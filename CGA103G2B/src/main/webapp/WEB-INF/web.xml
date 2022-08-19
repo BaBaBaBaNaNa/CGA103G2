@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+											http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>CGA103G2</display-name>
+	<welcome-file-list>
+		<welcome-file>BackLogin.jsp</welcome-file>
+	</welcome-file-list>
+	<!-- 登入 start -->
+	<servlet>
+		<servlet-name>EmpLoginServlet</servlet-name>
+		<servlet-class>com.emp.controller.EmpLoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmpLoginServlet</servlet-name>
+		<url-pattern>/EmpLoginServlet</url-pattern>
+	</servlet-mapping>
+	<!-- 登入 end -->
+	<!-- 驗證登入狀態 start -->
+	<filter>
+		<filter-name>BackFilter</filter-name>
+		<filter-class>com.filter.controller.BackFilter</filter-class>
+		<!-- 配置初始化引數，指明再沒有登入的情況下放行的資源 -->
+		<init-param>
+			<!-- //初始化引數名 -->
+			<param-name>letgo</param-name>
+			<!-- //初始化引數值 -->
+			<param-value>/BackLogin.jsp;/EmpLoginServlet;/assets;/vendors;</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<!-- //必須和上面的一樣 -->
+		<filter-name>BackFilter</filter-name>
+		<!-- //過濾所有 -->
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- 驗證登入狀態 end -->
+	<!-- 後臺首頁 start -->
+	<servlet>
+		<servlet-name>BackIndexServlet</servlet-name>
+		<servlet-class>com.back.controller.BackIndexServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BackIndexServlet</servlet-name>
+		<url-pattern>/BackIndexServlet</url-pattern>
+	</servlet-mapping>
+	<!-- 後臺首頁 end -->
+	<!-- 顯示全部員工 start -->
+	<servlet>
+		<servlet-name>EmpShowServlet</servlet-name>
+		<servlet-class>com.emp.controller.EmpShowServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmpShowServlet</servlet-name>
+		<url-pattern>/EmpShowServlet</url-pattern>
+	</servlet-mapping>
+	<!-- 顯示全部員工 end -->
+	<!-- 刪除員工 start -->
+	<servlet>
+		<servlet-name>EmpDeleteServlet</servlet-name>
+		<servlet-class>com.emp.controller.EmpDeleteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmpDeleteServlet</servlet-name>
+		<url-pattern>/EmpDeleteServlet</url-pattern>
+	</servlet-mapping>
+	<!-- 刪除員工 end -->
+	<!-- 新增員工 start -->
+	<servlet>
+		<servlet-name>EmpAddServlet</servlet-name>
+		<servlet-class>com.emp.controller.EmpAddServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmpAddServlet</servlet-name>
+		<url-pattern>/EmpAddServlet</url-pattern>
+	</servlet-mapping>
+	<!-- 新增員工 end -->
+	<!-- 修改員工資料 start -->
+	<servlet>
+		<servlet-name>EmpModifyServlet</servlet-name>
+		<servlet-class>com.emp.controller.EmpModifyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmpModifyServlet</servlet-name>
+		<url-pattern>/EmpModifyServlet</url-pattern>
+	</servlet-mapping>
+	<!-- 修改員工資料 end -->
+</web-app>
