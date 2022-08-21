@@ -17,5 +17,5 @@ public class PermissionVO implements java.io.Serializable{
 		this.function_id = function_id;
 	}
 	
-	
+	/* */
 }
