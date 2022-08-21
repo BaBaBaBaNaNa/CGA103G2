@@ -19,23 +19,23 @@
 	</servlet-mapping>
 	<!-- 登入 end -->
 	<!-- 驗證登入狀態 start -->
-	<filter>
-		<filter-name>BackFilter</filter-name>
-		<filter-class>com.filter.controller.BackFilter</filter-class>
-		<!-- 配置初始化引數，指明再沒有登入的情況下放行的資源 -->
-		<init-param>
-			<!-- //初始化引數名 -->
-			<param-name>letgo</param-name>
-			<!-- //初始化引數值 -->
-			<param-value>/BackLogin.jsp;/EmpLoginServlet;/back-assets;</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<!-- //必須和上面的一樣 -->
-		<filter-name>BackFilter</filter-name>
-		<!-- //過濾所有 -->
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	<!-- <filter> -->
+	<!-- <filter-name>BackFilter</filter-name> -->
+	<!-- <filter-class>com.filter.controller.BackFilter</filter-class> -->
+	<!-- 配置初始化引數，指明再沒有登入的情況下放行的資源 -->
+	<!-- <init-param> -->
+	<!-- //初始化引數名 -->
+	<!-- <param-name>letgo</param-name> -->
+	<!-- //初始化引數值 -->
+	<!-- <param-value>/BackLogin.jsp;/EmpLoginServlet;/back-assets;</param-value> -->
+	<!-- </init-param> -->
+	<!-- </filter> -->
+	<!-- <filter-mapping> -->
+	<!-- //必須和上面的一樣 -->
+	<!-- <filter-name>BackFilter</filter-name> -->
+	<!-- //過濾所有 -->
+	<!-- <url-pattern>/*</url-pattern> -->
+	<!-- </filter-mapping> -->
 	<!-- 驗證登入狀態 end -->
 	<!-- 後臺首頁 start -->
 	<servlet>
