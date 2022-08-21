@@ -38,7 +38,7 @@ public class EmpModifyServlet extends HttpServlet {
 		EmpJDBCDAO dao=new EmpJDBCDAO();
 		EmpVO employee=dao.findByPrimaryKey(emp_id);
 		request.setAttribute("emp",employee );
-		request.getRequestDispatcher("pages/employee/employee_edit.jsp").forward(request, response);
+		request.getRequestDispatcher("back-end/employee/employee_edit.jsp").forward(request, response);
 	}
 
 	/**

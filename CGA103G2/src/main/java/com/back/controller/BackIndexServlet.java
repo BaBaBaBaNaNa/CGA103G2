@@ -34,7 +34,7 @@ public class BackIndexServlet extends HttpServlet {
 		
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		request.getRequestDispatcher("pages/backstage/Back_index.jsp").forward(request, response);
+		request.getRequestDispatcher("back-end/backstage/Back_index.jsp").forward(request, response);
 	}
 
 	/**

@@ -39,7 +39,7 @@ public class EmpShowServlet extends HttpServlet {
 		List<EmpVO> list = new ArrayList<EmpVO>();
 		list=dao.getAll();
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("pages/employee/employee_detail.jsp").forward(request, response);
+		request.getRequestDispatcher("back-end/employee/employee_detail.jsp").forward(request, response);
 	}
 
 	/**

@@ -9,15 +9,15 @@
 <title>登入</title>
 
 <!-- 登入 style -->
-<link type="text/css" rel="stylesheet" href="./assets/css/back.login.css"
+<link type="text/css" rel="stylesheet" href="./back-assets/css/back.login.css"
 	media="screen" />
 <!-- Load Javascript -->
-<script type="text/javascript" src="./assets/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="./assets/js/rainbows.js"></script>
+<script type="text/javascript" src="./back-assets/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./back-assets/js/rainbows.js"></script>
 <!-- // Load Javascipt end-->
 
 <!-- Load stylesheets -->
-<link type="text/css" rel="stylesheet" href="./assets/css/back.login.css"
+<link type="text/css" rel="stylesheet" href="./back-assets/css/back.login.css"
 	media="screen" />
 <!-- // Load stylesheets -->
 <!-- 登入 style end-->
@@ -62,9 +62,9 @@
 
 				</div>
 				<div id="submit">
-					<input type="image" src="./assets/img/login_images/submit_hover.png"
+					<input type="image" src="./back-assets/img/login_images/submit_hover.png"
 						id="submit1" value="Sign In" onclick="return checkForm()">
-					<input type="image" src="./assets/img/login_images/submit.png"
+					<input type="image" src="./back-assets/img/login_images/submit.png"
 						id="submit2" value="Sign In">
 				</div>
 			</div> 
@@ -72,6 +72,6 @@
 			<div id="wrapperbottom"></div>
 		</div>
 	</form>
-	<script type="text/javascript" src="./assets/js/back.login.js"></script>
+	<script type="text/javascript" src="./back-assets/js/back.login.js"></script>
 </body>
 </html>

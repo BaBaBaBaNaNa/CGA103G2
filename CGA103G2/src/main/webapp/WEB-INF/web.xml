@@ -27,7 +27,7 @@
 			<!-- //初始化引數名 -->
 			<param-name>letgo</param-name>
 			<!-- //初始化引數值 -->
-			<param-value>/BackLogin.jsp;/EmpLoginServlet;/assets;/vendors;</param-value>
+			<param-value>/BackLogin.jsp;/EmpLoginServlet;/back-assets;</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

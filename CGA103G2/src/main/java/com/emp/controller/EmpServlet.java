@@ -30,7 +30,7 @@ public class EmpServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("list", list);    // 資料庫取出的list物件,存入session
 			// Send the Success view
-			String url = "../../pages/emp/listAllEmp2_getFromSession.jsp";
+			String url = "../../back-end/emp/listAllEmp2_getFromSession.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交listAllEmp2_getFromSession.jsp
 			successView.forward(req, res);
 			return;
@@ -52,7 +52,7 @@ public class EmpServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("../../pages/emp/select_page.jsp");
+							.getRequestDispatcher("../../back-end/emp/select_page.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -66,7 +66,7 @@ public class EmpServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("../../pages/emp/select_page.jsp");
+							.getRequestDispatcher("../../back-end/emp/select_page.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -80,14 +80,14 @@ public class EmpServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("../../pages/emp/select_page.jsp");
+							.getRequestDispatcher("../../back-end/emp/select_page.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("empVO", empVO); // 資料庫取出的empVO物件,存入req
-				String url = "../../pages/emp/listOneEmp.jsp";
+				String url = "../../back-end/emp/listOneEmp.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 				successView.forward(req, res);
 		}
