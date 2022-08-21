@@ -8,3 +8,4 @@ public interface FunctionsDAO_interface {
     public FunctionsVO findByPrimaryKey(Integer functions_id);
     public List<FunctionsVO> getAll();
 }
+/* */

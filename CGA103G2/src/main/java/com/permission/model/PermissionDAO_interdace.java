@@ -8,3 +8,4 @@ public interface PermissionDAO_interdace {
     public PermissionVO findByPrimaryKey(Integer functions_id);
     public List<PermissionVO> getAll();
 }
+/* */

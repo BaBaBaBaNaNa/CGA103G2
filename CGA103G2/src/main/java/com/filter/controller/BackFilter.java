@@ -68,5 +68,5 @@ public class BackFilter implements Filter {
 		String initParameter = fConfig.getInitParameter("letgo");
 		paths = initParameter.split(";");
 	}
-
+	/* */
 }
