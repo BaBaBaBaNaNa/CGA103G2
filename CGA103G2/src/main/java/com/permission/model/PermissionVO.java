@@ -3,7 +3,6 @@ package com.permission.model;
 public class PermissionVO implements java.io.Serializable{
 	private int emp_id;
 	private int function_id;
-	
 	public int getEmp_id() {
 		return emp_id;
 	}
@@ -16,6 +15,4 @@ public class PermissionVO implements java.io.Serializable{
 	public void setFunction_id(int function_id) {
 		this.function_id = function_id;
 	}
-	
-	/* */
 }
