@@ -1,8 +1,8 @@
 package com.emp.model;
+
 import java.sql.Date;
 
 public class EmpVO implements java.io.Serializable{
-	
 	private int emp_id;
 	private String emp_name;
 	private String emp_account;
@@ -11,8 +11,7 @@ public class EmpVO implements java.io.Serializable{
 	private String emp_phone;
 	private String emp_address;
 	private String emp_job;
-	private String emp_hiredate;
-	
+	private Date emp_hiredate;
 	public int getEmp_id() {
 		return emp_id;
 	}
@@ -61,12 +60,10 @@ public class EmpVO implements java.io.Serializable{
 	public void setEmp_job(String emp_job) {
 		this.emp_job = emp_job;
 	}
-	public String getEmp_hiredate() {
+	public Date getEmp_hiredate() {
 		return emp_hiredate;
 	}
-	public void setEmp_hiredate(String emp_hiredate) {
+	public void setEmp_hiredate(Date emp_hiredate) {
 		this.emp_hiredate = emp_hiredate;
 	}
-	/* */
-	
 }

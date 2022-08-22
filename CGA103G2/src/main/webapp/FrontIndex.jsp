@@ -10,9 +10,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>義式餐酒館 - 緯育 中壢Java班 CGA_103 第二組 </title>
+    <title>義鄉人 - 義式餐酒館 - 首頁 - 緯育 中壢Java班 CGA_103 第二組</title>
 
-    <!-- CSS FILES -->
+<!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,98 +26,14 @@
     <link href="front-assets/css/tooplate-crispy-kitchen.css" rel="stylesheet">
 
     <link href="front-assets/css/navbar.css" rel="stylesheet">
-    
+    <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
 <body>
 
-    <!-- ----- ----- ----- 頁面 上面標頭選擇列 start ----- ----- ----- -->
-
-    <nav class="navbar navbar-expand-lg bg-white shadow-lg">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <a class="navbar-brand" href="FrontIndex.jsp">
-                異鄉人
-            </a>
-
-            <div class="d-lg-none">
-                <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal"
-                    data-bs-target="#BookingModal">訂位</button>
-            </div>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="FrontIndex.jsp">首頁</a>
-                        <ul>
-                            <li><a class="nav-link1" href="FrontIndex.jsp">1</a></li>
-                            <li><a class="nav-link1" href="FrontIndex.jsp">2</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="front-end/news/news.jsp">最新資訊</a>
-                        <ul>
-                            <li><a class="nav-link1" href="FrontIndex.jsp">所有消息</a></li>
-                            <li><a class="nav-link1" href="FrontIndex.jsp">2</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="front-end/menu/menu.jsp">美味餐點</a>
-                        <ul>
-                            <li><a class="nav-link1" href="FrontIndex.jsp">1</a></li>
-                            <li><a class="nav-link1" href="FrontIndex.jsp">2</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="front-end/order/order.jsp">訂單查詢</a>
-                        <ul>
-                            <li><a class="nav-link1" href="FrontIndex.jsp">1</a></li>
-                            <li><a class="nav-link1" href="FrontIndex.jsp">2</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="front-end/about/about.jsp">關於我們</a>
-                        <ul>
-                            <li><a class="nav-link1" href="FrontIndex.jsp">1</a></li>
-                            <li><a class="nav-link1" href="FrontIndex.jsp">2</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="front-end/contact/contact.jsp">客服</a>
-                        <ul>
-                            <li><a class="nav-link1" href="FrontIndex.jsp">1</a></li>
-                            <li><a class="nav-link1" href="FrontIndex.jsp">2</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="front-end/member/members.jsp">會員中心</a>
-                        <ul>
-                            <li><a class="nav-link1" href="FrontIndex.jsp">1</a></li>
-                            <li><a class="nav-link1" href="FrontIndex.jsp">2</a></li>
-                        </ul>
-                    </li>
-
-                </ul>
-            </div>
-
-            <div class="d-none d-lg-block">
-                <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal"
-                    data-bs-target="#BookingModal">訂位</button>
-            </div>
-
-        </div>
-    </nav>
-    <!-- ----- ----- ----- 頁面 上面標頭選擇列 end ----- ----- ----- -->
+	<!-- ----- ----- ----- 最上面 選擇列 start ----- ----- ----- -->
+	<%@ include file="front-end/tool/UpSideBar.file"%>
+	<!-- ----- ----- ----- 最上面 選擇列 end ----- ----- ----- -->
 
     <!-- ----- ----- ----- 頁面 中間內容 start ----- ----- ----- -->
     <main>

@@ -1,42 +1,51 @@
- package com.emp.model;
+package com.emp.model;
 
 import java.util.*;
+
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 import com.emp.model.EmpVO;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class EmpJDBCDAO implements EmpDAO_interface {
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/restaurant?serverTimezone=Asia/Taipei";
-	String userid = "adminmanager01";
-	String passwd = "aaa123";
+public class EmpDAO implements EmpDAO_interface {
+//	共用DataSource
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/restaurant");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private static final String LOGIN_STMT = "SELECT emp_account,emp_password from employee where emp_account = ? and emp_password = ?";
 	private static final String INSERT_STMT = "INSERT INTO employee ( emp_name, emp_account,emp_password,emp_permission,emp_phone,emp_address,emp_job,emp_hiredate) VALUES (?,?,?,?,?,?,?,?);";
 	private static final String GET_ALL_STMT = "SELECT emp_id, emp_name, emp_account,emp_password,emp_permission,emp_phone,emp_address,emp_job,emp_hiredate FROM employee order by emp_id";
 	private static final String GET_ONE_STMT = "SELECT emp_id, emp_name, emp_account,emp_password,emp_permission,emp_phone,emp_address,emp_job,emp_hiredate FROM employee where emp_id = ?";
 	private static final String DELETE = "DELETE FROM employee where emp_id = ?";
 	private static final String UPDATE = "UPDATE employee set emp_name=?, emp_account=?, emp_password=?, emp_permission=?, emp_phone=?, emp_address=?, emp_job=?,emp_hiredate=? where emp_id = ?";
-
+	
 	@Override
 	public boolean loginAdmin(EmpLoginVO admin) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
-//		Connection conn = EmpDb.getConnection();
-//		String sql = "select emp_account,emp_password from employee where emp_account = ? and emp_password = ?;";
-		
 		int res = 0;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(LOGIN_STMT );
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(LOGIN_STMT);
 			
 			pstmt.setString(1, admin.getEmp_account());
 			pstmt.setString(2, admin.getEmp_password());
-			System.out.println(admin.getEmp_account());
-			System.out.println(admin.getEmp_password());
-			System.out.println(pstmt.toString());
+
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				res = 1;
@@ -46,9 +55,6 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 			if (res == 1) {
 				return true;
 			}
-		}catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		}
@@ -61,12 +67,9 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-//			Class.forName("com.mysql.cj.jdbc.Driver");
-//			con = EmpDb.getConnection();
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-
+			
 //			pstmt.setInt(1,empVO.getEmp_id());
 			pstmt.setString(1, empVO.getEmp_name());
 			pstmt.setString(2, empVO.getEmp_account());
@@ -75,14 +78,9 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 			pstmt.setString(5, empVO.getEmp_phone());
 			pstmt.setString(6, empVO.getEmp_address());
 			pstmt.setString(7, empVO.getEmp_job());
-			pstmt.setString(8, empVO.getEmp_hiredate());
+			pstmt.setObject(8, empVO.getEmp_hiredate());
 
 			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -112,10 +110,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-//			Class.forName("com.mysql.cj.jdbc.Driver");
-//			con = EmpDb.getConnection();
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, empVO.getEmp_name());
@@ -125,15 +120,12 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 			pstmt.setString(5, empVO.getEmp_phone());
 			pstmt.setString(6, empVO.getEmp_address());
 			pstmt.setString(7, empVO.getEmp_job());
-			pstmt.setString(8, empVO.getEmp_hiredate());
+			
+			pstmt.setObject(8, empVO.getEmp_hiredate());
+			
 			pstmt.setInt(9, empVO.getEmp_id());
 
 			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -163,20 +155,13 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-//			Class.forName("com.mysql.cj.jdbc.Driver");
-//			con = EmpDb.getConnection();
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, emp_id);
 
 			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
+			
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -208,16 +193,13 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 		ResultSet rs = null;
 
 		try {
-//			Class.forName("com.mysql.cj.jdbc.Driver");
-//			con = EmpDb.getConnection();
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
-
+			
 			pstmt.setInt(1, emp_id);
-
+			
 			rs = pstmt.executeQuery();
-
+//			System.out.println(rs);
 			while (rs.next()) {
 				// empVo 也稱為 Domain objects
 				empVO = new EmpVO();
@@ -230,13 +212,9 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 				empVO.setEmp_phone(rs.getString("emp_phone"));
 				empVO.setEmp_address(rs.getString("emp_address"));
 				empVO.setEmp_job(rs.getString("emp_job"));
-				empVO.setEmp_hiredate(rs.getString("emp_hiredate"));
+				empVO.setEmp_hiredate( rs.getDate("emp_hiredate"));
+//				empVO.setEmp_hiredate( rs.getObject("emp_hiredate",LocalDateTime.class));
 			}
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -276,10 +254,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 		ResultSet rs = null;
 
 		try {
-//			Class.forName("com.mysql.cj.jdbc.Driver");
-//			con = EmpDb.getConnection();
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -295,14 +270,10 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 				empVO.setEmp_phone(rs.getString("emp_phone"));
 				empVO.setEmp_address(rs.getString("emp_address"));
 				empVO.setEmp_job(rs.getString("emp_job"));
-				empVO.setEmp_hiredate(rs.getString("emp_hiredate"));
+				empVO.setEmp_hiredate( rs.getDate("emp_hiredate"));
+//				empVO.setEmp_hiredate( rs.getObject("emp_hiredate",LocalDateTime.class));
 				list.add(empVO); // Store the row in the list
 			}
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -334,7 +305,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 
 	public static void main(String[] args) {
 
-		EmpJDBCDAO dao = new EmpJDBCDAO();
+		EmpDAO dao = new EmpDAO();
 
 //		// 新增
 //		EmpVO empVO1 = new EmpVO();
@@ -364,7 +335,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 		// 刪除
 //		dao.delete(2);
 
-		// 單筆查詢
+//		 單筆查詢
 //		EmpVO empVO3 = dao.findByPrimaryKey(1);
 //		System.out.print(empVO3.getEmp_id() + ",");
 //		System.out.print(empVO3.getEmp_name() + ",");
@@ -378,19 +349,18 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 //		System.out.println("---------------------");
 
 		// 多筆查詢
-		List<EmpVO> list = dao.getAll();
-		for (EmpVO aEmp : list) {
-			System.out.print(aEmp.getEmp_id() + ",");
-			System.out.print(aEmp.getEmp_name() + ",");
-			System.out.print(aEmp.getEmp_account() + ",");
-			System.out.print(aEmp.getEmp_password() + ",");
-			System.out.print(aEmp.getEmp_permission() + ",");
-			System.out.print(aEmp.getEmp_phone() + ",");
-			System.out.println(aEmp.getEmp_address() + ",");
-			System.out.println(aEmp.getEmp_job() + ",");
-			System.out.println(aEmp.getEmp_hiredate());
-			System.out.println();
-		}
+//		List<EmpVO> list = dao.getAll();
+//		for (EmpVO aEmp : list) {
+//			System.out.print(aEmp.getEmp_id() + ",");
+//			System.out.print(aEmp.getEmp_name() + ",");
+//			System.out.print(aEmp.getEmp_account() + ",");
+//			System.out.print(aEmp.getEmp_password() + ",");
+//			System.out.print(aEmp.getEmp_permission() + ",");
+//			System.out.print(aEmp.getEmp_phone() + ",");
+//			System.out.println(aEmp.getEmp_address() + ",");
+//			System.out.println(aEmp.getEmp_job() + ",");
+//			System.out.println(aEmp.getEmp_hiredate());
+//			System.out.println();
+//		}
 	}
 }
-/* */
