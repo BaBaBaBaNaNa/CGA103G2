@@ -9,8 +9,8 @@ import java.sql.*;
 public class EmpJDBCDAO implements EmpDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/restaurant?serverTimezone=Asia/Taipei";
-	String userid = "adminmanager01";
-	String passwd = "aaa123";
+	String userid = "root";
+	String passwd = "root";
 	private static final String LOGIN_STMT = "SELECT emp_account,emp_password from employee where emp_account = ? and emp_password = ?";
 	private static final String INSERT_STMT = "INSERT INTO employee ( emp_name, emp_account,emp_password,emp_permission,emp_phone,emp_address,emp_job,emp_hiredate) VALUES (?,?,?,?,?,?,?,?);";
 	private static final String GET_ALL_STMT = "SELECT emp_id, emp_name, emp_account,emp_password,emp_permission,emp_phone,emp_address,emp_job,emp_hiredate FROM employee order by emp_id";
