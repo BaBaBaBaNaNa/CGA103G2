@@ -7,7 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import com.emp.model.*;
-
+/* */
 public class EmpServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)

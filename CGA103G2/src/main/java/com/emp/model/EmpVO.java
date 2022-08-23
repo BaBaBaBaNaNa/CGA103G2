@@ -67,6 +67,6 @@ public class EmpVO implements java.io.Serializable{
 	public void setEmp_hiredate(String emp_hiredate) {
 		this.emp_hiredate = emp_hiredate;
 	}
-
+	/* */
 	
 }

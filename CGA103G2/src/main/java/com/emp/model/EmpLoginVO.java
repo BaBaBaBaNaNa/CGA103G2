@@ -18,5 +18,5 @@ public class EmpLoginVO {
 		this.emp_password = emp_password;
 	}
 	
-
+	/* */
 }
