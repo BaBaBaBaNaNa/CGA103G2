@@ -1,0 +1,10 @@
+package com.permission.model1;
+import java.util.*;
+
+public interface PermissionDAO_interface {
+	public void insert(PermissionVO permissionVO);
+    public void update(PermissionVO permissionVO);
+    public void delete(Integer functions_id);
+    public PermissionVO findByPrimaryKey(Integer functions_id);
+    public List<PermissionVO> getAll();
+}

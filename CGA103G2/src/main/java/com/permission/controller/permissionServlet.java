@@ -9,9 +9,9 @@ import javax.servlet.http.*;
 
 import org.apache.naming.java.javaURLContextFactory;
 
-import com.permission.model.PermissionDAO;
-import com.permission.model.PermissionService;
-import com.permission.model.PermissionVO;
+import com.permission.model1.PermissionDAO;
+import com.permission.model1.PermissionService;
+import com.permission.model1.PermissionVO;
 
 @WebServlet("/permission/PermissionServlet2")
 public class permissionServlet extends HttpServlet {
