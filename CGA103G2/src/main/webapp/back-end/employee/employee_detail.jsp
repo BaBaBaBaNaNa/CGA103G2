@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="java.util.*"%>
 <%@ page import="com.emp.model.*"%>
 
-<jsp:useBean id="list" scope="session" type="java.util.List<EmpVO>" />
+<%
+EmpService empSvc = new EmpService();
+List<EmpVO> list = empSvc.getAll();
+pageContext.setAttribute("list", list);
+%>
+
 <!DOCTYPE html>
 <html lang="zh-tw">
 
@@ -46,6 +50,10 @@ td {
 	text-align: center;
 }
 
+h2 {
+	text-align: center;
+}
+
 .bd-placeholder-img {
 	font-size: 1.125rem;
 	text-anchor: middle;
@@ -65,7 +73,8 @@ td {
 	background-color: rgba(0, 0, 0, .1);
 	border: solid rgba(0, 0, 0, .15);
 	border-width: 1px 0;
-	box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+	box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em
+		rgba(0, 0, 0, .15);
 }
 
 .b-example-vr {
@@ -124,55 +133,48 @@ td {
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<div>
-			<table>
+		<h2>查看員工訊息</h2>
+		<table>
+			<tr>
+				<th>員工編號</th>
+				<th>員工姓名</th>
+				<th>帳號</th>
+				<th>密碼</th>
+				<th>權限</th>
+				<th>員工電話</th>
+				<th>員工地址</th>
+				<th>員工職位</th>
+				<th>員工入職日期</th>
+				<th>修改</th>
+				<th>刪除</th>
+			</tr>
+			<%@ include file="../../back-end/tool/page1.file"%>
+			<c:forEach var="empVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				<tr>
-					<th>員工編號</th>
-					<th>員工姓名</th>
-					<th>帳號</th>
-					<th>密碼</th>
-					<th>權限</th>
-					<th>員工電話</th>
-					<th>員工地址</th>
-					<th>員工職位</th>
-					<th>員工入職日期</th>
+					<td>${empVO.emp_id}</td>
+					<td>${empVO.emp_name}</td>
+					<td>${empVO.emp_account}</td>
+					<td>${empVO.emp_password}</td>
+					<td>${empVO.emp_permission}</td>
+					<td>${empVO.emp_phone}</td>
+					<td>${empVO.emp_address}</td>
+					<td>${empVO.jobVO.job_name}</td>
+<%-- 					<td>${empVO.emp_job}-[${empVO.jobVO.job_name}]</td> --%>
+					<td>${empVO.emp_hiredate}</td>
+					<td>
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/employee/emp.do" style="margin-bottom: 0px;">
+							<input type="submit" value="修改"> <input type="hidden" name="emp_id" value="${empVO.emp_id}"> <input type="hidden" name="action" value="getOne_For_Update">
+						</FORM>
+					</td>
+					<td>
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/employee/emp.do" style="margin-bottom: 0px;">
+							<input type="submit" value="刪除"> <input type="hidden" name="emp_id" value="${empVO.emp_id}"> <input type="hidden" name="action" value="delete">
+						</FORM>
+					</td>
 				</tr>
-				<%@ include file="../../back-end/tool/page1.file"%>
-				<c:forEach var="empVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-					<tr>
-						<td>${empVO.emp_id}</td>
-						<td>${empVO.emp_name}</td>
-						<td>${empVO.emp_account}</td>
-						<td>${empVO.emp_password}</td>
-						<td>${empVO.emp_permission}</td>
-						<td>${empVO.emp_phone}</td>
-						<td>${empVO.emp_address}</td>
-						<td>${empVO.emp_job}</td>
-						<td>${empVO.emp_hiredate}</td>
-						<td>
-							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/employee/emp.do" style="margin-bottom: 0px;">
-								<input type="submit" value="修改">
-								<input type="hidden" name="emp_id" value="${empVO.emp_id}">
-								<input type="hidden" name="action" value="getOne_For_Update">
-							</FORM>
-						</td>
-						<td>
-							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/employee/emp.do" style="margin-bottom: 0px;">
-								<input type="submit" value="刪除">
-								<input type="hidden" name="emp_id" value="${empVO.emp_id}">
-								<input type="hidden" name="action" value="delete">
-							</FORM>
-						</td>
-<!-- 						<td> -->
-<%-- 							<form METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/employee/emp.do"> --%>
-<%-- 								<a onclick="return checkconfirm()" href="${pageContext.request.contextPath}/back-end/employee/emp.do?action=delete&emp_id=${empVO.emp_id}">删除</a>| <a href="${pageContext.request.contextPath}/back-end/employee/emp.do?action=update&emp_id=${empVO.emp_id}">修改</a> --%>
-<!-- 							</form> -->
-<!-- 						</td> -->
-					</tr>
-				</c:forEach>
-			</table>
-			<%@ include file="../../back-end/tool/page2.file"%>
-		</div>
+			</c:forEach>
+		</table>
+		<%@ include file="../../back-end/tool/page2.file"%>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 
 	</main>

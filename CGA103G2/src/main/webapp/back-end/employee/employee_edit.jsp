@@ -32,6 +32,8 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 <link href="${pageContext.request.contextPath}/back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath}/favicon.ico">
+<!-- empStyle -->
+<link href="../../back-assets/css/empStyle.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -58,7 +60,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2>修改員工訊息</h2>
+		<h2	>修改員工訊息</h2>
 
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
@@ -74,46 +76,55 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 			<table>
 
 				<tr>
-					<td>員工編號</td>
-					<td><input type="text" name="emp_id" value="<%=empVO.getEmp_id()%>" readonly="readonly" /></td>
+					<th>員工編號</th>
+					<td><input type="text" name=" noemp_id" value="${param.emp_id}" readonly="readonly" /></td>
 				</tr>
 				<tr>
-					<td>員工姓名</td>
-					<td><input type="text" name="emp_name" value="<%=empVO.getEmp_name()%>" required /></td>
+					<th>員工姓名</th>
+					<td><input type="text" name="emp_name" value="${param.emp_name}" required /></td>
 				</tr>
 				<tr>
-					<td>帳號</td>
-					<td><input type="text" name="emp_account" value="<%=empVO.getEmp_account()%>" required /></td>
+					<th>帳號</th>
+					<td><input type="text" name="emp_account" value="${param.emp_account}" required /></td>
 				</tr>
 				<tr>
-					<td>密碼</td>
-					<td><input type="text" name="emp_password" value="<%=empVO.getEmp_password()%>" required /></td>
+					<th>密碼</th>
+					<td><input type="text" name="emp_password" value="${param.emp_password}" required /></td>
 				</tr>
 				<tr>
-					<td>權限</td>
-					<td><input type="text" name="emp_permission" value="<%=empVO.getEmp_permission()%>" required /></td>
+					<th>權限</th>
+					<td><input type="text" name="emp_permission" value="${param.emp_permission}" required /></td>
 				</tr>
 				<tr>
-					<td>員工電話</td>
-					<td><input type="text" name="emp_phone" value="<%=empVO.getEmp_phone()%>" required /></td>
+					<th>員工電話</th>
+					<td><input type="text" name="emp_phone" value="${param.emp_phone}" required /></td>
 				</tr>
 				<tr>
-					<td>員工地址</td>
-					<td><input type="text" name="emp_address" value="<%=empVO.getEmp_address()%>" required /></td>
+					<th>員工地址</th>
+					<td><input type="text" name="emp_address" value="${param.emp_address}" required /></td>
+				</tr>
+				<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
+				<tr>
+					<th>員工職位:<font color=red><b>*</b></font></th>
+					<td>
+						<select size="1" name="emp_job">
+							<c:forEach var="jobVO" items="${jobSvc.all}">
+								<option value="${jobVO.job_id}" ${(param.emp_job==jobVO.job_id)?'selected':'' } >${jobVO.job_name}
+							</c:forEach>
+						</select>
+					</td>
 				</tr>
 				<tr>
-					<td>員工職位</td>
-					<td><input type="text" name="emp_job" value="<%=empVO.getEmp_job()%>" required /></td>
-				</tr>
-				<tr>
-					<td>員工到職日</td>
-					<td><input type="text" name="emp_hiredate" value="<%=empVO.getEmp_hiredate()%>" required /></td>
+					<th>員工到職日</th>
+					<td><input type="text" id="f_date1" name="emp_hiredate" value="${param.emp_hiredate}" required /></td>
 				</tr>
 			</table>
 			<br>
+			<div>
 			<input type="hidden" name="action" value="update">
-			<input type="hidden" name="emp_id" value="<%=empVO.getEmp_id()%>">
+			<input type="hidden" name="emp_id" value="${param.emp_id}">
 			<input type="submit" value="送出修改">
+			</div>
 		</form>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
@@ -138,6 +149,44 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 	<!-- Settings -->
 	<script src="${pageContext.request.contextPath}/back-assets/js/settings.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
+	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
+	<%
+	java.sql.Date emp_hiredate = null;
+	try {
+		emp_hiredate = empVO.getEmp_hiredate();
+	} catch (Exception e) {
+		emp_hiredate = new java.sql.Date(System.currentTimeMillis());
+	}
+	%>
+
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.datetimepicker.css" />
+	<script src="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.js"></script>
+	<script src="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+	<style>
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
+</style>
+
+	<script type="text/javascript">
+    $.datetimepicker.setLocale('zh');
+    $('#f_date1').datetimepicker({
+       theme: '',              //theme: 'dark',
+       timepicker:false,       //timepicker:true,
+       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+	   value: '<%=emp_hiredate%>', // value:   new Date(),
+		//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+		//startDate:	            '2017/07/10',  // 起始日
+		//minDate:               '-1970-01-01', // 去除今日(不含)之前
+		//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+		});
+	</script>
 </body>
 
 </html>

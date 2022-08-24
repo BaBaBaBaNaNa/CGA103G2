@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*,com.emp.controller.EmpServlet"%>
 <%@ page import="com.emp.model.*"%>
 
@@ -32,18 +33,8 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 <link href="../../back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
-<style type="text/css">
-table {
-	border: 0px solid black;
-	margin: 0 auto;
-}
-
-td {
-	width: 150px;
-	border: 1px solid black;
-	text-align: center;
-}
-</style>
+<!-- empStyle -->
+<link href="../../back-assets/css/empStyle.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -72,49 +63,47 @@ td {
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-			<font style="color: red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
-		</c:if>
-
+		<h2	>新增員工</h2>
 		<FORM METHOD="post" ACTION="emp.do" name="form1">
+			<p>${errorMsgs.emp_name} ${errorMsgs.emp_account} ${errorMsgs.emp_password} ${errorMsgs.emp_permission} ${errorMsgs.emp_phone} ${errorMsgs.emp_address} ${errorMsgs.emp_job}</p>
 			<table>
 				<tr>
 					<td>ID:</td>
-					<td><input type="TEXT" name="emp_id" size="45" value="<%=(empVO == null) ? "Lock" : empVO.getEmp_id()%>" readonly /></td>
-				</tr>
+					<td><input type="hidden"  name="emp_id" size="45" value="${param.emp_id}"readonly/>
 				<tr>
 					<td>員工姓名:</td>
-					<td><input type="TEXT" name="emp_name" size="45" value="<%=(empVO == null) ? "吳永志" : empVO.getEmp_name()%>" /></td>
+					<td><input type="TEXT" name="emp_name" size="45" value="${param.emp_name}" /></td>
 				</tr>
 				<tr>
 					<td>帳號:</td>
-					<td><input type="TEXT" name="emp_account" size="45" value="<%=(empVO == null) ? "empxx" : empVO.getEmp_account()%>" /></td>
+					<td><input type="TEXT" name="emp_account" size="45" value="${param.emp_account}" /></td>
 				</tr>
 				<tr>
 					<td>密碼:</td>
-					<td><input type="TEXT" name="emp_password" size="45" value="<%=(empVO == null) ? "**********" : empVO.getEmp_password()%>" /></td>
+					<td><input type="TEXT" name="emp_password" size="45" value="${param.emp_password}" /></td>
 				</tr>
 				<tr>
 					<td>權限:</td>
-					<td><input type="TEXT" name="emp_permission" size="45" value="<%=(empVO == null) ? "" : empVO.getEmp_permission()%>" /></td>
+					<td><input type="TEXT" name="emp_permission" size="45" value="${param.emp_permission}" /></td>
 				</tr>
 				<tr>
 					<td>電話:</td>
-					<td><input type="TEXT" name="emp_phone" size="45" value="<%=(empVO == null) ? "" : empVO.getEmp_phone()%>" /></td>
+					<td><input type="TEXT" name="emp_phone" size="45" value="${param.emp_phone}" /></td>
 				</tr>
 				<tr>
 					<td>地址:</td>
-					<td><input type="TEXT" name="emp_address" size="45" value="<%=(empVO == null) ? "" : empVO.getEmp_address()%>" /></td>
+					<td><input type="TEXT" name="emp_address" size="45" value="${param.emp_address}" /></td>
 				</tr>
+				<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
 				<tr>
-					<td>職位:</td>
-					<td><input type="TEXT" name="emp_job" size="45" value="<%=(empVO == null) ? "" : empVO.getEmp_job()%>" /></td>
+					<td>職位:<font color=red><b>*</b></font></td>
+					<td>
+						<select size="1" name="emp_job">
+							<c:forEach var="jobVO" items="${jobSvc.all}">
+								<option value="${jobVO.job_id}" ${(param.emp_job==jobVO.job_id)?'selected':'' } >${jobVO.job_name}
+							</c:forEach>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<td>雇用日期:</td>
@@ -122,7 +111,11 @@ td {
 				</tr>
 
 			</table>
-			<br> <input type="hidden" name="action" value="insert"> <input type="submit" value="送出新增">
+			<br> 
+			<div>
+			<input type="hidden" name="action" value="insert"> 
+			<input type="submit" value="送出新增">
+			</div>
 		</FORM>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 
@@ -179,8 +172,7 @@ td {
        timepicker:false,       //timepicker:true,
        step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
        format:'Y-m-d',         //format:'Y-m-d H:i:s',
-	   value: '<%=emp_hiredate%>
-		', // value:   new Date(),
+	   value: '<%=emp_hiredate%>', // value:   new Date(),
 		//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 		//startDate:	            '2017/07/10',  // 起始日
 		//minDate:               '-1970-01-01', // 去除今日(不含)之前

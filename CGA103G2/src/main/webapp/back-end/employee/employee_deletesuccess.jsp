@@ -44,6 +44,12 @@ td {
 	border: 1px solid black;
 	text-align: center;
 }
+div{
+	text-align: center;
+}
+h2{
+	text-align: center;
+}
 </style>
 </head>
 
@@ -70,7 +76,7 @@ td {
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<p text-align: center>刪除成功!</p>
+		<h2	> 刪除成功!</h2>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->

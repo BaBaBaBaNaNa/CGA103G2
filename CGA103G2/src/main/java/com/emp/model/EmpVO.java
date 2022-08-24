@@ -3,19 +3,19 @@ package com.emp.model;
 import java.sql.Date;
 
 public class EmpVO implements java.io.Serializable{
-	private int emp_id;
+	private Integer emp_id;
 	private String emp_name;
 	private String emp_account;
 	private String emp_password;
-	private int emp_permission;
+	private Integer emp_permission;
 	private String emp_phone;
 	private String emp_address;
-	private String emp_job;
+	private Integer emp_job;
 	private Date emp_hiredate;
-	public int getEmp_id() {
+	public Integer getEmp_id() {
 		return emp_id;
 	}
-	public void setEmp_id(int emp_id) {
+	public void setEmp_id(Integer emp_id) {
 		this.emp_id = emp_id;
 	}
 	public String getEmp_name() {
@@ -36,10 +36,10 @@ public class EmpVO implements java.io.Serializable{
 	public void setEmp_password(String emp_password) {
 		this.emp_password = emp_password;
 	}
-	public int getEmp_permission() {
+	public Integer getEmp_permission() {
 		return emp_permission;
 	}
-	public void setEmp_permission(int emp_permission) {
+	public void setEmp_permission(Integer emp_permission) {
 		this.emp_permission = emp_permission;
 	}
 	public String getEmp_phone() {
@@ -54,10 +54,10 @@ public class EmpVO implements java.io.Serializable{
 	public void setEmp_address(String emp_address) {
 		this.emp_address = emp_address;
 	}
-	public String getEmp_job() {
+	public Integer getEmp_job() {
 		return emp_job;
 	}
-	public void setEmp_job(String emp_job) {
+	public void setEmp_job(Integer emp_job) {
 		this.emp_job = emp_job;
 	}
 	public Date getEmp_hiredate() {
@@ -66,4 +66,10 @@ public class EmpVO implements java.io.Serializable{
 	public void setEmp_hiredate(Date emp_hiredate) {
 		this.emp_hiredate = emp_hiredate;
 	}
+
+    public com.job.model.JobVO getJobVO() {
+	    com.job.model.JobService jobSvc = new com.job.model.JobService();
+	    com.job.model.JobVO jobVO = jobSvc.getOneJob(emp_job);
+	    return jobVO;
+    }
 }

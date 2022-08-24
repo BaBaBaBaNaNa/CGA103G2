@@ -15,8 +15,9 @@
 			<!-- ----- ----- ----- 員工 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#employee" aria-expanded="false" aria-controls="employee"><span><i class="fas fa-file-employee fs-16"></i>員工管理</span></a>
 				<ul id="employee" class="collapse" aria-labelledby="employee" data-parent="#side-nav-accordion">
-					<li><a href="${pageContext.request.contextPath}/back-end/employee/emp.do?action=getAll">查看員工資料</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/employee/employee_detail.jsp">查看員工資料</a></li>
 					<li><a href="${pageContext.request.contextPath}/back-end/employee/employee_add.jsp">新增員工資料</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/job/job.do?action=getAll">查看職務資料</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 員工 end ----- ----- ----- -->
 

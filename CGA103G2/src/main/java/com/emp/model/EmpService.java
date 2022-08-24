@@ -17,7 +17,7 @@ public class EmpService {
 			int emp_permission,
 			String emp_phone,
 			String emp_address,
-			String emp_job,
+			int emp_job,
 			java.sql.Date emp_hiredate) {
 
 		EmpVO empVO = new EmpVO();
@@ -43,7 +43,7 @@ public class EmpService {
 			int emp_permission,
 			String emp_phone,
 			String emp_address,
-			String emp_job,
+			int emp_job,
 			java.sql.Date emp_hiredate) {
 
 		EmpVO empVO = new EmpVO();

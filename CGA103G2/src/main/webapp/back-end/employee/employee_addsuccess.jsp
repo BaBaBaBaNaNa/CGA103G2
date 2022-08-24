@@ -32,7 +32,6 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 <link href="${pageContext.request.contextPath}/back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath}/favicon.ico">
-<!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 <style type="text/css">
 table {
 	border: 1px solid black;
@@ -51,6 +50,7 @@ h2{
 	text-align: center;
 }
 </style>
+<!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
@@ -76,10 +76,9 @@ h2{
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2	> 修改成功!</h2>
+		<h2	> 新增成功!</h2>
 		<table>
 			<tr>
-				<th>員工編號</th>
 				<th>員工姓名</th>
 				<th>帳號</th>
 				<th>密碼</th>
@@ -90,7 +89,6 @@ h2{
 				<th>員工入職日期</th>
 			</tr>
 			<tr>
-				<td>${empVO.emp_id}</td>
 				<td>${empVO.emp_name}</td>
 				<td>${empVO.emp_account}</td>
 				<td>${empVO.emp_password}</td>
