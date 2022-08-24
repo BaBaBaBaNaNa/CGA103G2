@@ -57,4 +57,14 @@
 		<url-pattern>/back-end/employee/emp.do</url-pattern>
 	</servlet-mapping>
 	<!-- 員工 end -->
+	<!-- 職務 start -->
+	<servlet>
+		<servlet-name>JobServlet</servlet-name>
+		<servlet-class>com.job.controller.JobServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>JobServlet</servlet-name>
+		<url-pattern>/back-end/job/job.do</url-pattern>
+	</servlet-mapping>
+	<!-- 職務 end -->
 </web-app>
