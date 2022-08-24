@@ -1,4 +1,4 @@
-package com.meals.modle;
+package com.meals.model;
 
 import java.util.*;
 import java.sql.*;
@@ -180,7 +180,7 @@ public class MealsJDBCDAO implements MealsDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo ¤]ºÙ¬° Domain objects
+				// empVo ï¿½]ï¿½Ù¬ï¿½ Domain objects
 				mealsVO = new MealsVO();
 				mealsVO.setMealsId(rs.getInt("Meals_id"));
 				mealsVO.setMealsCategoryId(rs.getInt("Meals_category_id"));
@@ -241,7 +241,7 @@ public class MealsJDBCDAO implements MealsDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO ¤]ºÙ¬° Domain objects
+				// empVO ï¿½]ï¿½Ù¬ï¿½ Domain objects
 				mealsVO = new MealsVO();
 				mealsVO.setMealsId(rs.getInt("Meals_id"));
 				mealsVO.setMealsCategoryId(rs.getInt("Meals_category_id"));
@@ -291,7 +291,7 @@ public class MealsJDBCDAO implements MealsDAO_interface {
 
 		MealsJDBCDAO dao = new MealsJDBCDAO();
 
-		// ·s¼W
+		// ï¿½sï¿½W
 		MealsVO mealsVO1 = new MealsVO();
 		mealsVO1.setMealsId(100);
 		mealsVO1.setMealsCategoryId(1);
@@ -301,7 +301,7 @@ public class MealsJDBCDAO implements MealsDAO_interface {
 		mealsVO1.setMealsControl(0);
 		dao.insert(mealsVO1);
 
-		// ­×§ï
+		// ï¿½×§ï¿½
 		MealsVO mealsVO2 = new MealsVO();
 	
 		mealsVO2.setMealsId(100);
@@ -312,10 +312,10 @@ public class MealsJDBCDAO implements MealsDAO_interface {
 		mealsVO2.setMealsControl(0);
 		dao.update(mealsVO2);
 
-		// §R°£
+		// ï¿½Rï¿½ï¿½
 		dao.delete(100);
 
-		// ¬d¸ß
+		// ï¿½dï¿½ï¿½
 		MealsVO mealsVO3 = dao.findByPrimaryKey(1);
 		System.out.print(mealsVO3.getMealsId() + ",");
 		System.out.print(mealsVO3.getMealsCategoryId() + ",");
@@ -325,7 +325,7 @@ public class MealsJDBCDAO implements MealsDAO_interface {
 		System.out.print(mealsVO3.getMealsControl() + ",");
 		System.out.println("---------------------");
 
-		// ¬d¸ß
+		// ï¿½dï¿½ï¿½
 		List<MealsVO> list = dao.getAll();
 		for (MealsVO aEmp : list) {
 			System.out.print(aEmp.getMealsId() + ",");

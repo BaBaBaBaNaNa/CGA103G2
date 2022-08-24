@@ -1,4 +1,4 @@
-package com.meals.modle;
+package com.meals.model;
 
 public class MealsVO {
 	private Integer mealsId;

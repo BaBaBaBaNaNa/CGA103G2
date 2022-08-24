@@ -1,4 +1,4 @@
-package com.meals.modle;
+package com.meals.model;
 
 import java.util.*;
 
@@ -225,7 +225,7 @@ public class MealsDAO implements MealsDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO ¤]ºÙ¬° Domain objects
+				// empVO ï¿½]ï¿½Ù¬ï¿½ Domain objects
 				mealsVO = new MealsVO();
 				mealsVO.setMealsId(rs.getInt("meals_id"));
 				mealsVO.setMealsCategoryId(rs.getInt("meals_category_id"));

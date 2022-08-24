@@ -1,4 +1,4 @@
-package com.meals.modle;
+package com.meals.model;
 import java.util.List;
 
 
@@ -9,7 +9,7 @@ public interface MealsDAO_interface {
     public void delete(Integer mealsId);
     public MealsVO findByPrimaryKey(Integer mealsId);
     public List<MealsVO> getAll();
-    //¸U¥Î½Æ¦X¬d¸ß(¶Ç¤J°Ñ¼Æ«¬ºAMap)(¦^¶Ç List)
+    //ï¿½Uï¿½Î½Æ¦Xï¿½dï¿½ï¿½(ï¿½Ç¤Jï¿½Ñ¼Æ«ï¿½ï¿½AMap)(ï¿½^ï¿½ï¿½ List)
 //  public List<EmpVO> getAll(Map<String, String[]> map); 
 
 }
