@@ -1,4 +1,4 @@
-package com.permission.model1;
+package com.permission.model;
 import java.util.*;
 
 public interface PermissionDAO_interface {
