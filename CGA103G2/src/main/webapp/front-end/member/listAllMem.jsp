@@ -55,7 +55,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>所有會員資料 - listAllMem.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="selectPage.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -77,24 +77,24 @@
 	<c:forEach var="memVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
-			<td>${memVO.mem_id}</td>
-			<td>${memVO.mem_name}</td>
-			<td>${memVO.mem_account}</td>
-			<td>${memVO.mem_gender}</td>
-			<td>${memVO.mem_birthday}</td>
-			<td>${memVO.mem_address}</td>
-			<td>${memVO.mem_phone}</td> 
-			<td>${memVO.mem_email}</td>
+			<td>${memVO.memId}</td>
+			<td>${memVO.memName}</td>
+			<td>${memVO.memAccount}</td>
+			<td>${memVO.memGender}</td>
+			<td>${memVO.memBirthday}</td>
+			<td>${memVO.memAddress}</td>
+			<td>${memVO.memPhone}</td> 
+			<td>${memVO.memEmail}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mem/mem.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/mem.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
-			     <input type="hidden" name="empno"  value="${memVO.mem_id}">
+			     <input type="hidden" name="memId"  value="${memVO.memId}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mem/mem.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/mem.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
-			     <input type="hidden" name="mem_id"  value="${memVO.mem_id}">
+			     <input type="hidden" name="memId"  value="${memVO.memId}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>

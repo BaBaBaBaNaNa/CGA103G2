@@ -52,9 +52,9 @@
   
   
   <li>
-    <FORM METHOD="post" ACTION="members.do" >
+    <FORM METHOD="post" ACTION="mem.do" >
         <b>輸入會員ID (如1,2,3,4...):</b>
-        <input type="text" name="mem_id">
+        <input type="text" name="memId">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
     </FORM>
@@ -63,11 +63,11 @@
   <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
    
   <li>
-     <FORM METHOD="post" ACTION="members.do" >
+     <FORM METHOD="post" ACTION="mem.do" >
        <b>會員編號:</b>
-       <select size="1" name="mem_id">
+       <select size="1" name="memId">
          <c:forEach var="memVO" items="${memSvc.all}" > 
-          <option value="${memVO.mem_id}">${memVO.mem_id}
+          <option value="${memVO.memId}">${memVO.memId}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -76,11 +76,11 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="members.do" >
+     <FORM METHOD="post" ACTION="mem.do" >
        <b>選擇會員姓名:</b>
-       <select size="1" name="mem_id">
+       <select size="1" name="memId">
          <c:forEach var="memVO" items="${memSvc.all}" > 
-          <option value="${memVO.mem_id}">${memVO.mem_name}
+          <option value="${memVO.memId}">${memVO.memName}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">

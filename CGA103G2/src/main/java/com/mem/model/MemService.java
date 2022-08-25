@@ -10,25 +10,32 @@ public class MemService {
 		dao = new MemJDBCDAO();
 	}
 
-	public MemVO addMem(Integer mem_id, String mem_name, String mem_account, 
-			String mem_password, Integer mem_gneder,
-			Integer mem_phone, String mem_email, String mem_address, 
-			java.sql.Date mem_birthday, Integer mem_permission) {
+	public MemVO addMem(
+			
+			String memName,
+			String memAccount, 
+			String memPassword,
+			int memperMission,
+			int memGender,
+			String memPhone,
+			String memAddress,
+			String memEmail,
+			java.sql.Date memBirthday) {
 			
 			
 
 		MemVO memVO = new MemVO();
 		
-		memVO.setMem_id(mem_id);
-		memVO.setMem_name(mem_name);
-		memVO.setMem_account(mem_account);
-		memVO.setMem_password(mem_password);
-		memVO.setMem_gender(mem_gneder);
-		memVO.setMem_phone(mem_phone);
-		memVO.setMem_email(mem_email);
-		memVO.setMem_address(mem_address);
-		memVO.setMem_birthday(mem_birthday);
-		memVO.setMem_permission(mem_permission);
+		
+		memVO.setMemName(memName);
+		memVO.setMemAccount(memAccount);
+		memVO.setMemPassword(memPassword);
+		memVO.setMemGender(memGender);
+		memVO.setMemPhone(memPhone);
+		memVO.setMemEmail(memEmail);
+		memVO.setMemAddress(memAddress);
+		memVO.setMemBirthday(memBirthday);
+		memVO.setMemPermission(memperMission);
 		
 		dao.insert(memVO);
 		
@@ -37,21 +44,31 @@ public class MemService {
 		
 	}
 
-	public MemVO updateMem( String mem_name,  
-			String mem_address,java.sql.Date mem_birthday,
-			Integer mem_phone, 
-			 Integer mem_gneder, 
-			 Integer mem_permission) {
+	public MemVO updateMem( 
+			Integer memId,
+			String memName,
+			String memAccount, 
+			String memPassword,
+			Integer memPermission,
+			
+			String memPhone, 
+			String memAddress,
+			String memEmail,
+			java.sql.Date memBirthday
+			 ) 
+	{
 
 		MemVO memVO = new MemVO();
 
-	
-		memVO.setMem_name(mem_name);
-		memVO.setMem_address(mem_address);
-		memVO.setMem_birthday(mem_birthday);
-		memVO.setMem_phone(mem_phone);
-		memVO.setMem_gender(mem_gneder);
-		memVO.setMem_permission(mem_permission);
+		memVO.setMemAccount(memAccount);
+		memVO.setMemName(memName);
+		memVO.setMemPassword(memPassword);
+		memVO.setMemEmail(memEmail);
+		memVO.setMemAddress(memAddress);
+		memVO.setMemBirthday(memBirthday);
+		memVO.setMemPhone(memPhone);
+		memVO.setMemId(memId);
+		memVO.setMemPermission(memPermission);
 		
 		
 		
@@ -61,12 +78,12 @@ public class MemService {
 		return memVO;
 	}
 
-	public void deleteMem(Integer mem_id) {
-		dao.delete(mem_id);
+	public void deleteMem(Integer memid) {
+		dao.delete(memid);
 	}
 
-	public MemVO getOneMem(Integer mem_id) {
-		return dao.findByPrimaryKey(mem_id);
+	public MemVO getOneMem(Integer memid) {
+		return dao.findByPrimaryKey(memid);
 	}
 
 	public List<MemVO> getAll() {

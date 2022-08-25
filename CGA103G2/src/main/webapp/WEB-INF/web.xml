@@ -55,44 +55,27 @@
 		<url-pattern>/BackIndexServlet</url-pattern>
 	</servlet-mapping>
 	<!-- 後臺首頁 end -->
-	<!-- 顯示全部員工 start -->
+	<!-- 員工 start -->
 	<servlet>
-		<servlet-name>EmpShowServlet</servlet-name>
-		<servlet-class>com.emp.controller.EmpShowServlet</servlet-class>
+		<servlet-name>EmpServlet</servlet-name>
+		<servlet-class>com.emp.controller.EmpServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>EmpShowServlet</servlet-name>
-		<url-pattern>/EmpShowServlet</url-pattern>
+		<servlet-name>EmpServlet</servlet-name>
+		<url-pattern>/back-end/employee/emp.do</url-pattern>
 	</servlet-mapping>
-	<!-- 顯示全部員工 end -->
-	<!-- 刪除員工 start -->
+	<!-- 員工 end -->
+	
+	<!-- 會員 start -->
 	<servlet>
-		<servlet-name>EmpDeleteServlet</servlet-name>
-		<servlet-class>com.emp.controller.EmpDeleteServlet</servlet-class>
+		<servlet-name>MemServlet</servlet-name>
+		<servlet-class>com.mem.controller.MemServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>EmpDeleteServlet</servlet-name>
-		<url-pattern>/EmpDeleteServlet</url-pattern>
+		<servlet-name>MemServlet</servlet-name>
+		<url-pattern>/back-end/member/mem.do</url-pattern>
+		<url-pattern>/front-end/member/mem.do</url-pattern>
+		<url-pattern>/member/mem.do</url-pattern>
 	</servlet-mapping>
-	<!-- 刪除員工 end -->
-	<!-- 新增員工 start -->
-	<servlet>
-		<servlet-name>EmpAddServlet</servlet-name>
-		<servlet-class>com.emp.controller.EmpAddServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>EmpAddServlet</servlet-name>
-		<url-pattern>/EmpAddServlet</url-pattern>
-	</servlet-mapping>
-	<!-- 新增員工 end -->
-	<!-- 修改員工資料 start -->
-	<servlet>
-		<servlet-name>EmpModifyServlet</servlet-name>
-		<servlet-class>com.emp.controller.EmpModifyServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>EmpModifyServlet</servlet-name>
-		<url-pattern>/EmpModifyServlet</url-pattern>
-	</servlet-mapping>
-	<!-- 修改員工資料 end -->
+	<!-- 會員 stop -->
 </web-app>

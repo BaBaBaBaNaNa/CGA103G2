@@ -8,10 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.emp.model.EmpJDBCDAO;
+import com.emp.model.EmpDAO;
 import com.emp.model.EmpLoginVO;
 import com.mysql.cj.Session;
-/* */
 /**
  * Servlet implementation class loginServlet
  */
@@ -36,8 +35,6 @@ public class EmpLoginServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 
-		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("utf-8");
 		StringBuffer url = request.getRequestURL();
 		System.out.println("瀏覽器訪問的資源地址 : " + url);
@@ -57,13 +54,13 @@ public class EmpLoginServlet extends HttpServlet {
 		EmpLoginVO admin = new EmpLoginVO();
 		admin.setEmp_account(emp_account);
 		admin.setEmp_password(emp_password);
-		EmpJDBCDAO dao = new EmpJDBCDAO();
+		EmpDAO dao = new EmpDAO();
 		boolean res = dao.loginAdmin(admin);
 
 		if (res) {
 			// ValidateLogin為登入驗證方法，如果驗證成功，則設定一個屬性名為“name”值為使用者名稱的session，用於Myfilter驗證是否登入過
 			request.getSession().setAttribute("name", emp_account);
-			request.getRequestDispatcher("BackIndexServlet").forward(request, response);
+			request.getRequestDispatcher("/back-end/backstage/Back_index.jsp").forward(request, response);
 		} else {
 			request.setAttribute("errorMessage", "wrong");
 			request.getRequestDispatcher("/BackLogin.jsp").forward(request, response);

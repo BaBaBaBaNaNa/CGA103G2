@@ -1,6 +1,6 @@
 <%@page import="com.mem.model.MemVO"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.emp.model.*"%>
+<%@ page import="com.mem.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
@@ -66,12 +66,12 @@
 		
 	</tr>
 	<tr>
-		<td><%=memVO.getMem_id()%></td>
-		<td><%=memVO.getMem_name()%></td>
-		<td><%=memVO.getMem_account()%></td>
-		<td><%=memVO.getMem_address()%></td>
-		<td><%=memVO.getMem_email()%></td>
-		<td><%=memVO.getMem_birthday()%></td>
+		<td><%=memVO.getMemId()%></td>
+		<td><%=memVO.getMemName()%></td>
+		<td><%=memVO.getMemAccount()%></td>
+		<td><%=memVO.getMemAddress()%></td>
+		<td><%=memVO.getMemEmail()%></td>
+		<td><%=memVO.getMemBirthday()%></td>
 		
 	</tr>
 </table>

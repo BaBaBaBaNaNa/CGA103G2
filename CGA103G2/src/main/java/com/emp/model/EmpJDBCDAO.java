@@ -75,7 +75,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 			pstmt.setString(5, empVO.getEmp_phone());
 			pstmt.setString(6, empVO.getEmp_address());
 			pstmt.setString(7, empVO.getEmp_job());
-			pstmt.setString(8, empVO.getEmp_hiredate());
+			pstmt.setDate(8, empVO.getEmp_hiredate());
 
 			pstmt.executeUpdate();
 
@@ -125,7 +125,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 			pstmt.setString(5, empVO.getEmp_phone());
 			pstmt.setString(6, empVO.getEmp_address());
 			pstmt.setString(7, empVO.getEmp_job());
-			pstmt.setString(8, empVO.getEmp_hiredate());
+			pstmt.setDate(8, empVO.getEmp_hiredate());
 			pstmt.setInt(9, empVO.getEmp_id());
 
 			pstmt.executeUpdate();
@@ -230,7 +230,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 				empVO.setEmp_phone(rs.getString("emp_phone"));
 				empVO.setEmp_address(rs.getString("emp_address"));
 				empVO.setEmp_job(rs.getString("emp_job"));
-				empVO.setEmp_hiredate(rs.getString("emp_hiredate"));
+				empVO.setEmp_hiredate(rs.getDate("emp_hiredate"));
 			}
 
 			// Handle any driver errors
@@ -295,7 +295,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 				empVO.setEmp_phone(rs.getString("emp_phone"));
 				empVO.setEmp_address(rs.getString("emp_address"));
 				empVO.setEmp_job(rs.getString("emp_job"));
-				empVO.setEmp_hiredate(rs.getString("emp_hiredate"));
+				empVO.setEmp_hiredate(rs.getDate("emp_hiredate"));
 				list.add(empVO); // Store the row in the list
 			}
 
@@ -365,32 +365,32 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 //		dao.delete(2);
 
 		// 單筆查詢
-//		EmpVO empVO3 = dao.findByPrimaryKey(1);
-//		System.out.print(empVO3.getEmp_id() + ",");
-//		System.out.print(empVO3.getEmp_name() + ",");
-//		System.out.print(empVO3.getEmp_account() + ",");
-//		System.out.print(empVO3.getEmp_password() + ",");
-//		System.out.print(empVO3.getEmp_permission() + ",");
-//		System.out.print(empVO3.getEmp_phone() + ",");
-//		System.out.println(empVO3.getEmp_address() + ",");
-//		System.out.println(empVO3.getEmp_job() + ",");
-//		System.out.println(empVO3.getEmp_hiredate());
-//		System.out.println("---------------------");
+		EmpVO empVO3 = dao.findByPrimaryKey(1);
+		System.out.print(empVO3.getEmp_id() + ",");
+		System.out.print(empVO3.getEmp_name() + ",");
+		System.out.print(empVO3.getEmp_account() + ",");
+		System.out.print(empVO3.getEmp_password() + ",");
+		System.out.print(empVO3.getEmp_permission() + ",");
+		System.out.print(empVO3.getEmp_phone() + ",");
+		System.out.println(empVO3.getEmp_address() + ",");
+		System.out.println(empVO3.getEmp_job() + ",");
+		System.out.println(empVO3.getEmp_hiredate());
+		System.out.println("---------------------");
 
 		// 多筆查詢
-		List<EmpVO> list = dao.getAll();
-		for (EmpVO aEmp : list) {
-			System.out.print(aEmp.getEmp_id() + ",");
-			System.out.print(aEmp.getEmp_name() + ",");
-			System.out.print(aEmp.getEmp_account() + ",");
-			System.out.print(aEmp.getEmp_password() + ",");
-			System.out.print(aEmp.getEmp_permission() + ",");
-			System.out.print(aEmp.getEmp_phone() + ",");
-			System.out.println(aEmp.getEmp_address() + ",");
-			System.out.println(aEmp.getEmp_job() + ",");
-			System.out.println(aEmp.getEmp_hiredate());
-			System.out.println();
+//		List<EmpVO> list = dao.getAll();
+//		for (EmpVO aEmp : list) {
+//			System.out.print(aEmp.getEmp_id() + ",");
+//			System.out.print(aEmp.getEmp_name() + ",");
+//			System.out.print(aEmp.getEmp_account() + ",");
+//			System.out.print(aEmp.getEmp_password() + ",");
+//			System.out.print(aEmp.getEmp_permission() + ",");
+//			System.out.print(aEmp.getEmp_phone() + ",");
+//			System.out.println(aEmp.getEmp_address() + ",");
+//			System.out.println(aEmp.getEmp_job() + ",");
+//			System.out.println(aEmp.getEmp_hiredate());
+//			System.out.println();
 		}
 	}
-}
+
 /* */

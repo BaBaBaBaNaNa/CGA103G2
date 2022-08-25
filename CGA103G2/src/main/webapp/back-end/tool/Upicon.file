@@ -1,0 +1,9 @@
+	<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	
+		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb pl-0">
+				<li class="breadcrumb-item"><a href="#"><i class="material-icons">home</i>首頁</a></li>
+			</ol>
+		</nav>
+		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
