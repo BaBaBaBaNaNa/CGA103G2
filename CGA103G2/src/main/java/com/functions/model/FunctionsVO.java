@@ -1,19 +1,19 @@
 package com.functions.model;
 
 public class FunctionsVO implements java.io.Serializable{
-	private int function_id;
-	private String function_name;
+	private int functionID;
+	private String functionName;
 	
-	public int getFunction_id() {
-		return function_id;
+	public int getFunctionID() {
+		return functionID;
 	}
-	public void setFunction_id(int function_id) {
-		this.function_id = function_id;
+	public void setFunctionID(int functionID) {
+		this.functionID = functionID;
 	}
-	public String getFunction_name() {
-		return function_name;
+	public String getFunctionName() {
+		return functionName;
 	}
-	public void setFunction_name(String function_name) {
-		this.function_name = function_name;
+	public void setFunctionName(String functionName) {
+		this.functionName = functionName;
 	}
 }

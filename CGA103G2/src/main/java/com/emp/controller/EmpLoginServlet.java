@@ -4,33 +4,23 @@ import java.io.IOException;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.emp.model.EmpDAO;
 import com.emp.model.EmpLoginVO;
-import com.mysql.cj.Session;
-/**
- * Servlet implementation class loginServlet
- */
+
+@WebServlet("/EmpLoginServlet.do")
 public class EmpLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public EmpLoginServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
@@ -47,20 +37,18 @@ public class EmpLoginServlet extends HttpServlet {
 			System.out.println("攜帶的請求參數 : " + paramName);
 		}
 
-
-
-		String emp_account = request.getParameter("emp_account");
-		String emp_password = request.getParameter("emp_password");
+		String empAccount = request.getParameter("empAccount");
+		String empPassword = request.getParameter("empPassword");
 		EmpLoginVO admin = new EmpLoginVO();
-		admin.setEmp_account(emp_account);
-		admin.setEmp_password(emp_password);
+		admin.setEmpAccount(empAccount);
+		admin.setEmpPassword(empPassword);
 		EmpDAO dao = new EmpDAO();
 		boolean res = dao.loginAdmin(admin);
 
 		if (res) {
 			// ValidateLogin為登入驗證方法，如果驗證成功，則設定一個屬性名為“name”值為使用者名稱的session，用於Myfilter驗證是否登入過
-			request.getSession().setAttribute("name", emp_account);
-			request.getRequestDispatcher("/back-end/backstage/Back_index.jsp").forward(request, response);
+			request.getSession().setAttribute("name", empAccount);
+			request.getRequestDispatcher("/back-end/index/BackIndex.jsp").forward(request, response);
 		} else {
 			request.setAttribute("errorMessage", "wrong");
 			request.getRequestDispatcher("/BackLogin.jsp").forward(request, response);
@@ -70,12 +58,7 @@ public class EmpLoginServlet extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 

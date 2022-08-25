@@ -11,63 +11,63 @@ public class EmpService {
 	}
 
 	public EmpVO addEmp(
-			String emp_name, 
-			String emp_account,
-			String emp_password,
-			int emp_permission,
-			String emp_phone,
-			String emp_address,
-			String emp_job,
-			java.sql.Date emp_hiredate) {
+			String empName, 
+			String empAccount,
+			String empPassword,
+			int empPermission,
+			String empPhone,
+			String empAddress,
+			int JobID,
+			java.sql.Date empHiredate) {
 
 		EmpVO empVO = new EmpVO();
 
-		empVO.setEmp_name(emp_name);
-		empVO.setEmp_account(emp_account);
-		empVO.setEmp_password(emp_password);
-		empVO.setEmp_permission(emp_permission);
-		empVO.setEmp_phone(emp_phone);
-		empVO.setEmp_address(emp_address);
-		empVO.setEmp_job(emp_job);
-		empVO.setEmp_hiredate(emp_hiredate);
+		empVO.setEmpName(empName);
+		empVO.setEmpAccount(empAccount);
+		empVO.setEmpPassword(empPassword);
+		empVO.setEmpPermission(empPermission);
+		empVO.setEmpPhone(empPhone);
+		empVO.setEmpAddress(empAddress);
+		empVO.setJobID(JobID);
+		empVO.setEmpHiredate(empHiredate);
 		dao.insert(empVO);
 
 		return empVO;
 	}
 
 	public EmpVO updateEmp(
-			Integer emp_id,
-			String emp_name, 
-			String emp_account,
-			String emp_password,
-			int emp_permission,
-			String emp_phone,
-			String emp_address,
-			String emp_job,
-			java.sql.Date emp_hiredate) {
+			Integer empID,
+			String empName, 
+			String empAccount,
+			String empPassword,
+			int empPermission,
+			String empPhone,
+			String empAddress,
+			int jobID,
+			java.sql.Date empHiredate) {
 
 		EmpVO empVO = new EmpVO();
 
-		empVO.setEmp_id(emp_id);
-		empVO.setEmp_name(emp_name);
-		empVO.setEmp_account(emp_account);
-		empVO.setEmp_password(emp_password);
-		empVO.setEmp_permission(emp_permission);
-		empVO.setEmp_phone(emp_phone);
-		empVO.setEmp_address(emp_address);
-		empVO.setEmp_job(emp_job);
-		empVO.setEmp_hiredate(emp_hiredate);
+		empVO.setEmpID(empID);
+		empVO.setEmpName(empName);
+		empVO.setEmpAccount(empAccount);
+		empVO.setEmpPassword(empPassword);
+		empVO.setEmpPermission(empPermission);
+		empVO.setEmpPhone(empPhone);
+		empVO.setEmpAddress(empAddress);
+		empVO.setJobID(jobID);
+		empVO.setEmpHiredate(empHiredate);
 		dao.update(empVO);
 
 		return empVO;
 	}
 
-	public void deleteEmp(Integer emp_id) {
-		dao.delete(emp_id);
+	public void deleteEmp(Integer empID) {
+		dao.delete(empID);
 	}
 
-	public EmpVO getOneEmp(Integer emp_id) {
-		return dao.findByPrimaryKey(emp_id);
+	public EmpVO getOneEmp(Integer empID) {
+		return dao.findByPrimaryKey(empID);
 	}
 
 	public List<EmpVO> getAll() {
