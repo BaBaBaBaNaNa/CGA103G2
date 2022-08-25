@@ -18,20 +18,20 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 <!-- Iconic Fonts -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/back-assets/vendors/iconic-fonts/flat-icons/flaticon.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/back-assets/vendors/iconic-fonts/cryptocoins/cryptocoins.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/back-assets/vendors/iconic-fonts/cryptocoins/cryptocoins-colors.css">
+<link rel="stylesheet" href="../../back-assets/vendors/iconic-fonts/flat-icons/flaticon.css">
+<link rel="stylesheet" href="../../back-assets/vendors/iconic-fonts/cryptocoins/cryptocoins.css">
+<link rel="stylesheet" href="../../back-assets/vendors/iconic-fonts/cryptocoins/cryptocoins-colors.css">
 <!-- Bootstrap core CSS -->
-<link href="${pageContext.request.contextPath}/back-assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../back-assets/css/bootstrap.min.css" rel="stylesheet">
 <!-- jQuery UI -->
-<link href="${pageContext.request.contextPath}/back-assets/css/jquery-ui.min.css" rel="stylesheet">
+<link href="../../back-assets/css/jquery-ui.min.css" rel="stylesheet">
 <!-- Page Specific CSS (Slick Slider.css) -->
-<link href="${pageContext.request.contextPath}/back-assets/css/slick.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/back-assets/css/datatables.min.css" rel="stylesheet">
+<link href="../../back-assets/css/slick.css" rel="stylesheet">
+<link href="../../back-assets/css/datatables.min.css" rel="stylesheet">
 <!-- Costic styles -->
-<link href="${pageContext.request.contextPath}/back-assets/css/style.css" rel="stylesheet">
+<link href="../../back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
-<link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath}/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
 <!-- empStyle -->
 <link href="../../back-assets/css/empStyle.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
@@ -72,57 +72,57 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 			</ul>
 		</c:if>
 
-		<form action="emp.do" name="form1" method="post">
+		<form action="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" name="form1" method="post">
 			<table>
 
 				<tr>
 					<th>員工編號</th>
-					<td><input type="text" name=" noemp_id" value="${param.emp_id}" readonly="readonly" /></td>
+					<td><input type="text" name=" empID" value="${param.empID}" readonly="readonly" /></td>
 				</tr>
 				<tr>
 					<th>員工姓名</th>
-					<td><input type="text" name="emp_name" value="${param.emp_name}" required /></td>
+					<td><input type="text" name="empName" value="${param.empName}" required /></td>
 				</tr>
 				<tr>
 					<th>帳號</th>
-					<td><input type="text" name="emp_account" value="${param.emp_account}" required /></td>
+					<td><input type="text" name="empAccount" value="${param.empAccount}" required /></td>
 				</tr>
 				<tr>
 					<th>密碼</th>
-					<td><input type="text" name="emp_password" value="${param.emp_password}" required /></td>
+					<td><input type="text" name="empPassword" value="${param.empPassword}" required /></td>
 				</tr>
 				<tr>
 					<th>權限</th>
-					<td><input type="text" name="emp_permission" value="${param.emp_permission}" required /></td>
+					<td><input type="text" name="empPermission" value="${param.empPermission}" required /></td>
 				</tr>
 				<tr>
 					<th>員工電話</th>
-					<td><input type="text" name="emp_phone" value="${param.emp_phone}" required /></td>
+					<td><input type="text" name="empPhone" value="${param.empPhone}" required /></td>
 				</tr>
 				<tr>
 					<th>員工地址</th>
-					<td><input type="text" name="emp_address" value="${param.emp_address}" required /></td>
+					<td><input type="text" name="empAddress" value="${param.empAddress}" required /></td>
 				</tr>
 				<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
 				<tr>
 					<th>員工職位:<font color=red><b>*</b></font></th>
 					<td>
-						<select size="1" name="emp_job">
+						<select size="1" name="jobID">
 							<c:forEach var="jobVO" items="${jobSvc.all}">
-								<option value="${jobVO.job_id}" ${(param.emp_job==jobVO.job_id)?'selected':'' } >${jobVO.job_name}
+								<option value="${jobVO.jobID}" ${(param.jobID==jobVO.jobID)?'selected':'' } >${jobVO.jobName}
 							</c:forEach>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<th>員工到職日</th>
-					<td><input type="text" id="f_date1" name="emp_hiredate" value="${param.emp_hiredate}" required /></td>
+					<td><input type="text" id="f_date1" name="empHiredate" value="${param.empHiredate}" required /></td>
 				</tr>
 			</table>
 			<br>
 			<div>
 			<input type="hidden" name="action" value="update">
-			<input type="hidden" name="emp_id" value="${param.emp_id}">
+			<input type="hidden" name="empID" value="${param.empID}">
 			<input type="submit" value="送出修改">
 			</div>
 		</form>
@@ -132,36 +132,36 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 
 	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
 	<!-- Global Required Scripts Start -->
-	<script src="${pageContext.request.contextPath}/back-assets/js/jquery-3.3.1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/back-assets/js/popper.min.js"></script>
-	<script src="${pageContext.request.contextPath}/back-assets/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/back-assets/js/perfect-scrollbar.js"></script>
-	<script src="${pageContext.request.contextPath}/back-assets/js/jquery-ui.min.js"></script>
+	<script src="../../back-assets/js/jquery-3.3.1.min.js"></script>
+	<script src="../../back-assets/js/popper.min.js"></script>
+	<script src="../../back-assets/js/bootstrap.min.js"></script>
+	<script src="../../back-assets/js/perfect-scrollbar.js"></script>
+	<script src="../../back-assets/js/jquery-ui.min.js"></script>
 	<!-- Global Required Scripts End -->
 	<!-- Page Specific Scripts Start -->
-	<script src="${pageContext.request.contextPath}/back-assets/js/d3.v3.min.js"></script>
-	<script src="${pageContext.request.contextPath}/back-assets/js/topojson.v1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/back-assets/js/datatables.min.js"></script>
-	<script src="${pageContext.request.contextPath}/back-assets/js/data-tables.js"></script>
+	<script src="../../back-assets/js/d3.v3.min.js"></script>
+	<script src="../../back-assets/js/topojson.v1.min.js"></script>
+	<script src="../../back-assets/js/datatables.min.js"></script>
+	<script src="../../back-assets/js/data-tables.js"></script>
 	<!-- Page Specific Scripts Finish -->
 	<!-- Costic core JavaScript -->
-	<script src="${pageContext.request.contextPath}/back-assets/js/framework.js"></script>
+	<script src="../../back-assets/js/framework.js"></script>
 	<!-- Settings -->
-	<script src="${pageContext.request.contextPath}/back-assets/js/settings.js"></script>
+	<script src="../../back-assets/js/settings.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 	<%
-	java.sql.Date emp_hiredate = null;
+	java.sql.Date empHiredate = null;
 	try {
-		emp_hiredate = empVO.getEmp_hiredate();
+		empHiredate = empVO.getEmpHiredate();
 	} catch (Exception e) {
-		emp_hiredate = new java.sql.Date(System.currentTimeMillis());
+		empHiredate = new java.sql.Date(System.currentTimeMillis());
 	}
 	%>
 
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.datetimepicker.css" />
-	<script src="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.js"></script>
-	<script src="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.css" />
+	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 	<style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
@@ -180,7 +180,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
        timepicker:false,       //timepicker:true,
        step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
        format:'Y-m-d',         //format:'Y-m-d H:i:s',
-	   value: '<%=emp_hiredate%>', // value:   new Date(),
+	   value: '<%=empHiredate%>', // value:   new Date(),
 		//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 		//startDate:	            '2017/07/10',  // 起始日
 		//minDate:               '-1970-01-01', // 去除今日(不含)之前

@@ -13,7 +13,7 @@ import com.permission.model.PermissionDAO;
 import com.permission.model.PermissionService;
 import com.permission.model.PermissionVO;
 
-@WebServlet("/permission/PermissionServlet2")
+@WebServlet("/permission/PermissionServlet.do")
 public class permissionServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -51,7 +51,7 @@ public class permissionServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-String str = req.getParameter("emp_id");
+String str = req.getParameter("empID");
 				if (str == null || (str.trim()).length() == 0) {
 					errorMsgs.add("請輸入員工編號");
 				}
@@ -63,9 +63,9 @@ String str = req.getParameter("emp_id");
 					return;//程式中斷
 				}
 				
-				Integer emp_id = null;
+				Integer empID = null;
 				try {
-					 emp_id = Integer.valueOf(str);
+					 empID = Integer.valueOf(str);
 				} catch (Exception e) {
 					errorMsgs.add("員工編號格式不正確");
 				}
@@ -79,7 +79,7 @@ String str = req.getParameter("emp_id");
 				
 				/***************************2.開始查詢資料*****************************************/
 				PermissionService permissionSvc = new PermissionService();
-				PermissionVO permissionVO = permissionSvc.getOnePermission(emp_id);
+				PermissionVO permissionVO = permissionSvc.getOnePermission(empID);
 				if (permissionVO == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -108,19 +108,19 @@ String str = req.getParameter("emp_id");
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 
-			String emp_id = req.getParameter("emp_id").trim();
-			if (emp_id == null || emp_id.trim().length() == 0) {
-				errorMsgs.add("emp_id請勿空白");
+			String empID = req.getParameter("empID").trim();
+			if (empID == null || empID.trim().length() == 0) {
+				errorMsgs.add("empID請勿空白");
 			}
 			
-			String function_id = req.getParameter("function_id").trim();
-			if (function_id == null || function_id.trim().length() == 0) {
-				errorMsgs.add("function_id請勿空白");
+			String functionID = req.getParameter("functionID").trim();
+			if (functionID == null || functionID.trim().length() == 0) {
+				errorMsgs.add("functionID請勿空白");
 			}
 
 			PermissionVO permissionVO = new PermissionVO();
-			permissionVO.setEmp_id(Integer.parseInt(emp_id));
-			permissionVO.setFunction_id(Integer.parseInt(function_id));
+			permissionVO.setEmpID(Integer.parseInt(empID));
+			permissionVO.setFunctionID(Integer.parseInt(functionID));
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
@@ -132,7 +132,7 @@ String str = req.getParameter("emp_id");
 
 			/*************************** 2.開始新增資料 ***************************************/
 			PermissionService permissionSvc = new PermissionService();
-			permissionVO = permissionSvc.addPermission(Integer.parseInt(emp_id),Integer.parseInt(function_id));
+			permissionVO = permissionSvc.addPermission(Integer.parseInt(empID),Integer.parseInt(functionID));
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = "/pages/permission/listAllPermission1_byDAO.jsp";

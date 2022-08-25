@@ -2,21 +2,19 @@ package com.emp.model;
 
 public class EmpLoginVO {
 	
-	private String emp_account;
-	private String emp_password;
+	private String empAccount;
+	private String empPassword;
 	
-	public String getEmp_account() {
-		return emp_account;
+	public String getEmpAccount() {
+		return empAccount;
 	}
-	public void setEmp_account(String emp_account) {
-		this.emp_account = emp_account;
+	public void setEmpAccount(String empAccount) {
+		this.empAccount = empAccount;
 	}
-	public String getEmp_password() {
-		return emp_password;
+	public String getEmpPassword() {
+		return empPassword;
 	}
-	public void setEmp_password(String emp_password) {
-		this.emp_password = emp_password;
+	public void setEmpPassword(String empPassword) {
+		this.empPassword = empPassword;
 	}
-	
-
 }

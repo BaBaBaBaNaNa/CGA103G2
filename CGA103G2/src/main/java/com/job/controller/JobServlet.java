@@ -14,7 +14,7 @@ import com.job.model.JobDAO;
 import com.job.model.JobService;
 import com.job.model.JobVO;
 
-@WebServlet("/back-end/job/JobServlet2")
+@WebServlet("/back-end/job/JobServlet.do")
 public class JobServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -36,7 +36,7 @@ public class JobServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("list", list); // 資料庫取出的list物件,存入session
 			// Send the Success view
-			String url = "/back-end/job/job_detail.jsp";
+			String url = "/back-end/job/jobDetail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交listAllEmp2_getFromSession.jsp
 			successView.forward(req, res);
 			return;
@@ -52,7 +52,7 @@ public class JobServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-String str = req.getParameter("job_id");
+String str = req.getParameter("jobID");
 				if (str == null || (str.trim()).length() == 0) {
 					errorMsgs.add("請輸入職務編號");
 				}
@@ -64,9 +64,9 @@ String str = req.getParameter("job_id");
 					return;//程式中斷
 				}
 				
-				Integer job_id = null;
+				Integer jobID = null;
 				try {
-					 job_id = Integer.valueOf(str);
+					 jobID = Integer.valueOf(str);
 				} catch (Exception e) {
 					errorMsgs.add("職務編號格式不正確");
 				}
@@ -79,7 +79,7 @@ String str = req.getParameter("job_id");
 				
 				/***************************2.開始查詢資料*****************************************/
 				JobService jobSvc = new JobService();
-			    JobVO jobVO = jobSvc.getOneJob(job_id);
+			    JobVO jobVO = jobSvc.getOneJob(jobID);
 				if (jobVO == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -108,10 +108,10 @@ String str = req.getParameter("job_id");
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			// emp_name
-			String job_name = req.getParameter("job_name");
+			String jobName = req.getParameter("jobName");
 //			String emp_nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 //			String job_nameReg = "";
-			if (job_name == null || job_name.trim().length() == 0) {
+			if (jobName == null || jobName.trim().length() == 0) {
 				errorMsgs.add("功能名字: 請勿空白");
 			}
 //			else if (!job_name.trim().matches(job_nameReg)) { // 以下練習正則(規)表示式(regular-expression)
@@ -120,7 +120,7 @@ String str = req.getParameter("job_id");
 
 
 			JobVO jobVO = new JobVO();
-			jobVO.setJob_name(job_name);
+			jobVO.setJobName(jobName);
 
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("jobVO", jobVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -131,7 +131,7 @@ String str = req.getParameter("job_id");
 
 			/*************************** 2.開始新增資料 ***************************************/
 			JobService jobSvc = new JobService();
-			jobVO = jobSvc.addJob(job_name);
+			jobVO = jobSvc.addJob(jobName);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = "/pages/functions/listAllEmp1_byDAO.jsp";

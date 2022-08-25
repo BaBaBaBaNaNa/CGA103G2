@@ -22,11 +22,11 @@ public class JobDAO  implements JobDAO_interface {
 		}
 	}
 	
-	private static final String INSERT_STMT = "INSERT INTO job ( job_name) VALUES (?);";
-	private static final String GET_ALL_STMT = "SELECT job_id,job_name FROM job order by job_id";
-	private static final String GET_ONE_STMT = "SELECT job_id,job_name FROM job where job_id = ?";
-	private static final String DELETE = "DELETE FROM job where job_id = ?";
-	private static final String UPDATE = "UPDATE job set job_id=?,job_name=? where job_id = ?";
+	private static final String INSERT_STMT = "INSERT INTO Job ( jobName) VALUES (?);";
+	private static final String GET_ALL_STMT = "SELECT jobID,jobName FROM Job order by jobID";
+	private static final String GET_ONE_STMT = "SELECT jobID,jobName FROM Job where jobID = ?";
+	private static final String DELETE = "DELETE FROM Job where jobID = ?";
+	private static final String UPDATE = "UPDATE job set jobID=?,jobName=? where jobID = ?";
 	
 	@Override
 	public void insert(JobVO jobVO) {
@@ -37,8 +37,8 @@ public class JobDAO  implements JobDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setInt(1, jobVO.getJob_id());
-			pstmt.setString(2, jobVO.getJob_name());
+			pstmt.setInt(1, jobVO.getJobID());
+			pstmt.setString(2, jobVO.getJobName());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -72,8 +72,8 @@ public class JobDAO  implements JobDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
-			pstmt.setInt(1, jobVO.getJob_id());
-			pstmt.setString(2, jobVO.getJob_name());
+			pstmt.setInt(1, jobVO.getJobID());
+			pstmt.setString(2, jobVO.getJobName());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -99,7 +99,7 @@ public class JobDAO  implements JobDAO_interface {
 	}
 
 	@Override
-	public void delete(Integer function_id) {
+	public void delete(Integer functionID) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -108,7 +108,7 @@ public class JobDAO  implements JobDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setInt(1, function_id);
+			pstmt.setInt(1, functionID);
 
 			pstmt.executeUpdate();
 			
@@ -135,7 +135,7 @@ public class JobDAO  implements JobDAO_interface {
 	}
 
 	@Override
-	public JobVO findByPrimaryKey(Integer job_id) {
+	public JobVO findByPrimaryKey(Integer jobID) {
 
 		JobVO jobVO = null;
 		Connection con = null;
@@ -146,7 +146,7 @@ public class JobDAO  implements JobDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			
-			pstmt.setInt(1, job_id);
+			pstmt.setInt(1, jobID);
 			
 			rs = pstmt.executeQuery();
 //			System.out.println(rs);
@@ -154,8 +154,8 @@ public class JobDAO  implements JobDAO_interface {
 				// empVo 也稱為 Domain objects
 				jobVO = new JobVO();
 
-				jobVO.setJob_id(rs.getInt("job_id"));
-				jobVO.setJob_name(rs.getString("job_name"));
+				jobVO.setJobID(rs.getInt("jobID"));
+				jobVO.setJobName(rs.getString("jobName"));
 
 			}
 		} catch (SQLException se) {
@@ -205,8 +205,8 @@ public class JobDAO  implements JobDAO_interface {
 				// empVO 也稱為 Domain objects
 				jobVO = new JobVO();
 
-				jobVO.setJob_id(rs.getInt("job_id"));
-				jobVO.setJob_name(rs.getString("job_name"));
+				jobVO.setJobID(rs.getInt("jobID"));
+				jobVO.setJobName(rs.getString("jobName"));
 				
 				list.add(jobVO); // Store the row in the list
 			}

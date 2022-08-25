@@ -138,19 +138,19 @@ h2{
 				<%@ include file="../../back-end/tool/page1.file"%>
 				<c:forEach var="jobVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 					<tr>
-						<td>${jobVO.job_id}</td>
-						<td>${jobVO.job_name}</td>
+						<td>${jobVO.jobID}</td>
+						<td>${jobVO.jobName}</td>
 						<td>
 							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/job/job.do" style="margin-bottom: 0px;">
 								<input type="submit" value="修改">
-								<input type="hidden" name="job_id" value="${jobVO.job_id}">
+								<input type="hidden" name="job_id" value="${jobVO.jobID}">
 								<input type="hidden" name="action" value="getOne_For_Update">
 							</FORM>
 						</td>
 						<td>
 							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/job/job.do" style="margin-bottom: 0px;">
 								<input type="submit" value="刪除">
-								<input type="hidden" name="job_id" value="${empVO.emp_id}">
+								<input type="hidden" name="job_id" value="${empVO.empID}">
 								<input type="hidden" name="action" value="delete">
 							</FORM>
 						</td>

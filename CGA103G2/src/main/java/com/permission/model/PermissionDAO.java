@@ -11,28 +11,23 @@ import com.emp.model.EmpVO;
 
 import java.sql.*;
 
-public class PermissionDAO implements PermissionDAO_interface {
-//	String driver = "com.mysql.cj.jdbc.Driver";
-//	String url = "jdbc:mysql://localhost:3306/restaurant?serverTimezone=Asia/Taipei";
-//	String userid = "adminmanager01";
-//	String passwd = "aaa123";
-	
+public class PermissionDAO implements PermissionDAO_interface {	
 //	共用DataSource
 	private static DataSource ds = null;
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/restaurant");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/cga103g2");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private static final String INSERT_STMT = "INSERT INTO permission ( emp_id,function_id) VALUES (?,?);";
-	private static final String GET_ALL_STMT = "SELECT emp_id,function_id FROM permission order by emp_id";
-	private static final String GET_ONE_STMT = "SELECT emp_id,function_id FROM permission where emp_id = ?";
-	private static final String DELETE = "DELETE FROM permission where emp_id = ?";
-	private static final String UPDATE = "UPDATE permission set emp_id=?, function_id=? where emp_id = ?";
+	private static final String INSERT_STMT = "INSERT INTO permission ( empID,functionID) VALUES (?,?);";
+	private static final String GET_ALL_STMT = "SELECT empID,functionID FROM permission order by empID";
+	private static final String GET_ONE_STMT = "SELECT empID,functionID FROM permission where empID = ?";
+	private static final String DELETE = "DELETE FROM permission where empID = ?";
+	private static final String UPDATE = "UPDATE permission set empID=?, functionID=? where empID = ?";
 	
 	@Override
 	public void insert(PermissionVO permissionVO) {
@@ -43,8 +38,8 @@ public class PermissionDAO implements PermissionDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setInt(1, permissionVO.getEmp_id());
-			pstmt.setInt(2, permissionVO.getFunction_id());
+			pstmt.setInt(1, permissionVO.getEmpID());
+			pstmt.setInt(2, permissionVO.getFunctionID());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -79,8 +74,8 @@ public class PermissionDAO implements PermissionDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setInt(1, permissionVO.getEmp_id());
-			pstmt.setInt(2, permissionVO.getFunction_id());
+			pstmt.setInt(1, permissionVO.getEmpID());
+			pstmt.setInt(2, permissionVO.getFunctionID());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -106,7 +101,7 @@ public class PermissionDAO implements PermissionDAO_interface {
 	}
 
 	@Override
-	public void delete(Integer emp_id) {
+	public void delete(Integer empID) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -115,7 +110,7 @@ public class PermissionDAO implements PermissionDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setInt(1, emp_id);
+			pstmt.setInt(1, empID);
 
 			pstmt.executeUpdate();
 			
@@ -142,7 +137,7 @@ public class PermissionDAO implements PermissionDAO_interface {
 	}
 
 	@Override
-	public PermissionVO findByPrimaryKey(Integer emp_id) {
+	public PermissionVO findByPrimaryKey(Integer empID) {
 
 		PermissionVO permissionVO = null;
 		Connection con = null;
@@ -153,7 +148,7 @@ public class PermissionDAO implements PermissionDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			
-			pstmt.setInt(1, emp_id);
+			pstmt.setInt(1, empID);
 			
 			rs = pstmt.executeQuery();
 //			System.out.println(rs);
@@ -161,8 +156,8 @@ public class PermissionDAO implements PermissionDAO_interface {
 				// empVo 也稱為 Domain objects
 				permissionVO = new PermissionVO();
 
-				permissionVO.setEmp_id(rs.getInt("emp_id"));
-				permissionVO.setFunction_id(rs.getInt("function_id"));
+				permissionVO.setEmpID(rs.getInt("empID"));
+				permissionVO.setFunctionID(rs.getInt("functionID"));
 
 			}
 		} catch (SQLException se) {
@@ -212,8 +207,8 @@ public class PermissionDAO implements PermissionDAO_interface {
 				// empVO 也稱為 Domain objects
 				permissionVO = new PermissionVO();
 
-				permissionVO.setEmp_id(rs.getInt("emp_id"));
-				permissionVO.setFunction_id(rs.getInt("function_id"));
+				permissionVO.setEmpID(rs.getInt("empID"));
+				permissionVO.setFunctionID(rs.getInt("functionID"));
 				
 				list.add(permissionVO); // Store the row in the list
 			}

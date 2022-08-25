@@ -11,13 +11,13 @@ public class PermissionService {
 	}
 //123
 	public PermissionVO addPermission(
-			int emp_id, 
-			int function_id) {
+			int empID, 
+			int functionID) {
 
 		PermissionVO permissionVO = new PermissionVO();
 
-		permissionVO.setEmp_id(emp_id);
-		permissionVO.setFunction_id(function_id);
+		permissionVO.setEmpID(empID);
+		permissionVO.setFunctionID(functionID);
 
 		dao.insert(permissionVO);
 
@@ -25,25 +25,25 @@ public class PermissionService {
 	}
 
 	public PermissionVO updatePermission(			
-			int emp_id, 
-			int function_id) {
+			int empID, 
+			int functionID) {
 
 		PermissionVO permissionVO = new PermissionVO();
 
-		permissionVO.setEmp_id(emp_id);
-		permissionVO.setFunction_id(function_id);
+		permissionVO.setEmpID(empID);
+		permissionVO.setFunctionID(functionID);
 		
 		dao.update(permissionVO);
 
 		return permissionVO;
 	}
 
-	public void deletePermission(Integer emp_id) {
-		dao.delete(emp_id);
+	public void deletePermission(Integer empID) {
+		dao.delete(empID);
 	}
 
-	public PermissionVO getOnePermission(Integer emp_id) {
-		return dao.findByPrimaryKey(emp_id);
+	public PermissionVO getOnePermission(Integer empID) {
+		return dao.findByPrimaryKey(empID);
 	}
 
 	public List<PermissionVO> getAll() {

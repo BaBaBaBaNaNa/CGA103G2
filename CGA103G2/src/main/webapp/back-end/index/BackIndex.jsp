@@ -51,7 +51,10 @@
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		
+<%-- 	        <%@ include file="${pageContext.request.contextPath}/back-end/tool/picture01.file"%> --%>
+<pre>
+		<%@ include file="../../back-end/tool/picture02.file"%> --%>
+</pre>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->

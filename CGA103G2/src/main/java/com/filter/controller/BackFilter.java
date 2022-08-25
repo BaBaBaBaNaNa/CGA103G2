@@ -12,31 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet Filter implementation class MyFilter
- */
-
 public class BackFilter implements Filter {
 //定義一個存放放行資源路徑的陣列
 	private static String[] paths;
 
-	/**
-	 * Default constructor.
-	 */
 	public BackFilter() {
 	}
 
-	/**
-	 * @see Filter#destroy()
-	 */
 	public void destroy() {
 	}
 
-	/**
-	 * @see Filter#doFilter(ServletRequest,ServletResponse,FilterChain)
-	 */
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-			throws IOException, ServletException {
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		// 獲取資源URI路徑
@@ -60,13 +46,9 @@ public class BackFilter implements Filter {
 		chain.doFilter(request, response);
 	}
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
 	public void init(FilterConfig fConfig) throws ServletException {
 		// 讀取初始化引數，得到放行的資源
 		String initParameter = fConfig.getInitParameter("letgo");
 		paths = initParameter.split(";");
 	}
-	/* */
 }

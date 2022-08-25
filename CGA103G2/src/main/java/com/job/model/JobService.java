@@ -11,11 +11,11 @@ public class JobService {
 	}
 
 	public JobVO addJob(
-			String job_name) {
+			String jobName) {
 
 		JobVO jobVO = new JobVO();
 
-		jobVO.setJob_name(job_name);
+		jobVO.setJobName(jobName);
 
 		dao.insert(jobVO);
 
@@ -23,25 +23,25 @@ public class JobService {
 	}
 
 	public JobVO updateJob(			
-			int job_id, 
-			String job_name) {
+			int jobID, 
+			String jobName) {
 
 				JobVO jobVO = new JobVO();
 
-				jobVO.setJob_id(job_id);
-				jobVO.setJob_name(job_name);
+				jobVO.setJobID(jobID);
+				jobVO.setJobName(jobName);
 		
 		dao.update(jobVO);
 
 		return jobVO;
 	}
 
-	public void deleteJob(Integer job_id) {
-		dao.delete(job_id);
+	public void deleteJob(Integer jobID) {
+		dao.delete(jobID);
 	}
 
-	public JobVO getOneJob(Integer job_id) {
-		return dao.findByPrimaryKey(job_id);
+	public JobVO getOneJob(Integer jobID) {
+		return dao.findByPrimaryKey(jobID);
 	}
 
 	public List<JobVO> getAll() {

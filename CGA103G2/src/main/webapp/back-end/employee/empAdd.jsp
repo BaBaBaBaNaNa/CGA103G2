@@ -64,50 +64,50 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 		<h2	>新增員工</h2>
-		<FORM METHOD="post" ACTION="emp.do" name="form1">
-			<p>${errorMsgs.emp_name} ${errorMsgs.emp_account} ${errorMsgs.emp_password} ${errorMsgs.emp_permission} ${errorMsgs.emp_phone} ${errorMsgs.emp_address} ${errorMsgs.emp_job}</p>
+		<FORM METHOD="post" ACTION="EmpServlet.do" name="form1">
+			<p>${errorMsgs.empName} ${errorMsgs.empAccount} ${errorMsgs.empPassword} ${errorMsgs.empPermission} ${errorMsgs.empPhone} ${errorMsgs.empAddress} ${errorMsgs.jobID}</p>
 			<table>
 				<tr>
 					<td>ID:</td>
-					<td><input type="hidden"  name="emp_id" size="45" value="${param.emp_id}"readonly/>
+					<td><input type="hidden"  name="empID" size="45" value="${param.empID}"readonly/>
 				<tr>
 					<td>員工姓名:</td>
-					<td><input type="TEXT" name="emp_name" size="45" value="${param.emp_name}" /></td>
+					<td><input type="TEXT" name="empName" size="45" value="${param.empName}" /></td>
 				</tr>
 				<tr>
 					<td>帳號:</td>
-					<td><input type="TEXT" name="emp_account" size="45" value="${param.emp_account}" /></td>
+					<td><input type="TEXT" name="empAccount" size="45" value="${param.empAccount}" /></td>
 				</tr>
 				<tr>
 					<td>密碼:</td>
-					<td><input type="TEXT" name="emp_password" size="45" value="${param.emp_password}" /></td>
+					<td><input type="TEXT" name="empPassword" size="45" value="${param.empPassword}" /></td>
 				</tr>
 				<tr>
 					<td>權限:</td>
-					<td><input type="TEXT" name="emp_permission" size="45" value="${param.emp_permission}" /></td>
+					<td><input type="TEXT" name="empPermission" size="45" value="${param.empPermission}" /></td>
 				</tr>
 				<tr>
 					<td>電話:</td>
-					<td><input type="TEXT" name="emp_phone" size="45" value="${param.emp_phone}" /></td>
+					<td><input type="TEXT" name="empPhone" size="45" value="${param.empPhone}" /></td>
 				</tr>
 				<tr>
 					<td>地址:</td>
-					<td><input type="TEXT" name="emp_address" size="45" value="${param.emp_address}" /></td>
+					<td><input type="TEXT" name="empAddress" size="45" value="${param.empAddress}" /></td>
 				</tr>
 				<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
 				<tr>
 					<td>職位:<font color=red><b>*</b></font></td>
 					<td>
-						<select size="1" name="emp_job">
+						<select size="1" name="jobID">
 							<c:forEach var="jobVO" items="${jobSvc.all}">
-								<option value="${jobVO.job_id}" ${(param.emp_job==jobVO.job_id)?'selected':'' } >${jobVO.job_name}
+								<option value="${jobVO.jobID}" ${(param.jobID==jobVO.jobID)?'selected':'' } >${jobVO.jobName}
 							</c:forEach>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<td>雇用日期:</td>
-					<td><input name="emp_hiredate" id="f_date1" type="text"></td>
+					<td><input name="empHiredate" id="f_date1" type="text"></td>
 				</tr>
 
 			</table>
@@ -143,17 +143,17 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 	
 	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 	<%
-	java.sql.Date emp_hiredate = null;
+	java.sql.Date empHiredate = null;
 	try {
-		emp_hiredate = empVO.getEmp_hiredate();
+		empHiredate = empVO.getEmpHiredate();
 	} catch (Exception e) {
-		emp_hiredate = new java.sql.Date(System.currentTimeMillis());
+		empHiredate = new java.sql.Date(System.currentTimeMillis());
 	}
 	%>
 
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.datetimepicker.css" />
-	<script src="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.js"></script>
-	<script src="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.css" />
+	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 	<style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
@@ -172,7 +172,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
        timepicker:false,       //timepicker:true,
        step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
        format:'Y-m-d',         //format:'Y-m-d H:i:s',
-	   value: '<%=emp_hiredate%>', // value:   new Date(),
+	   value: '<%=empHiredate%>', // value:   new Date(),
 		//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 		//startDate:	            '2017/07/10',  // 起始日
 		//minDate:               '-1970-01-01', // 去除今日(不含)之前
