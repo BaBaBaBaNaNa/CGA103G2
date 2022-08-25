@@ -2,7 +2,7 @@ package com.mem.model;
 
 import java.util.*;
 
-import com.emp.model.EmpJDBCDAO;
+import com.emp.model.EmpDAO;
 import com.emp.model.EmpVO;
 import com.mem.model.MemVO;
 
