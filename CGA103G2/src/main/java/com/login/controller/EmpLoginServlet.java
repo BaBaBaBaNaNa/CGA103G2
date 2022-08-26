@@ -1,4 +1,4 @@
-package com.emp.controller;
+package com.login.controller;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.emp.model.EmpDAO;
-import com.emp.model.EmpLoginVO;
+import com.login.model.EmpLoginVO;
 
 @WebServlet("/EmpLoginServlet.do")
 public class EmpLoginServlet extends HttpServlet {
@@ -21,20 +21,22 @@ public class EmpLoginServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 
-		request.setCharacterEncoding("utf-8");
 		StringBuffer url = request.getRequestURL();
-		System.out.println("瀏覽器訪問的資源地址 : " + url);
+//		System.out.println("瀏覽器訪問的資源地址 : " + url);
 		String method = request.getMethod();
-		System.out.println("瀏覽器訪問時採用的請求方式 : " + method);
+//		System.out.println("瀏覽器訪問時採用的請求方式 : " + method);
 
 		Enumeration paramNames = request.getParameterNames();
 		while (paramNames.hasMoreElements()) {
 			String paramName = (String) paramNames.nextElement();
-			System.out.println("攜帶的請求參數 : " + paramName);
+//			System.out.println("攜帶的請求參數 : " + paramName);
 		}
 
 		String empAccount = request.getParameter("empAccount");
@@ -55,11 +57,5 @@ public class EmpLoginServlet extends HttpServlet {
 //				request.getSession().setAttribute("error", "賬號或者密碼錯誤");
 //				response.sendRedirect("login.jsp");
 		}
-
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-
 }

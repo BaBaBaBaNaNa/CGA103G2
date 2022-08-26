@@ -1,4 +1,4 @@
-package com.back.controller;
+package com.index.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;

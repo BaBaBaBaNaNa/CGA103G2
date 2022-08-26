@@ -1,4 +1,4 @@
-package com.emp.model;
+package com.login.model;
 
 public class EmpLoginVO {
 	

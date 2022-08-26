@@ -12,15 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class BackFilter implements Filter {
+@WebFilter(filterName = "letgo",
+						urlPatterns = {"/back-end/*","/front-end/*"}
+)
+public class BackFilterServlet implements Filter {
 //定義一個存放放行資源路徑的陣列
 	private static String[] paths;
-
-	public BackFilter() {
-	}
-
-	public void destroy() {
-	}
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
@@ -34,6 +31,7 @@ public class BackFilter implements Filter {
 				return;// 放行之後返回，避免程式繼續執行，往下面執行是攔截的程式碼
 			}
 		}
+		System.out.println("1");
 		// 判斷使用者是否已經登入，如果登入則放行資源，否則重定向到登入介面
 		String name = (String) request.getSession().getAttribute("name");
 		// 如果name為空，則證明使用者沒有登入過，跳轉到登入介面
@@ -47,7 +45,7 @@ public class BackFilter implements Filter {
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
-		// 讀取初始化引數，得到放行的資源
+
 		String initParameter = fConfig.getInitParameter("letgo");
 		paths = initParameter.split(";");
 	}

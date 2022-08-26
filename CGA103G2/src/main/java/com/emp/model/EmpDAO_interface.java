@@ -1,6 +1,8 @@
 package com.emp.model;
 import java.util.*;
 
+import com.login.model.EmpLoginVO;
+
 public interface EmpDAO_interface {
 	public boolean loginAdmin (EmpLoginVO admin);
     public void insert(EmpVO empVO);

@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.login.model.EmpLoginVO;
+
 import java.sql.*;
 
 public class EmpDAO implements EmpDAO_interface {

@@ -74,8 +74,8 @@ public class EmpServlet extends HttpServlet {
 			}
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("empVO", empVO); // 資料庫取出的empVO物件,存入req
-			String url = "/back-end/employee/empDetail.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+			String url = "/back-end/employee/empDetailOne.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); 
 			successView.forward(req, res);
 		}
 

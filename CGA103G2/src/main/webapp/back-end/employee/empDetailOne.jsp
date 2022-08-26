@@ -134,14 +134,6 @@ h2 {
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 		<h2>查看員工訊息</h2>
-		 <li>
-    	<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" >
-        		<b>輸入員工編號 (如1):</b>
-        		<input type="text" name="empID" value="${param.empID}"><font color=red>${errorMsgs.empID}</font>
-        		<input type="hidden" name="action" value="getOne_For_Display">
-        		<input type="submit" value="送出">
-    			</FORM>
-  		</li>
 		<table>
 			<tr>
 				<th>員工編號</th>
@@ -156,8 +148,6 @@ h2 {
 				<th>修改</th>
 				<th>刪除</th>
 			</tr>
-			<%@ include file="../../back-end/tool/page1.file"%>
-			<c:forEach var="empVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				<tr>
 					<td>${empVO.empID}</td>
 					<td>${empVO.empName}</td>
@@ -180,9 +170,7 @@ h2 {
 						</FORM>
 					</td>
 				</tr>
-			</c:forEach>
 		</table>
-		<%@ include file="../../back-end/tool/page2.file"%>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 
 	</main>
