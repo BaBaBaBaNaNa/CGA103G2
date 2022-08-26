@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.rsvt.model.RsvtService;
 import com.rsvt.model.RsvtVO;
 
+
+@WebServlet("/back-end/reservation/RsvtServlet")
 public class RsvtServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
@@ -24,7 +27,6 @@ public class RsvtServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); // 日期格式轉換
 		if ("getOne_For_CustomerName".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -194,10 +196,10 @@ public class RsvtServlet extends HttpServlet {
 				errorMsgs.add("請輸入日期!");
 			}
 			Timestamp rsvtMealDate = null;
-			//如果已入座 用餐日期時間自動導入
-			if(rsvtToSeat == 0 && rsvtMealDate == null) {
-				rsvtMealDate =  new Timestamp(System.currentTimeMillis());
-			}else if(rsvtToSeat == 1) {
+			// 如果已入座 用餐日期時間自動導入
+			if (rsvtToSeat == 0 && rsvtMealDate == null) {
+				rsvtMealDate = new Timestamp(System.currentTimeMillis());
+			} else if (rsvtToSeat == 1) {
 				rsvtMealDate = null;
 			}
 			RsvtVO rsvtVO = new RsvtVO();
@@ -218,7 +220,7 @@ public class RsvtServlet extends HttpServlet {
 
 			/*************************** 2.開始修改資料 *****************************************/
 			RsvtService rsvtSvc = new RsvtService();
-				rsvtVO = rsvtSvc.updateRsvt(cName, cPhone, rsvtNum, rsvtPeriod, rsvtToSeat, rsvtDate, rsvtMealDate, rsvtId);
+			rsvtVO = rsvtSvc.updateRsvt(cName, cPhone, rsvtNum, rsvtPeriod, rsvtToSeat, rsvtDate, rsvtMealDate, rsvtId);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("rsvtVO", rsvtVO); // 資料庫update成功後,正確的的rsvtVO物件,存入req
@@ -263,11 +265,9 @@ public class RsvtServlet extends HttpServlet {
 			}
 
 			Integer rsvtPeriod = null;
-			try {
-				rsvtPeriod = Integer.valueOf(req.getParameter("rsvtPeriod").trim());
-			} catch (NumberFormatException e) {
-				rsvtPeriod = 0;
-				errorMsgs.add("請選擇時段");
+			rsvtPeriod = Integer.valueOf(req.getParameter("rsvtPeriod").trim());
+			if(rsvtPeriod == null) {
+				errorMsgs.add("請選擇時段");				
 			}
 
 			java.sql.Date rsvtDate = null;

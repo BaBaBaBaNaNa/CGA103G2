@@ -11,18 +11,18 @@ import javax.sql.DataSource;
 
 
 public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
-	private static final String INSERT_STMT = "INSERT INTO RESERVATION_CTRL (RSVT_CTRL_ID,RSVT_CTRL_DATE,RSVT_CTRL_PERIOD,RSVT_CTRL_MAX) VALUES(?,?,?,?);";
-	private static final String GET_ALL_STMT = "SELECT RSVT_CTRL_ID,TABLE_TYPE_ID,RSVT_CTRL_OPEN,RSVT_CTRL_DATE,RSVT_CTRL_PERIOD,RSVT_CTRL_MAX,RSVT_CTRL_NUMBER FROM RESERVATION_CTRL;";
-	private static final String GET_ONE_STMT = "SELECT RSVT_CTRL_ID,TABLE_TYPE_ID,RSVT_CTRL_OPEN,RSVT_CTRL_DATE,RSVT_CTRL_PERIOD,RSVT_CTRL_MAX,RSVT_CTRL_NUMBER FROM RESERVATION_CTRL WHERE RSVT_CTRL_ID = ?";
-	private static final String GET_DATE_STMT = "SELECT RSVT_CTRL_ID,TABLE_TYPE_ID,RSVT_CTRL_OPEN,RSVT_CTRL_DATE,RSVT_CTRL_PERIOD,RSVT_CTRL_MAX,RSVT_CTRL_NUMBER FROM RESERVATION_CTRL WHERE RSVT_CTRL_DATE = ?";
-	private static final String DELETE_STMT = "DELETE FROM RESERVATION_CTRL WHERE RSVT_CTRL_ID = ?";
-	private static String UPDATE_STMT = "UPDATE RESERVATION_CTRL SET TABLE_TYPE_ID = ?,RSVT_CTRL_OPEN = ?,RSVT_CTRL_DATE = ?,RSVT_CTRL_PERIOD = ?,RSVT_CTRL_MAX = ?,RSVT_CTRL_NUMBER = ? WHERE RSVT_CTRL_ID = ? ;";
+	private static final String INSERT_STMT = "INSERT INTO RESERVATIONCTRL (RSVTCTRLID,RSVTCTRLOPEN ,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX) VALUES(?,?,?,?,?);";
+	private static final String GET_ALL_STMT = "SELECT RSVTCTRLID,TABLETYPEID,RSVTCTRLOPEN,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX,RSVTCTRLNUMBER FROM RESERVATIONCTRL;";
+	private static final String GET_ONE_STMT = "SELECT RSVTCTRLID,TABLETYPEID,RSVTCTRLOPEN,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX,RSVTCTRLNUMBER FROM RESERVATIONCTRL WHERE RSVTCTRLID = ?";
+	private static final String GET_DATE_STMT = "SELECT RSVTCTRLID,TABLETYPEID,RSVTCTRLOPEN,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX,RSVTCTRLNUMBER FROM RESERVATIONCTRL WHERE RSVTCTRLDATE = ?";
+	private static final String DELETE_STMT = "DELETE FROM RESERVATIONCTRL WHERE RSVTCTRLID = ?";
+	private static final String UPDATE_STMT = "UPDATE RESERVATIONCTRL SET TABLETYPEID = ?,RSVTCTRLOPEN = ?,RSVTCTRLDATE = ?,RSVTCTRLPERIOD = ?,RSVTCTRLMAX = ?,RSVTCTRLNUMBER = ? WHERE RSVTCTRLID = ? ;";
 	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
 	private static DataSource ds = null;
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Restaurant");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CGA103G2");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -56,9 +56,10 @@ public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
 		try (Connection conn = ds.getConnection();
 				PreparedStatement ps = conn.prepareStatement(INSERT_STMT);) {
 			ps.setInt(1, rsvtCtrl.getRsvtCtrlId());
-			ps.setDate(2, rsvtCtrl.getRsvtCtrlDate());
-			ps.setInt(3, rsvtCtrl.getRsvtCtrlPeriod());
-			ps.setInt(4, rsvtCtrl.getRsvtCtrlMax());
+			ps.setInt(2, rsvtCtrl.getRsvtCtrlOpen());
+			ps.setDate(3, rsvtCtrl.getRsvtCtrlDate());
+			ps.setInt(4, rsvtCtrl.getRsvtCtrlPeriod());
+			ps.setInt(5, rsvtCtrl.getRsvtCtrlMax());
 			ps.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -82,12 +83,13 @@ public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
 	public void update(RsvtCtrlVO rsvtCtrl) {
 		try (Connection conn = ds.getConnection();
 				PreparedStatement ps = conn.prepareStatement(UPDATE_STMT);) {
-			ps.setInt(1, rsvtCtrl.getRsvtCtrlOpen());
-			ps.setDate(2, rsvtCtrl.getRsvtCtrlDate());
-			ps.setInt(3, rsvtCtrl.getRsvtCtrlPeriod());
-			ps.setInt(4, rsvtCtrl.getRsvtCtrlMax());
-			ps.setInt(5, rsvtCtrl.getRsvtCtrlNumber());
-			ps.setInt(6, rsvtCtrl.getRsvtCtrlId());
+			ps.setInt(1, rsvtCtrl.getTableTypeId());
+			ps.setInt(2, rsvtCtrl.getRsvtCtrlOpen());
+			ps.setDate(3, rsvtCtrl.getRsvtCtrlDate());
+			ps.setInt(4, rsvtCtrl.getRsvtCtrlPeriod());
+			ps.setInt(5, rsvtCtrl.getRsvtCtrlMax());
+			ps.setInt(6, rsvtCtrl.getRsvtCtrlNumber());
+			ps.setInt(7, rsvtCtrl.getRsvtCtrlId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -96,27 +98,27 @@ public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
 
 	@Override
 	public void updateForOne(Integer rsvtCtrlId, String columnName, Object value) {
-		String SQL = "UPDATE RESERVATION_CTRL SET " + columnName + " = ? WHERE RSVT_CTRL_ID = ?";
+		String SQL = "UPDATE RESERVATIONCTRL SET " + columnName + " = ? WHERE RSVTCTRLID = ?";
 		System.out.println(SQL);
 		try (Connection conn = ds.getConnection();
 				PreparedStatement ps = conn.prepareStatement(SQL);) {
 			int type = -1;
-			if ("TABLE_TYPE_ID".equals(columnName)) {
+			if ("TABLETYPEID".equals(columnName)) {
 				type = 4;
 			}
-			if ("RSVT_CTRL_OPEN".equals(columnName)) {
+			if ("RSVTCTRLOPEN".equals(columnName)) {
 				type = 4;
 			}
-			if ("RSVT_CTRL_DATE".equals(columnName)) {
+			if ("RSVTCTRLDATE".equals(columnName)) {
 				type = 91;
 			}
-			if ("RSVT_CTRL_PERIOD".equals(columnName)) {
+			if ("RSVTCTRLPERIOD".equals(columnName)) {
 				type = 4;
 			}
-			if ("RSVT_CTRL_MAX".equals(columnName)) {
+			if ("RSVTCTRLMAX".equals(columnName)) {
 				type = 4;
 			}
-			if ("RSVT_CTRL_PERIOD".equals(columnName)) {
+			if ("RSVTCTRLPERIOD".equals(columnName)) {
 				type = 4;
 			}
 			if (type != -1) {
@@ -137,54 +139,55 @@ public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
 	@Override
 	public RsvtCtrlVO findByPrimaryKey(Integer rsvtCtrlId) {
 		try (Connection conn = ds.getConnection();
-				PreparedStatement ps = conn.prepareStatement(GET_ONE_STMT);
-					ResultSet rs = ps.executeQuery();) {
+				PreparedStatement ps = conn.prepareStatement(GET_ONE_STMT);) {
 			ps.setInt(1, rsvtCtrlId);
-			ps.execute();
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				RsvtCtrlVO rsvtCtrl = new RsvtCtrlVO();
-				rsvtCtrl.setRsvtCtrlId(rs.getInt("rsvt_ctrl_id"));
-				rsvtCtrl.setTableTypeId(rs.getInt("table_type_id"));
-				rsvtCtrl.setRsvtCtrlOpen(rs.getInt("rsvt_ctrl_open"));
-				rsvtCtrl.setRsvtCtrlDate(rs.getDate("rsvt_ctrl_date"));
-				rsvtCtrl.setRsvtCtrlPeriod(rs.getInt("rsvt_ctrl_period"));
-				rsvtCtrl.setRsvtCtrlMax(rs.getInt("rsvt_ctrl_max"));
-				rsvtCtrl.setRsvtCtrlNumber(rs.getInt("rsvt_ctrl_number"));
+				rsvtCtrl.setRsvtCtrlId(rs.getInt("rsvtctrlid"));
+				rsvtCtrl.setTableTypeId(rs.getInt("tabletypeid"));
+				rsvtCtrl.setRsvtCtrlOpen(rs.getInt("rsvtctrlopen"));
+				rsvtCtrl.setRsvtCtrlDate(rs.getDate("rsvtctrldate"));
+				rsvtCtrl.setRsvtCtrlPeriod(rs.getInt("rsvtctrlperiod"));
+				rsvtCtrl.setRsvtCtrlMax(rs.getInt("rsvtctrlmax"));
+				rsvtCtrl.setRsvtCtrlNumber(rs.getInt("rsvtctrlnumber"));
 				return rsvtCtrl;
 			}
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	public RsvtCtrlVO findByDate(Date rsvtCtrlDate) {
+	public RsvtCtrlVO findByDate(String rsvtCtrlDate) {
 		try (Connection conn = ds.getConnection();
-				PreparedStatement ps = conn.prepareStatement(GET_DATE_STMT);
-					ResultSet rs = ps.executeQuery();) {
-			ps.setDate(1, rsvtCtrlDate);
-			ps.execute();
+				PreparedStatement ps = conn.prepareStatement(GET_DATE_STMT)) {
+			ps.setString(1, rsvtCtrlDate);
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				RsvtCtrlVO rsvtCtrl = new RsvtCtrlVO();
-				rsvtCtrl.setRsvtCtrlId(rs.getInt("rsvt_ctrl_id"));
-				rsvtCtrl.setTableTypeId(rs.getInt("table_type_id"));
-				rsvtCtrl.setRsvtCtrlOpen(rs.getInt("rsvt_ctrl_open"));
-				rsvtCtrl.setRsvtCtrlDate(rs.getDate("rsvt_ctrl_date"));
-				rsvtCtrl.setRsvtCtrlPeriod(rs.getInt("rsvt_ctrl_period"));
-				rsvtCtrl.setRsvtCtrlMax(rs.getInt("rsvt_ctrl_max"));
-				rsvtCtrl.setRsvtCtrlNumber(rs.getInt("rsvt_ctrl_number"));
+				rsvtCtrl.setRsvtCtrlId(rs.getInt("rsvtctrlid"));
+				rsvtCtrl.setTableTypeId(rs.getInt("tabletypeid"));
+				rsvtCtrl.setRsvtCtrlOpen(rs.getInt("rsvtctrlopen"));
+				rsvtCtrl.setRsvtCtrlDate(rs.getDate("rsvtctrldate"));
+				rsvtCtrl.setRsvtCtrlPeriod(rs.getInt("rsvtctrlperiod"));
+				rsvtCtrl.setRsvtCtrlMax(rs.getInt("rsvtctrlmax"));
+				rsvtCtrl.setRsvtCtrlNumber(rs.getInt("rsvtctrlnumber"));
 				return rsvtCtrl;
 			}
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
+
 //	public static void main(String[] args) {
 //		String str = "2022-11-11";
 //		Date date = Date.valueOf(str);
 //		RsvtCtrlDAOImpl dao = new RsvtCtrlDAOImpl();
-//		dao.updateForOne(2, "RSVT_CTRL_OPEN", date);
+//		dao.updateForOne(2, "RSVTCTRLOPEN", date);
 //		for (RsvtCtrlVO test : dao.getAll()) {
 //			System.out.println(test.getRsvtCtrlId() + " " + test.getRsvtCtrlDate());
 //		}

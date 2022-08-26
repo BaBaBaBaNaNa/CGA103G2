@@ -76,7 +76,7 @@ RsvtVO rsvtVO = (RsvtVO) request.getAttribute("rsvtVO");
 	<tr>
 		<td>顧客手機:</td>
 		<td><input type="TEXT" name="customerPhone" size="45"
-			 value="" maxLength="10")/></td>
+			 value="" maxLength="10"/></td>
 	</tr>
 	<tr>
 		<td>人數:</td>
@@ -85,8 +85,11 @@ RsvtVO rsvtVO = (RsvtVO) request.getAttribute("rsvtVO");
 	</tr>
 	<tr>
 		<td>時段:</td>
-		<td><input type="TEXT" name="rsvtPeriod" placeholder="請選擇時段" size="45"
-			 value="" /></td>
+		<td><select name="rsvtPeriod">
+		<option selected disabled>請選擇時段</option>
+		<option value="0">中午</option>
+		<option value="1">晚上</option>
+		</select></td>
 	</tr>
 	<tr>
 		<td>訂位日期:</td>
@@ -121,9 +124,9 @@ RsvtVO rsvtVO = (RsvtVO) request.getAttribute("rsvtVO");
 	    rsvtDate = new java.sql.Date(System.currentTimeMillis());
    }
 %>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-end/reservation/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath()%>/back-end/reservation/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/back-end/reservation/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
   .xdsoft_datetimepicker .xdsoft_datepicker {

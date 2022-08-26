@@ -81,11 +81,14 @@ h4 {
 
 		<li>
 			<FORM METHOD="post" ACTION="RsvtServlet">
-				<b>選擇姓名:</b> <select size="1" name="rsvtId">
-					<c:forEach var="rsvtVO" items="${rsvtSvc.all}">
-						<option value="${rsvtVO.rsvtId}">${rsvtVO.customerName}
-					</c:forEach>
-				</select> <input type="hidden" name="action" value="getOne_For_Display">
+				<b>選擇姓名:</b> 
+<!-- 				<select size="1" name="customerName"> -->
+<%-- 					<c:forEach var="rsvtVO" items="${rsvtSvc.all}"> --%>
+<%-- 						<option value="${rsvtVO.customerName}">${rsvtVO.customerName} --%>
+<%-- 					</c:forEach> --%>
+<!-- 				</select>  -->
+				<input type="text" name="customerName">
+				<input type="hidden" name="action" value="getOne_For_CustomerName">
 				<input type="submit" value="送出">
 			</FORM>
 		</li>

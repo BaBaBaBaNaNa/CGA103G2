@@ -8,15 +8,15 @@ import java.sql.*;
 
 public class EmpJDBCDAO implements EmpDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/restaurant?serverTimezone=Asia/Taipei";
-	String userid = "adminmanager01";
-	String passwd = "aaa123";
-	private static final String LOGIN_STMT = "SELECT emp_account,emp_password from employee where emp_account = ? and emp_password = ?";
-	private static final String INSERT_STMT = "INSERT INTO employee ( emp_name, emp_account,emp_password,emp_permission,emp_phone,emp_address,emp_job,emp_hiredate) VALUES (?,?,?,?,?,?,?,?);";
-	private static final String GET_ALL_STMT = "SELECT emp_id, emp_name, emp_account,emp_password,emp_permission,emp_phone,emp_address,emp_job,emp_hiredate FROM employee order by emp_id";
-	private static final String GET_ONE_STMT = "SELECT emp_id, emp_name, emp_account,emp_password,emp_permission,emp_phone,emp_address,emp_job,emp_hiredate FROM employee where emp_id = ?";
-	private static final String DELETE = "DELETE FROM employee where emp_id = ?";
-	private static final String UPDATE = "UPDATE employee set emp_name=?, emp_account=?, emp_password=?, emp_permission=?, emp_phone=?, emp_address=?, emp_job=?,emp_hiredate=? where emp_id = ?";
+	String url = "jdbc:mysql://localhost:3306/CGA103G2?serverTimezone=Asia/Taipei";
+	String userid = "root";
+	String passwd = "password";
+	private static final String LOGINSTMT = "SELECT empaccount,emppassword from employee where empaccount = ? and emppassword = ?";
+	private static final String INSERTSTMT = "INSERT INTO employee ( empname, empaccount,emppassword,emppermission,empphone,empaddress,emphiredate) VALUES (?,?,?,?,?,?,?);";
+	private static final String GETALLSTMT = "SELECT empid, empname, empaccount,emppassword,emppermission,empphone,empaddress,emphiredate FROM employee order by empid";
+	private static final String GETONESTMT = "SELECT empid, empname, empaccount,emppassword,emppermission,empphone,empaddress,emphiredate FROM employee where empid = ?";
+	private static final String DELETE = "DELETE FROM employee where empid = ?";
+	private static final String UPDATE = "UPDATE employee set empname=?, empaccount=?, emppassword=?, emppermission=?, empphone=?, empaddress=?, empjob=?,emphiredate=? where empid = ?";
 
 	@Override
 	public boolean loginAdmin(EmpLoginVO admin) {
@@ -24,13 +24,13 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 		PreparedStatement pstmt = null;
 		
 //		Connection conn = EmpDb.getConnection();
-//		String sql = "select emp_account,emp_password from employee where emp_account = ? and emp_password = ?;";
+//		String sql = "select empaccount,emppassword from employee where empaccount = ? and emppassword = ?;";
 		
 		int res = 0;
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(LOGIN_STMT );
+			pstmt = con.prepareStatement(LOGINSTMT );
 			
 			pstmt.setString(1, admin.getEmp_account());
 			pstmt.setString(2, admin.getEmp_password());
@@ -65,9 +65,9 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 //			con = EmpDb.getConnection();
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_STMT);
+			pstmt = con.prepareStatement(INSERTSTMT);
 
-//			pstmt.setInt(1,empVO.getEmp_id());
+//			pstmt.setInt(1,empVO.getEmpid());
 			pstmt.setString(1, empVO.getEmp_name());
 			pstmt.setString(2, empVO.getEmp_account());
 			pstmt.setString(3, empVO.getEmp_password());
@@ -157,7 +157,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 	}
 
 	@Override
-	public void delete(Integer emp_id) {
+	public void delete(Integer empid) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -169,7 +169,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setInt(1, emp_id);
+			pstmt.setInt(1, empid);
 
 			pstmt.executeUpdate();
 
@@ -200,7 +200,7 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 	}
 
 	@Override
-	public EmpVO findByPrimaryKey(Integer emp_id) {
+	public EmpVO findByPrimaryKey(Integer empid) {
 
 		EmpVO empVO = null;
 		Connection con = null;
@@ -212,9 +212,9 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 //			con = EmpDb.getConnection();
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ONE_STMT);
+			pstmt = con.prepareStatement(GETONESTMT);
 
-			pstmt.setInt(1, emp_id);
+			pstmt.setInt(1, empid);
 
 			rs = pstmt.executeQuery();
 
@@ -222,15 +222,15 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 				// empVo 也稱為 Domain objects
 				empVO = new EmpVO();
 
-				empVO.setEmp_id(rs.getInt("emp_id"));
-				empVO.setEmp_name(rs.getString("emp_name"));
-				empVO.setEmp_account(rs.getString("emp_account"));
-				empVO.setEmp_password(rs.getString("emp_password"));
-				empVO.setEmp_permission(rs.getInt("emp_permission"));
-				empVO.setEmp_phone(rs.getString("emp_phone"));
-				empVO.setEmp_address(rs.getString("emp_address"));
-				empVO.setEmp_job(rs.getString("emp_job"));
-				empVO.setEmp_hiredate(rs.getString("emp_hiredate"));
+				empVO.setEmp_id(rs.getInt("empid"));
+				empVO.setEmp_name(rs.getString("empname"));
+				empVO.setEmp_account(rs.getString("empaccount"));
+				empVO.setEmp_password(rs.getString("emppassword"));
+				empVO.setEmp_permission(rs.getInt("emppermission"));
+				empVO.setEmp_phone(rs.getString("empphone"));
+				empVO.setEmp_address(rs.getString("empaddress"));
+				empVO.setEmp_job(rs.getString("empjob"));
+				empVO.setEmp_hiredate(rs.getString("emphiredate"));
 			}
 
 			// Handle any driver errors
@@ -280,22 +280,22 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 //			con = EmpDb.getConnection();
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ALL_STMT);
+			pstmt = con.prepareStatement(GETALLSTMT);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// empVO 也稱為 Domain objects
 				empVO = new EmpVO();
 
-				empVO.setEmp_id(rs.getInt("emp_id"));
-				empVO.setEmp_name(rs.getString("emp_name"));
-				empVO.setEmp_account(rs.getString("emp_account"));
-				empVO.setEmp_password(rs.getString("emp_password"));
-				empVO.setEmp_permission(rs.getInt("emp_permission"));
-				empVO.setEmp_phone(rs.getString("emp_phone"));
-				empVO.setEmp_address(rs.getString("emp_address"));
-				empVO.setEmp_job(rs.getString("emp_job"));
-				empVO.setEmp_hiredate(rs.getString("emp_hiredate"));
+				empVO.setEmp_id(rs.getInt("empid"));
+				empVO.setEmp_name(rs.getString("empname"));
+				empVO.setEmp_account(rs.getString("empaccount"));
+				empVO.setEmp_password(rs.getString("emppassword"));
+				empVO.setEmp_permission(rs.getInt("emppermission"));
+				empVO.setEmp_phone(rs.getString("empphone"));
+				empVO.setEmp_address(rs.getString("empaddress"));
+				empVO.setEmp_job(rs.getString("empjob"));
+				empVO.setEmp_hiredate(rs.getString("emphiredate"));
 				list.add(empVO); // Store the row in the list
 			}
 
@@ -338,27 +338,27 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 
 //		// 新增
 //		EmpVO empVO1 = new EmpVO();
-//		empVO1.setEmp_name("楊嘉倫");
-//		empVO1.setEmp_account ("admin01");
-//		empVO1.setEmp_password("123456");
-//		empVO1.setEmp_permission(0);
-//		empVO1.setEmp_phone("0987654321");
-//		empVO1.setEmp_address("桃園市中壢區復興路46號9樓");
-//		empVO1.setEmp_job("管理者");
-//		empVO1.setEmp_hiredate("2018-06-11");
+//		empVO1.setEmpname("楊嘉倫");
+//		empVO1.setEmpaccount ("admin01");
+//		empVO1.setEmppassword("123456");
+//		empVO1.setEmppermission(0);
+//		empVO1.setEmpphone("0987654321");
+//		empVO1.setEmpaddress("桃園市中壢區復興路46號9樓");
+//		empVO1.setEmpjob("管理者");
+//		empVO1.setEmphiredate("2018-06-11");
 //		dao.insert(empVO1);
 
 		// 修改
 //		EmpVO empVO2 = new EmpVO();
-//		empVO2.setEmp_id(1);
-//		empVO2.setEmp_name("楊嘉倫");
-//		empVO2.setEmp_account ("admin01");
-//		empVO2.setEmp_password("123456");
-//		empVO2.setEmp_permission(0);
-//		empVO2.setEmp_phone("0987654321");
-//		empVO2.setEmp_address("桃園市中壢區復興路46號9樓");
-//		empVO2.setEmp_job("管理者");
-//		empVO2.setEmp_hiredate("2018-06-09");
+//		empVO2.setEmpid(1);
+//		empVO2.setEmpname("楊嘉倫");
+//		empVO2.setEmpaccount ("admin01");
+//		empVO2.setEmppassword("123456");
+//		empVO2.setEmppermission(0);
+//		empVO2.setEmpphone("0987654321");
+//		empVO2.setEmpaddress("桃園市中壢區復興路46號9樓");
+//		empVO2.setEmpjob("管理者");
+//		empVO2.setEmphiredate("2018-06-09");
 //		dao.update(empVO2);
 
 		// 刪除
@@ -366,15 +366,15 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 
 		// 單筆查詢
 //		EmpVO empVO3 = dao.findByPrimaryKey(1);
-//		System.out.print(empVO3.getEmp_id() + ",");
-//		System.out.print(empVO3.getEmp_name() + ",");
-//		System.out.print(empVO3.getEmp_account() + ",");
-//		System.out.print(empVO3.getEmp_password() + ",");
-//		System.out.print(empVO3.getEmp_permission() + ",");
-//		System.out.print(empVO3.getEmp_phone() + ",");
-//		System.out.println(empVO3.getEmp_address() + ",");
-//		System.out.println(empVO3.getEmp_job() + ",");
-//		System.out.println(empVO3.getEmp_hiredate());
+//		System.out.print(empVO3.getEmpid() + ",");
+//		System.out.print(empVO3.getEmpname() + ",");
+//		System.out.print(empVO3.getEmpaccount() + ",");
+//		System.out.print(empVO3.getEmppassword() + ",");
+//		System.out.print(empVO3.getEmppermission() + ",");
+//		System.out.print(empVO3.getEmpphone() + ",");
+//		System.out.println(empVO3.getEmpaddress() + ",");
+//		System.out.println(empVO3.getEmpjob() + ",");
+//		System.out.println(empVO3.getEmphiredate());
 //		System.out.println("---------------------");
 
 		// 多筆查詢
