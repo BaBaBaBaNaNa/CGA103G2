@@ -11,11 +11,11 @@ public class FunctionsService {
 	}
 
 	public FunctionsVO addFunctions(
-			String function_name) {
+			String functionName) {
 
 		FunctionsVO functionsVO = new FunctionsVO();
 
-		functionsVO.setFunction_name(function_name);
+		functionsVO.setFunctionName(functionName);
 
 		dao.insert(functionsVO);
 
@@ -23,25 +23,25 @@ public class FunctionsService {
 	}
 
 	public FunctionsVO updateFunctions(			
-			int function_id, 
-			String function_name) {
+			int functionID, 
+			String functionName) {
 
 				FunctionsVO functionsVO = new FunctionsVO();
 
-				functionsVO.setFunction_id(function_id);
-				functionsVO.setFunction_name(function_name);
+				functionsVO.setFunctionID(functionID);
+				functionsVO.setFunctionName(functionName);
 		
 		dao.update(functionsVO);
 
 		return functionsVO;
 	}
 
-	public void deleteFunctions(Integer function_id) {
-		dao.delete(function_id);
+	public void deleteFunctions(Integer functionID) {
+		dao.delete(functionID);
 	}
 
-	public FunctionsVO getOneFunctions(Integer function_id) {
-		return dao.findByPrimaryKey(function_id);
+	public FunctionsVO getOneFunctions(Integer functionID) {
+		return dao.findByPrimaryKey(functionID);
 	}
 
 	public List<FunctionsVO> getAll() {

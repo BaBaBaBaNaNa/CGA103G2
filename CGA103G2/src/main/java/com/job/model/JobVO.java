@@ -1,23 +1,23 @@
 package com.job.model;
 
 public class JobVO implements java.io.Serializable{
-	private int job_id;
-	private String job_name;
-	public int getJob_id() {
-		return job_id;
+	private int jobID;
+	private String jobName;
+
+	public int getJobID() {
+		return jobID;
 	}
-	public void setJob_id(int job_id) {
-		this.job_id = job_id;
+	public void setJobID(int jobID) {
+		this.jobID = jobID;
 	}
-	public String getJob_name() {
-		return job_name;
+	public String getJobName() {
+		return jobName;
 	}
-	public void setJob_name(String job_name) {
-		this.job_name = job_name;
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
 	}
-	
 	@Override
 	public String toString() {
-		return "JobVO [job_id=" + job_id + ", job_name=" + job_name +  "]";
+		return "JobVO [jobID=" + jobID + ", jobName=" + jobName +  "]";
 	}
 }

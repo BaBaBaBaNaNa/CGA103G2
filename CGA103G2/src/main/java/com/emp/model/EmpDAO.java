@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.login.model.EmpLoginVO;
+
 import java.sql.*;
 
 public class EmpDAO implements EmpDAO_interface {
@@ -22,12 +24,12 @@ public class EmpDAO implements EmpDAO_interface {
 		}
 	}
 	
-	private static final String LOGIN_STMT = "SELECT emp_account,emp_password from employee where emp_account = ? and emp_password = ?";
-	private static final String INSERT_STMT = "INSERT INTO employee ( emp_name, emp_account,emp_password,emp_permission,emp_phone,emp_address,emp_job,emp_hiredate) VALUES (?,?,?,?,?,?,?,?);";
-	private static final String GET_ALL_STMT = "SELECT emp_id, emp_name, emp_account,emp_password,emp_permission,emp_phone,emp_address,emp_job,emp_hiredate FROM employee order by emp_id";
-	private static final String GET_ONE_STMT = "SELECT emp_id, emp_name, emp_account,emp_password,emp_permission,emp_phone,emp_address,emp_job,emp_hiredate FROM employee where emp_id = ?";
-	private static final String DELETE = "DELETE FROM employee where emp_id = ?";
-	private static final String UPDATE = "UPDATE employee set emp_name=?, emp_account=?, emp_password=?, emp_permission=?, emp_phone=?, emp_address=?, emp_job=?,emp_hiredate=? where emp_id = ?";
+	private static final String LOGIN_STMT = "SELECT empAccount,empPassword from Employee where empAccount = ? and empPassword = ?";
+	private static final String INSERT_STMT = "INSERT INTO Employee ( empName, empAccount,empPassword,empPermission,empPhone,empAddress,jobID,empHiredate) VALUES (?,?,?,?,?,?,?,?);";
+	private static final String GET_ALL_STMT = "SELECT empID, empName, empAccount,empPassword,empPermission,empPhone,empAddress,jobID,empHiredate FROM Employee order by empID";
+	private static final String GET_ONE_STMT = "SELECT empID, empName, empAccount,empPassword,empPermission,empPhone,empAddress,jobID,empHiredate FROM Employee where empID = ?";
+	private static final String DELETE = "DELETE FROM Employee where empID = ?";
+	private static final String UPDATE = "UPDATE Employee set empName=?, empAccount=?, empPassword=?, empPermission=?, empPhone=?, empAddress=?, jobID=?,empHiredate=? where empID = ?";
 	
 	@Override
 	public boolean loginAdmin(EmpLoginVO admin) {
@@ -39,8 +41,8 @@ public class EmpDAO implements EmpDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(LOGIN_STMT);
 			
-			pstmt.setString(1, admin.getEmp_account());
-			pstmt.setString(2, admin.getEmp_password());
+			pstmt.setString(1, admin.getEmpAccount());
+			pstmt.setString(2, admin.getEmpPassword());
 
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -67,14 +69,14 @@ public class EmpDAO implements EmpDAO_interface {
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
 //			pstmt.setInt(1,empVO.getEmp_id());
-			pstmt.setString(1, empVO.getEmp_name());
-			pstmt.setString(2, empVO.getEmp_account());
-			pstmt.setString(3, empVO.getEmp_password());
-			pstmt.setInt(4, empVO.getEmp_permission());
-			pstmt.setString(5, empVO.getEmp_phone());
-			pstmt.setString(6, empVO.getEmp_address());
-			pstmt.setInt(7, empVO.getEmp_job());
-			pstmt.setObject(8, empVO.getEmp_hiredate());
+			pstmt.setString(1, empVO.getEmpName());
+			pstmt.setString(2, empVO.getEmpAccount());
+			pstmt.setString(3, empVO.getEmpPassword());
+			pstmt.setInt(4, empVO.getEmpPermission());
+			pstmt.setString(5, empVO.getEmpPhone());
+			pstmt.setString(6, empVO.getEmpAddress());
+			pstmt.setInt(7, empVO.getJobID());
+			pstmt.setObject(8, empVO.getEmpHiredate());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -109,17 +111,15 @@ public class EmpDAO implements EmpDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, empVO.getEmp_name());
-			pstmt.setString(2, empVO.getEmp_account());
-			pstmt.setString(3, empVO.getEmp_password());
-			pstmt.setInt(4, empVO.getEmp_permission());
-			pstmt.setString(5, empVO.getEmp_phone());
-			pstmt.setString(6, empVO.getEmp_address());
-			pstmt.setInt(7, empVO.getEmp_job());
-			
-			pstmt.setObject(8, empVO.getEmp_hiredate());
-			
-			pstmt.setInt(9, empVO.getEmp_id());
+			pstmt.setString(1, empVO.getEmpName());
+			pstmt.setString(2, empVO.getEmpAccount());
+			pstmt.setString(3, empVO.getEmpPassword());
+			pstmt.setInt(4, empVO.getEmpPermission());
+			pstmt.setString(5, empVO.getEmpPhone());
+			pstmt.setString(6, empVO.getEmpAddress());
+			pstmt.setInt(7, empVO.getJobID());
+			pstmt.setObject(8, empVO.getEmpHiredate());
+			pstmt.setInt(9, empVO.getEmpID());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -145,7 +145,7 @@ public class EmpDAO implements EmpDAO_interface {
 	}
 
 	@Override
-	public void delete(Integer emp_id) {
+	public void delete(Integer empID) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -154,7 +154,7 @@ public class EmpDAO implements EmpDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setInt(1, emp_id);
+			pstmt.setInt(1, empID);
 
 			pstmt.executeUpdate();
 			
@@ -181,7 +181,7 @@ public class EmpDAO implements EmpDAO_interface {
 	}
 
 	@Override
-	public EmpVO findByPrimaryKey(Integer emp_id) {
+	public EmpVO findByPrimaryKey(Integer empID) {
 
 		EmpVO empVO = null;
 		Connection con = null;
@@ -192,28 +192,25 @@ public class EmpDAO implements EmpDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			
-			pstmt.setInt(1, emp_id);
+			pstmt.setInt(1, empID);
 			
 			rs = pstmt.executeQuery();
-//			System.out.println(rs);
+
 			while (rs.next()) {
-				// empVo 也稱為 Domain objects
 				empVO = new EmpVO();
 
-				empVO.setEmp_id(rs.getInt("emp_id"));
-				empVO.setEmp_name(rs.getString("emp_name"));
-				empVO.setEmp_account(rs.getString("emp_account"));
-				empVO.setEmp_password(rs.getString("emp_password"));
-				empVO.setEmp_permission(rs.getInt("emp_permission"));
-				empVO.setEmp_phone(rs.getString("emp_phone"));
-				empVO.setEmp_address(rs.getString("emp_address"));
-				empVO.setEmp_job(rs.getInt("emp_job"));
-				empVO.setEmp_hiredate( rs.getDate("emp_hiredate"));
-//				empVO.setEmp_hiredate( rs.getObject("emp_hiredate",LocalDateTime.class));
+				empVO.setEmpID(rs.getInt("empID"));
+				empVO.setEmpName(rs.getString("empName"));
+				empVO.setEmpAccount(rs.getString("empAccount"));
+				empVO.setEmpPassword(rs.getString("empPassword"));
+				empVO.setEmpPermission(rs.getInt("empPermission"));
+				empVO.setEmpPhone(rs.getString("empPhone"));
+				empVO.setEmpAddress(rs.getString("empAddress"));
+				empVO.setJobID(rs.getInt("JobID"));
+				empVO.setEmpHiredate( rs.getDate("empHiredate"));
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {
@@ -258,15 +255,15 @@ public class EmpDAO implements EmpDAO_interface {
 				// empVO 也稱為 Domain objects
 				empVO = new EmpVO();
 
-				empVO.setEmp_id(rs.getInt("emp_id"));
-				empVO.setEmp_name(rs.getString("emp_name"));
-				empVO.setEmp_account(rs.getString("emp_account"));
-				empVO.setEmp_password(rs.getString("emp_password"));
-				empVO.setEmp_permission(rs.getInt("emp_permission"));
-				empVO.setEmp_phone(rs.getString("emp_phone"));
-				empVO.setEmp_address(rs.getString("emp_address"));
-				empVO.setEmp_job(rs.getInt("emp_job"));
-				empVO.setEmp_hiredate( rs.getDate("emp_hiredate"));
+				empVO.setEmpID(rs.getInt("empID"));
+				empVO.setEmpName(rs.getString("empName"));
+				empVO.setEmpAccount(rs.getString("empAccount"));
+				empVO.setEmpPassword(rs.getString("empPassword"));
+				empVO.setEmpPermission(rs.getInt("empPermission"));
+				empVO.setEmpPhone(rs.getString("empPhone"));
+				empVO.setEmpAddress(rs.getString("empAddress"));
+				empVO.setJobID(rs.getInt("JobID"));
+				empVO.setEmpHiredate( rs.getDate("empHiredate"));
 				list.add(empVO); 
 			}
 		} catch (SQLException se) {

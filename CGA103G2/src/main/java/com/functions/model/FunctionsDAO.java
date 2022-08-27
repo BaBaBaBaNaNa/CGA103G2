@@ -10,23 +10,22 @@ import javax.sql.DataSource;
 import java.sql.*;
 
 public class FunctionsDAO  implements FunctionsDAO_interface {
-	
 //	共用DataSource
 	private static DataSource ds = null;
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/restaurant");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/cga103g2");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private static final String INSERT_STMT = "INSERT INTO functions ( function_id,function_name) VALUES (?,?);";
-	private static final String GET_ALL_STMT = "SELECT function_id,function_name FROM functions order by function_id";
-	private static final String GET_ONE_STMT = "SELECT function_id,function_name FROM functions where function_id = ?";
-	private static final String DELETE = "DELETE FROM functions where function_id = ?";
-	private static final String UPDATE = "UPDATE functions set function_id=?,function_name=? where function_id = ?";
+	private static final String INSERT_STMT = "INSERT INTO functions ( functionID,functionName) VALUES (?,?);";
+	private static final String GET_ALL_STMT = "SELECT functionID,functionName FROM functions order by functionID";
+	private static final String GET_ONE_STMT = "SELECT functionID,functionName FROM functions where functionID = ?";
+	private static final String DELETE = "DELETE FROM functions where functionID = ?";
+	private static final String UPDATE = "UPDATE functions set functionID=?,functionName=? where functionID = ?";
 	
 	@Override
 	public void insert(FunctionsVO functionsVO) {
@@ -37,8 +36,8 @@ public class FunctionsDAO  implements FunctionsDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setInt(1, functionsVO.getFunction_id());
-			pstmt.setString(2, functionsVO.getFunction_name());
+			pstmt.setInt(1, functionsVO.getFunctionID());
+			pstmt.setString(2, functionsVO.getFunctionName());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -73,8 +72,8 @@ public class FunctionsDAO  implements FunctionsDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setInt(1, functionsVO.getFunction_id());
-			pstmt.setString(2, functionsVO.getFunction_name());
+			pstmt.setInt(1, functionsVO.getFunctionID());
+			pstmt.setString(2, functionsVO.getFunctionName());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -100,7 +99,7 @@ public class FunctionsDAO  implements FunctionsDAO_interface {
 	}
 
 	@Override
-	public void delete(Integer function_id) {
+	public void delete(Integer functionID) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -109,7 +108,7 @@ public class FunctionsDAO  implements FunctionsDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setInt(1, function_id);
+			pstmt.setInt(1, functionID);
 
 			pstmt.executeUpdate();
 			
@@ -136,7 +135,7 @@ public class FunctionsDAO  implements FunctionsDAO_interface {
 	}
 
 	@Override
-	public FunctionsVO findByPrimaryKey(Integer function_id) {
+	public FunctionsVO findByPrimaryKey(Integer functionID) {
 
 		FunctionsVO functionsVO = null;
 		Connection con = null;
@@ -147,7 +146,7 @@ public class FunctionsDAO  implements FunctionsDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			
-			pstmt.setInt(1, function_id);
+			pstmt.setInt(1, functionID);
 			
 			rs = pstmt.executeQuery();
 //			System.out.println(rs);
@@ -155,8 +154,8 @@ public class FunctionsDAO  implements FunctionsDAO_interface {
 				// empVo 也稱為 Domain objects
 				functionsVO = new FunctionsVO();
 
-				functionsVO.setFunction_id(rs.getInt("function_id"));
-				functionsVO.setFunction_name(rs.getString("function_name"));
+				functionsVO.setFunctionID(rs.getInt("functionID"));
+				functionsVO.setFunctionName(rs.getString("functionName"));
 
 			}
 		} catch (SQLException se) {
@@ -206,8 +205,8 @@ public class FunctionsDAO  implements FunctionsDAO_interface {
 				// empVO 也稱為 Domain objects
 				functionsVO = new FunctionsVO();
 
-				functionsVO.setFunction_id(rs.getInt("function_id"));
-				functionsVO.setFunction_name(rs.getString("function_name"));
+				functionsVO.setFunctionID(rs.getInt("functionID"));
+				functionsVO.setFunctionName(rs.getString("functionName"));
 				
 				list.add(functionsVO); // Store the row in the list
 			}

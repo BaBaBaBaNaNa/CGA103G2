@@ -3,73 +3,73 @@ package com.emp.model;
 import java.sql.Date;
 
 public class EmpVO implements java.io.Serializable{
-	private Integer emp_id;
-	private String emp_name;
-	private String emp_account;
-	private String emp_password;
-	private Integer emp_permission;
-	private String emp_phone;
-	private String emp_address;
-	private Integer emp_job;
-	private Date emp_hiredate;
-	public Integer getEmp_id() {
-		return emp_id;
+	private Integer empID;
+	private String empName;
+	private String empAccount;
+	private String empPassword;
+	private Integer empPermission;
+	private String empPhone;
+	private String empAddress;
+	private Integer jobID;
+	private Date empHiredate;
+	
+    public Integer getEmpID() {
+		return empID;
 	}
-	public void setEmp_id(Integer emp_id) {
-		this.emp_id = emp_id;
+	public void setEmpID(Integer empID) {
+		this.empID = empID;
 	}
-	public String getEmp_name() {
-		return emp_name;
+	public String getEmpName() {
+		return empName;
 	}
-	public void setEmp_name(String emp_name) {
-		this.emp_name = emp_name;
+	public void setEmpName(String empName) {
+		this.empName = empName;
 	}
-	public String getEmp_account() {
-		return emp_account;
+	public String getEmpAccount() {
+		return empAccount;
 	}
-	public void setEmp_account(String emp_account) {
-		this.emp_account = emp_account;
+	public void setEmpAccount(String empAccount) {
+		this.empAccount = empAccount;
 	}
-	public String getEmp_password() {
-		return emp_password;
+	public String getEmpPassword() {
+		return empPassword;
 	}
-	public void setEmp_password(String emp_password) {
-		this.emp_password = emp_password;
+	public void setEmpPassword(String empPassword) {
+		this.empPassword = empPassword;
 	}
-	public Integer getEmp_permission() {
-		return emp_permission;
+	public Integer getEmpPermission() {
+		return empPermission;
 	}
-	public void setEmp_permission(Integer emp_permission) {
-		this.emp_permission = emp_permission;
+	public void setEmpPermission(Integer empPermission) {
+		this.empPermission = empPermission;
 	}
-	public String getEmp_phone() {
-		return emp_phone;
+	public String getEmpPhone() {
+		return empPhone;
 	}
-	public void setEmp_phone(String emp_phone) {
-		this.emp_phone = emp_phone;
+	public void setEmpPhone(String empPhone) {
+		this.empPhone = empPhone;
 	}
-	public String getEmp_address() {
-		return emp_address;
+	public String getEmpAddress() {
+		return empAddress;
 	}
-	public void setEmp_address(String emp_address) {
-		this.emp_address = emp_address;
+	public void setEmpAddress(String empAddress) {
+		this.empAddress = empAddress;
 	}
-	public Integer getEmp_job() {
-		return emp_job;
+	public Integer getJobID() {
+		return jobID;
 	}
-	public void setEmp_job(Integer emp_job) {
-		this.emp_job = emp_job;
+	public void setJobID(Integer jobID) {
+		this.jobID = jobID;
 	}
-	public Date getEmp_hiredate() {
-		return emp_hiredate;
+	public Date getEmpHiredate() {
+		return empHiredate;
 	}
-	public void setEmp_hiredate(Date emp_hiredate) {
-		this.emp_hiredate = emp_hiredate;
+	public void setEmpHiredate(Date empHiredate) {
+		this.empHiredate = empHiredate;
 	}
-
-    public com.job.model.JobVO getJobVO() {
+	public com.job.model.JobVO getJobVO() {
 	    com.job.model.JobService jobSvc = new com.job.model.JobService();
-	    com.job.model.JobVO jobVO = jobSvc.getOneJob(emp_job);
+	    com.job.model.JobVO jobVO = jobSvc.getOneJob(jobID);
 	    return jobVO;
     }
 }

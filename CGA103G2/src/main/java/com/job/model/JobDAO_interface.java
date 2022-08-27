@@ -4,7 +4,7 @@ import java.util.*;
 public interface JobDAO_interface {
 	public void insert(JobVO jobVO);
     public void update(JobVO jobVO);
-    public void delete(Integer job_id);
-    public JobVO findByPrimaryKey(Integer job_id);
+    public void delete(Integer jobID);
+    public JobVO findByPrimaryKey(Integer jobID);
     public List<JobVO> getAll();
 }

@@ -30,7 +30,7 @@
 </head>
 
 <body style="text-align: center">
-	<form name="myform" action="EmpLoginServlet" method="POST">
+	<form name="myform" action="EmpLoginServlet.do" method="POST">
 		<div id="wrapper">
 			<div id="wrappertop"></div>
 
@@ -42,7 +42,7 @@
 					<div id="username_inputleft"></div>
 
 					<div id="username_inputmiddle">
-						<input type="text" name="emp_account" id="url" value="員工帳號">
+						<input type="text" name="empAccount" id="url" value="員工帳號">
 					</div>
 
 					<div id="username_inputright"></div>
@@ -54,7 +54,7 @@
 					<div id="password_inputleft"></div>
  
 					<div id="password_inputmiddle">
-						<input type="password" name="emp_password" id="url"
+						<input type="password" name="empPassword" id="url"
 							value="Password">
 					</div>
 

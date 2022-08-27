@@ -5,66 +5,32 @@
 											http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 	<display-name>CGA103G2</display-name>
-	<welcome-file-list>
+    <welcome-file-list>
+		<welcome-file>FrontIndex.jsp</welcome-file>
 		<welcome-file>BackLogin.jsp</welcome-file>
 	</welcome-file-list>
+<<<<<<< HEAD
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/cga103g2</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+	
+	<!-- 會員 start -->
+	<servlet>
+		<servlet-name>MemServlet</servlet-name>
+		<servlet-class>com.mem.controller.MemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemServlet</servlet-name>
+		<url-pattern>/back-end/member/mem.do</url-pattern>
+		<url-pattern>/front-end/member/mem.do</url-pattern>
+		<url-pattern>/member/mem.do</url-pattern>
+	</servlet-mapping>
+	<!-- 會員 stop -->
+=======
 	<!-- 登入 start -->
-	<servlet>
-		<servlet-name>EmpLoginServlet</servlet-name>
-		<servlet-class>com.emp.controller.EmpLoginServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>EmpLoginServlet</servlet-name>
-		<url-pattern>/EmpLoginServlet</url-pattern>
-	</servlet-mapping>
-	<!-- 登入 end -->
-	<!-- 驗證登入狀態 start -->
-	<!-- <filter> -->
-	<!-- <filter-name>BackFilter</filter-name> -->
-	<!-- <filter-class>com.filter.controller.BackFilter</filter-class> -->
-	<!-- 配置初始化引數，指明再沒有登入的情況下放行的資源 -->
-	<!-- <init-param> -->
-	<!-- //初始化引數名 -->
-	<!-- <param-name>letgo</param-name> -->
-	<!-- //初始化引數值 -->
-	<!-- <param-value>/BackLogin.jsp;/EmpLoginServlet;/back-assets;</param-value> -->
-	<!-- </init-param> -->
-	<!-- </filter> -->
-	<!-- <filter-mapping> -->
-	<!-- //必須和上面的一樣 -->
-	<!-- <filter-name>BackFilter</filter-name> -->
-	<!-- //過濾所有 -->
-	<!-- <url-pattern>/*</url-pattern> -->
-	<!-- </filter-mapping> -->
-	<!-- 驗證登入狀態 end -->
-	<!-- 後臺首頁 start -->
-	<servlet>
-		<servlet-name>BackIndexServlet</servlet-name>
-		<servlet-class>com.back.controller.BackIndexServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>BackIndexServlet</servlet-name>
-		<url-pattern>/BackIndexServlet</url-pattern>
-	</servlet-mapping>
-	<!-- 後臺首頁 end -->
-	<!-- 員工 start -->
-	<servlet>
-		<servlet-name>EmpServlet</servlet-name>
-		<servlet-class>com.emp.controller.EmpServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>EmpServlet</servlet-name>
-		<url-pattern>/back-end/employee/emp.do</url-pattern>
-	</servlet-mapping>
-	<!-- 員工 end -->
-	<!-- 職務 start -->
-	<servlet>
-		<servlet-name>JobServlet</servlet-name>
-		<servlet-class>com.job.controller.JobServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>JobServlet</servlet-name>
-		<url-pattern>/back-end/job/job.do</url-pattern>
-	</servlet-mapping>
-	<!-- 職務 end -->
+
+>>>>>>> refs/heads/Joe
 </web-app>
