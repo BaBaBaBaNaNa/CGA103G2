@@ -27,11 +27,11 @@ public class MemDAO implements MemDAO_interface {
 		}
 	}
 
-private static final String INSERTSTMT = "INSERT INTO members (memId,memName,memAccount,memPassword,memGender,memPhone,memEmail,memAddress,memBirthday,memPermission) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
-private static final String GETALLSTMT = "SELECT memid, memname, memaccount, mempassword, memgender, memphone, mememail, memaddress, membirthday, mempermission FROM members order by memid";
-private static final String GETONESTMT = "SELECT memid, memname, memaccount, mempassword, memgender, memphone, mememail, memaddress, membirthday, mempermission FROM members  where memid = ?";
-private static final String DELETE = "DELETE FROM members where memid = ?";
-private static final String UPDATE = "UPDATE members set memname=?, memaccount=?, mempassword=?, memgender=?, memphone=?, mememail=?, memaddress=?, membirthday=?, mempermission=? where memid = ?";
+private static final String INSERTSTMT = "INSERT INTO members (memID,memName,memAccount,memPassword,memGender,memPhone,memEmail,memAddress,memBirthday,memPermission) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+private static final String GETALLSTMT = "SELECT memID, memname, memaccount, mempassword, memgender, memphone, mememail, memaddress, membirthday, mempermission FROM members order by memID";
+private static final String GETONESTMT = "SELECT memID, memname, memaccount, mempassword, memgender, memphone, mememail, memaddress, membirthday, mempermission FROM members  where memID = ?";
+private static final String DELETE = "DELETE FROM members where memID = ?";
+private static final String UPDATE = "UPDATE members set memname=?, memaccount=?, mempassword=?, memgender=?, memphone=?, mememail=?, memaddress=?, membirthday=?, mempermission=? where memID = ?";
 
 
 @Override
@@ -43,7 +43,7 @@ public void insert(MemVO memVO) {
 		con = ds.getConnection();
 		pstmt = con.prepareStatement(INSERTSTMT);
 	
-		pstmt.setInt(1, memVO.getMemId());
+		pstmt.setInt(1, memVO.getMemID());
 		pstmt.setString(2, memVO.getMemName());
 		pstmt.setString(3, memVO.getMemAccount());
 		pstmt.setString(4, memVO.getMemPassword());
@@ -98,7 +98,7 @@ public void update(MemVO memVO) {
 		pstmt.setString(7, memVO.getMemAddress());
 		pstmt.setDate(8, memVO.getMemBirthday());
 		pstmt.setInt(9, memVO.getMemPermission());
-		pstmt.setInt(10, memVO.getMemId());
+		pstmt.setInt(10, memVO.getMemID());
 		pstmt.executeUpdate();
 		
 	} catch (SQLException se) {
@@ -127,7 +127,7 @@ public void update(MemVO memVO) {
 
 
 @Override
-public void delete(Integer memid) {
+public void delete(Integer memID) {
 	
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -136,7 +136,7 @@ public void delete(Integer memid) {
 		con = ds.getConnection();
 		pstmt = con.prepareStatement(DELETE);
 		
-		pstmt.setInt(1, memid);
+		pstmt.setInt(1, memID);
 
 		pstmt.executeUpdate();
 		
@@ -165,7 +165,7 @@ public void delete(Integer memid) {
 
 
 @Override
-public MemVO findByPrimaryKey(Integer memid) {
+public MemVO findByPrimaryKey(Integer memID) {
 	MemVO memVO = null;
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -174,13 +174,13 @@ public MemVO findByPrimaryKey(Integer memid) {
 		con = ds.getConnection();
 		pstmt = con.prepareStatement(GETONESTMT);
 		
-		pstmt.setInt(1, memid);
+		pstmt.setInt(1, memID);
 		rs = pstmt.executeQuery();
 		while (rs.next()) {
 			memVO = new MemVO();
 			
-//			pstmt.setInt(1, memVO.getMemid());
-			memVO.setMemId(rs.getInt("memid"));
+//			pstmt.setInt(1, memVO.getmemID());
+			memVO.setMemID(rs.getInt("memID"));
 //			pstmt.setString(2, memVO.getMemname());
 			memVO.setMemName(rs.getString("memname"));
 //			pstmt.setString(3, memVO.getMemaccount());
@@ -249,7 +249,7 @@ public List<MemVO> getAll() {
 			// empVO 也稱為 Domain objects
 			memVO = new MemVO();
 			
-			memVO.setMemId(rs.getInt("memid"));
+			memVO.setMemID(rs.getInt("memID"));
 			memVO.setMemName(rs.getString("memname"));
 			memVO.setMemAccount(rs.getString("memaccount"));
 			memVO.setMemPassword(rs.getString("mempassword"));
@@ -296,7 +296,7 @@ public static void main(String[] args) {
 	MemJDBCDAO dao = new MemJDBCDAO();
 	// 新增  done
 //	MemVO memVO1 = new MemVO();
-//	memVO1.setMemId(12);
+//	memVO1.setmemID(12);
 //	memVO1.setMemName("LEO");
 //	memVO1.setMemAccount ("1qwewqewqe");
 //	memVO1.setMemPassword("qwewqewqe");
@@ -312,7 +312,7 @@ public static void main(String[] args) {
 	
 	// 修改  done
 //	MemVO memVO2 = new MemVO();
-//	memVO2.setMemId(9);
+//	memVO2.setmemID(9);
 //	memVO2.setMemName("Ooo");
 //	memVO2.setMemAccount ("wowowo");
 //	memVO2.setMemPassword("123");
@@ -333,7 +333,7 @@ public static void main(String[] args) {
 	
 	// 單筆查詢  done
 //	MemVO memVO3 = dao.findByPrimaryKey(11);
-//	System.out.print(memVO3.getMemid() + ",");
+//	System.out.print(memVO3.getmemID() + ",");
 //	System.out.print(memVO3.getMemname() + ",");
 //	System.out.print(memVO3.getMemaccount() + ",");
 //	System.out.print(memVO3.getMempassword() + ",");
@@ -349,7 +349,7 @@ public static void main(String[] args) {
 	// 多筆查詢  done
 //	List<MemVO> list = dao.getAll();
 //	for (MemVO aMem : list) {
-//		System.out.print(aMem.getMemId() + ",");
+//		System.out.print(aMem.getMemID() + ",");
 //		System.out.print(aMem.getMemName() + ",");
 //		System.out.print(aMem.getMemAccount() + ",");
 //		System.out.print(aMem.getMemPassword() + ",");

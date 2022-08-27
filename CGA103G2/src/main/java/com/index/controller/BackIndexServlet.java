@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/back-end/backstage/BackIndexServlet.do")
+@WebServlet("/back-end/index/BackIndexServlet.do")
 public class BackIndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

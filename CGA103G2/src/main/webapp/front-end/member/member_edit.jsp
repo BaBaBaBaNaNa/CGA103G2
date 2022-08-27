@@ -3,14 +3,14 @@
 <%@ page import="com.mem.model.*"%>
 
 <%
-  MemVO memVO = (MemVO) request.getAttribute("memVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroller) 存入req的memVo物件 (包括幫忙取出的memVO, 也包括輸入資料錯誤時的memVO物件)
 %>
---<%= memVO==null %>--${empVO.deptno}--
+
 
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>員工資料修改 - update_emp_input.jsp</title>
+<title>會員資料修改 - member_edit.jsp</title>
 
 <style>
   table#table-1 {
@@ -74,7 +74,7 @@
 				
 				<tr>
 					<td>會員編號</td>
-					<td><input type="text" name="memId" value="<%=memVO.getMemId()%>" required /></td>
+					<td><input type="text" name="memID" value="<%=memVO.getMemID()%>" required /></td>
 				</tr>
 				<tr>
 					<td>會員姓名</td>
@@ -111,7 +111,7 @@
 			</table>
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="empno" value="<%=memVO.getMemId()%>">
+<input type="hidden" name="empno" value="<%=memVO.getMemID()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 

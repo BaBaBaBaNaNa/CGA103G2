@@ -5,7 +5,7 @@ import java.sql.Date;
 import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 
 public class MemVO implements java.io.Serializable {
-	private Integer memId;
+	private Integer memID;
 	private String memName;
 	private String memAccount;
 	private String memPassword;
@@ -17,11 +17,11 @@ public class MemVO implements java.io.Serializable {
 	private Integer memPermission;
 	
 	
-	public Integer getMemId() {
-		return memId;
+	public Integer getMemID() {
+		return memID;
 	}
-	public void setMemId(Integer memId) {
-		this.memId = memId;
+	public void setMemID(Integer memID) {
+		this.memID = memID;
 	}
 	public String getMemName() {
 		return memName;

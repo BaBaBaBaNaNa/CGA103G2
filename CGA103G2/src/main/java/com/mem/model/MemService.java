@@ -45,7 +45,7 @@ public class MemService {
 	}
 
 	public MemVO updateMem( 
-			Integer memId,
+			Integer memID,
 			String memName,
 			String memAccount, 
 			String memPassword,
@@ -67,7 +67,7 @@ public class MemService {
 		memVO.setMemAddress(memAddress);
 		memVO.setMemBirthday(memBirthday);
 		memVO.setMemPhone(memPhone);
-		memVO.setMemId(memId);
+		memVO.setMemID(memID);
 		memVO.setMemPermission(memPermission);
 		
 		
@@ -78,12 +78,12 @@ public class MemService {
 		return memVO;
 	}
 
-	public void deleteMem(Integer memid) {
-		dao.delete(memid);
+	public void deleteMem(Integer MemID) {
+		dao.delete(MemID);
 	}
 
-	public MemVO getOneMem(Integer memid) {
-		return dao.findByPrimaryKey(memid);
+	public MemVO getOneMem(Integer MemID) {
+		return dao.findByPrimaryKey(MemID);
 	}
 
 	public List<MemVO> getAll() {

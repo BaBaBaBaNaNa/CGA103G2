@@ -39,7 +39,7 @@ public class MemServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("list", list); // 資料庫取出的list物件,存入session
 			// Send the Success view
-			String url = "/back-end/member/member_detail.jsp";
+			String url = "/back-end/member/memberDetail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交listAllEmp2GetFromSession.jsp
 			successView.forward(req, res);
 			return;
@@ -55,7 +55,7 @@ public class MemServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-			String str = req.getParameter("memId");
+			String str = req.getParameter("memID");
 			if (str == null || (str.trim()).length() == 0) {
 				errorMsgs.add("請輸入member編號");
 			}
@@ -65,9 +65,9 @@ public class MemServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
-			Integer memId = null;
+			Integer memID = null;
 			try {
-				memId = Integer.valueOf(str);
+				memID = Integer.valueOf(str);
 			} catch (Exception e) {
 				errorMsgs.add("member編號格式不正確");
 			}
@@ -79,7 +79,7 @@ public class MemServlet extends HttpServlet {
 			}
 			/*************************** 2.開始查詢資料 *****************************************/
 			MemService memSvc = new MemService();
-			MemVO memVO = memSvc.getOneMem(memId);
+			MemVO memVO = memSvc.getOneMem(memID);
 			if (memVO == null) {
 				errorMsgs.add("查無資料");
 			}
@@ -181,7 +181,7 @@ public class MemServlet extends HttpServlet {
 					Integer.parseInt(memGender), memPhone, memAddress, memEmail, memBirthday);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/front-end/member/listAllMem.jsp";
+			String url = "/back-end/member/memberDetail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 		}
@@ -195,15 +195,15 @@ public class MemServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 ****************************************/
-			Integer memId = Integer.valueOf(req.getParameter("memId"));
+			Integer memID = Integer.valueOf(req.getParameter("memID"));
 
 			/*************************** 2.開始查詢資料 ****************************************/
 			MemService memSvc = new MemService();
-			MemVO memVO = memSvc.getOneMem(memId);
+			MemVO memVO = memSvc.getOneMem(memID);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("memVO", memVO); // 資料庫取出的empVO物件,存入req
-			String url = "/front-end/member/member_edit.jsp";
+			String url = "/back-end/member/memberEdit.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_mem_input.jsp
 			successView.forward(req, res);
 		}
@@ -218,7 +218,7 @@ public class MemServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-			Integer memId = Integer.valueOf(req.getParameter("memId").trim());
+			Integer memID = Integer.valueOf(req.getParameter("memID").trim());
 
 			// mem_name
 			String memName = req.getParameter("memName");
@@ -259,6 +259,8 @@ public class MemServlet extends HttpServlet {
 			if (memAddress == null || memAddress.trim().length() == 0) {
 				errorMsgs.add("地址請勿空白");
 			}
+			
+			
 
 			java.sql.Date memBirthday = null;
 			try {
@@ -270,7 +272,7 @@ public class MemServlet extends HttpServlet {
 
 			MemVO memVO = new MemVO();
 
-			memVO.setMemId(memId);
+			memVO.setMemID(memID);
 			memVO.setMemName(memName);
 			memVO.setMemAccount(memAccount);
 			memVO.setMemPassword(memPassword);
@@ -290,11 +292,11 @@ public class MemServlet extends HttpServlet {
 			}
 			/*************************** 2.開始修改資料 *****************************************/
 			MemService memSvc = new MemService();
-			memVO = memSvc.updateMem(memId, memName, memAccount, memPassword, Integer.parseInt(memPermission),
+			memVO = memSvc.updateMem(memID, memName, memAccount, memPassword, Integer.parseInt(memPermission),
 					 memPhone, memAddress, memEmail, memBirthday);
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("memVO", memVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url = "/front-end/member/update_member_input.jsp";
+			String url = "/back-end/member/memberEditsuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -308,14 +310,14 @@ public class MemServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 ***************************************/
-			Integer memID = Integer.valueOf(req.getParameter("memId"));
+			Integer memID = Integer.valueOf(req.getParameter("memID"));
 
 			/*************************** 2.開始刪除資料 ***************************************/
 			MemService memSvc = new MemService();
 			memSvc.deleteMem(memID);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url = "/front-end/member/listAllMem.jsp";
+			String url = "/back-end/member/memberDeletesuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}
