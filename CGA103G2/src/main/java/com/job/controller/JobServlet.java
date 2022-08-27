@@ -47,16 +47,14 @@ public class JobServlet extends HttpServlet {
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-String str = req.getParameter("jobID");
+				String str = req.getParameter("jobID");
 				if (str == null || (str.trim()).length() == 0) {
 					errorMsgs.add("請輸入職務編號");
 				}
-				// Send the use back to the form, if there were errors
+
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/pages/functions/select_page.jsp");
@@ -72,7 +70,7 @@ String str = req.getParameter("jobID");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/pages/functions/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/job/jobDetail.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -86,14 +84,14 @@ String str = req.getParameter("jobID");
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/pages/functions/select_page.jsp");
+							.getRequestDispatcher("/back-end/job/jobDetail.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("jobVO", jobVO); // 資料庫取出的empVO物件,存入req
-				String url = "/pages/functions/listOneEmp.jsp";
+				String url = "/back-end/job/empDetailOne.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 				successView.forward(req, res);
 		}
@@ -107,12 +105,11 @@ String str = req.getParameter("jobID");
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-			// emp_name
 			String jobName = req.getParameter("jobName");
 //			String emp_nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 //			String job_nameReg = "";
 			if (jobName == null || jobName.trim().length() == 0) {
-				errorMsgs.add("功能名字: 請勿空白");
+				errorMsgs.add("職位名字: 請勿空白");
 			}
 //			else if (!job_name.trim().matches(job_nameReg)) { // 以下練習正則(規)表示式(regular-expression)
 //				errorMsgs.add("員工姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
@@ -124,7 +121,7 @@ String str = req.getParameter("jobID");
 
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("jobVO", jobVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/pages/functions/addFunctions.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/job/jobAdd.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -134,7 +131,7 @@ String str = req.getParameter("jobID");
 			jobVO = jobSvc.addJob(jobName);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/pages/functions/listAllEmp1_byDAO.jsp";
+			String url = "/pages/functions/jobAddSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 		}

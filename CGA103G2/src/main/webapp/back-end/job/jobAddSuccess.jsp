@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.emp.model.*"%>
+<%@ page import="java.util.*,com.emp.model.EmpVO"%>
 
-<jsp:useBean id="list" scope="session" type="java.util.List<EmpVO>" />
+<%
+EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+%>
 
 <!DOCTYPE html>
 <html lang="zh-tw">
@@ -13,7 +14,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>異鄉人-義式餐酒館-管理中心</title>
-
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
 <!-- Iconic Fonts -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -32,8 +32,6 @@
 <link href="../../back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
-
-
 <style type="text/css">
 table {
 	border: 1px solid black;
@@ -45,72 +43,21 @@ td {
 	border: 1px solid black;
 	text-align: center;
 }
-
-h2 {
+div{
 	text-align: center;
 }
-
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-}
-
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-
-.b-example-divider {
-	height: 3rem;
-	background-color: rgba(0, 0, 0, .1);
-	border: solid rgba(0, 0, 0, .15);
-	border-width: 1px 0;
-	box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em
-		rgba(0, 0, 0, .15);
-}
-
-.b-example-vr {
-	flex-shrink: 0;
-	width: 1.5rem;
-	height: 100vh;
-}
-
-.bi {
-	vertical-align: -.125em;
-	fill: currentColor;
-}
-
-.nav-scroller {
-	position: relative;
-	z-index: 2;
-	height: 2.75rem;
-	overflow-y: hidden;
-}
-
-.nav-scroller .nav {
-	display: flex;
-	flex-wrap: nowrap;
-	padding-bottom: 1rem;
-	margin-top: -1px;
-	overflow-x: auto;
+h2{
 	text-align: center;
-	white-space: nowrap;
-	-webkit-overflow-scrolling: touch;
 }
 </style>
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
-
 	<!-- ----- ----- ----- 進入網站的讀取圈圈 start ----- ----- ----- -->
 	<%@ include file="../../back-end/tool/ReadingCircle.file"%>
 	<!-- ----- ----- ----- 進入網站的讀取圈圈 end ----- ----- ----- -->
-
+	<!-- Overlays -->
 	<div class="ms-aside-overlay ms-overlay-left ms-toggler" data-target="#ms-side-nav" data-toggle="slideLeft"></div>
 	<div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"></div>
 
@@ -129,18 +76,9 @@ h2 {
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2>查看員工訊息</h2>
-		 <li>
-    	<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" >
-        		<b>輸入員工編號 (如1):</b>
-        		<input type="text" name="empID" value="${param.empID}"><font color=red>${errorMsgs.empID}</font>
-        		<input type="hidden" name="action" value="getOne_For_Display">
-        		<input type="submit" value="送出">
-    			</FORM>
-  		</li>
+		<h2	> 新增成功!</h2>
 		<table>
 			<tr>
-				<th>員工編號</th>
 				<th>員工姓名</th>
 				<th>帳號</th>
 				<th>密碼</th>
@@ -149,38 +87,19 @@ h2 {
 				<th>員工地址</th>
 				<th>員工職位</th>
 				<th>員工入職日期</th>
-				<th>修改</th>
-				<th>刪除</th>
 			</tr>
-			<%@ include file="../../back-end/tool/page1.file"%>
-			<c:forEach var="empVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-				<tr>
-					<td>${empVO.empID}</td>
-					<td>${empVO.empName}</td>
-					<td>${empVO.empAccount}</td>
-					<td>${empVO.empPassword}</td>
-					<td>${empVO.empPermission}</td>
-					<td>${empVO.empPhone}</td>
-					<td>${empVO.empAddress}</td>
-					<td>${empVO.jobVO.jobName}</td>
-<%-- 					<td>${empVO.emp_job}-[${empVO.jobVO.job_name}]</td> --%>
-					<td>${empVO.empHiredate}</td>
-					<td>
-						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;">
-							<input type="submit" value="修改"> <input type="hidden" name="empID" value="${empVO.empID}"> <input type="hidden" name="action" value="getOne_For_Update">
-						</FORM>
-					</td>
-					<td>
-						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;">
-							<input type="submit" value="刪除"> <input type="hidden" name="empID" value="${empVO.empID}"> <input type="hidden" name="action" value="delete">
-						</FORM>
-					</td>
-				</tr>
-			</c:forEach>
+			<tr>
+				<td>${empVO.empName}</td>
+				<td>${empVO.empAccount}</td>
+				<td>${empVO.empPassword}</td>
+				<td>${empVO.empPermission}</td>
+				<td>${empVO.empPhone}</td>
+				<td>${empVO.empAddress}</td>
+				<td>${empVO.jobVO.jobName}</td>
+				<td>${empVO.empHiredate}</td>
+			</tr>
 		</table>
-		<%@ include file="../../back-end/tool/page2.file"%>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
-
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 

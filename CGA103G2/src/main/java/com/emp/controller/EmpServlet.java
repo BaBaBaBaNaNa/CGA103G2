@@ -11,6 +11,8 @@ import javax.servlet.http.*;
 import org.apache.naming.java.javaURLContextFactory;
 
 import com.emp.model.*;
+import com.job.model.JobDAO;
+import com.job.model.JobVO;
 import com.emp.controller.*;
 
 @WebServlet("/back-end/employee/EmpServlet.do")
@@ -26,7 +28,20 @@ public class EmpServlet extends HttpServlet {
 		String action = req.getParameter("action");
 
 		// ----- ----- ----- getAll start ----- ----- -----
-		//	此段已經寫入jsp了
+		if ("getAll".equals(action)) {
+			/*************************** 開始查詢資料 ****************************************/
+		    EmpDAO dao = new EmpDAO();
+			List<EmpVO> list = dao.getAll();
+
+			/*************************** 查詢完成,準備轉交(Send the Success view) *************/
+			HttpSession session = req.getSession();
+			session.setAttribute("list", list); // 資料庫取出的list物件,存入session
+			// Send the Success view
+			String url = "/back-end/employee/empDetail.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+			return;
+		}
 		// ----- ----- ----- getAll end ----- ----- -----
 
 		// ----- ----- ----- getOne_For_Display start ----- ----- -----
@@ -159,7 +174,7 @@ public class EmpServlet extends HttpServlet {
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			req.setAttribute("empVO", empVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url = "/back-end/employee/empAddsuccess.jsp";
+			String url = "/back-end/employee/empAddSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 		}
@@ -269,7 +284,7 @@ public class EmpServlet extends HttpServlet {
 			empVO = empSvc.updateEmp(empID, empName, empAccount, empPassword, Integer.parseInt(empPermission), empPhone, empAddress, Integer.parseInt(jobID), empHiredate);
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("empVO", empVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url = "/back-end/employee/empEditsuccess.jsp";
+			String url = "/back-end/employee/empEditSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -289,7 +304,7 @@ public class EmpServlet extends HttpServlet {
 			empSvc.deleteEmp(empID);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url = "/back-end/employee/empDeletesuccess.jsp";
+			String url = "/back-end/employee/empDeleteSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}

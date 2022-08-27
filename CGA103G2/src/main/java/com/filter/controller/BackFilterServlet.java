@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(filterName = "letgo",
-						urlPatterns = {"/back-end/*","/front-end/*"}
-)
+//@WebFilter(filterName = "letgo",
+//						urlPatterns = {"/back-end/*","/front-end/*"}
+//)
 public class BackFilterServlet implements Filter {
 //定義一個存放放行資源路徑的陣列
 	private static String[] paths;
