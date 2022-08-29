@@ -4,8 +4,7 @@ import java.util.*;
 public interface FunctionsDAO_interface {
 	public void insert(FunctionsVO functionsVO);
     public void update(FunctionsVO functionsVO);
-    public void delete(Integer functions_id);
-    public FunctionsVO findByPrimaryKey(Integer functions_id);
+    public void delete(Integer functionID);
+    public FunctionsVO findByPrimaryKey(Integer functionID);
     public List<FunctionsVO> getAll();
 }
-/* */

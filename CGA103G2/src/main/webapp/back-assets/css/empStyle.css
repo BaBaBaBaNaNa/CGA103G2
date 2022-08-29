@@ -1,0 +1,33 @@
+table {
+	border: 1px solid black;
+	margin: 0 auto;
+}
+th{
+	width: 150px;
+	border: 1px solid black;
+	text-align: center;
+}
+td {
+	width: 300px;
+	border: 1px solid black;
+	text-align: center;
+}
+input{
+	width: 300px;
+}
+select{
+	width: 300px;
+}
+div{
+	text-align: center;
+}
+h2{
+	text-align: center;
+}
+p{
+	text-align: center;
+	color:red;
+}
+b{
+	text-align: center;
+}

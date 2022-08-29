@@ -1,21 +1,20 @@
 package com.permission.model;
 
 public class PermissionVO implements java.io.Serializable{
-	private int emp_id;
-	private int function_id;
+	private int empID;
+	private int functionID;
 	
-	public int getEmp_id() {
-		return emp_id;
+	public int getEmpID() {
+		return empID;
 	}
-	public void setEmp_id(int emp_id) {
-		this.emp_id = emp_id;
+	public void setEmpID(int empID) {
+		this.empID = empID;
 	}
-	public int getFunction_id() {
-		return function_id;
+	public int getFunctionID() {
+		return functionID;
 	}
-	public void setFunction_id(int function_id) {
-		this.function_id = function_id;
+	public void setFunctionID(int functionID) {
+		this.functionID = functionID;
 	}
-	
-	/* */
+
 }

@@ -1,0 +1,204 @@
+/* body {
+    color: #000;
+    overflow-x: hidden;
+    height: 100%;
+    background-color: rgba(195, 195, 195, .2) !important;
+    background-repeat: no-repeat;
+} */
+/* 內容垂直置中 */
+.container-fluid {
+  padding-top: 50px;
+  padding-bottom: 120px;
+}
+
+
+input {
+  /* padding: 10px 20px 10px 20px; */
+  border: 1px solid lightgrey !important;
+  border-radius: 6px !important;
+  box-sizing: border-box;
+  background-color: #fff !important;
+  color: #2C3E50;
+  font-size: 14px;
+  letter-spacing: 1px;
+  ;
+}
+
+input:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid #512DA8;
+  outline-width: 0;
+}
+
+::placeholder {
+  color: #BDBDBD;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: #BDBDBD;
+}
+
+::-ms-input-placeholder {
+  color: #BDBDBD;
+}
+
+button:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-width: 0;
+}
+
+.datepicker {
+  background-color: #fff;
+  border: none;
+  cursor: default;
+  /*Add the z-index property, so it can solve the problem of 'the dialog occlusion the datapicker'.modifed by tony he.2009-09-29 */
+  z-index: 1200;
+}
+
+.datepicker-dropdown {
+  top: 0;
+  left: 0;
+}
+
+
+
+.datepicker table tr td.today,
+span.focused {
+  border-radius: 50% !important;
+
+}
+
+/* title-head bgcolor */
+thead tr:nth-child(2) {
+  background-color: #6dd0cd !important;
+}
+
+/* text-color here */
+thead tr:nth-child(3) th {
+  color: #6dd0cd !important;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(195, 195, 195, .2);
+}
+
+.dow,
+.old-day,
+.day,
+.new-day {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+
+}
+
+.old-day:hover,
+.day:hover,
+.new-day:hover,
+.month:hover,
+.year:hover,
+.decade:hover,
+.century:hover {
+  border-radius: 50% !important;
+  background-color: #eee;
+  background-image: linear-gradient(#dce1e4, #64B5F6) !important;
+  color: white
+}
+
+.active {
+  /* border-radius: 50% !important; */
+  background-image: linear-gradient(#dce1e4, #64B5F6) !important;
+  color: #fff !important;
+}
+
+.prev,
+.next,
+.datepicker-switch {
+  border-radius: 0 !important;
+  padding: 20px 10px !important;
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.prev:hover,
+.next:hover,
+.datepicker-switch:hover {
+  background-color: inherit !important;
+  opacity: 1;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#submit_btn {
+  position: absolute;
+}
+
+#cancel {
+  position: relative;
+  left: 70px;
+}
+
+#show {
+  border-radius: 10px;
+  border: none;
+  width: 50px;
+  height: 35px;
+}
+
+#show:hover {
+  box-shadow: inset 0 2px 6px #ccc;
+
+}
+
+#myform {
+  position: relative;
+  top: 20px;
+  left: 20px;
+}
+
+/* dialog */
+dialog {
+  position: absolute;
+  translate: 0 5%;
+  border: none;
+  box-shadow: 0 2px 6px #ccc;
+  border-radius: 10px;
+  width: 60%;
+  height: 90%;
+  overflow: hidden;
+}
+
+#dl1::before {
+  content: "";
+  background-color: var(--white-color);
+  background-image: url('../images/pic.jpg');
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+  width: 60%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+}
+table.table-condensed{
+  translate: 0 -20%;
+}
+/* 日期選擇時 */
+td.disabled {
+  cursor: not-allowed !important;
+  color: lightgray !important;
+}
+
+td.disabled:hover {
+  background-image: none !important;
+}
