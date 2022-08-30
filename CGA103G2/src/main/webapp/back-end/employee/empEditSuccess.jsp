@@ -32,25 +32,11 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 <link href="../../back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
-<!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
-<style type="text/css">
-table {
-	border: 1px solid black;
-	margin: 0 auto;
-}
 
-td {
-	width: 150px;
-	border: 1px solid black;
-	text-align: center;
-}
-div{
-	text-align: center;
-}
-h2{
-	text-align: center;
-}
-</style>
+<link href="../../back-assets/css/empStyle.css" rel="stylesheet">
+
+<link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
+<!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
@@ -94,10 +80,10 @@ h2{
 				<td>${empVO.empName}</td>
 				<td>${empVO.empAccount}</td>
 				<td>${empVO.empPassword}</td>
-				<td>${empVO.empPermission}</td>
+				<td>${(empVO.empPermission == "0") ? "正常" : "停權"}</td>
 				<td>${empVO.empPhone}</td>
 				<td>${empVO.empAddress}</td>
-				<td>${empVO.jobID}</td>
+				<td>${empVO.jobVO.jobName}</td>
 				<td>${empVO.empHiredate}</td>
 			</tr>
 		</table>

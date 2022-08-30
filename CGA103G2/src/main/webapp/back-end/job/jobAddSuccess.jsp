@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*,com.emp.model.EmpVO"%>
+<%@ page import="java.util.*,com.job.model.JobVO"%>
 
 <%
-EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+JobVO jobVO = (JobVO) request.getAttribute("jobVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
 
 <!DOCTYPE html>
@@ -32,24 +32,10 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 <link href="../../back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
-<style type="text/css">
-table {
-	border: 1px solid black;
-	margin: 0 auto;
-}
 
-td {
-	width: 150px;
-	border: 1px solid black;
-	text-align: center;
-}
-div{
-	text-align: center;
-}
-h2{
-	text-align: center;
-}
-</style>
+<link href="../../back-assets/css/empStyle.css" rel="stylesheet">
+
+<link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -79,24 +65,10 @@ h2{
 		<h2	> 新增成功!</h2>
 		<table>
 			<tr>
-				<th>員工姓名</th>
-				<th>帳號</th>
-				<th>密碼</th>
-				<th>權限</th>
-				<th>員工電話</th>
-				<th>員工地址</th>
-				<th>員工職位</th>
-				<th>員工入職日期</th>
+				<th>職位 : </th>
 			</tr>
 			<tr>
-				<td>${empVO.empName}</td>
-				<td>${empVO.empAccount}</td>
-				<td>${empVO.empPassword}</td>
-				<td>${empVO.empPermission}</td>
-				<td>${empVO.empPhone}</td>
-				<td>${empVO.empAddress}</td>
-				<td>${empVO.jobVO.jobName}</td>
-				<td>${empVO.empHiredate}</td>
+				<td>${jobVO.jobName}</td>
 			</tr>
 		</table>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->

@@ -34,6 +34,8 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
 <!-- empStyle -->
 <link href="../../back-assets/css/empStyle.css" rel="stylesheet">
+
+<link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -85,23 +87,27 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 				</tr>
 				<tr>
 					<th>帳號</th>
-					<td><input type="text" name="empAccount" value="${param.empAccount}" required /></td>
+					<td><input type="text" name="empAccount" value="${param.empAccount}" readonly="readonly" /></td>
 				</tr>
 				<tr>
 					<th>密碼</th>
-					<td><input type="text" name="empPassword" value="${param.empPassword}" required /></td>
+					<td><input type="text" name="empPassword" value="${param.empPassword}"/></td>
 				</tr>
 				<tr>
 					<th>權限</th>
-					<td><input type="text" name="empPermission" value="${param.empPermission}" required /></td>
+					<td><select name="empPermission">
+					<option value="0" ${(param.empPermission== "0") ? 'selected' : '' }>正常</option>
+					<option value="1" ${(param.empPermission== "1") ? 'selected' : '' }>停權</option>						
+					</select>
+				  </td>
 				</tr>
 				<tr>
 					<th>員工電話</th>
-					<td><input type="text" name="empPhone" value="${param.empPhone}" required /></td>
+					<td><input type="text" name="empPhone" value="${param.empPhone}"/></td>
 				</tr>
 				<tr>
 					<th>員工地址</th>
-					<td><input type="text" name="empAddress" value="${param.empAddress}" required /></td>
+					<td><input type="text" name="empAddress" value="${param.empAddress}"/></td>
 				</tr>
 				<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
 				<tr>

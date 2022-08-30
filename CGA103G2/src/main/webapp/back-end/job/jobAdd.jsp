@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+\<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*,com.emp.controller.EmpServlet"%>
 
@@ -30,6 +30,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
 <!-- empStyle -->
 <link href="../../back-assets/css/empStyle.css" rel="stylesheet">
+
+<link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -58,12 +60,13 @@
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2	>新增員工</h2>
+		<h2	>新增職位</h2>
+		<hr>
 		<FORM METHOD="post" ACTION="JobServlet.do" name="form1">
 			<p>${errorMsgs.jobName}</p>
 			<table>
 				<tr>
-					<td>新增職位 : (例 : 管理員)</td>
+					<td>新增職位:</td>
 					<td><input type="TEXT" name="jobName" size="45" value="${param.jobName}" /></td>
 				</tr>
 			</table>

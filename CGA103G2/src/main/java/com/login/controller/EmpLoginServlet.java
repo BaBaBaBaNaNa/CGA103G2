@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.emp.model.EmpDAO;
+import com.login.model.EmpLoginDAO;
 import com.login.model.EmpLoginVO;
 
 @WebServlet("/EmpLoginServlet.do")
@@ -44,7 +44,7 @@ public class EmpLoginServlet extends HttpServlet {
 		EmpLoginVO admin = new EmpLoginVO();
 		admin.setEmpAccount(empAccount);
 		admin.setEmpPassword(empPassword);
-		EmpDAO dao = new EmpDAO();
+		EmpLoginDAO dao = new EmpLoginDAO();
 		boolean res = dao.loginAdmin(admin);
 
 		if (res) {

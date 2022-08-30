@@ -10,29 +10,15 @@ th{
 }
 
 td {
-	width: 300px;
+	width: 150px;
 	border: 2px solid DarkGray;
 	text-align: center;
 }
-input{
-	width: 300px;
-}
-select{
-	width: 300px;
-}
-div{
+
+h2 {
 	text-align: center;
 }
-h2{
-	text-align: center;
-}
-p{
-	text-align: center;
-	color:red;
-}
-b{
-	text-align: center;
-}
+
 .bd-placeholder-img {
 	font-size: 1.125rem;
 	text-anchor: middle;

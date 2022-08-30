@@ -32,76 +32,7 @@
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath}/favicon.ico">
 
-
-<style type="text/css">
-table {
-	border: 1px solid black;
-	margin: 0 auto;
-}
-
-td {
-	width: 150px;
-	border: 1px solid black;
-	text-align: center;
-}
-div{
-	text-align: center;
-}
-h2{
-	text-align: center;
-}
-
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-}
-
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-
-.b-example-divider {
-	height: 3rem;
-	background-color: rgba(0, 0, 0, .1);
-	border: solid rgba(0, 0, 0, .15);
-	border-width: 1px 0;
-	box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-}
-
-.b-example-vr {
-	flex-shrink: 0;
-	width: 1.5rem;
-	height: 100vh;
-}
-
-.bi {
-	vertical-align: -.125em;
-	fill: currentColor;
-}
-
-.nav-scroller {
-	position: relative;
-	z-index: 2;
-	height: 2.75rem;
-	overflow-y: hidden;
-}
-
-.nav-scroller .nav {
-	display: flex;
-	flex-wrap: nowrap;
-	padding-bottom: 1rem;
-	margin-top: -1px;
-	overflow-x: auto;
-	text-align: center;
-	white-space: nowrap;
-	-webkit-overflow-scrolling: touch;
-}
-</style>
+<link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -129,35 +60,45 @@ h2{
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2	>查看職務</h2>
-			<table>
+		<h2>查看職務</h2>
+		<hr>
+		<div style="text-align: center;">
+			<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/job/JobServlet.do">
+				<b>輸入職稱編號 (如1):</b> 
+				<input type="text" name="jobID" value="${param.jobID}"><font color=red>${errorMsgs.jobID}</font> 
+				<input type="hidden" name="action" value="getOne_For_Display"> 
+				<input type="submit" value="送出">
+			</FORM>
+    	</div>
+  		<hr>
+		<table>
+			<tr>
+				<th>職務編號</th>
+				<th>職務名稱</th>
+			</tr>
+			<div style="text-align: center;">
+			<%@ include file="../../back-end/tool/page1.file"%>
+			</div>
+			<c:forEach var="jobVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				<tr>
-					<th>職務編號</th>
-					<th>職務名稱</th>
+					<td>${jobVO.jobID}</td>
+					<td>${jobVO.jobName}</td>
+					<td>
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/job/JobServlet.do" style="margin-bottom: 0px;">
+							<input type="submit" value="修改"> <input type="hidden" name="jobID" value="${jobVO.jobID}"> <input type="hidden" name="action" value="getOne_For_Update">
+						</FORM>
+					</td>
+					<td>
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/job/JobServlet.do" style="margin-bottom: 0px;">
+							<input type="submit" value="刪除"> <input type="hidden" name="jobID" value="${jobVO.jobID}"> <input type="hidden" name="action" value="delete">
+						</FORM>
+					</td>
 				</tr>
-				<%@ include file="../../back-end/tool/page1.file"%>
-				<c:forEach var="jobVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-					<tr>
-						<td>${jobVO.jobID}</td>
-						<td>${jobVO.jobName}</td>
-						<td>
-							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/job/job.do" style="margin-bottom: 0px;">
-								<input type="submit" value="修改">
-								<input type="hidden" name="job_id" value="${jobVO.jobID}">
-								<input type="hidden" name="action" value="getOne_For_Update">
-							</FORM>
-						</td>
-						<td>
-							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/job/job.do" style="margin-bottom: 0px;">
-								<input type="submit" value="刪除">
-								<input type="hidden" name="job_id" value="${empVO.empID}">
-								<input type="hidden" name="action" value="delete">
-							</FORM>
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
-			<%@ include file="../../back-end/tool/page2.file"%>
+			</c:forEach>
+		</table>
+		<div style="text-align: center;">
+		<%@ include file="../../back-end/tool/page2.file"%>
+		</div>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 
 	</main>

@@ -32,24 +32,9 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 <link href="../../back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
-<style type="text/css">
-table {
-	border: 1px solid black;
-	margin: 0 auto;
-}
-
-td {
-	width: 150px;
-	border: 1px solid black;
-	text-align: center;
-}
-div{
-	text-align: center;
-}
-h2{
-	text-align: center;
-}
-</style>
+<!-- empStyle -->
+<link href="../../back-assets/css/empStyle.css" rel="stylesheet">
+<link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 

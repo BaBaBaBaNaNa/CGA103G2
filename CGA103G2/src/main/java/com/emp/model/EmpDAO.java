@@ -24,41 +24,15 @@ public class EmpDAO implements EmpDAO_interface {
 		}
 	}
 	
-	private static final String LOGIN_STMT = "SELECT empAccount,empPassword from Employee where empAccount = ? and empPassword = ?";
 	private static final String INSERT_STMT = "INSERT INTO Employee ( empName, empAccount,empPassword,empPermission,empPhone,empAddress,jobID,empHiredate) VALUES (?,?,?,?,?,?,?,?);";
 	private static final String GET_ALL_STMT = "SELECT empID, empName, empAccount,empPassword,empPermission,empPhone,empAddress,jobID,empHiredate FROM Employee order by empID";
 	private static final String GET_ONE_STMT = "SELECT empID, empName, empAccount,empPassword,empPermission,empPhone,empAddress,jobID,empHiredate FROM Employee where empID = ?";
 	private static final String DELETE = "DELETE FROM Employee where empID = ?";
 	private static final String UPDATE = "UPDATE Employee set empName=?, empAccount=?, empPassword=?, empPermission=?, empPhone=?, empAddress=?, jobID=?,empHiredate=? where empID = ?";
 	
-	@Override
-	public boolean loginAdmin(EmpLoginVO admin) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
-		int res = 0;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(LOGIN_STMT);
-			
-			pstmt.setString(1, admin.getEmpAccount());
-			pstmt.setString(2, admin.getEmpPassword());
-
-			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
-				res = 1;
-			}
-			pstmt.close();
-			rs.close();
-			if (res == 1) {
-				return true;
-			}
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-		}
-		return false;
-	}
+	private static final String CheckRepeatEmpAccount= "SELECT empAccount FROM Employee where empAccount = ?";
 	
+	//----- ----- ----- 新增db Employee單筆資料 start ----- ----- -----
 	@Override
 	public void insert(EmpVO empVO) {
 		Connection con = null;
@@ -100,7 +74,9 @@ public class EmpDAO implements EmpDAO_interface {
 		}
 
 	}
-
+	//----- ----- ----- 新增db Employee單筆資料 end ----- ----- -----
+	
+	//----- ----- ----- 修改db Employee單筆資料 start ----- ----- -----
 	@Override
 	public void update(EmpVO empVO) {
 
@@ -143,7 +119,9 @@ public class EmpDAO implements EmpDAO_interface {
 		}
 
 	}
-
+	//----- ----- ----- 修改db Employee單筆資料 end ----- ----- -----
+	
+	//----- ----- ----- 刪除db Employee單筆資料 start ----- ----- -----
 	@Override
 	public void delete(Integer empID) {
 
@@ -179,7 +157,9 @@ public class EmpDAO implements EmpDAO_interface {
 		}
 
 	}
-
+	//----- ----- ----- 刪除db Employee單筆資料 end ----- ----- -----
+	
+	//----- ----- ----- 查詢db Employee單筆資料 使用empID start ----- ----- -----
 	@Override
 	public EmpVO findByPrimaryKey(Integer empID) {
 
@@ -236,7 +216,9 @@ public class EmpDAO implements EmpDAO_interface {
 		}
 		return empVO;
 	}
-
+	//----- ----- ----- 查詢db Employee單筆資料 使用empID end ----- ----- -----
+	
+	//----- ----- ----- 查詢db Employee全部資料 start ----- ----- -----
 	@Override
 	public List<EmpVO> getAll() {
 		List<EmpVO> list = new ArrayList<EmpVO>();
@@ -294,5 +276,59 @@ public class EmpDAO implements EmpDAO_interface {
 		}
 		return list;
 	}
+	//----- ----- ----- 查詢db Employee全部資料 end ----- ----- -----
+	
+	//----- ----- ----- 查詢db Employee 的empAccount start ----- ----- -----
+	@Override
+	public EmpVO checkRepeatEmpAccount(String empAccount) {
 
+		EmpVO empVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(CheckRepeatEmpAccount);
+			
+			pstmt.setString(1, empAccount);
+			
+			rs = pstmt.executeQuery();
+//			System.out.println(rs);
+			while (rs.next()) {
+				// empVo 也稱為 Domain objects
+				empVO = new EmpVO();
+
+				empVO.setEmpName(rs.getString("empAccount"));
+
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return empVO;
+	}
+	//----- ----- ----- 查詢db Employee 的empAccount end ----- ----- -----
 }

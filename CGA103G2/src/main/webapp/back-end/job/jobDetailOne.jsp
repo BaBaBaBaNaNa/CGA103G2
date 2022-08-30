@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*,com.emp.controller.EmpServlet"%>
-<%@ page import="com.emp.model.*"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.job.model.*"%>
 
 <%
-EmpVO empVO = (EmpVO) request.getAttribute("empVO");
+JobService jobSvc = new JobService();
+List<JobVO> list = jobSvc.getAll();
+pageContext.setAttribute("list", list);
 %>
 
 <!DOCTYPE html>
@@ -15,6 +17,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>異鄉人-義式餐酒館-管理中心</title>
+
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
 <!-- Iconic Fonts -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -33,8 +36,6 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 <link href="../../back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
-<!-- empStyle -->
-<link href="../../back-assets/css/empStyle.css" rel="stylesheet">
 
 <link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
@@ -54,8 +55,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
-	<main class="body-content">
-
+	<main class="body-content"padding-right: 0 px;>
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
 		<%@ include file="../../back-end/tool/UpSideBar.file"%>
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
@@ -65,71 +65,36 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2	>新增員工</h2>
-		<hr>
-		<FORM METHOD="post" ACTION="EmpServlet.do" name="form1">
-			<p>${errorMsgs.empName} ${errorMsgs.empAccount} ${errorMsgs.empPassword} ${errorMsgs.empPermission} ${errorMsgs.empPhone} ${errorMsgs.empAddress} ${errorMsgs.jobID}</p>
-			<table>
-				<tr>
-					<td>ID:</td>
-					<td><input type="hidden"  name="empID" size="45" value="${param.empID}"readonly/>
-				<tr>
-					<td>員工姓名:</td>
-					<td><input type="TEXT" name="empName" size="45" value="${param.empName}" /></td>
-				</tr>
-				<tr>
-					<td>帳號:</td>
-					<td><input type="TEXT" name="empAccount" size="45" value="${param.empAccount}" /></td>
-				</tr>
-				<tr>
-					<td>密碼:</td>
-					<td><input type="TEXT" name="empPassword" size="45" value="${param.empPassword}" /></td>
-				</tr>
-				<tr>
-					<td>權限:</td>
-					<td><select name="empPermission">
-									<option value="0" ${(param.empPermission== "0") ? 'selected' : '' }>正常</option>
-									<option value="1" ${(param.empPermission== "1") ? 'selected' : '' }>停權</option>						
-							  </select>
-				  </td>
-				</tr>
-				<tr>
-					<td>電話:</td>
-					<td><input type="TEXT" name="empPhone" size="45" value="${param.empPhone}" /></td>
-				</tr>
-				<tr>
-					<td>地址:</td>
-					<td><input type="TEXT" name="empAddress" size="45" value="${param.empAddress}" /></td>
-				</tr>
-				<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
-				<tr>
-					<td>職位:<font color=red><b>*</b></font></td>
-					<td>
-						<select size="1" name="jobID">
-							<c:forEach var="jobVO" items="${jobSvc.all}">
-								<option value="${jobVO.jobID}" ${(param.jobID==jobVO.jobID)?'selected':'' } >${jobVO.jobName}
-							</c:forEach>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>雇用日期:</td>
-					<td><input name="empHiredate" id="f_date1" type="text"  value="${param.empHibernate}"></td>
-				</tr>
-
-			</table>
-			<br> 
-			<div>
-			<input type="hidden" name="action" value="insert"> 
-			<input type="submit" value="送出新增">
-			</div>
-		</FORM>
+		<h2>查看員工訊息</h2>
+		<table>
+			<tr>
+				<th>員工編號</th>
+				<th>員工姓名</th>
+				<th>修改</th>
+				<th>刪除</th>
+			</tr>
+			<tr>
+				<td>${jobVO.jobID}</td>
+				<td>${jobVO.jobName}</td>
+				<td>
+					<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/job/JobServlet.do" style="margin-bottom: 0px;">
+						<input type="submit" value="修改"> <input type="hidden" name="jobID" value="${jobVO.jobID}"> <input type="hidden" name="action" value="getOne_For_Update">
+					</FORM>
+				</td>
+				<td>
+					<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/job/JobServlet.do" style="margin-bottom: 0px;">
+							<input type="submit" value="刪除"> <input type="hidden" name="jobID" value="${jobVO.jobID}"> <input type="hidden" name="action" value="delete">
+					</FORM>
+				</td>
+			</tr>
+		</table>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
+	<!-- Global Required Scripts Start -->
 	<script src="../../back-assets/js/jquery-3.3.1.min.js"></script>
 	<script src="../../back-assets/js/popper.min.js"></script>
 	<script src="../../back-assets/js/bootstrap.min.js"></script>
@@ -147,46 +112,6 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 	<!-- Settings -->
 	<script src="../../back-assets/js/settings.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
-	
-	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
-	<%
-	java.sql.Date empHiredate = null;
-	try {
-		empHiredate = empVO.getEmpHiredate();
-	} catch (Exception e) {
-		empHiredate = new java.sql.Date(System.currentTimeMillis());
-	}
-	%>
-
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.css" />
-	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.js"></script>
-	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-	<style>
-.xdsoft_datetimepicker .xdsoft_datepicker {
-	width: 300px; /* width:  300px; */
-}
-
-.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-	height: 151px; /* height:  151px; */
-}
-</style>
-
-	<script type="text/javascript">
-    $.datetimepicker.setLocale('zh');
-    $('#f_date1').datetimepicker({
-       theme: '',              //theme: 'dark',
-       timepicker:false,       //timepicker:true,
-       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-	   value: '<%=empHiredate%>', // value:   new Date(),
-		//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-		//startDate:	            '2017/07/10',  // 起始日
-		//minDate:               '-1970-01-01', // 去除今日(不含)之前
-		//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-		});
-	</script>
-
 </body>
 
 </html>
