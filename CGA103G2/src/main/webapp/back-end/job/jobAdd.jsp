@@ -1,4 +1,4 @@
-\<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*,com.emp.controller.EmpServlet"%>
 
@@ -60,22 +60,21 @@
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2	>新增職位</h2>
-		<hr>
-		<FORM METHOD="post" ACTION="JobServlet.do" name="form1">
-			<p>${errorMsgs.jobName}</p>
-			<table>
-				<tr>
-					<td>新增職位:</td>
-					<td><input type="TEXT" name="jobName" size="45" value="${param.jobName}" /></td>
-				</tr>
-			</table>
-			<br> 
-			<div>
-			<input type="hidden" name="action" value="insert"> 
-			<input type="submit" value="送出新增">
-			</div>
-		</FORM>
+		<div class="ms-auth-form">
+			<form METHOD="post" ACTION="JobServlet.do" name="form1">
+				<h3>新增職位</h3>
+				<div class="form-row">
+					<div class="col-md-12 ">
+						<p>${errorMsgs.jobName}</p>
+						<div class="input-group">
+							<input type="text" name="jobName" value="${param.jobName}" class="form-control" placeholder="請輸入職稱">
+						</div>
+					</div>
+				</div>
+				<input type="hidden" name="action" value="insert">
+				<input class="btn btn-primary mt-4 d-block w-100" type="submit" value="送出新增">
+			</form>
+		</div>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 
 	</main>

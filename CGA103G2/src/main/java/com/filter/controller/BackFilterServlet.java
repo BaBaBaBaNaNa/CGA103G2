@@ -8,45 +8,53 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpFilter;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-//@WebFilter(filterName = "letgo",
-//						urlPatterns = {"/back-end/*","/front-end/*"}
-//)
-public class BackFilterServlet implements Filter {
-//定義一個存放放行資源路徑的陣列
-	private static String[] paths;
+/****************************************
+ * 限制 "/back-end/*" 底下的頁面
+ ****************************************/
+@WebFilter(	filterName = "BackFilterServlet",
+			servletNames = {"/BackFilterServlet"},
+			urlPatterns = {"/back-end/*"}
+)
+public class BackFilterServlet extends HttpFilter implements Filter {
 
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-		HttpServletRequest request = (HttpServletRequest) req;
-		HttpServletResponse response = (HttpServletResponse) res;
-		// 獲取資源URI路徑
-		String path = request.getServletPath();
-		for (int i = 0; i < paths.length; i++) {
-			// 如果當前請求的URI路徑是要放行的資源中的一個，放行
-			if (path.startsWith(paths[i])) {
-				chain.doFilter(request, response);
-				return;// 放行之後返回，避免程式繼續執行，往下面執行是攔截的程式碼
-			}
-		}
-		System.out.println("1");
-		// 判斷使用者是否已經登入，如果登入則放行資源，否則重定向到登入介面
-		String name = (String) request.getSession().getAttribute("name");
-		// 如果name為空，則證明使用者沒有登入過，跳轉到登入介面
-		if (name == null) {
-			request.getSession().setAttribute("error", "尚未登入，請登入");
-			response.sendRedirect("../../BackLogin.jsp");
+	public BackFilterServlet() {
+		super();
+	}
+
+	public void destroy() {
+	}
+
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
+		//讀取的網頁路徑
+		String uri = req.getRequestURI();
+//		System.out.println(uri);
+		//判斷是否有登入,用session判斷
+		String LoginSessionName = (String) req.getSession().getAttribute("LoginSessionName");
+		System.out.println(LoginSessionName);
+		//以下判斷,當結尾不是"BackLogin.jsp" 或是 "EmpLoginServlet.do" 時 ,而且沒有取得Session登入狀態
+		if( !(uri.endsWith("BackLogin.jsp") || uri.endsWith("EmpLoginServlet.do")) && LoginSessionName == null){
+//			request.getRequestDispatcher("../../BackLogin.jsp").forward(request, response);
+			//跳轉頁面至後台登入頁面
+			req.getSession().setAttribute("error", "尚未登入，請登入");
+			res.sendRedirect("../../BackLogin.jsp");
 			return;
-		}
-		// 剩下的情況為已登入，放行
-		chain.doFilter(request, response);
+		}else{
+			//回傳正常頁面
+			chain.doFilter(request, response);
+		};
+		
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
-
-		String initParameter = fConfig.getInitParameter("letgo");
-		paths = initParameter.split(";");
+		
 	}
+
 }

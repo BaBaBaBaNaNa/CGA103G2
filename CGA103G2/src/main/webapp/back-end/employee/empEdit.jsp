@@ -62,76 +62,77 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2	>修改員工訊息</h2>
-
-		<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-			<font style="color: red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
-		</c:if>
-
-		<form action="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" name="form1" method="post">
-			<table>
-
-				<tr>
-					<th>員工編號</th>
-					<td><input type="text" name=" empID" value="${param.empID}" readonly="readonly" /></td>
-				</tr>
-				<tr>
-					<th>員工姓名</th>
-					<td><input type="text" name="empName" value="${param.empName}" required /></td>
-				</tr>
-				<tr>
-					<th>帳號</th>
-					<td><input type="text" name="empAccount" value="${param.empAccount}" readonly="readonly" /></td>
-				</tr>
-				<tr>
-					<th>密碼</th>
-					<td><input type="text" name="empPassword" value="${param.empPassword}"/></td>
-				</tr>
-				<tr>
-					<th>權限</th>
-					<td><select name="empPermission">
-					<option value="0" ${(param.empPermission== "0") ? 'selected' : '' }>正常</option>
-					<option value="1" ${(param.empPermission== "1") ? 'selected' : '' }>停權</option>						
-					</select>
-				  </td>
-				</tr>
-				<tr>
-					<th>員工電話</th>
-					<td><input type="text" name="empPhone" value="${param.empPhone}"/></td>
-				</tr>
-				<tr>
-					<th>員工地址</th>
-					<td><input type="text" name="empAddress" value="${param.empAddress}"/></td>
-				</tr>
-				<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
-				<tr>
-					<th>員工職位:<font color=red><b>*</b></font></th>
-					<td>
-						<select size="1" name="jobID">
+		<div class="ms-auth-form">
+			<form METHOD="post" ACTION="EmpServlet.do" name="form1">
+				<h3>修改員工帳號</h3>
+				<div class="form-row">
+					<div class="col-md-12 ">
+						<label>員工編號</label>
+						<div class="input-group">
+							<input type="text" name="empID" value="${param.empID}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>員工姓名</label><p>${errorMsgs.empName}</p>
+						<div class="input-group">
+							<input type="text" name="empName" value="${param.empName}" class="form-control" placeholder="請輸入員工姓名">
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>帳號:[請輸入Email信箱]</label><p>${errorMsgs.empAccount}</p>
+						<div class="input-group">
+							<input type="text" name="empAccount" value="${param.empAccount}" class="form-control" placeholder="example@gmail.com" readonly="readonly">
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>密碼</label><p>${errorMsgs.empPassword}</p>
+						<div class="input-group">
+						<input type="password" name="empPassword" value="${param.empPassword}" class="form-control" placeholder="請輸入密碼">
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>權限</label>
+						<div class="input-group">
+						<select name="empPermission" class="form-control">
+							<option value="0" ${(param.empPermission== "0") ? 'selected' : '' }>正常</option>
+							<option value="1" ${(param.empPermission== "1") ? 'selected' : '' }>停權</option>
+						</select>
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>電話</label><p>${errorMsgs.empPhone}</p>
+						<div class="input-group">
+						<input type="text" name="empPhone" value="${param.empPhone}" class="form-control" placeholder="請輸入員工電話">
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>地址</label><p>${errorMsgs.empAddress}</p>
+						<div class="input-group">
+						<input type="text" name="empAddress" value="${param.empAddress}" class="form-control" placeholder="請輸入員工地址">
+						</div>
+					</div>
+					<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
+					<div class="col-md-12 ">
+						<label>職位</label>
+						<div class="input-group">
+						<select size="1" name="jobID" class="form-control">
 							<c:forEach var="jobVO" items="${jobSvc.all}">
-								<option value="${jobVO.jobID}" ${(param.jobID==jobVO.jobID)?'selected':'' } >${jobVO.jobName}
+								<option value="${jobVO.jobID}" ${(param.jobID==jobVO.jobID)?'selected':'' }>${jobVO.jobName}
 							</c:forEach>
 						</select>
-					</td>
-				</tr>
-				<tr>
-					<th>員工到職日</th>
-					<td><input type="text" id="f_date1" name="empHiredate" value="${param.empHiredate}" required /></td>
-				</tr>
-			</table>
-			<br>
-			<div>
-			<input type="hidden" name="action" value="update">
-			<input type="hidden" name="empID" value="${param.empID}">
-			<input type="submit" value="送出修改">
-			</div>
-		</form>
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>雇用日期</label><p>${errorMsgs.empHiredate}</p>
+						<div class="input-group">
+						<input type="text" name="empHiredate" id="f_date1" value="${param.empHiredate}" class="form-control">
+						</div>
+					</div>
+				</div>
+				<input type="hidden" name="action" value="update">
+				<input class="btn btn-primary mt-4 d-block w-100" type="submit" value="送出修改">
+			</form>
+		</div>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->

@@ -108,7 +108,7 @@ public class EmpServlet extends HttpServlet {
 			//--- 員工姓名 ---
 			String empName = req.getParameter("empName");
 //			String empNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,20}$";
-			String empNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{2,20}$";
+			String empNameReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9)]{2,20}$";
 			if (empName == null || empName.trim().length() == 0) {
 				errorMsgs.put("empName","員工姓名請勿空白");
 			} else if (!empName.trim().matches(empNameReg)) { // 以下練習正則(規)表示式(regular-expression)
@@ -117,7 +117,7 @@ public class EmpServlet extends HttpServlet {
 
 			//--- 帳號 ---
 			String empAccount = req.getParameter("empAccount").trim();
-			String empAccountReg = "^[(a-zA-Z0-9)]{5,30}$";
+			String empAccountReg = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 			//----- 此段去查詢資料庫是否有重複的empAccount員工帳號資料 start-----
 			EmpService empSvc = new EmpService();
 			EmpVO empVO = empSvc.getEmpAccountCheck(empAccount); 
@@ -125,7 +125,7 @@ public class EmpServlet extends HttpServlet {
 			if (empAccount == null || empAccount.trim().length() == 0) {
 				errorMsgs.put("empAccount","  帳號請勿空白");
 			} else if (!empAccount.trim().matches(empAccountReg)) {
-				errorMsgs.put("empAccount","  帳號只能是中、英文字母、數字 , 且長度必需在5到30之間");
+				errorMsgs.put("empAccount","  帳號只能是 examle@gmail.com 信箱形式");
 			}else if(empVO != null) {
 				errorMsgs.put("empAccount","  帳號重複,請重新輸入");
 			}
@@ -153,6 +153,12 @@ public class EmpServlet extends HttpServlet {
 			
 			//地址
 			String empAddress = req.getParameter("empAddress").trim();
+			
+//			String empAddress1 = req.getParameter("empAddress1");
+			System.out.println(req.getParameter("county"));
+			System.out.println(req.getParameter("district"));
+			System.out.println(req.getParameter("zipcode"));
+			
 			String empAddressReg = "^[(\\u4e00-\\u9fa5)]{1,100}$";
 			if (empAddress == null || empAddress.trim().length() == 0) {
 				errorMsgs.put("empAddress","  地址請勿空白");

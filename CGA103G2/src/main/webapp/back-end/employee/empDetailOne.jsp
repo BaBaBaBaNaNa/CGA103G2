@@ -68,17 +68,17 @@ pageContext.setAttribute("list", list);
 		<h2>查看員工訊息</h2>
 		<table>
 			<tr>
-				<th>員工編號</th>
-				<th>員工姓名</th>
-				<th>帳號</th>
-				<th>密碼</th>
-				<th>權限</th>
-				<th>員工電話</th>
-				<th>員工地址</th>
-				<th>員工職位</th>
-				<th>員工入職日期</th>
-				<th>修改</th>
-				<th>刪除</th>
+				<th style="width: 5% ; ">員工<br>編號</th>
+				<th style="width: 7% ;">員工<br>姓名</th>
+				<th style="width: 10% ;">帳號</th>
+				<th style="width: 10% ;">密碼</th>
+				<th style="width: 5% ;">權限</th>
+				<th style="width: 10% ;">員工<br>電話</th>
+				<th>員工<br>地址</th>
+				<th style="width: 10% ;">員工<br>職位</th>
+				<th style="width: 10% ;">員工<br>入職日期</th>
+				<th style="width: 5% ;">修改</th>
+				<th style="width: 5% ;">刪除</th>
 			</tr>
 				<tr>
 					<td>${empVO.empID}</td>

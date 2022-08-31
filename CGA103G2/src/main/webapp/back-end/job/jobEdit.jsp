@@ -52,7 +52,7 @@ JobVO jobVO = (JobVO) request.getAttribute("jobVO"); //EmpServlet.java (Concroll
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
-	<main class="body-content"padding-right: 0 px;>
+	<main class="body-content">
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
 		<%@ include file="../../back-end/tool/UpSideBar.file"%>
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
@@ -62,37 +62,29 @@ JobVO jobVO = (JobVO) request.getAttribute("jobVO"); //EmpServlet.java (Concroll
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2	>修改職稱</h2>
-
-		<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-			<font style="color: red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
-		</c:if>
-
-		<form action="${pageContext.request.contextPath}/back-end/job/JobServlet.do" name="form1" method="post">
-			<table>
-
-				<tr>
-					<th>職位編號</th>
-					<td><input type="text" name=" jobID" value="${param.jobID}" readonly="readonly" /></td>
-				</tr>
-				<tr>
-					<th>職稱</th>
-					<td><input type="text" name="jobName" value="${param.jobName}"/></td>
-				</tr>
-			</table>
-			<br>
-			<div>
-			<input type="hidden" name="action" value="update">
-			<input type="hidden" name="jobID" value="${param.jobID}">
-			<input type="submit" value="送出修改">
-			</div>
-		</form>
+		<div class="ms-auth-form">
+			<form METHOD="post" ACTION="JobServlet.do" name="form1">
+				<h3>修改職位名稱</h3>
+				<div class="form-row">
+					<div class="col-md-12 ">
+						<label>職位編號</label>
+						<div class="input-group">
+							<input type="text" name="jobID" value="${param.jobID}" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>職位名稱</label>
+						<p>${errorMsgs.jobName}</p>
+						<div class="input-group">
+							<input type="text" name="jobName" value="${param.jobName}" class="form-control" placeholder="請輸入職稱">
+						</div>
+					</div>
+				</div>
+				<input type="hidden" name="action" value="update">
+				<input type="hidden" name="jobID" value="${param.jobID}">
+				<input class="btn btn-primary mt-4 d-block w-100" type="submit" value="送出修改">
+			</form>
+		</div>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->

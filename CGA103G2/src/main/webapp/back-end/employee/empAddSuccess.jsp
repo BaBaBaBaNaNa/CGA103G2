@@ -62,26 +62,26 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 		<h2	> 新增成功!</h2>
-		<table>
+		<table class = "dataTable table-striped thead-primary" style="width: 95%">
 			<tr>
-				<th>員工姓名</th>
-				<th>帳號</th>
-				<th>密碼</th>
-				<th>權限</th>
-				<th>員工電話</th>
-				<th>員工地址</th>
-				<th>員工職位</th>
-				<th>員工入職日期</th>
+				<th style="width: 7% ;">員工<br>姓名</th>
+				<th style="width: 10% ;">帳號</th>
+				<th style="width: 10% ;">密碼</th>
+				<th style="width: 5% ;">權限</th>
+				<th style="width: 10% ;">員工<br>電話</th>
+				<th>員工<br>地址</th>
+				<th style="width: 10% ;">員工<br>職位</th>
+				<th style="width: 10% ;">員工<br>入職日期</th>
 			</tr>
 			<tr>
-				<td>${empVO.empName}</td>
-				<td>${empVO.empAccount}</td>
-				<td>${empVO.empPassword}</td>
-				<td>${empVO.empPermission}</td>
-				<td>${empVO.empPhone}</td>
+				<td style="width: 7%">${empVO.empName}</td>
+				<td style="width: 10%">${empVO.empAccount}</td>
+				<td style="width: 10%">${empVO.empPassword}</td>
+				<td style="width: 5%">${(empVO.empPermission == "0") ? "正常" : "停權"}</td>
+				<td style="width: 10%">${empVO.empPhone}</td>
 				<td>${empVO.empAddress}</td>
-				<td>${empVO.jobVO.jobName}</td>
-				<td>${empVO.empHiredate}</td>
+				<td style="width: 10% ; ">${empVO.jobVO.jobName}</td>
+				<td style="width: 10% ; ">${empVO.empHiredate}</td>
 			</tr>
 		</table>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->

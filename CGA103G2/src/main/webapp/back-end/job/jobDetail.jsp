@@ -60,7 +60,7 @@
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2>查看職務</h2>
+		<h2>查看職位</h2>
 		<hr>
 		<div style="text-align: center;">
 			<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/job/JobServlet.do">
@@ -71,10 +71,12 @@
 			</FORM>
     	</div>
   		<hr>
-		<table>
+		<table style="width: 35% ;">
 			<tr>
-				<th>職務編號</th>
-				<th>職務名稱</th>
+				<th style="width: 5% ;">編號</th>
+				<th style="width: 20% ;">職務<br>名稱</th>
+				<th style="width: 5% ;">修改</th>
+				<th style="width: 5% ;">刪除</th>
 			</tr>
 			<div style="text-align: center;">
 			<%@ include file="../../back-end/tool/page1.file"%>
