@@ -10,20 +10,20 @@ import java.util.List;
 
 public class QueuerJDBCDAO implements QueuerDAO_interface{
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "dbc:mysql://localhost:3306/restaurant?serverTimezone=Asia/Taipei";
+	String url = "dbc:mysql://localhost:3306/CGA103G2?serverTimezone=Asia/Taipei";
 	String userid = "dba";
 	String passwd = "0911";
 	
 	private static final String INSERT_STMT =
-			"INSERT INTO queuer (queuer_id, queuer_status, queuer_name, queuer_phone, queuer_no) VALUES (?, ?, ?, ?, ?, ?)";
+			"INSERT INTO queuer (queuerID, queuerStatus, queuerName, queuerPhone, queuerNo) VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE =
-			"UPDATE queuer set queuer_id=?, queuer_status=?, queuer_name=?, queuer_phone=?, queuer_no=? WHERE waiting_id=?";
+			"UPDATE queuer set queuerID=?, queuerStatus=?, queuerName=?, queuerPhone=?, queuerNo=? WHERE queuerID=?";
 	private static final String GET_ALL =
-			"SELECT queued_id, waiting_id, queuer_status, queuer_name, queuer_phone, queuer_no FROM queuer order by queued_id";
+			"SELECT queuerID, waitingID, queuerStatus, queuerName, queuerPhone, queuerNo FROM queuer FROM queuer order by queuerID";
 	private static final String GET_ONE =
-			"SELECT queued_id, waiting_id, queuer_status, queuer_name, queuer_phone, queuer_no FROM queuer where queued_id = ?";
+			"SELECT queuerID, waitingID, queuerStatus, queuerName, queuerPhone, queuerNo FROM queuer where queuerID = ?";
 	private static final String DELETE =
-			"DELETE FROM queuer WHERE queuer_id = ?";
+			"DELETE FROM queuer WHERE queuerID = ?";
 	
 	@Override
 	public void insert(QueuerVO queuerVO) {
@@ -35,12 +35,8 @@ public class QueuerJDBCDAO implements QueuerDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setInt(1, queuerVO.getqueuer_id());
-			pstmt.setInt(2, queuerVO.getwaiting_id());
-			pstmt.setInt(3, queuerVO.getqueuer_status());
-			pstmt.setString(4, queuerVO.getqueuer_name());
-			pstmt.setString(5, queuerVO.getqueuer_phone());
-			pstmt.setInt(6, queuerVO.getqueuer_no());
+			pstmt.setString(1, queuerVO.getQueuerName());
+			pstmt.setString(2, queuerVO.getQueuerPhone());
 			
 			pstmt.executeUpdate();
 			
@@ -68,12 +64,10 @@ public class QueuerJDBCDAO implements QueuerDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 			
-			pstmt.setInt(1, queuerVO.getqueuer_id());
-			pstmt.setInt(2, queuerVO.getwaiting_id());
-			pstmt.setInt(3, queuerVO.getqueuer_status());
-			pstmt.setString(4, queuerVO.getqueuer_name());
-			pstmt.setString(5, queuerVO.getqueuer_phone());
-			pstmt.setInt(6, queuerVO.getqueuer_no());
+			pstmt.setInt(1, queuerVO.getQueuerStatus());
+			pstmt.setString(2, queuerVO.getQueuerName());
+			pstmt.setString(3, queuerVO.getQueuerPhone());
+			pstmt.setInt(4, queuerVO.getQueuerNo());
 			
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -91,7 +85,7 @@ public class QueuerJDBCDAO implements QueuerDAO_interface{
 		}
 	}
 	@Override
-	public void delete(Integer quequer_id) {
+	public void delete(Integer queuerID) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -101,7 +95,7 @@ public class QueuerJDBCDAO implements QueuerDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 			
-			pstmt.setInt(1, quequer_id);
+			pstmt.setInt(1, queuerID);
 			
 			pstmt.executeQuery();
 		} catch (ClassNotFoundException e) {
@@ -131,7 +125,7 @@ public class QueuerJDBCDAO implements QueuerDAO_interface{
 
 	}
 	@Override
-	public QueuerVO findByPrimaryKey(Integer queuer_id) {
+	public QueuerVO findByPrimaryKey(Integer queuerID) {
 		QueuerVO queuerVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -145,12 +139,11 @@ public class QueuerJDBCDAO implements QueuerDAO_interface{
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				queuerVO = new QueuerVO();
-				queuerVO.setqueuer_id(rs.getInt("queuer_id"));
-				queuerVO.setwaiting_id(rs.getInt("waiting_id"));
-				queuerVO.setqueuer_status(rs.getInt("queuer_id"));
-				queuerVO.setqueuer_name(rs.getString("queuer_name"));
-				queuerVO.setqueuer_phone(rs.getString("queuer_phone"));
-				queuerVO.setqueuer_no(rs.getInt("queuer_no"));
+				queuerVO.setQueuerID(rs.getInt("queuerID"));
+				queuerVO.setQueuerStatus(rs.getInt("queuerID"));
+				queuerVO.setQueuerName(rs.getString("queuerName"));
+				queuerVO.setQueuerPhone(rs.getString("queuerPhone"));
+				queuerVO.setQueuerNo(rs.getInt("queuerNo"));
 			}
 
 			// Handle any driver errors
@@ -204,12 +197,11 @@ public class QueuerJDBCDAO implements QueuerDAO_interface{
 			
 			while (rs.next()) {
 				queuerVO = new QueuerVO();
-				queuerVO.setqueuer_id(rs.getInt("queuer_id"));
-				queuerVO.setwaiting_id(rs.getInt("waiting_id"));
-				queuerVO.setqueuer_status(rs.getInt("queuer_id"));
-				queuerVO.setqueuer_name(rs.getString("queuer_name"));
-				queuerVO.setqueuer_phone(rs.getString("queuer_phone"));
-				queuerVO.setqueuer_no(rs.getInt("queuer_no"));
+				queuerVO.setQueuerID(rs.getInt("queuerID"));
+				queuerVO.setQueuerStatus(rs.getInt("queuerStatus"));
+				queuerVO.setQueuerName(rs.getString("queuerName"));
+				queuerVO.setQueuerPhone(rs.getString("queuerPhone"));
+				queuerVO.setQueuerNo(rs.getInt("queuerNo"));
 				
 				list.add(queuerVO);
 			}

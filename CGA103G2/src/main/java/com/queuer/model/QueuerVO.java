@@ -3,52 +3,77 @@ package com.queuer.model;
 import java.io.Serializable;
 
 public class QueuerVO implements Serializable{
-	private Integer queuer_id;
-	private Integer waiting_id;
-	private Integer queuer_status;
-	private String queuer_name;
-	private String queuer_phone;
-	private Integer queuer_no;
+	private Integer queuerID;
+	private Integer waitingID;
+	private Integer queuerStatus;
+	private String queuerName;
+	private String queuerPhone;
+	private Integer queuerNo;
 	
 	
 	public QueuerVO() {
 		super();
 	}
-	public Integer getqueuer_id() {
-		return queuer_id;
+
+
+	public Integer getQueuerID() {
+		return queuerID;
 	}
-	public void setqueuer_id(Integer queuer_id) {
-		this.queuer_id = queuer_id;
+
+
+	public void setQueuerID(Integer queuerID) {
+		this.queuerID = queuerID;
 	}
-	public Integer getwaiting_id() {
-		return waiting_id;
+
+
+	public Integer getWaitingID() {
+		return waitingID;
 	}
-	public void setwaiting_id(Integer waiting_id) {
-		this.waiting_id = waiting_id;
+
+
+	public void setWaitingID(Integer waitingID) {
+		this.waitingID = waitingID;
 	}
-	public Integer getqueuer_status() {
-		return queuer_status;
+
+
+	public Integer getQueuerStatus() {
+		return queuerStatus;
 	}
-	public void setqueuer_status(Integer queuer_status) {
-		this.queuer_status = queuer_status;
+
+
+	public void setQueuerStatus(Integer queuerStatus) {
+		this.queuerStatus = queuerStatus;
 	}
-	public String getqueuer_name() {
-		return queuer_name;
+
+
+	public String getQueuerName() {
+		return queuerName;
 	}
-	public void setqueuer_name(String queuer_name) {
-		this.queuer_name = queuer_name;
+
+
+	public void setQueuerName(String queuerName) {
+		this.queuerName = queuerName;
 	}
-	public String getqueuer_phone() {
-		return queuer_phone;
+
+
+	public String getQueuerPhone() {
+		return queuerPhone;
 	}
-	public void setqueuer_phone(String queuer_phone) {
-		this.queuer_phone = queuer_phone;
+
+
+	public void setQueuerPhone(String queuerPhone) {
+		this.queuerPhone = queuerPhone;
 	}
-	public Integer getqueuer_no() {
-		return queuer_no;
+
+
+	public Integer getQueuerNo() {
+		return queuerNo;
 	}
-	public void setqueuer_no(Integer queuer_no) {
-		this.queuer_no = queuer_no;
+
+
+	public void setQueuerNo(Integer queuerNo) {
+		this.queuerNo = queuerNo;
 	}
+	
 	
 }

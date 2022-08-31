@@ -10,42 +10,36 @@ public class QueuerService {
 		dao = new QueuerDAO();
 	}
 	
-	public QueuerVO addQueuer(Integer queuer_id, Integer queuer_status, String queuer_name, String queuer_phone, Integer queuer_no) {
+	public QueuerVO addQueuer( String queuerName, String queuerPhone) {
 		
 		QueuerVO queuerVO = new QueuerVO();
 		
-		queuerVO.setqueuer_id(queuer_id);
-		queuerVO.setqueuer_status(queuer_status);
-		queuerVO.setqueuer_name(queuer_name);
-		queuerVO.setqueuer_phone(queuer_phone);
-		queuerVO.setqueuer_no(queuer_no);
+		queuerVO.setQueuerName(queuerName);
+		queuerVO.setQueuerPhone(queuerPhone);
 		dao.insert(queuerVO);
 		
 		
 		return queuerVO;
 	}
 	
-	public QueuerVO updatQueuer(Integer queuer_id, Integer queuer_status, String queuer_name, String queuer_phone, Integer queuer_no) {
+	public QueuerVO updateQueuer(Integer queuerStatus, Integer queuerID) {
 		
 		QueuerVO queuerVO = new QueuerVO();
 		
-		queuerVO.setqueuer_id(queuer_id);
-		queuerVO.setqueuer_status(queuer_status);
-		queuerVO.setqueuer_name(queuer_name);
-		queuerVO.setqueuer_phone(queuer_phone);
-		queuerVO.setqueuer_no(queuer_no);
+		queuerVO.setQueuerStatus(queuerStatus);
+		queuerVO.setQueuerID(queuerID);
 		dao.update(queuerVO);
 		
 		
 		return queuerVO;
 	}
 	
-	public void deleteQueuer(Integer queuer_id) {
-		dao.delete(queuer_id);
+	public void deleteQueuer(Integer queuerID) {
+		dao.delete(queuerID);
 	}
 	
-	public QueuerVO getOneQueuer(Integer queuer_id) {
-		return dao.findByPrimaryKey(queuer_id);
+	public QueuerVO getOneQueuer(Integer queuerID) {
+		return dao.findByPrimaryKey(queuerID);
 	}
 	
 	public List<QueuerVO> getAll(){
