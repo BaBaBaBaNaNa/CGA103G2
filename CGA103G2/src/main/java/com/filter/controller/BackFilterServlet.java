@@ -1,6 +1,8 @@
 package com.filter.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -38,18 +40,18 @@ public class BackFilterServlet extends HttpFilter implements Filter {
 //		System.out.println(uri);
 		//判斷是否有登入,用session判斷
 		String LoginSessionName = (String) req.getSession().getAttribute("LoginSessionName");
-		System.out.println(LoginSessionName);
+		System.out.println("登入狀態Session : " + LoginSessionName);
 		//以下判斷,當結尾不是"BackLogin.jsp" 或是 "EmpLoginServlet.do" 時 ,而且沒有取得Session登入狀態
-		if( !(uri.endsWith("BackLogin.jsp") || uri.endsWith("EmpLoginServlet.do")) && LoginSessionName == null){
-//			request.getRequestDispatcher("../../BackLogin.jsp").forward(request, response);
+		if( !(uri.endsWith("BackLogin.jsp") || uri.endsWith("EmpLoginServlet.do")) && (LoginSessionName == null || (LoginSessionName.trim()).length() == 0)){
+//			req.getRequestDispatcher("../../BackLogin.jsp").forward(request, response);
 			//跳轉頁面至後台登入頁面
-			req.getSession().setAttribute("error", "尚未登入，請登入");
 			res.sendRedirect("../../BackLogin.jsp");
 			return;
 		}else{
 			//回傳正常頁面
 			chain.doFilter(request, response);
-		};
+			return;
+		}
 		
 	}
 

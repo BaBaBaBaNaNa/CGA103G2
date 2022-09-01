@@ -1,6 +1,7 @@
 package com.login.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -50,13 +51,13 @@ public class EmpLoginServlet extends HttpServlet {
 		if (res) {
 			request.getSession().setAttribute("LoginSessionName", empAccount);
 			request.getRequestDispatcher("/back-end/index/BackIndex.jsp").forward(request, response);
-//			System.out.println("執行1");
+			System.out.println("登入成功!");
+			return;
 		} else {
-			request.setAttribute("errorMessage", "wrong");
+			request.setAttribute("errorMessage", "帳號或者密碼錯誤");
 			request.getRequestDispatcher("/BackLogin.jsp").forward(request, response);
-			request.getSession().setAttribute("error", "賬號或者密碼錯誤");
-//			response.sendRedirect("login.jsp");
-//			System.out.println("執行2");
+			return;
+//			response.sendRedirect("BackLogin.jsp");
 		}
 	}
 }
