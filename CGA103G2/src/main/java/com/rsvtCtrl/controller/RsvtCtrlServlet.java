@@ -253,7 +253,7 @@ public class RsvtCtrlServlet extends HttpServlet {
 			rsvtCtrlSvc.deleteRsvtCtrl(rsvtCtrlId);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url = "/back-end/reservation_ctrl/listAllRsvt.jsp";
+			String url = "/back-end/reservation_ctrl/reservationCtrl_edit.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}

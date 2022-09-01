@@ -26,6 +26,7 @@
     <link href="front-assets/css/tooplate-crispy-kitchen.css" rel="stylesheet">
 
     <link href="front-assets/css/navbar.css" rel="stylesheet">
+    <link href="front-assets/css/datepicker.css" rel="stylesheet">
     <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -241,44 +242,44 @@
                 <div class="modal-body d-flex flex-column justify-content-center">
                     <div class="booking">
 
-                        <form class="booking-form row" role="form" action="#" method="post">
+                        <form class="booking-form row" role="form" action="RsvtServlet" method="post">
                             <div class="col-lg-6 col-12">
                                 <label for="name" class="form-label">您的名字</label>
 
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Your Name"
+                                <input type="text" name="name" id="name" class="form-control" placeholder="請輸入姓名" pattern="[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,8}"
                                     required>
                             </div>
 
-                            <div class="col-lg-6 col-12">
+                            <!-- <div class="col-lg-6 col-12">
                                 <label for="email" class="form-label">Email</label>
 
                                 <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control"
                                     placeholder="your@email.com" required>
-                            </div>
+                            </div> -->
 
                             <div class="col-lg-6 col-12">
                                 <label for="phone" class="form-label">電話號碼</label>
 
-                                <input type="telephone" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                    class="form-control" placeholder="123-456-7890">
+                                <input type="telephone" name="phone" id="phone" pattern="[0]{1}[9]{1}[0-9]{8}"
+                                    class="form-control" placeholder="請輸入手機" required>
                             </div>
 
                             <div class="col-lg-6 col-12">
                                 <label for="people" class="form-label">訂位人數</label>
 
                                 <input type="text" name="people" id="people" class="form-control"
-                                    placeholder="12 persons">
+                                    placeholder="請輸入人數" autocomplete="off" pattern="\d{1,2}" maxlength="2" required>
                             </div>
 
                             <div class="col-lg-6 col-12">
                                 <label for="date" class="form-label">日期</label>
-
-                                <input type="date" name="date" id="date" value="" class="form-control">
+                                <input type="text" id="dp1" class="datepicker mr-2 form-control" placeholder="選擇日期" name="date" autocomplete="off"><span
+                                    style="display: none">*</span>
                             </div>
 
                             <div class="col-lg-6 col-12">
                                 <label for="time" class="form-label">時間</label>
-
+                                
                                 <select class="form-select form-control" name="time" id="time">
                                     <option value="5" selected>5:00 PM</option>
                                     <option value="6">18:00 PM</option>
@@ -290,15 +291,18 @@
                                     <option value="13">00:00 AM</option>
                                 </select>
                             </div>
+                            <div class="col-lg-6 col-12">
+                            </div>
 
-                            <div class="col-12">
+                            <!-- <div class="col-12">
                                 <label for="message" class="form-label">其他需求:</label>
 
                                 <textarea class="form-control" rows="4" id="message" name="message"
                                     placeholder=""></textarea>
-                            </div>
+                            </div> -->
 
                             <div class="col-lg-4 col-12 ms-auto">
+                            	<input type="hidden" name="action" value="insert">
                                 <button type="submit" class="form-control">送出</button>
                             </div>
                         </form>
@@ -318,7 +322,29 @@
     <script src="front-assets/js/jquery.min.js"></script>
     <script src="front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
     <script src="front-assets/js/custom.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+    <script src="front-assets/js/bootstrap-datepicker.zh-TW.min.js"></script>
+  	
+	<script>
+	$('.datepicker').datepicker({
+        autoclose: true, // 選擇後自動關閉日期選擇器
+        language: 'zh-TW', // 語言切換 中文
+        format: 'yyyy/mm/dd', // 日期格式
+        todayHighlight: true, // 高亮"當天日期"
+        toggleActive: true, // 	點擊選擇，再次點擊取消
+        startDate: new Date(), //開放初始日期 ex=> 
+        // endDate:new Date(),
+        // clearBtn: true, //顯示清除按鈕
+        daysOfWeekDisabled: [3],  //每周隱藏的第幾天  0為周日6為星期六
+        datesDisabled: [ // 特殊日期禁用
+            '2022/10/10',
+            '2022.09.09',
+            '2022.09.10',
+            '2022.09.11'
+        ],
+    });
+	</script>
     <!-- ----- ----- ----- js end ----- ----- ----- -->
 </body>
 

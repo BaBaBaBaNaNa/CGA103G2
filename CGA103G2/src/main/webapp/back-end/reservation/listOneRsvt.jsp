@@ -71,8 +71,8 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); // ¤é´Á
 	</tr>
 	<tr>
 		<td><%=rsvtVO.getRsvtId()%></td>
-		<td><%=rsvtVO.getMemId()%></td>
-		<td><%=rsvtVO.getTableTypeId()%></td>
+		<td><%=rsvtVO.getMemId() == null ? "" : rsvtVO.getMemId()%></td>
+		<td><%=rsvtVO.getTableTypeId() == null ? "" : rsvtVO.getTableTypeId()%></td>
 		<td><%=rsvtVO.getCustomerName()%></td>
 		<td><%=rsvtVO.getCustomerPhone()%></td>
 		<td><%=rsvtVO.getRsvtNum()%></td>

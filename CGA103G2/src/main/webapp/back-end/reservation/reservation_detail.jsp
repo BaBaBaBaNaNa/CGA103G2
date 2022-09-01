@@ -27,6 +27,32 @@
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
+<style>
+.table th,.table td{
+	text-align: center;
+	background-color: white;
+}
+.input_btn {
+	border-radius: 10px;
+	border: none;
+	width: 50px;
+	height: 50px;
+}
+
+.input_btn:active {
+	box-shadow: inset -1px -1px 1px 1 red;
+}
+
+.input_btn:hover {
+	cursor: pointer;
+	background-image: linear-gradient(90deg, #FA748B 0%, #f5a623 100%);
+	color: #fff;
+	box-shadow: 0px 10px 5px -2px rgba(0, 0, 0, 0.3);
+	/*   width: 100px;
+  height: 100px; */
+/* 	transform: scale(1.5); */
+}
+</style>
 </head>
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
@@ -51,7 +77,7 @@
 			<%@ include file="../../back-end/tool/Upicon.file"%>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		
+		<%@ include file="../../back-end/reservation/listAllRsvt.jsp"%>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->

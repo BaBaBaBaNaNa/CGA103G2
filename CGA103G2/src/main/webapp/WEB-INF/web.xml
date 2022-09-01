@@ -9,7 +9,6 @@
 		<welcome-file>FrontIndex.jsp</welcome-file>
 		<welcome-file>BackLogin.jsp</welcome-file>
 	</welcome-file-list>
-<<<<<<< HEAD
 	<resource-ref>
 		<description>DB Connection</description>
 		<res-ref-name>jdbc/cga103g2</res-ref-name>
@@ -29,8 +28,5 @@
 		<url-pattern>/member/mem.do</url-pattern>
 	</servlet-mapping>
 	<!-- 會員 stop -->
-=======
-	<!-- 登入 start -->
 
->>>>>>> refs/heads/Joe
 </web-app>

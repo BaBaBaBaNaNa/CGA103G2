@@ -41,7 +41,7 @@
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
 	
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
-	<main class="body-content"padding-right: 0 px;>
+	<main class="body-content" padding-right:0 px; z-index:0>
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
 			<%@ include file="../../back-end/tool/UpSideBar.file"%>
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
@@ -51,9 +51,10 @@
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
+		
 <%-- 	        <%@ include file="${pageContext.request.contextPath}/back-end/tool/picture01.file"%> --%>
 <pre>
-		<%@ include file="../../back-end/tool/picture02.file"%> --%>
+		<%@ include file="../../back-end/tool/picture02.file"%>
 </pre>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
@@ -61,6 +62,7 @@
 	
 	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
 	<!-- Global Required Scripts Start -->
+	<script src="${pageContext.request.contextPath}/back-assets/js/rsvtCtrl.js"></script>
 	<script src="${pageContext.request.contextPath}/back-assets/js/jquery-3.3.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/back-assets/js/popper.min.js"></script>
 	<script src="${pageContext.request.contextPath}/back-assets/js/bootstrap.min.js"></script>
