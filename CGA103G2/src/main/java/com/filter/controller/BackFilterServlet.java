@@ -38,9 +38,15 @@ public class BackFilterServlet extends HttpFilter implements Filter {
 		//讀取的網頁路徑
 		String uri = req.getRequestURI();
 //		System.out.println(uri);
-		//判斷是否有登入,用session判斷
+		//判斷是否有登入,用session有無存入LoginSessionName判斷
+		String getSessionID =	((HttpServletRequest) request).getRequestedSessionId();
 		String LoginSessionName = (String) req.getSession().getAttribute("LoginSessionName");
-		System.out.println("登入狀態Session : " + LoginSessionName);
+		String LoginSessionID = (String) req.getSession().getAttribute("LoginSessionID");
+		
+//		測試登入狀態
+//		System.out.println("SessionID : " + getSessionID);
+//		System.out.println("登入狀態Session : " + LoginSessionName);
+		
 		//以下判斷,當結尾不是"BackLogin.jsp" 或是 "EmpLoginServlet.do" 時 ,而且沒有取得Session登入狀態
 		if( !(uri.endsWith("BackLogin.jsp") || uri.endsWith("EmpLoginServlet.do")) && (LoginSessionName == null || (LoginSessionName.trim()).length() == 0)){
 //			req.getRequestDispatcher("../../BackLogin.jsp").forward(request, response);

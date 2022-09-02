@@ -67,7 +67,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 				<h3>修改員工帳號</h3>
 				<div class="form-row">
 					<div class="col-md-12 ">
-						<label>員工編號</label>
+						<label>員工編號 [不可修改]</label>
 						<div class="input-group">
 							<input type="text" name="empID" value="${param.empID}" class="form-control" readonly="readonly">
 						</div>
@@ -79,7 +79,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 						</div>
 					</div>
 					<div class="col-md-12 ">
-						<label>帳號:[請輸入Email信箱]</label><p>${errorMsgs.empAccount}</p>
+						<label>帳號 [不可修改]</label><p>${errorMsgs.empAccount}</p>
 						<div class="input-group">
 							<input type="text" name="empAccount" value="${param.empAccount}" class="form-control" placeholder="example@gmail.com" readonly="readonly">
 						</div>

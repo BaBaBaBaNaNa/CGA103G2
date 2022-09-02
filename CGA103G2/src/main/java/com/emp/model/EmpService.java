@@ -91,4 +91,9 @@ public class EmpService {
 	public EmpVO getEmpAccountCheck(String empAccount) {
 		return dao.checkRepeatEmpAccount(empAccount);
 	}
+	
+	//查詢員工自己的資料
+	public EmpVO getOwnEmp(String empAccount) {
+		return dao.findByEmpAccount(empAccount);
+	}
 }

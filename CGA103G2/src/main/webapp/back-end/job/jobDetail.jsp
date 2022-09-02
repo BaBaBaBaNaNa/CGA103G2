@@ -92,7 +92,9 @@
 					</td>
 					<td>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/job/JobServlet.do" style="margin-bottom: 0px;">
-							<input type="submit" value="刪除"> <input type="hidden" name="jobID" value="${jobVO.jobID}"> <input type="hidden" name="action" value="delete">
+							<input type="submit" value="刪除" disabled="disabled">
+							<input type="hidden" name="jobID" value="${jobVO.jobID}">
+							<input type="hidden" name="action" value="delete">
 						</FORM>
 					</td>
 				</tr>

@@ -3,6 +3,10 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.emp.model.*"%>
 
+<%
+EmpVO empVO = (EmpVO) request.getAttribute("empVO");
+%>
+
 <jsp:useBean id="list" scope="session" type="java.util.List<EmpVO>" />
 
 <!DOCTYPE html>
@@ -85,11 +89,8 @@
        		<b>輸入員工姓名:</b>
       		<input type="text" name="empName" value="周杰倫"><br>
        
-      		<b>輸入員工職位:</b>
-      		<input type="text" name="jobName" value="管理員"><br>
-    
        		<b>輸入員工職位:</b>
-       		<select size="1" name="jobName1" >
+       		<select size="1" name="jobID" >
           		<option value="">
          		<c:forEach var="jobVO" items="${jobSvc.all}" > 
           			<option value="${jobVO.jobID}">${jobVO.jobName}
@@ -142,7 +143,9 @@
 					</td>
 					<td style="width: 5% ; height:100px">
 						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;">
-							<input type="submit" value="刪除"> <input type="hidden" name="empID" value="${empVO.empID}"> <input type="hidden" name="action" value="delete">
+							<input type="submit" value="刪除" disabled="disabled">
+							<input type="hidden" name="empID" value="${empVO.empID}">
+							<input type="hidden" name="action" value="delete">
 						</FORM>
 					</td>
 				</tr>
@@ -175,6 +178,45 @@
 	<!-- Settings -->
 	<script src="../../back-assets/js/settings.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
+	
+	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
+	<%
+	java.sql.Date empHiredate = null;
+	try {
+		empHiredate = empVO.getEmpHiredate();
+	} catch (Exception e) {
+		empHiredate = new java.sql.Date(System.currentTimeMillis());
+	}
+	%>
+
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.css" />
+	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+	<style>
+		.xdsoft_datetimepicker .xdsoft_datepicker {
+			width: 300px; /* width:  300px; */
+		}
+
+		.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+			height: 151px; /* height:  151px; */
+		}
+	</style>
+
+	<script type="text/javascript">
+    $.datetimepicker.setLocale('zh');
+    $('#f_date1').datetimepicker({
+       theme: '',              //theme: 'dark',
+       timepicker:false,       //timepicker:true,
+       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+	   value: '<%=empHiredate%>', // value:   new Date(),
+		//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+		//startDate:	            '2017/07/10',  // 起始日
+		//minDate:               '-1970-01-01', // 去除今日(不含)之前
+		//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+		});
+	</script>
 </body>
 
 </html>

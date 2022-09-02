@@ -26,10 +26,14 @@ public class EmpLogoutServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//把LoginSessionName 的Session 清空,以作為登出方式
-		request.getSession().setAttribute("LoginSessionName", null);
+		//把 Session 失效,以作為登出方式
+		request.getSession().invalidate();
 		request.setAttribute("errorMessage", "登出成功");
-		System.out.println("登出成功!");
+		
+//		測試登出狀態
+//		System.out.println("SessionId : "+request.getRequestedSessionId() + " 已失效");
+//		System.out.println("登出成功!");
+		
 		request.getRequestDispatcher("/BackLogin.jsp").forward(request, response);
 //		response.sendRedirect("BackLogin.jsp");
 		return;

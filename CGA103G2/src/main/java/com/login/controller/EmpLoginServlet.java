@@ -48,10 +48,15 @@ public class EmpLoginServlet extends HttpServlet {
 		EmpLoginDAO dao = new EmpLoginDAO();
 		boolean res = dao.loginAdmin(admin);
 		// 登入驗證，如果驗證成功，則設定一個屬性名為“LoginSessionName”值為使用者名稱的session，用於BackFilterServlet驗證是否登入過
+		// 驗證的話還是會用SessionId去做驗證
 		if (res) {
 			request.getSession().setAttribute("LoginSessionName", empAccount);
 			request.getRequestDispatcher("/back-end/index/BackIndex.jsp").forward(request, response);
-			System.out.println("登入成功!");
+			
+			//測試登入狀態
+//			System.out.println("SessionId : "+request.getRequestedSessionId());
+//			System.out.println("登入成功!");
+			
 			return;
 		} else {
 			request.setAttribute("errorMessage", "帳號或者密碼錯誤");

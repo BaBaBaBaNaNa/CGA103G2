@@ -32,6 +32,8 @@ public class EmpDAO implements EmpDAO_interface {
 	
 	private static final String CheckRepeatEmpAccount= "SELECT empAccount FROM Employee where empAccount = ?";
 	
+	private static final String GetOwnSTMT= "SELECT * FROM Employee where empAccount = ?";
+	
 	//----- ----- ----- 新增db Employee單筆資料 start ----- ----- -----
 	@Override
 	public void insert(EmpVO empVO) {
@@ -397,4 +399,63 @@ public class EmpDAO implements EmpDAO_interface {
 		return list;
 	}
 	//----- ----- ----- 複合查詢db Employee end ----- ----- -----
+	
+	//----- ----- ----- 查找 db Employee 個人資料 start ----- ----- -----
+	@Override
+	public EmpVO findByEmpAccount(String empAccount) {
+
+		EmpVO empVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GetOwnSTMT);
+			
+			pstmt.setString(1, empAccount);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				empVO = new EmpVO();
+
+				empVO.setEmpID(rs.getInt("empID"));
+				empVO.setEmpName(rs.getString("empName"));
+				empVO.setEmpAccount(rs.getString("empAccount"));
+				empVO.setEmpPassword(rs.getString("empPassword"));
+				empVO.setEmpPermission(rs.getInt("empPermission"));
+				empVO.setEmpPhone(rs.getString("empPhone"));
+				empVO.setEmpAddress(rs.getString("empAddress"));
+				empVO.setJobID(rs.getInt("JobID"));
+				empVO.setEmpHiredate( rs.getDate("empHiredate"));
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return empVO;
+	}
+	//----- ----- ----- 查找 db Employee 個人資料 end ----- ----- -----
 }

@@ -379,5 +379,61 @@ public class EmpServlet extends HttpServlet {
 				successView.forward(req, res);
 		}
 		// ----- ----- ----- getEmpListCompositeQuery end ----- ----- -----
+		
+		// ----- ----- ----- getEmpPersonalData start ----- ----- -----
+		if ("getEmpPersonalData".equals(action)) { // 來自select_page.jsp的請求
+
+			Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+			String str =  (String) req.getSession().getAttribute("LoginSessionName");
+			//--- 判斷輸入是否是空值 ---
+			if (str == null || (str.trim()).length() == 0) {
+				errorMsgs.put("empID","請輸入員工編號");  
+			}
+			
+			//--- 當有錯誤資訊時 ---
+			if (!errorMsgs.isEmpty()) {
+				System.out.println("0");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/employee/empDetail.jsp");
+				failureView.forward(req, res);
+				return;
+			}
+
+			String empAccount = null;
+			try {
+				empAccount = str;
+			} catch (Exception e) {
+				errorMsgs.put("empAccount","帳號格式不正確");
+			}
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				System.out.println("1");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/employee/empDetail.jsp");
+				failureView.forward(req, res);
+				return;// 程式中斷
+			}
+
+			/*************************** 2.開始查詢資料 *****************************************/
+			EmpService empSvc = new EmpService();
+			EmpVO empVO = empSvc.getOwnEmp(empAccount);
+			if (empVO == null) {
+				errorMsgs.put("empID","查無資料");
+			}
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				System.out.println("2");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/employee/empDetail.jsp");
+				failureView.forward(req, res);
+				return;// 程式中斷
+			}
+			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+			req.setAttribute("empVO", empVO); // 資料庫取出的empVO物件,存入req
+			String url = "/back-end/employee/empDetailOwn.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); 
+			successView.forward(req, res);
+		}
+		// ----- ----- ----- getEmpPersonalData end ----- ----- -----
 	}
 }

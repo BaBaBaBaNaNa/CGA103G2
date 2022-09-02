@@ -15,14 +15,19 @@ public class EmpCompositeQuery {
 
 		String aCondition = null;
 
-		if ("empID".equals(columnName) || "empName".equals(columnName) || "jobName".equals(columnName) || "empHiredate".equals(columnName)) // 用於其他
+		 // 用於其他
+		if ("empID".equals(columnName) || "jobID".equals(columnName)) {
 			aCondition = columnName + "=" + value;
-		else if ("empName".equals(columnName) || "jobName".equals(columnName)) // 用於varchar
+		}
+		// 用於varchar
+		else if ("empName".equals(columnName) || "jobName".equals(columnName)) {
 			aCondition = columnName + " like '%" + value + "%'";
-		else if ("empHiredate".equals(columnName))                          // 用於date
+		}
+		// 用於date
+		else if ("empHiredate".equals(columnName)){
 			aCondition = columnName + "=" + "'"+ value +"'";                          //for 其它DB  的 date
 //		    aCondition = "to_char(" + columnName + ",'yyyy-mm-dd')='" + value + "'";  //for Oracle 的 date
-		
+		}   
 		return aCondition + " ";
 	}
 
@@ -52,18 +57,19 @@ public class EmpCompositeQuery {
 
 		// 配合 req.getParameterMap()方法 回傳 java.util.Map<java.lang.String,java.lang.String[]> 之測試
 		Map<String, String[]> map = new TreeMap<String, String[]>();
-		map.put("empno", new String[] { "7001" });
-		map.put("ename", new String[] { "KING" });
-		map.put("job", new String[] { "PRESIDENT" });
-		map.put("hiredate", new String[] { "1981-11-17" });
-		map.put("sal", new String[] { "5000.5" });
-		map.put("comm", new String[] { "0.0" });
-		map.put("deptno", new String[] { "10" });
-		map.put("action", new String[] { "getXXX" }); // 注意Map裡面會含有action的key
+		map.put("empID", new String[] { "2" });
+		map.put("empName", new String[] { "KING" });
+//		map.put("empAccount", new String[] { "PRESIDENT" });
+//		map.put("empPassword", new String[] { "1981-11-17" });
+//		map.put("empPermission", new String[] { "5000.5" });
+//		map.put("empPhone", new String[] { "0.0" });
+//		map.put("empAddress", new String[] { "10" });
+//		map.put("jobID", new String[] { "getXXX" });
+//		map.put("empHiredate", new String[] { "getXXX" });
 
-		String finalSQL = "select * from emp2 "
+		String finalSQL = "select * from employee "
 				          + EmpCompositeQuery.getWhereCondition(map)
-				          + "order by empno";
+				          + "order by empID";
 		System.out.println("●●finalSQL = " + finalSQL);
 
 	}

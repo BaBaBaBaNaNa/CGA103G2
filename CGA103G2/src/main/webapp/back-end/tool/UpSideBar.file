@@ -46,7 +46,10 @@
 							</h6>
 						</li>
 						<li class="dropdown-divider"></li>
-						<li class="ms-dropdown-list"><a class="media fs-14 p-2" href=""><span><i class="flaticon-user mr-2"></i>個人基本資料</span></a><a class="media fs-14 p-2" href=""><span><i class="flaticon-mail mr-2"></i>信箱</span><span class="badge badge-pill badge-info">3</span></a><a class="media fs-14 p-2" href=""><span><i class="flaticon-gear mr-2"></i>帳號設定</span></a></li>
+						<li class="ms-dropdown-list"><a class="media fs-14 p-2" href="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do?action=getEmpPersonalData"><span><i class="flaticon-user mr-2"></i>個人基本資料</span></a>
+													 <a class="media fs-14 p-2" href=""><span><i class="flaticon-mail mr-2"></i>信箱</span><span class="badge badge-pill badge-info">3</span></a>
+													 <a class="media fs-14 p-2" href=""><span><i class="flaticon-gear mr-2"></i>帳號設定</span></a>
+					    </li>
 						<li class="dropdown-divider"></li>
 						<li class="dropdown-menu-footer"><a class="media fs-14 p-2" href="${pageContext.request.contextPath}/EmpLogoutServlet.do"><span><i class="flaticon-shut-down mr-2"></i>Logout</span></a></li>
 					</ul></li>
