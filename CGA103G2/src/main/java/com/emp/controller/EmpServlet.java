@@ -355,5 +355,29 @@ public class EmpServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 		// ----- ----- ----- delete end ----- ----- -----
+		
+		// ----- ----- ----- getEmpCompositeQuery start ----- ----- -----
+		if ("getEmpListCompositeQuery".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+				
+				/***************************1.將輸入資料轉為Map**********************************/ 
+				//採用Map<String,String[]> getParameterMap()的方法 
+				//注意:an immutable java.util.Map 
+				Map<String, String[]> map = req.getParameterMap();
+				
+				/***************************2.開始複合查詢***************************************/
+				EmpService empSvc = new EmpService();
+				List<EmpVO> list  = empSvc.getAll(map);
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				req.setAttribute("getEmpListCompositeQuery", list); // 資料庫取出的list物件,存入request
+				RequestDispatcher successView = req.getRequestDispatcher("/back-end/employee/empDetailCQ.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+				successView.forward(req, res);
+		}
+		// ----- ----- ----- getEmpListCompositeQuery end ----- ----- -----
 	}
 }

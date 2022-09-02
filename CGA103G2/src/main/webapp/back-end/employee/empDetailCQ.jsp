@@ -3,11 +3,9 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.emp.model.*"%>
 
-<%
-EmpService empSvc = new EmpService();
-List<EmpVO> list = empSvc.getAll();
-pageContext.setAttribute("list", list);
-%>
+
+<jsp:useBean id="getEmpListCompositeQuery" scope="request" type="java.util.List<EmpVO>" />
+<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
 
 <!DOCTYPE html>
 <html lang="zh-tw">
@@ -38,6 +36,7 @@ pageContext.setAttribute("list", list);
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
 
 <link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
+
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -55,7 +54,7 @@ pageContext.setAttribute("list", list);
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
-	<main class="body-content">
+	<main class="body-content"padding-right: 0 px;>
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
 		<%@ include file="../../back-end/tool/UpSideBar.file"%>
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
@@ -66,7 +65,8 @@ pageContext.setAttribute("list", list);
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 		<h2>查看員工訊息</h2>
-		<table>
+  		<hr>
+		<table class = "dataTable table-striped thead-primary" style="width: 95%">
 			<tr>
 				<th style="width: 5% ; ">員工<br>編號</th>
 				<th style="width: 7% ;">員工<br>姓名</th>
@@ -80,29 +80,39 @@ pageContext.setAttribute("list", list);
 				<th style="width: 5% ;">修改</th>
 				<th style="width: 5% ;">刪除</th>
 			</tr>
+			<div style="text-align: center">
+			<%@ include file="../../back-end/employee/EmpCQpage1.file"%>
+			</div>
+			<c:forEach var="empVO" items="${getEmpListCompositeQuery}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				<tr>
-					<td>${empVO.empID}</td>
-					<td>${empVO.empName}</td>
-					<td>${empVO.empAccount}</td>
-					<td>${empVO.empPassword}</td>
-					<td>${(empVO.empPermission == "0") ? "正常" : "停權"}</td>
-					<td>${empVO.empPhone}</td>
+					<td style="width: 5% ;">${empVO.empID}</td>
+					<td style="width: 7%">${empVO.empName}</td>
+					<td style="width: 10%">${empVO.empAccount}</td>
+					<td style="width: 10%">${empVO.empPassword}</td>
+					<td style="width: 5%">${(empVO.empPermission == "0") ? "正常" : "停權"}</td>
+					<td style="width: 10%">${empVO.empPhone}</td>
 					<td>${empVO.empAddress}</td>
-					<td>${empVO.jobVO.jobName}</td>
+					<td style="width: 10% ; ">${empVO.jobVO.jobName}</td>
 <%-- 					<td>${empVO.emp_job}-[${empVO.jobVO.job_name}]</td> --%>
-					<td>${empVO.empHiredate}</td>
-					<td>
+					<td style="width: 10% ; ">${empVO.empHiredate}</td>
+					<td style="width: 5% ; ">
 						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;">
-							<input type="submit" value="修改"> <input type="hidden" name="empID" value="${empVO.empID}"> <input type="hidden" name="action" value="getOne_For_Update">
+							<input type="submit" value="修改"> <input type="hidden" name="empID" value="${empVO.empID}"> 
+							<input type="hidden" name="action" value="getOne_For_Update">
 						</FORM>
 					</td>
-					<td>
+					<td style="width: 5% ; height:100px">
 						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;">
-							<input type="submit" value="刪除"> <input type="hidden" name="empID" value="${empVO.empID}"> <input type="hidden" name="action" value="delete">
+							<input type="submit" value="刪除"> <input type="hidden" name="empID" value="${empVO.empID}"> 
+							<input type="hidden" name="action" value="delete">
 						</FORM>
 					</td>
 				</tr>
+			</c:forEach>
 		</table>
+		<div style="text-align: center;">
+		<%@ include file="../../back-end/employee/EmpCQpage2.file"%>
+		</div>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 
 	</main>

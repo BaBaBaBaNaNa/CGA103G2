@@ -331,4 +331,70 @@ public class EmpDAO implements EmpDAO_interface {
 		return empVO;
 	}
 	//----- ----- ----- 查詢db Employee 的empAccount end ----- ----- -----
+	
+	//----- ----- ----- 複合查詢db Employee Start ----- ----- -----
+	@Override
+	public List<EmpVO> getAll(Map<String, String[]> map) {
+		List<EmpVO> list = new ArrayList<EmpVO>();
+		EmpVO empVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			con = ds.getConnection();
+			String finalSQL = "select * from employee "
+		          + EmpCompositeQuery.getWhereCondition(map)
+		          + "order by empID";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				empVO = new EmpVO();
+				
+				empVO.setEmpID(rs.getInt("empID"));
+				empVO.setEmpName(rs.getString("empName"));
+				empVO.setEmpAccount(rs.getString("empAccount"));
+				empVO.setEmpPassword(rs.getString("empPassword"));
+				empVO.setEmpPermission(rs.getInt("empPermission"));
+				empVO.setEmpPhone(rs.getString("empPhone"));
+				empVO.setEmpAddress(rs.getString("empAddress"));
+				empVO.setJobID(rs.getInt("JobID"));
+				empVO.setEmpHiredate( rs.getDate("empHiredate"));
+				
+				list.add(empVO); // Store the row in the List
+			}
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	//----- ----- ----- 複合查詢db Employee end ----- ----- -----
 }

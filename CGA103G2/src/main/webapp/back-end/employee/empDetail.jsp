@@ -63,6 +63,7 @@
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 		<h2>查看員工訊息</h2>
+		<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
 		<hr>
 		<div style="text-align: center;">
     		<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" >
@@ -72,6 +73,38 @@
         		<input type="submit" value="送出">
     		</FORM>
     	</div>
+  		<hr>
+  		<div style="text-align: center;">
+  			<div style= "margin:0 auto;">
+  			<div>
+  		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/employee/EmpServlet.do" name="form1">
+        	<b><font color=blue>萬用複合查詢:</font></b> <br>
+        	<b>輸入員工編號:</b>
+        	<input type="text" name="empID" value="1"><br>
+           
+       		<b>輸入員工姓名:</b>
+      		<input type="text" name="empName" value="周杰倫"><br>
+       
+      		<b>輸入員工職位:</b>
+      		<input type="text" name="jobName" value="管理員"><br>
+    
+       		<b>輸入員工職位:</b>
+       		<select size="1" name="jobName1" >
+          		<option value="">
+         		<c:forEach var="jobVO" items="${jobSvc.all}" > 
+          			<option value="${jobVO.jobID}">${jobVO.jobName}
+         		</c:forEach>   
+       		</select><br>
+           
+       		<b>雇用日期:</b>
+	   		<input name="empHiredate" id="f_date1" type="text">
+		        
+        	<input type="submit" value="送出">
+        	<input type="hidden" name="action" value="getEmpListCompositeQuery">
+        	</div>
+     	</FORM>
+     	</div>
+     	</div>
   		<hr>
 		<table class = "dataTable table-striped thead-primary" style="width: 95%">
 			<tr>

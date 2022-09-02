@@ -1,6 +1,7 @@
 package com.emp.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.job.model.JobVO;
 
@@ -79,6 +80,11 @@ public class EmpService {
 	//查詢所有員工資料
 	public List<EmpVO> getAll() {
 		return dao.getAll();
+	}
+	
+	//複合查詢所有員工資料
+	public List<EmpVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
 	}
 	
 	//使用empAccount找是否有職位
