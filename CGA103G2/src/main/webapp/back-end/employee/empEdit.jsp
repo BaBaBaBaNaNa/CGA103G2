@@ -65,30 +65,35 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 		<div class="ms-auth-form">
 			<form METHOD="post" ACTION="EmpServlet.do" name="form1">
 				<h3>修改員工帳號</h3>
+				<hr>
 				<div class="form-row">
 					<div class="col-md-12 ">
 						<label>員工編號 [不可修改]</label>
 						<div class="input-group">
 							<input type="text" name="empID" value="${param.empID}" class="form-control" readonly="readonly">
 						</div>
+						<hr>
 					</div>
 					<div class="col-md-12 ">
 						<label>員工姓名</label><p>${errorMsgs.empName}</p>
 						<div class="input-group">
 							<input type="text" name="empName" value="${param.empName}" class="form-control" placeholder="請輸入員工姓名">
 						</div>
+						<hr>
 					</div>
 					<div class="col-md-12 ">
 						<label>帳號 [不可修改]</label><p>${errorMsgs.empAccount}</p>
 						<div class="input-group">
 							<input type="text" name="empAccount" value="${param.empAccount}" class="form-control" placeholder="example@gmail.com" readonly="readonly">
 						</div>
+						<hr>
 					</div>
 					<div class="col-md-12 ">
 						<label>密碼</label><p>${errorMsgs.empPassword}</p>
 						<div class="input-group">
 						<input type="password" name="empPassword" value="${param.empPassword}" class="form-control" placeholder="請輸入密碼">
 						</div>
+						<hr>
 					</div>
 					<div class="col-md-12 ">
 						<label>權限</label>
@@ -98,18 +103,21 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 							<option value="1" ${(param.empPermission== "1") ? 'selected' : '' }>停權</option>
 						</select>
 						</div>
+						<hr>
 					</div>
 					<div class="col-md-12 ">
 						<label>電話</label><p>${errorMsgs.empPhone}</p>
 						<div class="input-group">
 						<input type="text" name="empPhone" value="${param.empPhone}" class="form-control" placeholder="請輸入員工電話">
 						</div>
+						<hr>
 					</div>
 					<div class="col-md-12 ">
 						<label>地址</label><p>${errorMsgs.empAddress}</p>
 						<div class="input-group">
 						<input type="text" name="empAddress" value="${param.empAddress}" class="form-control" placeholder="請輸入員工地址">
 						</div>
+						<hr>
 					</div>
 					<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
 					<div class="col-md-12 ">
@@ -121,14 +129,15 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 							</c:forEach>
 						</select>
 						</div>
+						<hr>
 					</div>
 					<div class="col-md-12 ">
 						<label>雇用日期</label><p>${errorMsgs.empHiredate}</p>
 						<div class="input-group">
 						<input type="text" name="empHiredate" id="f_date1" value="${param.empHiredate}" class="form-control">
 						</div>
+						<hr>
 					</div>
-				</div>
 				<input type="hidden" name="action" value="update">
 				<input class="btn btn-primary mt-4 d-block w-100" type="submit" value="送出修改">
 			</form>

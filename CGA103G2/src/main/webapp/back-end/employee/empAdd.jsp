@@ -70,7 +70,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 		<div class="ms-auth-form">
 			<form METHOD="post" ACTION="EmpServlet.do" name="form1">
 				<h3>新增員工帳號</h3>
-				<p>請輸入員工個人資料</p>
+
 				<div class="form-row">
 					<div class="col-md-12 ">
 						<label>員工姓名</label><p>${errorMsgs.empName}</p>
