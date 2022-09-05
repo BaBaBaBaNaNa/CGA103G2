@@ -37,75 +37,7 @@ pageContext.setAttribute("list", list);
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
 
-
-<style type="text/css">
-table {
-	border: 1px solid black;
-	margin: 0 auto;
-}
-
-td {
-	width: 150px;
-	border: 1px solid black;
-	text-align: center;
-}
-
-h2 {
-	text-align: center;
-}
-
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-}
-
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-
-.b-example-divider {
-	height: 3rem;
-	background-color: rgba(0, 0, 0, .1);
-	border: solid rgba(0, 0, 0, .15);
-	border-width: 1px 0;
-	box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em
-		rgba(0, 0, 0, .15);
-}
-
-.b-example-vr {
-	flex-shrink: 0;
-	width: 1.5rem;
-	height: 100vh;
-}
-
-.bi {
-	vertical-align: -.125em;
-	fill: currentColor;
-}
-
-.nav-scroller {
-	position: relative;
-	z-index: 2;
-	height: 2.75rem;
-	overflow-y: hidden;
-}
-
-.nav-scroller .nav {
-	display: flex;
-	flex-wrap: nowrap;
-	padding-bottom: 1rem;
-	margin-top: -1px;
-	overflow-x: auto;
-	text-align: center;
-	white-space: nowrap;
-	-webkit-overflow-scrolling: touch;
-}
-</style>
+<link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -123,7 +55,7 @@ h2 {
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
-	<main class="body-content"padding-right: 0 px;>
+	<main class="body-content">
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
 		<%@ include file="../../back-end/tool/UpSideBar.file"%>
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
@@ -136,24 +68,24 @@ h2 {
 		<h2>查看員工訊息</h2>
 		<table>
 			<tr>
-				<th>員工編號</th>
-				<th>員工姓名</th>
-				<th>帳號</th>
-				<th>密碼</th>
-				<th>權限</th>
-				<th>員工電話</th>
-				<th>員工地址</th>
-				<th>員工職位</th>
-				<th>員工入職日期</th>
-				<th>修改</th>
-				<th>刪除</th>
+				<th style="width: 5% ; ">員工<br>編號</th>
+				<th style="width: 7% ;">員工<br>姓名</th>
+				<th style="width: 10% ;">帳號</th>
+				<th style="width: 10% ;">密碼</th>
+				<th style="width: 5% ;">權限</th>
+				<th style="width: 10% ;">員工<br>電話</th>
+				<th>員工<br>地址</th>
+				<th style="width: 10% ;">員工<br>職位</th>
+				<th style="width: 10% ;">員工<br>入職日期</th>
+				<th style="width: 5% ;">修改</th>
+				<th style="width: 5% ;">刪除</th>
 			</tr>
 				<tr>
 					<td>${empVO.empID}</td>
 					<td>${empVO.empName}</td>
 					<td>${empVO.empAccount}</td>
 					<td>${empVO.empPassword}</td>
-					<td>${empVO.empPermission}</td>
+					<td>${(empVO.empPermission == "0") ? "正常" : "停權"}</td>
 					<td>${empVO.empPhone}</td>
 					<td>${empVO.empAddress}</td>
 					<td>${empVO.jobVO.jobName}</td>

@@ -6,7 +6,7 @@
     <%
   MemVO memVO = (MemVO) request.getAttribute("memVO");
 %>
---<%= memVO==null %>--${memVO.mem_id}--
+
 <!DOCTYPE html>
 <html>
 <head>

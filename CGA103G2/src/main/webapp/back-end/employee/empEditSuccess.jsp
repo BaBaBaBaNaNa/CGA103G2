@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.mem.model.*"%>
+<%@ page import="java.util.*,com.emp.model.EmpVO"%>
 
-<jsp:useBean id="list" scope="session" type="java.util.List<MemVO>" />
+<%
+EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+%>
+
 <!DOCTYPE html>
 <html lang="zh-tw">
 
@@ -12,7 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>義鄉人-義式餐酒館-管理中心</title>
+<title>異鄉人-義式餐酒館-管理中心</title>
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
 <!-- Iconic Fonts -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -31,6 +32,10 @@
 <link href="../../back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
+
+<link href="../../back-assets/css/empStyle.css" rel="stylesheet">
+
+<link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -38,7 +43,7 @@
 	<!-- ----- ----- ----- 進入網站的讀取圈圈 start ----- ----- ----- -->
 	<%@ include file="../../back-end/tool/ReadingCircle.file"%>
 	<!-- ----- ----- ----- 進入網站的讀取圈圈 end ----- ----- ----- -->
-	
+	<!-- Overlays -->
 	<div class="ms-aside-overlay ms-overlay-left ms-toggler" data-target="#ms-side-nav" data-toggle="slideLeft"></div>
 	<div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"></div>
 
@@ -49,65 +54,39 @@
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
 	<main class="body-content"padding-right: 0 px;>
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
-			<%@ include file="../../back-end/tool/UpSideBar.file"%>
+		<%@ include file="../../back-end/tool/UpSideBar.file"%>
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
-		
-		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
-			<%@ include file="../../back-end/tool/Upicon.file"%>
-		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
-		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<div>
-			<table>
-				<tr>
-			<th>會員編號</th>
-		<th>會員姓名</th>
-		<th>會員帳號</th>
-		<th>會員性別</th>
-		<th>會員生日</th>
-		<th>會員地址</th>
-		<th>會員電話</th>
-		<th>會員信箱</th>
-				</tr>
-				<%@ include file="../../back-end/tool/page1.file"%>
-				<c:forEach var="memVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-					<tr>
-						<td>${memVO.memId}</td>
-						<td>${memVO.memName}</td>
-						<td>${memVO.memAccount}</td>
-						<td>${memVO.memPassword}</td>
-						<td>${memVO.memPermission}</td>
-						<td>${memVO.memGender}</td>
-						<td>${memVO.memPhone}</td>
-						<td>${memVO.memAddress}</td>
-						<td>${memVO.memEmail}</td>
-						<td>${memVO.memBirthday}</td>
-						<td>
-							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/member/mem.do" style="margin-bottom: 0px;">
-								<input type="submit" value="修改">
-								<input type="hidden" name="memId" value="${memVo.memId}">
-								<input type="hidden" name="action" value="getOne_For_Update">
-							</FORM>
-						</td>
-						<td>
-							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/member/mem.do" style="margin-bottom: 0px;">
-								<input type="submit" value="刪除">
-								<input type="hidden" name="memId" value="${memVO.memId}">
-								<input type="hidden" name="action" value="delete">
-							</FORM>
-						</td>
-<!-- 						<td> -->
-<%-- 							<form METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/employee/emp.do"> --%>
-<%-- 								<a onclick="return checkconfirm()" href="${pageContext.request.contextPath}/back-end/employee/emp.do?action=delete&emp_id=${empVO.emp_id}">删除</a>| <a href="${pageContext.request.contextPath}/back-end/employee/emp.do?action=update&emp_id=${empVO.emp_id}">修改</a> --%>
-<!-- 							</form> -->
-<!-- 						</td> -->
-					</tr>
-				</c:forEach>
-			</table>
-			<%@ include file="../../back-end/tool/page2.file"%>
-		</div>
-		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 
-	</main>
+		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
+		<%@ include file="../../back-end/tool/Upicon.file"%>
+		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
+
+		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
+		<h2	> 修改成功!</h2>
+		<table class = "dataTable table-striped thead-primary" style="width: 95%">
+			<tr>
+				<th style="width: 5% ; ">員工<br>編號</th>
+				<th style="width: 7% ;">員工<br>姓名</th>
+				<th style="width: 10% ;">帳號</th>
+				<th style="width: 10% ;">密碼</th>
+				<th style="width: 5% ;">權限</th>
+				<th style="width: 10% ;">員工<br>電話</th>
+				<th>員工<br>地址</th>
+				<th style="width: 10% ;">員工<br>職位</th>
+				<th style="width: 10% ;">員工<br>入職日期</th>
+			</tr>
+			<tr>
+					<td style="width: 5% ;">${empVO.empID}</td>
+					<td style="width: 7%">${empVO.empName}</td>
+					<td style="width: 10%">${empVO.empAccount}</td>
+					<td style="width: 10%">${empVO.empPassword}</td>
+					<td style="width: 5%">${(empVO.empPermission == "0") ? "正常" : "停權"}</td>
+					<td style="width: 10%">${empVO.empPhone}</td>
+					<td>${empVO.empAddress}</td>
+					<td style="width: 10% ; ">${empVO.jobVO.jobName}</td>
+					<td style="width: 10% ; ">${empVO.empHiredate}</td>
+			</tr>
+		</table>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->

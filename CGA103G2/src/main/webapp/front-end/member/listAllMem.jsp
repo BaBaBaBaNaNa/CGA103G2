@@ -77,7 +77,7 @@
 	<c:forEach var="memVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
-			<td>${memVO.memId}</td>
+			<td>${memVO.memID}</td>
 			<td>${memVO.memName}</td>
 			<td>${memVO.memAccount}</td>
 			<td>${memVO.memGender}</td>
@@ -88,13 +88,13 @@
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/mem.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
-			     <input type="hidden" name="memId"  value="${memVO.memId}">
+			     <input type="hidden" name="memID"  value="${memVO.memID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/mem.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
-			     <input type="hidden" name="memId"  value="${memVO.memId}">
+			     <input type="hidden" name="memID"  value="${memVO.memID}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>

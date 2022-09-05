@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*,com.emp.model.EmpVO"%>
-
-<%
-EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-%>
+<%@ page import="java.util.*,com.emp.controller.EmpServlet"%>
 
 <!DOCTYPE html>
 <html lang="zh-tw">
@@ -32,32 +28,19 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 <link href="../../back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
-<style type="text/css">
-table {
-	border: 1px solid black;
-	margin: 0 auto;
-}
+<!-- empStyle -->
+<link href="../../back-assets/css/empStyle.css" rel="stylesheet">
 
-td {
-	width: 150px;
-	border: 1px solid black;
-	text-align: center;
-}
-div{
-	text-align: center;
-}
-h2{
-	text-align: center;
-}
-</style>
+<link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
+
 	<!-- ----- ----- ----- 進入網站的讀取圈圈 start ----- ----- ----- -->
 	<%@ include file="../../back-end/tool/ReadingCircle.file"%>
 	<!-- ----- ----- ----- 進入網站的讀取圈圈 end ----- ----- ----- -->
-	<!-- Overlays -->
+
 	<div class="ms-aside-overlay ms-overlay-left ms-toggler" data-target="#ms-side-nav" data-toggle="slideLeft"></div>
 	<div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"></div>
 
@@ -67,6 +50,7 @@ h2{
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
 	<main class="body-content"padding-right: 0 px;>
+
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
 		<%@ include file="../../back-end/tool/UpSideBar.file"%>
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
@@ -76,35 +60,27 @@ h2{
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2	> 新增成功!</h2>
-		<table>
-			<tr>
-				<th>員工姓名</th>
-				<th>帳號</th>
-				<th>密碼</th>
-				<th>權限</th>
-				<th>員工電話</th>
-				<th>員工地址</th>
-				<th>員工職位</th>
-				<th>員工入職日期</th>
-			</tr>
-			<tr>
-				<td>${empVO.empName}</td>
-				<td>${empVO.empAccount}</td>
-				<td>${empVO.empPassword}</td>
-				<td>${empVO.empPermission}</td>
-				<td>${empVO.empPhone}</td>
-				<td>${empVO.empAddress}</td>
-				<td>${empVO.jobVO.jobName}</td>
-				<td>${empVO.empHiredate}</td>
-			</tr>
-		</table>
+		<div class="ms-auth-form">
+			<form METHOD="post" ACTION="JobServlet.do" name="form1">
+				<h3>新增職位</h3>
+				<div class="form-row">
+					<div class="col-md-12 ">
+						<p>${errorMsgs.jobName}</p>
+						<div class="input-group">
+							<input type="text" name="jobName" value="${param.jobName}" class="form-control" placeholder="請輸入職稱">
+						</div>
+					</div>
+				</div>
+				<input type="hidden" name="action" value="insert">
+				<input class="btn btn-primary mt-4 d-block w-100" type="submit" value="送出新增">
+			</form>
+		</div>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
+
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
-	<!-- Global Required Scripts Start -->
 	<script src="../../back-assets/js/jquery-3.3.1.min.js"></script>
 	<script src="../../back-assets/js/popper.min.js"></script>
 	<script src="../../back-assets/js/bootstrap.min.js"></script>

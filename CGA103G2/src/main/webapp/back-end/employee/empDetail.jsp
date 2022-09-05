@@ -4,10 +4,10 @@
 <%@ page import="com.emp.model.*"%>
 
 <%
-EmpService empSvc = new EmpService();
-List<EmpVO> list = empSvc.getAll();
-pageContext.setAttribute("list", list);
+EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 %>
+
+<jsp:useBean id="list" scope="session" type="java.util.List<EmpVO>" />
 
 <!DOCTYPE html>
 <html lang="zh-tw">
@@ -37,75 +37,8 @@ pageContext.setAttribute("list", list);
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
 
+<link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
 
-<style type="text/css">
-table {
-	border: 1px solid black;
-	margin: 0 auto;
-}
-
-td {
-	width: 150px;
-	border: 1px solid black;
-	text-align: center;
-}
-
-h2 {
-	text-align: center;
-}
-
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-}
-
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-
-.b-example-divider {
-	height: 3rem;
-	background-color: rgba(0, 0, 0, .1);
-	border: solid rgba(0, 0, 0, .15);
-	border-width: 1px 0;
-	box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em
-		rgba(0, 0, 0, .15);
-}
-
-.b-example-vr {
-	flex-shrink: 0;
-	width: 1.5rem;
-	height: 100vh;
-}
-
-.bi {
-	vertical-align: -.125em;
-	fill: currentColor;
-}
-
-.nav-scroller {
-	position: relative;
-	z-index: 2;
-	height: 2.75rem;
-	overflow-y: hidden;
-}
-
-.nav-scroller .nav {
-	display: flex;
-	flex-wrap: nowrap;
-	padding-bottom: 1rem;
-	margin-top: -1px;
-	overflow-x: auto;
-	text-align: center;
-	white-space: nowrap;
-	-webkit-overflow-scrolling: touch;
-}
-</style>
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -134,55 +67,93 @@ h2 {
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 		<h2>查看員工訊息</h2>
-		 <li>
-    	<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" >
+		<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
+		<hr>
+		<div style="text-align: center;">
+    		<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" >
         		<b>輸入員工編號 (如1):</b>
         		<input type="text" name="empID" value="${param.empID}"><font color=red>${errorMsgs.empID}</font>
         		<input type="hidden" name="action" value="getOne_For_Display">
         		<input type="submit" value="送出">
-    			</FORM>
-  		</li>
-		<table>
+    		</FORM>
+    	</div>
+  		<hr>
+  		<div style="text-align: center;">
+  			<div style= "margin:0 auto;">
+  			<div>
+  		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/employee/EmpServlet.do" name="form1">
+        	<b><font color=blue>萬用複合查詢:</font></b> <br>
+        	<b>輸入員工編號:</b>
+        	<input type="text" name="empID" value="1"><br>
+           
+       		<b>輸入員工姓名:</b>
+      		<input type="text" name="empName" value="周杰倫"><br>
+       
+       		<b>輸入員工職位:</b>
+       		<select size="1" name="jobID" >
+          		<option value="">
+         		<c:forEach var="jobVO" items="${jobSvc.all}" > 
+          			<option value="${jobVO.jobID}">${jobVO.jobName}
+         		</c:forEach>   
+       		</select><br>
+           
+       		<b>雇用日期:</b>
+	   		<input name="empHiredate" id="f_date1" type="text">
+		        
+        	<input type="submit" value="送出">
+        	<input type="hidden" name="action" value="getEmpListCompositeQuery">
+        	</div>
+     	</FORM>
+     	</div>
+     	</div>
+  		<hr>
+		<table class = "dataTable table-striped thead-primary" style="width: 95%">
 			<tr>
-				<th>員工編號</th>
-				<th>員工姓名</th>
-				<th>帳號</th>
-				<th>密碼</th>
-				<th>權限</th>
-				<th>員工電話</th>
-				<th>員工地址</th>
-				<th>員工職位</th>
-				<th>員工入職日期</th>
-				<th>修改</th>
-				<th>刪除</th>
+				<th style="width: 5% ; ">員工<br>編號</th>
+				<th style="width: 7% ;">員工<br>姓名</th>
+				<th style="width: 10% ;">帳號</th>
+				<th style="width: 10% ;">密碼</th>
+				<th style="width: 5% ;">權限</th>
+				<th style="width: 10% ;">員工<br>電話</th>
+				<th>員工<br>地址</th>
+				<th style="width: 10% ;">員工<br>職位</th>
+				<th style="width: 10% ;">員工<br>入職日期</th>
+				<th style="width: 5% ;">修改</th>
+				<th style="width: 5% ;">刪除</th>
 			</tr>
+			<div style="text-align: center">
 			<%@ include file="../../back-end/tool/page1.file"%>
+			</div>
 			<c:forEach var="empVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				<tr>
-					<td>${empVO.empID}</td>
-					<td>${empVO.empName}</td>
-					<td>${empVO.empAccount}</td>
-					<td>${empVO.empPassword}</td>
-					<td>${empVO.empPermission}</td>
-					<td>${empVO.empPhone}</td>
+					<td style="width: 5% ;">${empVO.empID}</td>
+					<td style="width: 7%">${empVO.empName}</td>
+					<td style="width: 10%">${empVO.empAccount}</td>
+					<td style="width: 10%">${empVO.empPassword}</td>
+					<td style="width: 5%">${(empVO.empPermission == "0") ? "正常" : "停權"}</td>
+					<td style="width: 10%">${empVO.empPhone}</td>
 					<td>${empVO.empAddress}</td>
-					<td>${empVO.jobVO.jobName}</td>
+					<td style="width: 10% ; ">${empVO.jobVO.jobName}</td>
 <%-- 					<td>${empVO.emp_job}-[${empVO.jobVO.job_name}]</td> --%>
-					<td>${empVO.empHiredate}</td>
-					<td>
+					<td style="width: 10% ; ">${empVO.empHiredate}</td>
+					<td style="width: 5% ; ">
 						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;">
 							<input type="submit" value="修改"> <input type="hidden" name="empID" value="${empVO.empID}"> <input type="hidden" name="action" value="getOne_For_Update">
 						</FORM>
 					</td>
-					<td>
+					<td style="width: 5% ; height:100px">
 						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;">
-							<input type="submit" value="刪除"> <input type="hidden" name="empID" value="${empVO.empID}"> <input type="hidden" name="action" value="delete">
+							<input type="submit" value="刪除" disabled="disabled">
+							<input type="hidden" name="empID" value="${empVO.empID}">
+							<input type="hidden" name="action" value="delete">
 						</FORM>
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
+		<div style="text-align: center;">
 		<%@ include file="../../back-end/tool/page2.file"%>
+		</div>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 
 	</main>
@@ -207,6 +178,45 @@ h2 {
 	<!-- Settings -->
 	<script src="../../back-assets/js/settings.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
+	
+	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
+	<%
+	java.sql.Date empHiredate = null;
+	try {
+		empHiredate = empVO.getEmpHiredate();
+	} catch (Exception e) {
+		empHiredate = new java.sql.Date(System.currentTimeMillis());
+	}
+	%>
+
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.css" />
+	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+	<style>
+		.xdsoft_datetimepicker .xdsoft_datepicker {
+			width: 300px; /* width:  300px; */
+		}
+
+		.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+			height: 151px; /* height:  151px; */
+		}
+	</style>
+
+	<script type="text/javascript">
+    $.datetimepicker.setLocale('zh');
+    $('#f_date1').datetimepicker({
+       theme: '',              //theme: 'dark',
+       timepicker:false,       //timepicker:true,
+       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+	   value: '<%=empHiredate%>', // value:   new Date(),
+		//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+		//startDate:	            '2017/07/10',  // 起始日
+		//minDate:               '-1970-01-01', // 去除今日(不含)之前
+		//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+		});
+	</script>
 </body>
 
 </html>

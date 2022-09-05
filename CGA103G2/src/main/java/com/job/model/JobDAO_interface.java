@@ -7,4 +7,5 @@ public interface JobDAO_interface {
     public void delete(Integer jobID);
     public JobVO findByPrimaryKey(Integer jobID);
     public List<JobVO> getAll();
+    public JobVO checkRepeatJobName(String jobName);
 }

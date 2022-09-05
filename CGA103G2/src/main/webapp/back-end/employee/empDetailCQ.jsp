@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*,com.emp.model.EmpVO"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.emp.model.*"%>
 
-<%
-EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-%>
+
+<jsp:useBean id="getEmpListCompositeQuery" scope="request" type="java.util.List<EmpVO>" />
+<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
 
 <!DOCTYPE html>
 <html lang="zh-tw">
@@ -14,6 +15,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>異鄉人-義式餐酒館-管理中心</title>
+
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
 <!-- Iconic Fonts -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -32,32 +34,18 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 <link href="../../back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
-<!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
-<style type="text/css">
-table {
-	border: 1px solid black;
-	margin: 0 auto;
-}
 
-td {
-	width: 150px;
-	border: 1px solid black;
-	text-align: center;
-}
-div{
-	text-align: center;
-}
-h2{
-	text-align: center;
-}
-</style>
+<link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
+
+<!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
+
 	<!-- ----- ----- ----- 進入網站的讀取圈圈 start ----- ----- ----- -->
 	<%@ include file="../../back-end/tool/ReadingCircle.file"%>
 	<!-- ----- ----- ----- 進入網站的讀取圈圈 end ----- ----- ----- -->
-	<!-- Overlays -->
+
 	<div class="ms-aside-overlay ms-overlay-left ms-toggler" data-target="#ms-side-nav" data-toggle="slideLeft"></div>
 	<div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"></div>
 
@@ -76,32 +64,57 @@ h2{
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2	> 修改成功!</h2>
-		<table>
+		<h2>查看員工訊息</h2>
+  		<hr>
+		<table class = "dataTable table-striped thead-primary" style="width: 95%">
 			<tr>
-				<th>員工編號</th>
-				<th>員工姓名</th>
-				<th>帳號</th>
-				<th>密碼</th>
-				<th>權限</th>
-				<th>員工電話</th>
-				<th>員工地址</th>
-				<th>員工職位</th>
-				<th>員工入職日期</th>
+				<th style="width: 5% ; ">員工<br>編號</th>
+				<th style="width: 7% ;">員工<br>姓名</th>
+				<th style="width: 10% ;">帳號</th>
+				<th style="width: 10% ;">密碼</th>
+				<th style="width: 5% ;">權限</th>
+				<th style="width: 10% ;">員工<br>電話</th>
+				<th>員工<br>地址</th>
+				<th style="width: 10% ;">員工<br>職位</th>
+				<th style="width: 10% ;">員工<br>入職日期</th>
+				<th style="width: 5% ;">修改</th>
+				<th style="width: 5% ;">刪除</th>
 			</tr>
-			<tr>
-				<td>${empVO.empID}</td>
-				<td>${empVO.empName}</td>
-				<td>${empVO.empAccount}</td>
-				<td>${empVO.empPassword}</td>
-				<td>${empVO.empPermission}</td>
-				<td>${empVO.empPhone}</td>
-				<td>${empVO.empAddress}</td>
-				<td>${empVO.jobID}</td>
-				<td>${empVO.empHiredate}</td>
-			</tr>
+			<div style="text-align: center">
+			<%@ include file="../../back-end/employee/EmpCQpage1.file"%>
+			</div>
+			<c:forEach var="empVO" items="${getEmpListCompositeQuery}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+				<tr>
+					<td style="width: 5% ;">${empVO.empID}</td>
+					<td style="width: 7%">${empVO.empName}</td>
+					<td style="width: 10%">${empVO.empAccount}</td>
+					<td style="width: 10%">${empVO.empPassword}</td>
+					<td style="width: 5%">${(empVO.empPermission == "0") ? "正常" : "停權"}</td>
+					<td style="width: 10%">${empVO.empPhone}</td>
+					<td>${empVO.empAddress}</td>
+					<td style="width: 10% ; ">${empVO.jobVO.jobName}</td>
+<%-- 					<td>${empVO.emp_job}-[${empVO.jobVO.job_name}]</td> --%>
+					<td style="width: 10% ; ">${empVO.empHiredate}</td>
+					<td style="width: 5% ; ">
+						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;">
+							<input type="submit" value="修改"> <input type="hidden" name="empID" value="${empVO.empID}"> 
+							<input type="hidden" name="action" value="getOne_For_Update">
+						</FORM>
+					</td>
+					<td style="width: 5% ; height:100px">
+						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;">
+							<input type="submit" value="刪除"> <input type="hidden" name="empID" value="${empVO.empID}"> 
+							<input type="hidden" name="action" value="delete">
+						</FORM>
+					</td>
+				</tr>
+			</c:forEach>
 		</table>
+		<div style="text-align: center;">
+		<%@ include file="../../back-end/employee/EmpCQpage2.file"%>
+		</div>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
+
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 

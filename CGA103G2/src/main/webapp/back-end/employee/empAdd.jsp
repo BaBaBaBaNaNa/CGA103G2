@@ -35,6 +35,10 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
 <!-- empStyle -->
 <link href="../../back-assets/css/empStyle.css" rel="stylesheet">
+
+<link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
+<!-- 台灣地址選擇 -->
+<link href="../../back-assets/css/tw-city-selector.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -52,7 +56,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
-	<main class="body-content"padding-right: 0 px;>
+	<main class="body-content">
 
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
 		<%@ include file="../../back-end/tool/UpSideBar.file"%>
@@ -63,60 +67,74 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2	>新增員工</h2>
-		<FORM METHOD="post" ACTION="EmpServlet.do" name="form1">
-			<p>${errorMsgs.empName} ${errorMsgs.empAccount} ${errorMsgs.empPassword} ${errorMsgs.empPermission} ${errorMsgs.empPhone} ${errorMsgs.empAddress} ${errorMsgs.jobID}</p>
-			<table>
-				<tr>
-					<td>ID:</td>
-					<td><input type="hidden"  name="empID" size="45" value="${param.empID}"readonly/>
-				<tr>
-					<td>員工姓名:</td>
-					<td><input type="TEXT" name="empName" size="45" value="${param.empName}" /></td>
-				</tr>
-				<tr>
-					<td>帳號:</td>
-					<td><input type="TEXT" name="empAccount" size="45" value="${param.empAccount}" /></td>
-				</tr>
-				<tr>
-					<td>密碼:</td>
-					<td><input type="TEXT" name="empPassword" size="45" value="${param.empPassword}" /></td>
-				</tr>
-				<tr>
-					<td>權限:</td>
-					<td><input type="TEXT" name="empPermission" size="45" value="${param.empPermission}" /></td>
-				</tr>
-				<tr>
-					<td>電話:</td>
-					<td><input type="TEXT" name="empPhone" size="45" value="${param.empPhone}" /></td>
-				</tr>
-				<tr>
-					<td>地址:</td>
-					<td><input type="TEXT" name="empAddress" size="45" value="${param.empAddress}" /></td>
-				</tr>
-				<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
-				<tr>
-					<td>職位:<font color=red><b>*</b></font></td>
-					<td>
-						<select size="1" name="jobID">
+		<div class="ms-auth-form">
+			<form METHOD="post" ACTION="EmpServlet.do" name="form1">
+				<h3>新增員工帳號</h3>
+
+				<div class="form-row">
+					<div class="col-md-12 ">
+						<label>員工姓名</label><p>${errorMsgs.empName}</p>
+						<div class="input-group">
+							<input type="text" name="empName" value="${param.empName}" class="form-control" placeholder="請輸入員工姓名">
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>帳號:[請輸入Email信箱]</label><p>${errorMsgs.empAccount}</p>
+						<div class="input-group">
+							<input type="text" name="empAccount" value="${param.empAccount}" class="form-control" placeholder="example@gmail.com">
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>密碼</label><p>${errorMsgs.empPassword}</p>
+						<div class="input-group">
+						<input type="password" name="empPassword" value="${param.empPassword}" class="form-control" placeholder="請輸入密碼">
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>權限</label>
+						<div class="input-group">
+						<select name="empPermission" class="form-control">
+							<option value="0" ${(param.empPermission== "0") ? 'selected' : '' }>正常</option>
+							<option value="1" ${(param.empPermission== "1") ? 'selected' : '' }>停權</option>
+						</select>
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>電話</label><p>${errorMsgs.empPhone}</p>
+						<div class="input-group">
+						<input type="text" name="empPhone" value="${param.empPhone}" class="form-control" placeholder="請輸入員工電話">
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>地址</label><p>${errorMsgs.empAddress}</p>
+						<div role="tw-city-selector" class="tw-city-selector" data-has-zipcode data-bootstrap-style value="${param.empAddress1}">
+						</div>
+						<div class="input-group">
+							<input type="text" name="empAddress" value="${param.empAddress}" class="form-control" placeholder="請輸入員工地址">
+						</div>
+					</div>
+					<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
+					<div class="col-md-12 ">
+						<label>職位</label>
+						<div class="input-group">
+						<select size="1" name="jobID" class="form-control">
 							<c:forEach var="jobVO" items="${jobSvc.all}">
-								<option value="${jobVO.jobID}" ${(param.jobID==jobVO.jobID)?'selected':'' } >${jobVO.jobName}
+								<option value="${jobVO.jobID}" ${(param.jobID==jobVO.jobID)?'selected':'' }>${jobVO.jobName}
 							</c:forEach>
 						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>雇用日期:</td>
-					<td><input name="empHiredate" id="f_date1" type="text"></td>
-				</tr>
-
-			</table>
-			<br> 
-			<div>
-			<input type="hidden" name="action" value="insert"> 
-			<input type="submit" value="送出新增">
-			</div>
-		</FORM>
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>雇用日期</label><p>${errorMsgs.empHiredate}</p>
+						<div class="input-group">
+						<input type="text" name="empHiredate" id="f_date1" value="${param.empHiredate}" class="form-control">
+						</div>
+					</div>
+				</div>
+				<input type="hidden" name="action" value="insert">
+				<input class="btn btn-primary mt-4 d-block w-100" type="submit" value="送出新增">
+			</form>
+		</div>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 
 	</main>
@@ -139,8 +157,17 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 	<script src="../../back-assets/js/framework.js"></script>
 	<!-- Settings -->
 	<script src="../../back-assets/js/settings.js"></script>
-	<!-- ----- ----- ----- Script End ----- ----- ----- -->
+	<!-- 台灣地址選擇 -->
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/back-assets/js/tw-city-selector.js"></script>
+<!-- 	<script src="https://cdn.jsdelivr.net/npm/tw-city-selector@2.1.0/dist/tw-city-selector.min.js"></script> -->
+	<script>
+		new TwCitySelector();
+	</script>
 	
+	
+	<!-- ----- ----- ----- Script End ----- ----- ----- -->
+
 	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 	<%
 	java.sql.Date empHiredate = null;
@@ -156,14 +183,14 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 	<style>
-.xdsoft_datetimepicker .xdsoft_datepicker {
-	width: 300px; /* width:  300px; */
-}
+		.xdsoft_datetimepicker .xdsoft_datepicker {
+			width: 300px; /* width:  300px; */
+		}
 
-.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-	height: 151px; /* height:  151px; */
-}
-</style>
+		.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+			height: 151px; /* height:  151px; */
+		}
+	</style>
 
 	<script type="text/javascript">
     $.datetimepicker.setLocale('zh');
@@ -179,7 +206,6 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 		//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 		});
 	</script>
-
 </body>
 
 </html>

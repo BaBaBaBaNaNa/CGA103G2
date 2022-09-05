@@ -16,10 +16,10 @@ public class MemJDBCDAO implements MemDAO_interface {
 	String userid = "root";
 	String passwd = "root";
 	private static final String INSERTSTMT = "INSERT INTO members (memname,memaccount,mempassword,memgender,memphone,mememail,memaddress,membirthday,mempermission) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )";
-	private static final String GETALLSTMT = "SELECT memid, memname, memaccount, mempassword, memgender, memphone, mememail, memaddress, membirthday, mempermission FROM members order by memid";
-	private static final String GETONESTMT = "SELECT memid, memname, memaccount, mempassword, memgender, memphone, mememail, memaddress, membirthday, mempermission FROM members  where memid = ?";
-	private static final String DELETE = "DELETE FROM members where memid = ?";
-	private static final String UPDATE = "UPDATE members set memname=?, memaccount=?, mempassword=?,  memphone=?, mememail=?, memaddress=?, membirthday=?, mempermission=? where memid = ?";
+	private static final String GETALLSTMT = "SELECT MemID, memname, memaccount, mempassword, memgender, memphone, mememail, memaddress, membirthday, mempermission FROM members order by MemID";
+	private static final String GETONESTMT = "SELECT MemID, memname, memaccount, mempassword, memgender, memphone, mememail, memaddress, membirthday, mempermission FROM members  where MemID = ?";
+	private static final String DELETE = "DELETE FROM members where MemID = ?";
+	private static final String UPDATE = "UPDATE members set memname=?, memaccount=?, mempassword=?,  memphone=?, mememail=?, memaddress=?, membirthday=?, mempermission=? where MemID = ?";
 
 	@Override
 	public void insert(MemVO memVO) {
@@ -33,8 +33,8 @@ public class MemJDBCDAO implements MemDAO_interface {
 //			con = DriverManager.getConnection(url, userid, passwd);
 //			pstmt = con.prepareStatement(INSERTSTMT);
 
-//			pstmt.setString(1,memVO,getMemid());
-//			pstmt.setInt(1, memVO.getMemid());
+//			pstmt.setString(1,memVO,getMemID());
+//			pstmt.setInt(1, memVO.getMemID());
 			pstmt.setString(1, memVO.getMemName());
 			pstmt.setString(2, memVO.getMemAccount());
 			pstmt.setString(3, memVO.getMemPassword());
@@ -87,7 +87,7 @@ public class MemJDBCDAO implements MemDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-//			pstmt.setInt(1, memVO.getMemid());
+//			pstmt.setInt(1, memVO.getMemID());
 			pstmt.setString(1, memVO.getMemName());
 			pstmt.setString(2, memVO.getMemAccount());
 			pstmt.setString(3, memVO.getMemPassword());
@@ -97,7 +97,7 @@ public class MemJDBCDAO implements MemDAO_interface {
 			pstmt.setString(6, memVO.getMemAddress());
 			pstmt.setDate(7, memVO.getMemBirthday());
 			pstmt.setInt(8, memVO.getMemPermission());
-			pstmt.setInt(9, memVO.getMemId());
+			pstmt.setInt(9, memVO.getMemID());
 			pstmt.executeUpdate();
 			System.out.println("update done!");
 
@@ -128,7 +128,7 @@ public class MemJDBCDAO implements MemDAO_interface {
 	}
 
 	@Override
-	public void delete(Integer memid) {
+	public void delete(Integer MemID) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -137,7 +137,7 @@ public class MemJDBCDAO implements MemDAO_interface {
 		con = DriverManager.getConnection(url, userid, passwd);
 		pstmt = con.prepareStatement(DELETE);
 		
-		pstmt.setInt(1, memid);
+		pstmt.setInt(1, MemID);
 		
 		pstmt.executeUpdate();
 		System.out.println("Delete done!");
@@ -169,7 +169,7 @@ public class MemJDBCDAO implements MemDAO_interface {
 	}
 	
 	@Override
-	public MemVO findByPrimaryKey(Integer memid) {
+	public MemVO findByPrimaryKey(Integer MemID) {
 
 		MemVO memVO = null;
 		Connection con = null;
@@ -182,15 +182,15 @@ public class MemJDBCDAO implements MemDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GETONESTMT);
 
-			pstmt.setInt(1, memid);
+			pstmt.setInt(1, MemID);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				memVO = new MemVO();
 				
-//				pstmt.setInt(1, memVO.getMemid());
-				memVO.setMemId(rs.getInt("memid"));
+//				pstmt.setInt(1, memVO.getMemID());
+				memVO.setMemID(rs.getInt("MemID"));
 //				pstmt.setString(2, memVO.getMemname());
 				memVO.setMemName(rs.getString("memname"));
 //				pstmt.setString(3, memVO.getMemaccount());
@@ -265,7 +265,7 @@ public class MemJDBCDAO implements MemDAO_interface {
 				
 				memVO = new MemVO();
 				
-				memVO.setMemId(rs.getInt("memid"));
+				memVO.setMemID(rs.getInt("MemID"));
 				memVO.setMemName(rs.getString("memname"));
 				memVO.setMemAccount(rs.getString("memaccount"));
 				memVO.setMemPassword(rs.getString("mempassword"));
@@ -317,7 +317,7 @@ public class MemJDBCDAO implements MemDAO_interface {
 		
 		// 新增  done
 		MemVO memVO1 = new MemVO();
-		memVO1.setMemId(12);
+		memVO1.setMemID(12);
 		memVO1.setMemName("LEooo");
 		memVO1.setMemAccount ("1qwewqewqe");
 		memVO1.setMemPassword("qwewqewqe");
@@ -333,7 +333,7 @@ public class MemJDBCDAO implements MemDAO_interface {
 		
 //		 修改  done
 //		MemVO memVO2 = new MemVO();
-//		memVO2.setMemid(9);
+//		memVO2.setMemID(9);
 //		memVO2.setMemname("蔡EE");
 //		memVO2.setMemaccount ("wowowo");
 //		memVO2.setMempassword("123");
@@ -354,7 +354,7 @@ public class MemJDBCDAO implements MemDAO_interface {
 		
 		// 單筆查詢  done
 //		MemVO memVO3 = dao.findByPrimaryKey(11);
-//		System.out.print(memVO3.getMemid() + ",");
+//		System.out.print(memVO3.getMemID() + ",");
 //		System.out.print(memVO3.getMemname() + ",");
 //		System.out.print(memVO3.getMemaccount() + ",");
 //		System.out.print(memVO3.getMempassword() + ",");
@@ -370,7 +370,7 @@ public class MemJDBCDAO implements MemDAO_interface {
 		// 多筆查詢  done
 //		List<MemVO> list = dao.getAll();
 //		for (MemVO aMem : list) {
-//			System.out.print(aMem.getMemid() + ",");
+//			System.out.print(aMem.getMemID() + ",");
 //			System.out.print(aMem.getMemname() + ",");
 //			System.out.print(aMem.getMemaccount() + ",");
 //			System.out.print(aMem.getMempassword() + ",");

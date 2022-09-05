@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 
 import java.sql.*;
 
-public class JobDAO  implements JobDAO_interface {
+public class JobDAO implements JobDAO_interface {
 	
 //	共用DataSource
 	private static DataSource ds = null;
@@ -26,8 +26,11 @@ public class JobDAO  implements JobDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT jobID,jobName FROM Job order by jobID";
 	private static final String GET_ONE_STMT = "SELECT jobID,jobName FROM Job where jobID = ?";
 	private static final String DELETE = "DELETE FROM Job where jobID = ?";
-	private static final String UPDATE = "UPDATE job set jobID=?,jobName=? where jobID = ?";
+	private static final String UPDATE = "UPDATE job set jobName=? where jobID = ?";
 	
+	private static final String CheckRepeatJobName= "SELECT jobName FROM Job where jobName = ?";
+	
+	//----- ----- ----- 新增db Job單筆資料 start ----- ----- -----
 	@Override
 	public void insert(JobVO jobVO) {
 		Connection con = null;
@@ -37,8 +40,7 @@ public class JobDAO  implements JobDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setInt(1, jobVO.getJobID());
-			pstmt.setString(2, jobVO.getJobName());
+			pstmt.setString(1, jobVO.getJobName());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -62,7 +64,9 @@ public class JobDAO  implements JobDAO_interface {
 		}
 
 	}
-
+	//----- ----- ----- 新增db Job單筆資料 end ----- ----- -----
+	
+	//----- ----- ----- 修改db Job單筆資料用jobID start ----- ----- -----
 	@Override
 	public void update(JobVO jobVO) {
 
@@ -72,8 +76,8 @@ public class JobDAO  implements JobDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
-			pstmt.setInt(1, jobVO.getJobID());
-			pstmt.setString(2, jobVO.getJobName());
+			pstmt.setString(1, jobVO.getJobName());
+			pstmt.setInt(2, jobVO.getJobID());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -97,9 +101,11 @@ public class JobDAO  implements JobDAO_interface {
 		}
 
 	}
-
+	//----- ----- ----- 修改db Job單筆資料用jobID end ----- ----- -----
+	
+	//----- ----- ----- 刪除db Job單筆資料用jobID start ----- ----- -----
 	@Override
-	public void delete(Integer functionID) {
+	public void delete(Integer jobID) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -108,7 +114,7 @@ public class JobDAO  implements JobDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setInt(1, functionID);
+			pstmt.setInt(1, jobID);
 
 			pstmt.executeUpdate();
 			
@@ -133,7 +139,9 @@ public class JobDAO  implements JobDAO_interface {
 		}
 
 	}
+	//----- ----- ----- 刪除db Job單筆資料用jobID end ----- ----- -----
 
+	//----- ----- ----- 查詢db Job單筆資料用jobID start ----- ----- -----
 	@Override
 	public JobVO findByPrimaryKey(Integer jobID) {
 
@@ -186,7 +194,9 @@ public class JobDAO  implements JobDAO_interface {
 		}
 		return jobVO;
 	}
-
+	//----- ----- ----- 查詢db Job單筆資料用jobID end ----- ----- -----
+	
+	//----- ----- ----- 查詢db 全部資料 start ----- ----- -----
 	@Override
 	public List<JobVO> getAll() {
 		List<JobVO> list = new ArrayList<JobVO>();
@@ -238,4 +248,59 @@ public class JobDAO  implements JobDAO_interface {
 		}
 		return list;
 	}
+	//----- ----- ----- 查詢db 全部資料 end ----- ----- -----
+	
+	//----- ----- ----- 查詢db Job 的JobName start ----- ----- -----
+	@Override
+	public JobVO checkRepeatJobName(String jobName) {
+
+		JobVO jobVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(CheckRepeatJobName);
+			
+			pstmt.setString(1, jobName);
+			
+			rs = pstmt.executeQuery();
+//			System.out.println(rs);
+			while (rs.next()) {
+				// empVo 也稱為 Domain objects
+				jobVO = new JobVO();
+
+				jobVO.setJobName(rs.getString("jobName"));
+
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return jobVO;
+	}
+	//----- ----- ----- 查詢db Job 的JobName end ----- ----- -----
 }

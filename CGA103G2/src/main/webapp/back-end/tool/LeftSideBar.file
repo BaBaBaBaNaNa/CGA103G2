@@ -4,29 +4,29 @@
 	<aside id="ms-side-nav" class="side-nav fixed ms-aside-scrollable ms-aside-left">
 		<!-- Logo -->
 		<div class="logo-sn ms-d-block-lg">
-			<a class="pl-0 ml-0 text-center" href="${pageContext.request.contextPath}/back-end/backstage/BackIndexServlet.do"><img src="${pageContext.request.contextPath}/back-assets/img/logo/logo01.png" alt="logo"></a>
+			<a class="pl-0 ml-0 text-center" href="${pageContext.request.contextPath}/back-end/index/BackIndexServlet.do"><img src="${pageContext.request.contextPath}/back-assets/img/logo/logo01.png" alt="logo"></a>
 		</div>
 		<!-- Navigation -->
 		<ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
 			<!-- ----- ----- ----- 導向首頁 start ----- ----- ----- -->
-			<li class="menu-item"><a href="${pageContext.request.contextPath}/back-end/backstage/BackIndexServlet.do"><span><i class="material-icons fs-16"></i>後臺管理系統 - 首頁</span></a></li>
+			<li class="menu-item"><a href="${pageContext.request.contextPath}/back-end/index/BackIndexServlet.do"><span><i class="material-icons fs-16"></i>後臺管理系統 - 首頁</span></a></li>
 			<!-- ----- ----- ----- 導向首頁 end ----- ----- ----- -->
 
 			<!-- ----- ----- ----- 員工 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#employee" aria-expanded="false" aria-controls="employee"><span><i class="fas fa-file-employee fs-16"></i>員工管理</span></a>
 				<ul id="employee" class="collapse" aria-labelledby="employee" data-parent="#side-nav-accordion">
-					<li><a href="${pageContext.request.contextPath}/back-end/employee/empDetail.jsp">查看員工資料</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do?action=getAll">查看員工資料</a></li>
 					<li><a href="${pageContext.request.contextPath}/back-end/employee/empAdd.jsp">新增員工資料</a></li>
 					<li><a href="${pageContext.request.contextPath}/back-end/job/JobServlet.do?action=getAll">查看職務資料</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/job/jobAdd.jsp">新增職務</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 員工 end ----- ----- ----- -->
 
 			<!-- ----- ----- ----- 會員 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#member" aria-expanded="false" aria-controls="member"><span><i class="fas fa-file-member fs-16"></i>會員管理</span></a>
 				<ul id="member" class="collapse" aria-labelledby="member" data-parent="#side-nav-accordion">
-					<li><a href="${pageContext.request.contextPath}/back-end/member/mem.do?action=getAll">查看會員資料</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/member/member_add.jsp">新增會員資料</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/member/member_edit.jsp">修改會員資料</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/member/memberDetail.jsp">管理會員資料</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/member/memberAdd.jsp">新增會員資料</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 會員 end ----- ----- ----- -->
 

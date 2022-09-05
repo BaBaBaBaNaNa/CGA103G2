@@ -1,6 +1,7 @@
 package com.login.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.emp.model.EmpDAO;
+import com.login.model.EmpLoginDAO;
 import com.login.model.EmpLoginVO;
 
 @WebServlet("/EmpLoginServlet.do")
@@ -44,18 +45,24 @@ public class EmpLoginServlet extends HttpServlet {
 		EmpLoginVO admin = new EmpLoginVO();
 		admin.setEmpAccount(empAccount);
 		admin.setEmpPassword(empPassword);
-		EmpDAO dao = new EmpDAO();
+		EmpLoginDAO dao = new EmpLoginDAO();
 		boolean res = dao.loginAdmin(admin);
-
+		// 登入驗證，如果驗證成功，則設定一個屬性名為“LoginSessionName”值為使用者名稱的session，用於BackFilterServlet驗證是否登入過
+		// 驗證的話還是會用SessionId去做驗證
 		if (res) {
-			// ValidateLogin為登入驗證方法，如果驗證成功，則設定一個屬性名為“name”值為使用者名稱的session，用於Myfilter驗證是否登入過
-			request.getSession().setAttribute("name", empAccount);
+			request.getSession().setAttribute("LoginSessionName", empAccount);
 			request.getRequestDispatcher("/back-end/index/BackIndex.jsp").forward(request, response);
+			
+			//測試登入狀態
+//			System.out.println("SessionId : "+request.getRequestedSessionId());
+//			System.out.println("登入成功!");
+			
+			return;
 		} else {
-			request.setAttribute("errorMessage", "wrong");
+			request.setAttribute("errorMessage", "帳號或者密碼錯誤");
 			request.getRequestDispatcher("/BackLogin.jsp").forward(request, response);
-//				request.getSession().setAttribute("error", "賬號或者密碼錯誤");
-//				response.sendRedirect("login.jsp");
+			return;
+//			response.sendRedirect("BackLogin.jsp");
 		}
 	}
 }

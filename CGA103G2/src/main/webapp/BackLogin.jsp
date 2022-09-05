@@ -21,9 +21,9 @@
 	media="screen" />
 <!-- // Load stylesheets -->
 <!-- 登入 style end-->
-<%if ("wrong".equals(request.getAttribute("errorMessage"))) {%>
+<%if ( (request.getAttribute("errorMessage") != null)) {%>
 <script type="text/javascript">
-	alert("用戶名或者密碼錯誤！");
+ 	alert("<%= request.getAttribute("errorMessage") %>");
 </script>
 <%} else {%>
 <%}%>
@@ -42,11 +42,10 @@
 					<div id="username_inputleft"></div>
 
 					<div id="username_inputmiddle">
-						<input type="text" name="empAccount" id="url" value="員工帳號">
+						<input type="text" name="empAccount" id="url" value="test01@gmail.com">
 					</div>
 
 					<div id="username_inputright"></div>
-
 				</div>
 
 				<div id="password_input">
@@ -55,7 +54,7 @@
  
 					<div id="password_inputmiddle">
 						<input type="password" name="empPassword" id="url"
-							value="Password">
+							value="123456">
 					</div>
 
 					<div id="password_inputright"></div>

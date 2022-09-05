@@ -85,7 +85,7 @@ td {
 				
 			</tr>
 			<tr>
-			<td>${memVO.memId}</td>
+			<td>${memVO.memID}</td>
 			<td>${memVO.memName}</td>
 			<td>${memVO.memAccount}</td>
 			<td>${memVO.memGender}</td>

@@ -66,7 +66,7 @@
 		
 	</tr>
 	<tr>
-		<td><%=memVO.getMemId()%></td>
+		<td><%=memVO.getMemID()%></td>
 		<td><%=memVO.getMemName()%></td>
 		<td><%=memVO.getMemAccount()%></td>
 		<td><%=memVO.getMemAddress()%></td>

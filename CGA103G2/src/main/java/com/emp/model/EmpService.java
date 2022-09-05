@@ -1,6 +1,9 @@
 package com.emp.model;
 
 import java.util.List;
+import java.util.Map;
+
+import com.job.model.JobVO;
 
 public class EmpService {
 
@@ -10,6 +13,7 @@ public class EmpService {
 		dao = new EmpDAO();
 	}
 
+	//新增員工
 	public EmpVO addEmp(
 			String empName, 
 			String empAccount,
@@ -35,6 +39,7 @@ public class EmpService {
 		return empVO;
 	}
 
+	//修改員工資料
 	public EmpVO updateEmp(
 			Integer empID,
 			String empName, 
@@ -62,15 +67,33 @@ public class EmpService {
 		return empVO;
 	}
 
+	//刪除員工
 	public void deleteEmp(Integer empID) {
 		dao.delete(empID);
 	}
 
+	//查詢一位員工資料
 	public EmpVO getOneEmp(Integer empID) {
 		return dao.findByPrimaryKey(empID);
 	}
 
+	//查詢所有員工資料
 	public List<EmpVO> getAll() {
 		return dao.getAll();
+	}
+	
+	//複合查詢所有員工資料
+	public List<EmpVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
+	}
+	
+	//使用empAccount找是否有職位
+	public EmpVO getEmpAccountCheck(String empAccount) {
+		return dao.checkRepeatEmpAccount(empAccount);
+	}
+	
+	//查詢員工自己的資料
+	public EmpVO getOwnEmp(String empAccount) {
+		return dao.findByEmpAccount(empAccount);
 	}
 }

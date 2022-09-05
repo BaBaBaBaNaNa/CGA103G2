@@ -29,7 +29,7 @@
 </head>
 <body bgcolor='white'>
 
-<table id="table-1">
+<table ID="table-1">
    <tr><td><h3>ITAILLEN-MEMBER/h3><h4>( MVC )</h4></td></tr>
 </table>
 
@@ -54,7 +54,7 @@
   <li>
     <FORM METHOD="post" ACTION="mem.do" >
         <b>輸入會員ID (如1,2,3,4...):</b>
-        <input type="text" name="memId">
+        <input type="text" name="memID">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
     </FORM>
@@ -65,9 +65,9 @@
   <li>
      <FORM METHOD="post" ACTION="mem.do" >
        <b>會員編號:</b>
-       <select size="1" name="memId">
+       <select size="1" name="memID">
          <c:forEach var="memVO" items="${memSvc.all}" > 
-          <option value="${memVO.memId}">${memVO.memId}
+          <option value="${memVO.memID}">${memVO.memID}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -78,9 +78,9 @@
   <li>
      <FORM METHOD="post" ACTION="mem.do" >
        <b>選擇會員姓名:</b>
-       <select size="1" name="memId">
+       <select size="1" name="memID">
          <c:forEach var="memVO" items="${memSvc.all}" > 
-          <option value="${memVO.memId}">${memVO.memName}
+          <option value="${memVO.memID}">${memVO.memName}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
