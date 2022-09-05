@@ -1,55 +1,56 @@
 package com.meals.model;
 
 public class MealsVO {
-	private Integer mealsId;
-	private Integer mealsCategoryId;
+	private Integer mealsID;
+	private Integer mealsCategoryID;
 	private String mealsName;
 	private Integer mealsPrice;
 	private String mealsInfo;
-	private Byte[] meals_picture;
-	private Integer mealsControl;
-	public Integer getMealsId() {
-		return mealsId;
+	private byte[] mealsPicture;
+	public Integer getMealsID() {
+		return mealsID;
 	}
-	public Integer getMealsCategoryId() {
-		return mealsCategoryId;
+	public void setMealsID(Integer mealsID) {
+		this.mealsID = mealsID;
+	}
+	public Integer getMealsCategoryID() {
+		return mealsCategoryID;
+	}
+	public void setMealsCategoryID(Integer mealsCategoryID) {
+		this.mealsCategoryID = mealsCategoryID;
 	}
 	public String getMealsName() {
 		return mealsName;
 	}
-	public Integer getMealsPrice() {
-		return mealsPrice;
-	}
-	public String getMealsInfo() {
-		return mealsInfo;
-	}
-	public Byte[] getmeals_picture() {
-		return meals_picture;
-	}
-	public Integer getMealsControl() {
-		return mealsControl;
-	}
-	public void setMealsId(Integer mealsId) {
-		this.mealsId = mealsId;
-	}
-	public void setMealsCategoryId(Integer mealsCategoryId) {
-		this.mealsCategoryId = mealsCategoryId;
-	}
 	public void setMealsName(String mealsName) {
 		this.mealsName = mealsName;
+	}
+	public Integer getMealsPrice() {
+		return mealsPrice;
 	}
 	public void setMealsPrice(Integer mealsPrice) {
 		this.mealsPrice = mealsPrice;
 	}
+	public String getMealsInfo() {
+		return mealsInfo;
+	}
 	public void setMealsInfo(String mealsInfo) {
 		this.mealsInfo = mealsInfo;
 	}
-	public void setmeals_picture(Byte[] meals_picture) {
-		this.meals_picture = meals_picture;
+	public byte[] getMealsPicture() {
+		return mealsPicture;
+	}
+	public void setMealsPicture(byte[] mealsPicture) {
+		this.mealsPicture = mealsPicture;
+	}
+	public Integer getMealsControl() {
+		return mealsControl;
 	}
 	public void setMealsControl(Integer mealsControl) {
 		this.mealsControl = mealsControl;
 	}
+	private Integer mealsControl;
+
 	
 
 }
