@@ -1,44 +1,56 @@
 package com.meals.model;
 
 import java.util.*;
+
+import javax.imageio.ImageIO;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 
 
 public class MealsJDBCDAO implements MealsDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/restaurant?serverTimezone=Asia/Taipei";
+	String url = "jdbc:mysql://localhost:3306/cga103g2?serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "0000";
 
 	
-	private static final String INSERT_STMT = 
-		"INSERT INTO meals (meals_id, meals_category_id, meals_name, meals_price, meals_info,meals_control) VALUES (? , ?, ? ,? ,? ,?)";
-	private static final String GET_ALL_STMT = 
-		"SELECT meals_id, meals_category_id, meals_name, meals_price, meals_info,meals_control FROM meals order by meals_id";
-	private static final String GET_ONE_STMT = 
-		"SELECT meals_id, meals_category_id, meals_name, meals_price, meals_info,meals_control  FROM meals where meals_id = ?";
-	private static final String DELETE = 
-		"DELETE FROM meals where meals_id = ?";
-	private static final String UPDATE = 
-		"UPDATE meals set  meals_category_id=?, meals_name = ? ,meals_price = ? , meals_info = ? ,meals_control = ?  where meals_id = ?";
+	private static final String INSERT_STMT = "INSERT INTO meals (mealsID, mealsCategoryID, mealsName, mealsPrice, mealsInfo,mealsPicture,mealsControl) VALUES (? , ?, ? ,? ,? ,?,?)";
+	private static final String GET_ALL_STMT = "SELECT mealsID, mealsCategoryID, mealsName, mealsPrice, mealsInfo,mealsPicture,mealsControl FROM meals order by mealsID";
+	private static final String GET_ONE_STMT = "SELECT mealsID, mealsCategoryID, mealsName, mealsPrice, mealsInfo,mealsPicture,mealsControl  FROM meals where mealsID = ?";
+	private static final String DELETE = "DELETE FROM meals where mealsID = ?";
+	private static final String UPDATE = "UPDATE meals set mealsID, mealsCategoryID =?, mealsName =?, mealsPrice =?, mealsInfo =?,mealsPicture =?,mealsControl =? where mealsID = ?";
+
 	@Override
 	public void insert(MealsVO mealsVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
+		
+		InputStream fin = null;
+         
+		
 		try {
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setInt(1, mealsVO.getMealsId());
-			pstmt.setInt(2, mealsVO.getMealsCategoryId());
+
+			pstmt.setInt(1, mealsVO.getMealsID());
+			pstmt.setInt(2, mealsVO.getMealsCategoryID());
 			pstmt.setString(3, mealsVO.getMealsName());
 			pstmt.setInt(4, mealsVO.getMealsPrice());
 			pstmt.setString(5, mealsVO.getMealsInfo());
-			pstmt.setInt(6, mealsVO.getMealsControl());
-
+			pstmt.setBytes(6, mealsVO.getMealsPicture());
+			pstmt.setInt(7, mealsVO.getMealsControl());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -80,8 +92,8 @@ public class MealsJDBCDAO implements MealsDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setInt(1, mealsVO.getMealsId());
-			pstmt.setInt(2, mealsVO.getMealsCategoryId());
+			pstmt.setInt(1, mealsVO.getMealsID());
+			pstmt.setInt(2, mealsVO.getMealsCategoryID());
 			pstmt.setString(3, mealsVO.getMealsName());
 			pstmt.setInt(4, mealsVO.getMealsPrice());
 			pstmt.setString(5, mealsVO.getMealsInfo());
@@ -182,8 +194,8 @@ public class MealsJDBCDAO implements MealsDAO_interface {
 			while (rs.next()) {
 				// empVo �]�٬� Domain objects
 				mealsVO = new MealsVO();
-				mealsVO.setMealsId(rs.getInt("Meals_id"));
-				mealsVO.setMealsCategoryId(rs.getInt("Meals_category_id"));
+				mealsVO.setMealsID(rs.getInt("Meals_id"));
+				mealsVO.setMealsCategoryID(rs.getInt("Meals_category_id"));
 				mealsVO.setMealsName(rs.getString("Meals_name"));
 				mealsVO.setMealsPrice(rs.getInt("Meals_price"));
 				mealsVO.setMealsInfo(rs.getNString("Meals_info"));;
@@ -243,8 +255,8 @@ public class MealsJDBCDAO implements MealsDAO_interface {
 			while (rs.next()) {
 				// empVO �]�٬� Domain objects
 				mealsVO = new MealsVO();
-				mealsVO.setMealsId(rs.getInt("Meals_id"));
-				mealsVO.setMealsCategoryId(rs.getInt("Meals_category_id"));
+				mealsVO.setMealsID(rs.getInt("Meals_id"));
+				mealsVO.setMealsCategoryID(rs.getInt("Meals_category_id"));
 				mealsVO.setMealsName(rs.getString("Meals_name"));
 				mealsVO.setMealsPrice(rs.getInt("Meals_price"));
 				mealsVO.setMealsInfo(rs.getNString("Meals_info"));;
@@ -287,56 +299,56 @@ public class MealsJDBCDAO implements MealsDAO_interface {
 		}
 		return list;
 	}
-	public static void main(String[] args) {
+	  
+    static byte[] bytes;
+	public static void main(String[] args)throws Exception {
+		
+        File file1 = new File("page1.file");
 
-		MealsJDBCDAO dao = new MealsJDBCDAO();
+        File img = new File("tomcat.png");
+        fileToByte(img);
+        ByteToFile(bytes);
 
-		// �s�W
-		MealsVO mealsVO1 = new MealsVO();
-		mealsVO1.setMealsId(100);
-		mealsVO1.setMealsCategoryId(1);
-		mealsVO1.setMealsName("123");
-		mealsVO1.setMealsPrice(1);
-		mealsVO1.setMealsInfo("123");
-		mealsVO1.setMealsControl(0);
-		dao.insert(mealsVO1);
+        
+//		MealsJDBCDAO dao = new MealsJDBCDAO();
+//		MealsVO mealsVO1 = new MealsVO();
+//		mealsVO1.setMealsID(100);
+//		mealsVO1.setMealsCategoryID(1);
+//		mealsVO1.setMealsName("123");
+//		mealsVO1.setMealsPrice(1);
+//		mealsVO1.setMealsInfo("123");
+//	mealsVO1.setMealsPicture(file.getName());
+//		mealsVO1.setMealsControl(0);
+//		dao.insert(mealsVO1);
 
-		// �ק�
-		MealsVO mealsVO2 = new MealsVO();
-	
-		mealsVO2.setMealsId(100);
-		mealsVO2.setMealsCategoryId(1);
-		mealsVO2.setMealsName("1234");
-		mealsVO2.setMealsPrice(1);
-		mealsVO2.setMealsInfo("12");
-		mealsVO2.setMealsControl(0);
-		dao.update(mealsVO2);
-
-		// �R��
-		dao.delete(100);
-
-		// �d��
-		MealsVO mealsVO3 = dao.findByPrimaryKey(1);
-		System.out.print(mealsVO3.getMealsId() + ",");
-		System.out.print(mealsVO3.getMealsCategoryId() + ",");
-		System.out.print(mealsVO3.getMealsName() + ",");
-		System.out.print(mealsVO3.getMealsPrice() + ",");
-		System.out.print(mealsVO3.getMealsInfo() + ",");
-		System.out.print(mealsVO3.getMealsControl() + ",");
-		System.out.println("---------------------");
-
-		// �d��
-		List<MealsVO> list = dao.getAll();
-		for (MealsVO aEmp : list) {
-			System.out.print(aEmp.getMealsId() + ",");
-			System.out.print(aEmp.getMealsCategoryId() + ",");
-			System.out.print(aEmp.getMealsName() + ",");
-			System.out.print(aEmp.getMealsPrice() + ",");
-			System.out.print(aEmp.getMealsInfo() + ",");
-			System.out.print(aEmp.getMealsControl() + ",");
-			System.out.println();
-		}
+	}
+	 public static void fileToByte(File img) throws Exception {
+	        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	        try {
+	            BufferedImage bi;
+	            bi = ImageIO.read(img);
+	            ImageIO.write(bi, "jpg", baos);
+	            bytes = baos.toByteArray();
+	            System.err.println(bytes.length);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            baos.close();
+	        }
+	    }
+	     
+	    static void ByteToFile(byte[] bytes)throws Exception{
+	        ByteArrayInputStream bais = new ByteArrayInputStream(bytes);  
+	        BufferedImage bi1 =ImageIO.read(bais);
+	        try {  
+	            File w2 = new File("W:\\img\\00000000003.jpg");//可以是jpg,png,gif格式  
+	            ImageIO.write(bi1, "jpg", w2);//不管输出什么格式图片，此处不需改动  
+	        } catch (IOException e) {  
+	            e.printStackTrace();  
+	        }finally{
+	            bais.close();
+	        }
+	    } 
+	  
 	}
 
-	
-}

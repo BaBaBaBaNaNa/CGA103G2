@@ -1,12 +1,14 @@
 package com.meals.model;
 
-public class MealsVO {
+public class MealsVO implements java.io.Serializable{
 	private Integer mealsID;
 	private Integer mealsCategoryID;
 	private String mealsName;
 	private Integer mealsPrice;
 	private String mealsInfo;
 	private byte[] mealsPicture;
+	private Integer mealsControl;
+	
 	public Integer getMealsID() {
 		return mealsID;
 	}
@@ -49,8 +51,5 @@ public class MealsVO {
 	public void setMealsControl(Integer mealsControl) {
 		this.mealsControl = mealsControl;
 	}
-	private Integer mealsControl;
-
 	
-
 }
