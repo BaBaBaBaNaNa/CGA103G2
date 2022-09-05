@@ -15,7 +15,7 @@ public class MealsCategoryDAO implements MealsCategory_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/restaurant");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/cga103g2");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

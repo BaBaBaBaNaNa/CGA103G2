@@ -64,6 +64,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MealsCategoryServlet</servlet-name>
+		<url-pattern>/back-end/mealscategory/MealsCategory.do</url-pattern>
 		<url-pattern>/mealscategory/MealsCategory.do</url-pattern>
 	</servlet-mapping>
 
@@ -73,6 +74,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MealsServlet</servlet-name>
+		<url-pattern>/back-end/meals/Meals.do</url-pattern>
 		<url-pattern>/meals/Meals.do</url-pattern>
 	</servlet-mapping>
 	
@@ -82,6 +84,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>BotqaServlet</servlet-name>
+		<url-pattern>/back-end/botqa/Botqa.do</url-pattern>
 		<url-pattern>/botqa/Botqa.do</url-pattern>
 	</servlet-mapping>
 	
