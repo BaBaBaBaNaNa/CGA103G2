@@ -47,7 +47,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
 		 <div align="center"> <h2>所有員工資料 - listAllBotqa.jsp</h2>
-		 <h3><a class="navbar-brand" href="<%=request.getContextPath()%>/botqa/select_page.jsp"><img src="<%=request.getContextPath()%>/resources/images/back1.gif">回查詢頁${success}</a></h3></div>
+		 <h3><a class="navbar-brand" href="<%=request.getContextPath()%>/back-end/botqa/select_page.jsp"><img src="<%=request.getContextPath()%>/back-end/resources/images/back1.gif">回查詢頁${success}</a></h3></div>
 </nav>
 
 <table class="center">

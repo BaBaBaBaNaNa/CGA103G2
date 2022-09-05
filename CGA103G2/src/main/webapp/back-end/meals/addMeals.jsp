@@ -79,8 +79,8 @@ form div div {
 			<h2>員工資料新增 - addEmp.jsp</h2>
 			<h3>
 				<a class="navbar-brand"
-					href="<%=request.getContextPath()%>/meals/select_page.jsp"><img
-					src="<%=request.getContextPath()%>/resources/images/back1.gif">回查詢頁</a>
+					href="<%=request.getContextPath()%>/back-end/meals/select_page.jsp"><img
+					src="<%=request.getContextPath()%>/back-end/meals/images/back1.gif">回查詢頁</a>
 			</h3>
 		</div>
 	</nav>
@@ -97,7 +97,7 @@ form div div {
 		</ul>
 	</c:if>
 
-	<FORM  action="<%=request.getContextPath()%>/meals/Meals.do" method="post" enctype="multipart/form-data">
+	<FORM  action="<%=request.getContextPath()%>/back-end/meals/Meals.do" method="post" enctype="multipart/form-data">
 		<table>
 			<jsp:useBean id="mealsSvc" scope="page"
 				class="com.meals.model.MealsService" />

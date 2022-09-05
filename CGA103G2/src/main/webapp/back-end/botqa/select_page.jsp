@@ -64,7 +64,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
 		 <div align="center"> <h2>機器人資料管理 - select_page.jsp</h2>
-		 <h3><a class="navbar-brand" href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/resources/images/back1.gif">回index.jsp</a></h3></div>
+<%-- 		 <h3><a class="navbar-brand" href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/back-end/resources/images/back1.gif">回index.jsp</a></h3></div> --%>
 </nav>
 
 	<h4><span>資料查詢:</span></h4>
@@ -76,7 +76,7 @@
 
         <jsp:useBean id="botqaSvc" scope="page" class="com.botqa.model.BotqaService" />
 
-		<li><form method="post" action="<%=request.getContextPath()%>/botqa/Botqa.do">
+		<li><form method="post" action="<%=request.getContextPath()%>/back-end/botqa/Botqa.do">
 				選擇機器人編號:
 				<select size="1" name="keywordID">
                   <c:forEach var="botqaVO" items="${botqaSvc.all}" > 
@@ -88,7 +88,7 @@
 			</form><br>
 		</li> 
 
-		<li><form method="post" action="<%=request.getContextPath()%>/botqa/Botqqa.do">
+		<li><form method="post" action="<%=request.getContextPath()%>/back-end/botqa/Botqqa.do">
 				選擇回應名稱:
 				<select size="1" name="keywordName">
                   <c:forEach var="botqaVO" items="${botqaSvc.all}" > 

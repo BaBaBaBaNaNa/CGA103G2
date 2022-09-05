@@ -41,7 +41,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top justify-content-center">
 		 <div align="center"> <h2>員工資料新增 - addBotqa.jsp</h2>
-		 <h3><a class="navbar-brand" href="<%=request.getContextPath()%>/botqa/select_page.jsp"><img src="<%=request.getContextPath()%>/resources/images/back1.gif">回查詢頁</a></h3></div>
+		 <h3><a class="navbar-brand" href="<%=request.getContextPath()%>/back-end/botqa/select_page.jsp"><img src="<%=request.getContextPath()%>/back-end/resources/images/back1.gif">回查詢頁</a></h3></div>
 </nav>
 
 	<div align="center">
