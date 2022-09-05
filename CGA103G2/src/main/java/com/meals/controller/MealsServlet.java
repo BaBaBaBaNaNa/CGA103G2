@@ -36,7 +36,7 @@ public class MealsServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/meals/select_page.jsp");
+							.getRequestDispatcher("/back-end/meals/select_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -50,7 +50,7 @@ public class MealsServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/meals/select_page.jsp");
+							.getRequestDispatcher("/back-end/meals/select_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -64,14 +64,14 @@ public class MealsServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/meals/select_page.jsp");
+							.getRequestDispatcher("/back-end/meals/select_page.jsp");
 					failureView.forward(req, res);
 					return;//
 				}
 				
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("mealsVO", mealsVO); //資料庫取出的empVO物件,存入req
-				String url = "/meals/listOneMeals.jsp";
+				String url = "/back-end/meals/listOneMeals.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 				successView.forward(req, res);
 		}
@@ -94,7 +94,7 @@ public class MealsServlet extends HttpServlet{
 						       "&mealsInfo="    +mealsVO.getMealsInfo()+
 						       "&mealsPicture="   +mealsVO.getMealsPicture()+
 						       "&mealsControl=" +mealsVO.getMealsControl();
-			String url = "/meals/update_meals_input.jsp"+param;
+			String url = "/back-end/meals/update_meals_input.jsp"+param;
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 			successView.forward(req, res);
 		}
@@ -146,7 +146,7 @@ public class MealsServlet extends HttpServlet{
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/meals/update_meals_input.jsp");
+						.getRequestDispatcher("/back-end/meals/update_meals_input.jsp");
 				failureView.forward(req, res);
 				System.out.println("errorMsgs.isEmpty()");
 				return; //程式中斷
@@ -158,8 +158,8 @@ public class MealsServlet extends HttpServlet{
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view)*************/
 			req.setAttribute("mealsVO", mealsVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			System.out.println("/meals/listOneMeals.jsp");
-			String url = "/meals/listOneMeals.jsp";
+			System.out.println("/back-end/meals/listOneMeals.jsp");
+			String url = "/back-end/meals/listOneMeals.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -203,7 +203,7 @@ public class MealsServlet extends HttpServlet{
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/meals/addMeals.jsp");
+						.getRequestDispatcher("/back-end/meals/addMeals.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -213,7 +213,7 @@ public class MealsServlet extends HttpServlet{
 			MealsSvc.addMeals(mealsCategoryID,mealsName,mealsPrice,mealsInfo,mealsPicture,mealsControl);
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			req.setAttribute("success", "- (新增成功)");
-			String url = "/meals/listAllMeals.jsp";
+			String url = "/back-end/meals/listAllMeals.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 		}
@@ -232,7 +232,7 @@ public class MealsServlet extends HttpServlet{
 			MealsSvc.daletMeals(mealsID);
 			
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/meals/listAllMeals.jsp";
+			String url = "/back-end/meals/listAllMeals.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);//  刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}

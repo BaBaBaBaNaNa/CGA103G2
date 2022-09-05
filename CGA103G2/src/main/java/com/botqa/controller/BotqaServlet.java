@@ -31,7 +31,7 @@ public class BotqaServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/botqa/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/botqa/select_page.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -44,7 +44,7 @@ public class BotqaServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/botqa/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/botqa/select_page.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -57,14 +57,14 @@ public class BotqaServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/botqa/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/botqa/select_page.jsp");
 				failureView.forward(req, res);
 				return;//
 			}
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("botqaVO", botqaVO); // 資料庫取出的empVO物件,存入req
-			String url = "/botqa/listOneBotqa.jsp";
+			String url = "/back-end/botqa/listOneBotqa.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -82,7 +82,7 @@ public class BotqaServlet extends HttpServlet {
 			String param = "?keywordID=" + botqaVO.getKeywordID() + 
 					"&keywordName=" +botqaVO.getKeywordName()+ 
 					"&keywordContext=" + botqaVO.getKeywordContext();
-			String url = "/botqa/update_Botqa_input.jsp" + param;
+			String url = "/back-end/botqa/update_Botqa_input.jsp" + param;
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 			successView.forward(req, res);
 		}
@@ -115,7 +115,7 @@ public class BotqaServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/botqa/update_Botqa_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/botqa/update_Botqa_input.jsp");
 				failureView.forward(req, res);
 				System.out.println("errorMsgs.isEmpty()");
 				return; // 程式中斷
@@ -125,8 +125,8 @@ public class BotqaServlet extends HttpServlet {
 			BotqaVO botqaVO =botqaSvc.updateBotqa(keywordID, keywordName, keywordContext);
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("botqaVO", botqaVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			System.out.println("/botqa/listOneBotqa.jsp");
-			String url = "/botqa/listOneBotqa.jsp";
+			System.out.println("/back-end/botqa/listOneBotqa.jsp");
+			String url = "/back-end/botqa/listOneBotqa.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -156,7 +156,7 @@ public class BotqaServlet extends HttpServlet {
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/botqa/addBotqa.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/botqa/addBotqa.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -166,7 +166,7 @@ public class BotqaServlet extends HttpServlet {
 			botqaSvc.addBotqa(keywordName, keywordContext);
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			req.setAttribute("success", "- (新增成功)");
-			String url = "/botqa/listAllBotqa.jsp";
+			String url = "/back-end/botqa/listAllBotqa.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 		}
@@ -184,7 +184,7 @@ public class BotqaServlet extends HttpServlet {
 			BotqaService botqaSvc =new BotqaService();
 			botqaSvc.deletDotqa(keywordID);
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/botqa/listAllBotqa.jsp";
+			String url = "/back-end/botqa/listAllBotqa.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}

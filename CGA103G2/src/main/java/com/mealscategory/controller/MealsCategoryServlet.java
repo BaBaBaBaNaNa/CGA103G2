@@ -34,7 +34,7 @@ public class MealsCategoryServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/mealscategory/select_page.jsp");
+							.getRequestDispatcher("/back-end/mealscategory/select_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -48,7 +48,7 @@ public class MealsCategoryServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/mealscategory/select_page.jsp");
+							.getRequestDispatcher("/back-end/mealscategory/select_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -62,14 +62,14 @@ public class MealsCategoryServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/mealscategory/select_page.jsp");
+							.getRequestDispatcher("/back-end/mealscategory/select_page.jsp");
 					failureView.forward(req, res);
 					return;//
 				}
 				
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("mealsCategoryVO", mealsCategoryVO); //資料庫取出的empVO物件,存入req
-				String url = "/mealscategory/listOneMealsCategory.jsp";
+				String url = "/back-end/mealscategory/listOneMealsCategory.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 				successView.forward(req, res);
 		}
@@ -89,7 +89,7 @@ public class MealsCategoryServlet extends HttpServlet{
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				String param = "?MealsCategoryId="  +mealsCategoryVO.getMealsCategoryId()+
 							 "&MealsCategory="  +mealsCategoryVO.getMealsCategory();
-				String url = "/mealscategory/update_mealsCategory_input.jsp"+param;
+				String url = "/back-end/mealscategory/update_mealsCategory_input.jsp"+param;
 	
 				
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
@@ -120,7 +120,7 @@ public class MealsCategoryServlet extends HttpServlet{
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/mealscategory/update_mealsCategory_input.jsp");
+						.getRequestDispatcher("/back-end/mealscategory/update_mealsCategory_input.jsp");
 				failureView.forward(req, res);
 				return; //程式中斷
 			}
@@ -130,7 +130,7 @@ public class MealsCategoryServlet extends HttpServlet{
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view)*************/
 			req.setAttribute("mealsCategoryVO", mealsCategoryVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url = "/mealscategory/listOneMealsCategory.jsp";
+			String url = "/back-end/mealscategory/listOneMealsCategory.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -163,7 +163,7 @@ public class MealsCategoryServlet extends HttpServlet{
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("mealsCategoryVO", mealsCategoryVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/mealscategory/addMealsCategory.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/mealscategory/addMealsCategory.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -172,7 +172,7 @@ public class MealsCategoryServlet extends HttpServlet{
 			MealsCategoryService MealsCategorySvc = new MealsCategoryService();
 			MealsCategorySvc.addMealsCategory(MealsCategoryId, MealsCategory);
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/mealscategory/listAllMC.jsp";
+			String url = "/back-end/mealscategory/listAllMC.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 		}
@@ -191,7 +191,7 @@ public class MealsCategoryServlet extends HttpServlet{
 			MealsCategorySvc.deleteMealsCategory(MealsCategoryId);
 			
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/mealscategory/listAllMC.jsp";
+			String url = "/back-end/mealscategory/listAllMC.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);//  刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}

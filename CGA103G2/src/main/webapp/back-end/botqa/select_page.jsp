@@ -72,7 +72,7 @@
 	<div></div><br>
 	<div class="a">
 	  <ul>
-		<li><h5><a href='<%=request.getContextPath()%>/botqa/listAllBotqa.jsp'>List</a> all Botqa. <br><br></h5></li>
+		<li><h5><a href='<%=request.getContextPath()%>/back-end/botqa/listAllBotqa.jsp'>List</a> all Botqa. <br><br></h5></li>
 
         <jsp:useBean id="botqaSvc" scope="page" class="com.botqa.model.BotqaService" />
 
