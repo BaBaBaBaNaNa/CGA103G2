@@ -1,0 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+	<div align="center">
+		<h3><span>查詢結果 :</span></h3>
+		<span>機器人編號:</span><span>${botqaVO.keywordID}</span><br/>
+		<span>回應名稱:</span><span>${botqaVO.keywordName}</span><br/>
+		<span>回應內容:</span><span>${botqaVO.keywordContext}</span><br/>
+	</div>
