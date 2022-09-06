@@ -69,19 +69,13 @@
             <div class="container">
                 <div class="row">
 
-                    <h2 class="mb-lg-5 mb-4">最近更新資訊</h2>
+                    <h2 class="mb-lg-5 mb-4" id="currentNO">目前候位號碼</h2>
 
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="news-thumb mb-4">
                            
 
                             <div class="news-text-info news-text-info-large">
-                                <span class="category-tag bg-danger">Featured</span>
-
-                                <h5 class="news-title mt-2">
-                                    <a href="../../front-end/news/news-detail.jsp" class="news-title-link">How to make a
-                                        healthy diet?</a>
-                                </h5>
                             </div>
                         </div>
                     </div>
@@ -105,8 +99,16 @@
                 <div class="row">
 
                     <div class="col-12">
-                        <h2 class="mb-lg-5 mb-4">News &amp; Events</h2>
+                        <button type="button" id="queuedInline">我要候位</button>
+                        <br>
+                        <br>
+                          <h3 class="mb-lg-5 mb-4" id="queuerNO">您的候位號碼</h3>
+                          <span id="queuerNO"></span>
                     </div>
+					<div>
+                          <h3 class="mb-lg-5 mb-4" id="remainNO">目前仍有n組</h3>
+                          <span id="remainNO"></span>
+					</div>              
 
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="news-thumb mb-4">
@@ -136,6 +138,7 @@
             </div>
         </section>
         <!-- ----- ----- ----- 中間內容 end ----- ----- ----- -->
+    <main>
     </main>
     <!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 
@@ -285,6 +288,22 @@
     <script src="../../front-assets/js/jquery.min.js"></script>
     <script src="../../front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
     <script src="../../front-assets/js/custom.js"></script>
+    <script type="text/javascript">
+    
+    function showCurrentNO {
+    	
+    	let xmlhttp
+    	
+    	
+    	
+    	
+    }
+    
+    
+    
+    
+    
+    </script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 </body>
 

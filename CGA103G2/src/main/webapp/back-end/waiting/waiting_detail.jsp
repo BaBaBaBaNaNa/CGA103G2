@@ -124,13 +124,18 @@ input:checked + label:after {
 				<div class="col-xl-6 col-md-12">
 					<div class="ms-panel ms-panel-fh">
 						<div class="ms-panel-header">
-							<h6>我是一區頭</h6>
+							<h6>First Area</h6>
 						</div>
 						<div class="ms-panel-body">
 							<form class="needs-validation clearfix" novalidate>
 								<div class="form-row">
-							
+									候位日期：(動態取今天)
 								</div>
+								<div class="form-row">
+									候位時段：(動態顯示時段)
+								</div>
+									
+									
 							</form>
 						</div>
 					</div>
@@ -140,12 +145,28 @@ input:checked + label:after {
 						<div class="col-md-12">
 							<div class="ms-panel">
 								<div class="ms-panel-header">
-									<h6>我是二區頭</h6>
+									<h6>Second Area</h6>
 								</div>
 								<div class="ms-panel-body">
 									<div id="imagesSlider" class="ms-image-slider carousel slide" data-ride="carousel">
 										<div class="carousel-inner">
+										當前編號：(動態取值)
+										<div>
+										<button type="button">入座(更改候位狀態為入座)</button>
+										<button type="button">過號(更改候位狀態為過號)</button>
+										<button type="button">下一號(跳轉至下一號)</button>
+										</div>
+										</div>
 
+										<div class="carousel-inner">
+										下一號：(動態取值 當前編號+1)
+										</div>
+
+										<div class="carousel-inner">
+										剩餘組數：(動態取值 總候位編號-當前編號)
+										</div>
+										<div class="carousel-inner">
+										總組數：(動態取值 背後位了幾次)
 										</div>
 
 									</div>
