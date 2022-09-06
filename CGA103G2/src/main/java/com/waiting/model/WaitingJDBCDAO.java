@@ -1,0 +1,266 @@
+package com.waiting.model;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class WaitingJDBCDAO implements WaitingDAO_interface{
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "dbc:mysql://localhost:3306/restaurant?serverTimezone=Asia/Taipei";
+	String userid = "dba";
+	String passwd = "0911";
+	
+	private static final String INSERT_STMT =
+			"INSERT INTO waiting(waiting_id, waiting_date, waiting_time, current_no, current_queued_no) VALUES (?, ?, ?, ?, ?)";
+	private static final String UPDATE =
+			"UPDATE waiting set waiting_id=?, waiting_date=?, waiting_time=?, current_no=?, current_queued_no=?";
+	private static final String DELETE =
+			"DELETE FROM waiting WHERE waiting_id = ?";
+	private static final String GET_ALL =
+			"SELECT waiting_id, waiting_date, waiting_time, current_no, current_queued_no FROM waiting ORDER BY waiting_id";
+	private static final String GET_ONE =
+			"SELECT waiting_id, waiting_date, waiting_time, current_no, current_queued_no FROM waiting WHERE waiting_id=?";
+	public void insert(WaitingVO waitingVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(INSERT_STMT);
+			
+			pstmt.setInt(1, waitingVO.getwaiting_id());
+			pstmt.setDate(2, waitingVO.getwaiting_date());
+			pstmt.setInt(3, waitingVO.getwaiting_time());
+			pstmt.setInt(4, waitingVO.getcurrent_no());
+			pstmt.setInt(5, waitingVO.getcurrent_queued_no());
+			
+			pstmt.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Counldn't load database driver." + e.getMessage());
+		}catch (SQLException se) {
+		throw new RuntimeException("A database error occured." + se.getMessage());
+		}finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void update(WaitingVO waitingVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE);
+			
+			pstmt.setInt(1, waitingVO.getwaiting_id());
+			pstmt.setDate(2, waitingVO.getwaiting_date());
+			pstmt.setInt(3, waitingVO.getwaiting_time());
+			pstmt.setInt(4, waitingVO.getcurrent_no());
+			pstmt.setInt(5, waitingVO.getcurrent_queued_no());
+			
+			pstmt.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Counldn't load database driver." + e.getMessage());
+		}catch (SQLException se) {
+		throw new RuntimeException("A database error occured." + se.getMessage());
+		}finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void delete(Integer waiting_id) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(DELETE);
+			
+			pstmt.setInt(1,waiting_id);
+			
+			pstmt.executeQuery();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
+
+	@Override
+	public WaitingVO findByPrimaryKey(Integer waiting_id) {
+		WaitingVO waitingVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ONE);
+			
+			pstmt.setInt(1, waiting_id);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				waitingVO = new WaitingVO();
+				waitingVO.setwaiting_id(rs.getInt("waiting_no"));
+				waitingVO.setwaiting_date(rs.getDate("waiting_date"));
+				waitingVO.setwaiting_time(rs.getInt("waiting_time"));
+				waitingVO.setcurrent_no(rs.getInt("current_no"));
+				waitingVO.setcurrent_queued_no(rs.getInt("current_queued_no"));
+				
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return waitingVO;
+	}
+
+	@Override
+	public List<WaitingVO> getAll() {
+		List<WaitingVO> list = new ArrayList<WaitingVO>();
+		WaitingVO waitingVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ALL);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				waitingVO = new WaitingVO();
+				waitingVO.setwaiting_id(rs.getInt("waiting_id"));
+				waitingVO.setwaiting_date(rs.getDate("waiting_date"));
+				waitingVO.setwaiting_time(rs.getInt("waiting_time"));
+				waitingVO.setcurrent_no(rs.getInt("current_no"));
+				waitingVO.setcurrent_queued_no(rs.getInt("current_queued_no"));
+				
+				list.add(waitingVO);
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	public static void main(String[] args) {
+		
+	}
+}
+		
+

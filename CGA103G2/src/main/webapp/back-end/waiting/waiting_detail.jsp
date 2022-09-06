@@ -27,6 +27,66 @@
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath}/favicon.ico">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
+
+<style type="text/css">
+	input[type=checkbox]{
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+label {
+	cursor: pointer;
+	width: 40px;
+	height: 20px;
+	background: grey;
+	display: block;
+	border-radius: 20px;
+	position: relative;
+}
+
+label:after {
+	content: '';
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	width: 18px;
+	height: 18px;
+	background: #fff;
+	border-radius: 18px;
+	transition: 0.3s;
+}
+
+.switch-txt::before,
+.switch-txt::after {
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+.switch-txt::before {
+  content: attr(turnOn);
+  color: #fff;
+}
+.switch-txt::after {
+  content: attr(turnOff);
+  color: #ccc;
+}
+
+input:checked + label {
+	background: #6f42c1;;
+}
+
+label:active:after {
+	width: 26px;
+}
+
+input:checked + label:after {
+	left: calc(100% - 1px);
+	transform: translateX(-100%);
+}
+
+</style>
 </head>
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
@@ -51,6 +111,73 @@
 			<%@ include file="../../back-end/tool/Upicon.file"%>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
+		
+		<input type="checkbox" id="switch" />
+			<label for="switch">
+			</label>
+		<div class="ms-content-wrapper">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="alert alert-success" role="hidden" style="display:none">
+					</div>
+				</div>
+				<div class="col-xl-6 col-md-12">
+					<div class="ms-panel ms-panel-fh">
+						<div class="ms-panel-header">
+							<h6>First Area</h6>
+						</div>
+						<div class="ms-panel-body">
+							<form class="needs-validation clearfix" novalidate>
+								<div class="form-row">
+									候位日期：(動態取今天)
+								</div>
+								<div class="form-row">
+									候位時段：(動態顯示時段)
+								</div>
+									
+									
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-6 col-md-12">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="ms-panel">
+								<div class="ms-panel-header">
+									<h6>Second Area</h6>
+								</div>
+								<div class="ms-panel-body">
+									<div id="imagesSlider" class="ms-image-slider carousel slide" data-ride="carousel">
+										<div class="carousel-inner">
+										當前編號：(動態取值)
+										<div>
+										<button type="button">入座(更改候位狀態為入座)</button>
+										<button type="button">過號(更改候位狀態為過號)</button>
+										<button type="button">下一號(跳轉至下一號)</button>
+										</div>
+										</div>
+
+										<div class="carousel-inner">
+										下一號：(動態取值 當前編號+1)
+										</div>
+
+										<div class="carousel-inner">
+										剩餘組數：(動態取值 總候位編號-當前編號)
+										</div>
+										<div class="carousel-inner">
+										總組數：(動態取值 背後位了幾次)
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
