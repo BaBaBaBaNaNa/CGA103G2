@@ -3,7 +3,7 @@ import java.util.*;
 
 import com.login.model.EmpLoginVO;
 
-public interface EmpDAO_interface {
+public interface EmpDAOInterface {
     public void insert(EmpVO empVO);
     public void update(EmpVO empVO);
     public void delete(Integer empno);
