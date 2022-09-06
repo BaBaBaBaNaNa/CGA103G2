@@ -11,10 +11,9 @@ public class RsvtCtrlService {
 		dao = new RsvtCtrlDAOImpl();
 	}
 
-	public RsvtCtrlVO addRsvtCtrl(Integer rsvtCtrlId,Integer rsvtCtrlOpen, Date rsvtCtrlDate, Integer rsvtCtrlPeriod, Integer rsvtCtrlMax) {
+	public RsvtCtrlVO addRsvtCtrl(Integer rsvtCtrlOpen, Date rsvtCtrlDate, Integer rsvtCtrlPeriod, Integer rsvtCtrlMax) {
 
 		RsvtCtrlVO rsvt = new RsvtCtrlVO();
-		rsvt.setRsvtCtrlId(rsvtCtrlId);
 		rsvt.setRsvtCtrlOpen(rsvtCtrlOpen);;
 		rsvt.setRsvtCtrlDate(rsvtCtrlDate);
 		rsvt.setRsvtCtrlPeriod(rsvtCtrlPeriod);

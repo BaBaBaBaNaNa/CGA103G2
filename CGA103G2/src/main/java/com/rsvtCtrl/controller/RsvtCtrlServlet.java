@@ -172,12 +172,6 @@ public class RsvtCtrlServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			Integer rsvtCtrlId = null;
-			try {
-				rsvtCtrlId = Integer.valueOf(req.getParameter("rsvtCtrlId").trim());
-			} catch (Exception e) {
-				errorMsgs.add("請輸入編號!");
-			}
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			Integer rsvtCtrlOpen = Integer.valueOf(req.getParameter("rsvtCtrlOpen").trim());
 
@@ -209,7 +203,6 @@ public class RsvtCtrlServlet extends HttpServlet {
 			}
 
 			RsvtCtrlVO rsvtCtrlVO = new RsvtCtrlVO();
-			rsvtCtrlVO.setRsvtCtrlId(rsvtCtrlId);
 			rsvtCtrlVO.setRsvtCtrlOpen(rsvtCtrlOpen);
 			rsvtCtrlVO.setRsvtCtrlPeriod(rsvtCtrlPeriod);
 			rsvtCtrlVO.setRsvtCtrlDate(rsvtCtrlDate);
@@ -229,7 +222,7 @@ public class RsvtCtrlServlet extends HttpServlet {
 				return; // 程式中斷
 			}
 			/*************************** 2.開始新增資料 *****************************************/
-			rsvtCtrlVO = rsvtCtrlSvc.addRsvtCtrl(rsvtCtrlId, rsvtCtrlOpen, rsvtCtrlDate, rsvtCtrlPeriod, rsvtCtrlMax);
+			rsvtCtrlVO = rsvtCtrlSvc.addRsvtCtrl(rsvtCtrlOpen, rsvtCtrlDate, rsvtCtrlPeriod, rsvtCtrlMax);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("rsvtCtrlVO", rsvtCtrlVO); // 資料庫update成功後,正確的的rsvtCtrlVO物件,存入req
@@ -253,7 +246,7 @@ public class RsvtCtrlServlet extends HttpServlet {
 			rsvtCtrlSvc.deleteRsvtCtrl(rsvtCtrlId);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url = "/back-end/reservation_ctrl/reservationCtrl_edit.jsp";
+			String url = "/back-end/reservation_ctrl/reservationCtrl_detail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}

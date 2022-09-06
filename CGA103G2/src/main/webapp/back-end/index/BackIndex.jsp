@@ -62,7 +62,6 @@
 	
 	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
 	<!-- Global Required Scripts Start -->
-	<script src="${pageContext.request.contextPath}/back-assets/js/rsvtCtrl.js"></script>
 	<script src="${pageContext.request.contextPath}/back-assets/js/jquery-3.3.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/back-assets/js/popper.min.js"></script>
 	<script src="${pageContext.request.contextPath}/back-assets/js/bootstrap.min.js"></script>

@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 
 
 public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
-	private static final String INSERT_STMT = "INSERT INTO RESERVATIONCTRL (RSVTCTRLID,RSVTCTRLOPEN ,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX) VALUES(?,?,?,?,?);";
+	private static final String INSERT_STMT = "INSERT INTO RESERVATIONCTRL (RSVTCTRLOPEN ,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX) VALUES(?,?,?,?);";
 	private static final String GET_ALL_STMT = "SELECT RSVTCTRLID,TABLETYPEID,RSVTCTRLOPEN,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX,RSVTCTRLNUMBER FROM RESERVATIONCTRL;";
 	private static final String GET_ONE_STMT = "SELECT RSVTCTRLID,TABLETYPEID,RSVTCTRLOPEN,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX,RSVTCTRLNUMBER FROM RESERVATIONCTRL WHERE RSVTCTRLID = ?";
 	private static final String GET_DATE_STMT = "SELECT RSVTCTRLID,TABLETYPEID,RSVTCTRLOPEN,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX,RSVTCTRLNUMBER FROM RESERVATIONCTRL WHERE RSVTCTRLDATE = ?";
@@ -55,11 +55,10 @@ public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
 	public void insert(RsvtCtrlVO rsvtCtrl) {
 		try (Connection conn = ds.getConnection();
 				PreparedStatement ps = conn.prepareStatement(INSERT_STMT);) {
-			ps.setInt(1, rsvtCtrl.getRsvtCtrlId());
-			ps.setInt(2, rsvtCtrl.getRsvtCtrlOpen());
-			ps.setDate(3, rsvtCtrl.getRsvtCtrlDate());
-			ps.setInt(4, rsvtCtrl.getRsvtCtrlPeriod());
-			ps.setInt(5, rsvtCtrl.getRsvtCtrlMax());
+			ps.setInt(1, rsvtCtrl.getRsvtCtrlOpen());
+			ps.setDate(2, rsvtCtrl.getRsvtCtrlDate());
+			ps.setInt(3, rsvtCtrl.getRsvtCtrlPeriod());
+			ps.setInt(4, rsvtCtrl.getRsvtCtrlMax());
 			ps.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();

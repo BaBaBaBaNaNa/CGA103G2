@@ -21,7 +21,7 @@ input {
   color: #2C3E50;
   font-size: 14px;
   letter-spacing: 1px;
-  ;
+  
 }
 
 input:focus {
@@ -109,11 +109,11 @@ thead tr:nth-child(3) th {
   color: white
 }
 
-.active {
-  /* border-radius: 50% !important; */
-  background-image: linear-gradient(#dce1e4, #64B5F6) !important;
-  color: #fff !important;
-}
+/* .active { */
+/*   border-radius: 50% !important; */
+/*   background-image: linear-gradient(#dce1e4, #64B5F6) !important; */
+/*   color: #fff !important; */
+/* } */
 
 .prev,
 .next,

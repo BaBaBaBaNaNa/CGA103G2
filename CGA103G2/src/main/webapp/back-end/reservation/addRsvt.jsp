@@ -20,7 +20,7 @@ RsvtVO rsvtVO = (RsvtVO) request.getAttribute("rsvtVO");
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="RsvtServlet" name="form1">
+<FORM METHOD="post" ACTION="RsvtFEServlet" name="form1">
 <table class="table">
 	<tr>
 		<td>顧客姓名:</td>
@@ -49,16 +49,6 @@ RsvtVO rsvtVO = (RsvtVO) request.getAttribute("rsvtVO");
 		<td>訂位日期:</td>
 		<td><input name="rsvtDate" id="f_date1" type="text" placeholder="請選擇日期" autoComplete="off"></td>
 	</tr>
-
-			<%-- 	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" /> --%>
-<!-- 	<tr> -->
-<!-- 		<td>部門:<font color=red><b>*</b></font></td> -->
-<!-- 		<td><select size="1" name="deptno"> -->
-<%-- 			<c:forEach var="deptVO" items="${deptSvc.all}"> --%>
-<%-- 				<option value="${deptVO.deptno}" ${(rsvtVO.deptno==deptVO.deptno)? 'selected':'' } >${deptVO.dname} --%>
-<%-- 			</c:forEach> --%>
-<!-- 		</select></td> -->
-<!-- 	</tr> -->
 
 </table>
 <br>

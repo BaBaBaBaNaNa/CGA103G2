@@ -137,9 +137,6 @@ dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-#submit_btn {
-  position: absolute;
-}
 
 #cancel {
   position: relative;
@@ -158,11 +155,6 @@ dialog::backdrop {
 
 }
 
-#myform {
-  position: relative;
-  top: 20px;
-  left: 20px;
-}
 
 /* dialog */
 dialog {

@@ -24,18 +24,9 @@ RsvtCtrlVO rsvtCtrlVO = (RsvtCtrlVO) request.getAttribute("rsvtCtrlVO");
 		</c:forEach>
 	</ul>
 </c:if>
-<style>
-.datepicker{
-z-index: 1 ;
-position: absolute !important;
-}
-</style>
+<body>
 <FORM METHOD="post" ACTION="RsvtCtrlServlet" name="form1">
 	<table class="table">
-		<tr>
-			<td>訂位控制編號:</td>
-			<td><input type="TEXT" name="rsvtCtrlId" size="45" value="" /></td>
-		</tr>
 		<tr>
 			<td>設定開放狀態:</td>
 			<td><select name="rsvtCtrlOpen">
@@ -75,8 +66,6 @@ position: absolute !important;
 		type="submit" value="送出新增">
 </FORM>
 </body>
-
-
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 

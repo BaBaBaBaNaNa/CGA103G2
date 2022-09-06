@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.sql.Date"%>
-<%@ page import="com.rsvtCtrl.model.*"%>
-<%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ page import="java.util.*"%>
+<%@ page import="com.rsvtCtrl.model.*"%>
+
 <%
-RsvtCtrlVO rsvtCtrlVO = (RsvtCtrlVO) request.getAttribute("rsvtCtrlVO");
+RsvtCtrlService rsvtCtrlSvc = new RsvtCtrlService();
+List<RsvtCtrlVO> list = rsvtCtrlSvc.getAll();
+pageContext.setAttribute("list", list);
 %>
-<%=rsvtCtrlVO == null%>
 <!DOCTYPE html>
 <html lang="zh-tw">
 
@@ -16,6 +18,12 @@ RsvtCtrlVO rsvtCtrlVO = (RsvtCtrlVO) request.getAttribute("rsvtCtrlVO");
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>義鄉人-義式餐酒館-管理中心</title>
+<style>
+.table th,.table tr{
+	text-align: center;
+	background-color: white;
+}
+</style>
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
 <!-- Iconic Fonts -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -48,34 +56,6 @@ RsvtCtrlVO rsvtCtrlVO = (RsvtCtrlVO) request.getAttribute("rsvtCtrlVO");
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 <style>
-div .datepicker datepicker-dropdown{
-z-index:100000 !important;
-}
-.table th, .table td {
-	text-align: center;
-	background-color: white;
-}
-
-.input_btn {
-	border-radius: 10px;
-	border: none;
-	width: 50px;
-	height: 50px;
-}
-
-.input_btn:active {
-	box-shadow: inset -1px -1px 1px 1 red;
-}
-
-.input_btn:hover {
-	cursor: pointer;
-	background-image: linear-gradient(90deg, #FA748B 0%, #f5a623 100%);
-	color: #fff;
-	box-shadow: 0px 10px 5px -2px rgba(0, 0, 0, 0.3);
-	/*   width: 100px;
-  height: 100px; */
-/* 	transform: scale(1.5); */
-}
 </style>
 <body
 	class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
@@ -111,74 +91,51 @@ z-index:100000 !important;
 		</c:forEach>
 	</ul>
 </c:if>
-<FORM METHOD="post" ACTION="RsvtCtrlServlet" name="form1">
-	<table class="table">
+<table class="table">
+	<tr>
+		<th>訂位控制編號</th>
+		<th>桌型編號</th>
+		<th>訂位控制開放</th>
+		<th>訂位控制日期</th>
+		<th>訂位控制時段</th>
+		<th>桌子上限</th>
+		<th>已預訂桌數</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<%@ include file="page1.file"%>
+	<c:forEach var="rsvtCtrlVO" items="${list}" begin="<%=pageIndex%>"
+		end="<%=pageIndex+rowsPerPage-1%>">
+
 		<tr>
-			<td>訂位控制編號:</td>
-			<td><input type="TEXT" name="rsvtCtrlId" size="45" value="" /></td>
+			<td>${rsvtCtrlVO.rsvtCtrlId}</td>
+			<td>${rsvtCtrlVO.tableTypeId}</td>
+			<td>${rsvtCtrlVO.rsvtCtrlOpen == 0 ? "開放" : "不開放"}</td>
+			<td>${rsvtCtrlVO.rsvtCtrlDate}</td>
+			<td>${rsvtCtrlVO.rsvtCtrlOpen == 0 ? "中午" : "晚上"}</td>
+			<td>${rsvtCtrlVO.rsvtCtrlMax}</td>
+			<td>${rsvtCtrlVO.rsvtCtrlNumber}</td>
+
+			<td>
+				<FORM METHOD="post" ACTION="RsvtCtrlServlet"
+					style="margin-bottom: 0px;">
+					<input type="submit" value="修改" class="input_btn"> <input type="hidden"
+						name="rsvtCtrlId" value="${rsvtCtrlVO.rsvtCtrlId}"> <input
+						type="hidden" name="action" value="getOne_For_Update">
+				</FORM>
+			</td>
+			<td>
+				<FORM METHOD="post" ACTION="RsvtCtrlServlet"
+					style="margin-bottom: 0px;">
+					<input type="submit" value="刪除" class="input_btn"> <input type="hidden"
+						name="rsvtCtrlId" value="${rsvtCtrlVO.rsvtCtrlId}"> <input
+						type="hidden" name="action" value="delete">
+				</FORM>
+			</td>
 		</tr>
-		<tr>
-			<td>設定開放狀態:</td>
-			<td><select name="rsvtCtrlOpen">
-					<option value="0" selected>開放</option>
-					<option value="1">不開放</option>
-			</select></td>
-		</tr>
-                   
-		<tr>
-			<td>設定訂位日期:</td>
-			<td><input name="rsvtCtrlDate" type="text" placeholder="請選擇日期"
-				autoComplete="off" class="datepicker mr-2 form-control" size="45" id="f_date1"></td>
-		</tr>
-		<tr>
-			<td>設定訂位時段:</td>
-			<td><select name="rsvtCtrlPeriod">
-					<option value="0">中午</option>
-					<option value="1">晚上</option>
-			</select></td>
-		</tr>
-		<tr>
-			<td>設定桌位上限:</td>
-			<td><input type="TEXT" name="rsvtCtrlMax" size="45" value="" /></td>
-		</tr>
-		<%-- 	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" /> --%>
-		<!-- 	<tr> -->
-		<!-- 		<td>部門:<font color=red><b>*</b></font></td> -->
-		<!-- 		<td><select size="1" name="deptno"> -->
-		<%-- 			<c:forEach var="deptVO" items="${deptSvc.all}"> --%>
-		<%-- 				<option value="${deptVO.deptno}" ${(rsvtCtrlVO.deptno==deptVO.deptno)? 'selected':'' } >${deptVO.dname} --%>
-		<%-- 			</c:forEach> --%>
-		<!-- 		</select></td> -->
-		<!-- 	</tr> -->
-
-	</table>
-	<br> <input type="hidden" name="action" value="insert"> 
-	<input type="submit" value="送出新增">
-</FORM>
-
-
-
-<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
-
-<%
-java.sql.Date rsvtCtrlDate = null;
-try {
-	rsvtCtrlDate = rsvtCtrlVO.getRsvtCtrlDate();
-} catch (Exception e) {
-	rsvtCtrlDate = new java.sql.Date(System.currentTimeMillis());
-}
-RsvtCtrlService rsvtCtrlSvc = new RsvtCtrlService();
-List<RsvtCtrlVO> list = rsvtCtrlSvc.getAll();
-List<String> lists = new ArrayList<>();
-
-String DateString = "";
-for (RsvtCtrlVO all : list) {
-	//取得不開放的日期
-	if (all.getRsvtCtrlOpen() == 1) {
-		DateString += "'" + all.getRsvtCtrlDate() + "'" + ",";
-	}
-}
-%>
+	</c:forEach>
+</table>
+<%@ include file="page2.file"%>
 <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-assets/css/jquery.datetimepicker.css" /> --%>
 <%-- <script src="<%=request.getContextPath()%>/back-assets/js/jquery.js"></script> --%>
 <%-- <script src="<%=request.getContextPath()%>/back-assets/js/jquery.datetimepicker.full.js"></script> --%>
@@ -205,21 +162,7 @@ for (RsvtCtrlVO all : list) {
 	<!-- Settings -->
 	<script src="../../back-assets/js/settings.js"></script>
 	<script>
-	$('.datepicker').datepicker({
-		container:'#dlgEdit', //增加container屬性, #dlgEdit是模態框的id
-		autoclose: true, // 選擇後自動關閉日期選擇器
-        language: 'zh-TW', // 語言切換 中文
-        format: 'yyyy-mm-dd', // 日期格式
-        todayHighlight: true, // 高亮"當天日期"
-        toggleActive: true, // 	點擊選擇，再次點擊取消
-        startDate: new Date(), //開放初始日期 ex=> 
-        // endDate:new Date(),
-        // clearBtn: true, //顯示清除按鈕
-        daysOfWeekDisabled: [3],  //每周隱藏的第幾天  0為周日6為星期六
-        datesDisabled: [ // 特殊日期禁用
-            <%=DateString%>
-        ],
-    });
+	
 	</script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 </body>
