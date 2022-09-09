@@ -69,8 +69,8 @@
             <div class="container">
                 <div class="row">
 
-                    <h2 class="mb-lg-5 mb-4" id="currentNO">目前候位號碼</h2>
-
+                    <h2 class="mb-lg-5 mb-4" >目前候位號碼(動態取值currentNO)</h2>
+						<span id="currentNO"></span>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="news-thumb mb-4">
                            
@@ -99,14 +99,14 @@
                 <div class="row">
 
                     <div class="col-12">
-                        <button type="button" id="queuedInline">我要候位</button>
+                        <button type="button" id="queuedInline" onclick="queueInList">我要候位</button>
                         <br>
                         <br>
-                          <h3 class="mb-lg-5 mb-4" id="queuerNO">您的候位號碼</h3>
+                          <h3 class="mb-lg-5 mb-4" id="queuerNO">您的候位號碼(動態取值取當下產生的號碼)</h3>
                           <span id="queuerNO"></span>
                     </div>
 					<div>
-                          <h3 class="mb-lg-5 mb-4" id="remainNO">目前仍有n組</h3>
+                          <h3 class="mb-lg-5 mb-4" id="remainNO">目前仍有n組(動態取值取剩餘組數)</h3>
                           <span id="remainNO"></span>
 					</div>              
 
@@ -290,14 +290,6 @@
     <script src="../../front-assets/js/custom.js"></script>
     <script type="text/javascript">
     
-    function showCurrentNO {
-    	
-    	let xmlhttp
-    	
-    	
-    	
-    	
-    }
     
     
     

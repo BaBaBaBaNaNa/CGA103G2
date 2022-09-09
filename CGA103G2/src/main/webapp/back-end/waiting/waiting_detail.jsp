@@ -112,9 +112,7 @@ input:checked + label:after {
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 		
-		<input type="checkbox" id="switch" />
-			<label for="switch">
-			</label>
+
 		<div class="ms-content-wrapper">
 			<div class="row">
 				<div class="col-md-12">
@@ -124,15 +122,17 @@ input:checked + label:after {
 				<div class="col-xl-6 col-md-12">
 					<div class="ms-panel ms-panel-fh">
 						<div class="ms-panel-header">
-							<h6>First Area</h6>
+							<h6>日期與時間</h6>
 						</div>
 						<div class="ms-panel-body">
 							<form class="needs-validation clearfix" novalidate>
 								<div class="form-row">
-									候位日期：(動態取今天)
+									候位日期：
+									<span id="today"></span>
 								</div>
 								<div class="form-row">
-									候位時段：(動態顯示時段)
+									候位時段：
+									<span id="timePeriod"></span>
 								</div>
 									
 									
@@ -151,6 +151,7 @@ input:checked + label:after {
 									<div id="imagesSlider" class="ms-image-slider carousel slide" data-ride="carousel">
 										<div class="carousel-inner">
 										當前編號：(動態取值)
+										<span id="currentNO"></span>
 										<div>
 										<button type="button">入座(更改候位狀態為入座)</button>
 										<button type="button">過號(更改候位狀態為過號)</button>
@@ -159,14 +160,17 @@ input:checked + label:after {
 										</div>
 
 										<div class="carousel-inner">
-										下一號：(動態取值 當前編號+1)
+										下一號：( 動態取值 當前編號+1)
+										<span id="nextNO"></span>
 										</div>
 
 										<div class="carousel-inner">
 										剩餘組數：(動態取值 總候位編號-當前編號)
+										<span id="remainNO"></span>
 										</div>
 										<div class="carousel-inner">
 										總組數：(動態取值 背後位了幾次)
+										<span id="totalNO"></span>
 										</div>
 
 									</div>
@@ -201,6 +205,31 @@ input:checked + label:after {
 	<script src="${pageContext.request.contextPath}/back-assets/js/framework.js"></script>
 	<!-- Settings -->
 	<script src="${pageContext.request.contextPath}/back-assets/js/settings.js"></script>
+	
+	<script type="text/javascript">
+	Today = new Date();
+	yy=Today.getFullYear();
+	mm=Today.getMonth()+1;
+	dd=Today.getDate();
+	
+	document.getElementById("today").innerHTML = yy+"/"+mm+"/"+dd;
+	
+	</script>
+	
+	<script type="text/javascript">
+	Today = new Date();
+	time = Today.getHours();
+	
+	if(time < 17){
+		document.getElementById("timePeriod").innerHTML = "中午";
+	}else{
+		document.getElementById("timePeriod").innerHTML = "晚上";
+	}
+	</script>
+	
+	<script type="text/javascript">
+	
+	</script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 </body>
 
