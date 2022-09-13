@@ -152,11 +152,11 @@ input:checked + label:after {
 										<div class="carousel-inner">
 										當前編號：(動態取值)
 										<span id="currentNO"></span>
+										</div>
 										<div>
 										<button type="button">入座(更改候位狀態為入座)</button>
 										<button type="button">過號(更改候位狀態為過號)</button>
 										<button type="button">下一號(跳轉至下一號)</button>
-										</div>
 										</div>
 
 										<div class="carousel-inner">

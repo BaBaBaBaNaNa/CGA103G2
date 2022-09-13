@@ -70,7 +70,7 @@
                 <div class="row">
 
                     <h2 class="mb-lg-5 mb-4" >目前候位號碼(動態取值currentNO)</h2>
-						<span id="currentNO"></span>
+						<span id="queuerNO"></span>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="news-thumb mb-4">
                            
@@ -99,7 +99,7 @@
                 <div class="row">
 
                     <div class="col-12">
-                        <button type="button" id="queuedInline" onclick="queueInList">我要候位</button>
+                        <button type="button" id="queueInListBtn" onclick="queueInListBtn">我要候位</button>
                         <br>
                         <br>
                           <h3 class="mb-lg-5 mb-4" id="queuerNO">您的候位號碼(動態取值取當下產生的號碼)</h3>
@@ -290,12 +290,57 @@
     <script src="../../front-assets/js/custom.js"></script>
     <script type="text/javascript">
     
+    $(document).ready(function(){
+    	 
+        $("#queueInListBtn").click(function(){
+
+            $.ajax({
+
+
+                 url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
+
+                 data: {
+                	 action: "queueInList", 
+                 },
+
+                 success : function(res){
+// 						showQueuerNO(res);
+// 						showRemainNO(res);
+                     console.log(JSON.parse(res));
+                 },
+
+                 //Ajax失敗後要執行的function，此例為印出錯誤訊息
+
+                 error:function(xhr, ajaxOptions, thrownError){
+
+                     alert(xhr.status+"\n"+thrownError);
+                 }
+
+             });
+
+        });
+
+     });  
+
+ </script>
+  
+  <script type="text/javascript">
+//   function showQueuerNO(){
+// 	  JSON.parse(res);
+	  
+// 	  document.getElementById("queuerNO").innerHTML = 
+//   }
+  
+//   function showRemainNO(){
+	  
+//   }
+  
+  </script>
     
     
     
     
     
-    </script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 </body>
 

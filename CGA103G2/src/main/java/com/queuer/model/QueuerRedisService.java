@@ -1,34 +1,10 @@
 package com.queuer.model;
 
-import javax.servlet.annotation.WebServlet;
-
 import redis.clients.jedis.Jedis;
 
-@WebServlet
-public class QueuerRedisFuction {
-	
+public class QueuerRedisService {
 	public static void main(String[] args) {
-		
-		int i = 2;
-		
-		switch (i) {
-		case 0 : 
-			queueInList();
-			break;
-			
-		case 1 : 
-			getNextNO();
-			break;
-			
-		case 2 : 
-			doSeatedList();
-			break;
-			
-		case 3 : 
-			doOverList();
-			break;
-			
-			}
+		closeShop();
 	}
 	
 	private static Jedis getJedisConnection() {
@@ -40,7 +16,21 @@ public class QueuerRedisFuction {
 		return jedis;
 	}
 	
-	public static void queueInList() {
+	public String getQueuerNO() {
+		
+		// 取得redis連線
+		Jedis jedis = getJedisConnection();
+		// 宣告變數
+		String queuerNO = "";
+		long queuerNOValue = 0;
+		
+		queuerNOValue = jedis.llen("queuerList");
+		queuerNO = Long.toString(queuerNOValue);
+		
+		return queuerNO;
+	}
+	
+	public void queueInList() {
 		
 		// --前台按鈕"我要候位"的功能--
 		
@@ -49,6 +39,8 @@ public class QueuerRedisFuction {
 		
 		// 宣告候位者號碼
 		long queuerNOValue = 0;
+		
+		String queuerNO = "";
 		
 		// 如果jedis不存在"queuerList"
 		if(!jedis.exists("queuerList")) {
@@ -59,34 +51,23 @@ public class QueuerRedisFuction {
 			
 			queuerNOValue = jedis.llen("queuerList");
 			
-			// 回傳前台"您的號碼"
-			System.out.println("您的候位號碼：" + queuerNOValue);
-			
 		}else {
 			
 			// 存在則為後面候位號碼
 			
 			queuerNOValue = jedis.llen("queuerList") + 1;
-			String queuerNO = Long.toString(queuerNOValue);
+			queuerNO = Long.toString(queuerNOValue);
 			
 			jedis.rpush("queuerList", queuerNO);
 						
-			// 回傳前台"您的號碼"
-			System.out.println("您的候位號碼：" + queuerNOValue);
 		}
-		
-		
-		
-		
-		// console印出，表示任務完成！
-		System.out.println("MISSION COMPLETE!");
 		
 		// 關閉連線
 		jedis.close();
 		
 	}
 	
-	public static void getNextNO() {
+	public String getNextNO() {
 		
 		// 取得redis連線
 		Jedis jedis = getJedisConnection();
@@ -109,17 +90,6 @@ public class QueuerRedisFuction {
 			// 取出排隊list中當前號碼，並存入字串變數中。
 			currentNO = jedis.lrange("queuerList", index, index).get(0);
 			
-			// 將此變數(型態未定)回傳至後台"當前號碼"
-			System.out.println("後台\"當前號碼\"" + currentNO);
-						
-			// 將此變數(型態未定)回傳至前台"當前號碼"
-			System.out.println("前台\"當前號碼\"" + currentNO);
-			
-			
-			
-			// console印出，表示任務完成！
-			System.out.println("MISSION COMPLETE!");
-			
 		}else {
 			
 			//設定索引值
@@ -128,24 +98,14 @@ public class QueuerRedisFuction {
 			// 取出排隊line中當前號碼，並存入字串變數中。
 			currentNO = jedis.lrange("queuerList", index, index).get(0);
 			
-			// 將此變數(型態未定)回傳至後台"當前號碼"
-			System.out.println("後台\"當前號碼\"" +currentNO);
-						
-			// 將此變數(型態未定)回傳至前台"當前號碼"
-			System.out.println("前台\"當前號碼\"" + currentNO);
-			
-			
-			
-			// console印出，表示任務完成！
-			System.out.println("MISSION COMPLETE!");
-			
 		}
 		
 		jedis.close();
+		return currentNO;
 		
 	}
 	
-	public static void doOverList() {
+	public void doOverList() {
 		
 		// --後台按鈕"過號"的功能--
 		
@@ -168,13 +128,7 @@ public class QueuerRedisFuction {
 			
 			// 存入過號隊伍
 			jedis.rpush("overList", currentNO);
-			
-			// 測試過號功能
-			System.out.println(currentNO + "已過號");
-			
-			// console印出，表示任務完成！
-			System.out.println("MISSION COMPLETE!");
-			
+
 			// 索引值遞增並轉型
 			String nextNO = Integer.toString(index + 1);
 			
@@ -186,7 +140,7 @@ public class QueuerRedisFuction {
 		jedis.close();
 	}
 	
-	public static void doSeatedList() {
+	public void doSeatedList() {
 		
 		// --後台按鈕"過號"的功能--
 		
@@ -209,12 +163,6 @@ public class QueuerRedisFuction {
 			
 			// 當前號碼存入入座list
 			jedis.rpush("seatedList", currentNO);
-			
-			// 測試入座功能
-			System.out.println(currentNO + "已入座");
-			
-			// console印出，表示任務完成！
-			System.out.println("MISSION COMPLETE!");
 			
 			// 索引值遞增並轉型
 			String nextNO = Integer.toString(index + 1);
