@@ -124,7 +124,7 @@ public class MemServlet extends HttpServlet {
 
 			String memGender = req.getParameter("memGender").trim();
 			if (memGender == null || memGender.trim().length() == 0) {
-				errorMsgs.add("權限請勿空白");
+				errorMsgs.add("性別請勿空白");
 			}
 
 			String memPermission = req.getParameter("memPermission").trim();
@@ -210,7 +210,7 @@ public class MemServlet extends HttpServlet {
 		// ----- ----- ----- getOne_For_Update end ----- ----- -----
 
 		// ----- ----- ----- update start ----- ----- -----
-		if ("update".equals(action)) { // 來自update_mem_input.jsp的請求
+		if ("update".equals(action)) { // 來自memEdit.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -236,6 +236,11 @@ public class MemServlet extends HttpServlet {
 			String memPassword = req.getParameter("memPassword").trim();
 			if (memPassword == null || memPassword.trim().length() == 0) {
 				errorMsgs.add("密碼請勿空白");
+			}
+			
+			String memGender = req.getParameter("memGender").trim();
+			if (memGender == null || memGender.trim().length() == 0) {
+				errorMsgs.add("性別請勿空白");
 			}
 
 
@@ -270,13 +275,13 @@ public class MemServlet extends HttpServlet {
 				errorMsgs.add("請輸入日期!");
 			}
 
+				
 			MemVO memVO = new MemVO();
-
 			memVO.setMemID(memID);
 			memVO.setMemName(memName);
 			memVO.setMemAccount(memAccount);
 			memVO.setMemPassword(memPassword);
-			
+			memVO.setMemGender(Integer.parseInt(memGender));
 			memVO.setMemPhone(memPhone);
 			memVO.setMemEmail(memEmail);
 			memVO.setMemAddress(memAddress);
@@ -292,17 +297,17 @@ public class MemServlet extends HttpServlet {
 			}
 			/*************************** 2.開始修改資料 *****************************************/
 			MemService memSvc = new MemService();
-			memVO = memSvc.updateMem(memID, memName, memAccount, memPassword, Integer.parseInt(memPermission),
+			memVO = memSvc.updateMem(memID, memName, memAccount, memPassword,Integer.parseInt(memGender), Integer.parseInt(memPermission),
 					 memPhone, memAddress, memEmail, memBirthday);
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("memVO", memVO); // 資料庫update成功後,正確的的empVO物件,存入req
+			req.setAttribute("memVO", memVO); // 資料庫update成功後,正確的的memVO物件,存入req
 			String url = "/back-end/member/memberEditsuccess.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交editsuccess.jsp
 			successView.forward(req, res);
 		}
 		// ----- ----- ----- update end ----- ----- -----
 		// ----- ----- ----- delete start ----- ----- -----
-		if ("delete".equals(action)) { // 來自listAllEmp.jsp
+		if ("delete".equals(action)) { // 來自memdetail.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to

@@ -7,7 +7,7 @@ public class MemService {
 	private MemDAO_interface dao;
 
 	public MemService() {
-		dao = new MemJDBCDAO();
+		dao = new MemDAO();
 	}
 
 	public MemVO addMem(
@@ -15,8 +15,8 @@ public class MemService {
 			String memName,
 			String memAccount, 
 			String memPassword,
-			int memperMission,
 			int memGender,
+			int memperMission,
 			String memPhone,
 			String memAddress,
 			String memEmail,
@@ -44,34 +44,32 @@ public class MemService {
 		
 	}
 
+
 	public MemVO updateMem( 
 			Integer memID,
 			String memName,
 			String memAccount, 
-			String memPassword,
+			String memPassword, 
+			Integer memGender,
 			Integer memPermission,
-			
 			String memPhone, 
 			String memAddress,
 			String memEmail,
 			java.sql.Date memBirthday
 			 ) 
 	{
-
 		MemVO memVO = new MemVO();
 
-		memVO.setMemAccount(memAccount);
 		memVO.setMemName(memName);
+		memVO.setMemAccount(memAccount);
 		memVO.setMemPassword(memPassword);
+		memVO.setMemGender(memGender);
+		memVO.setMemPhone(memPhone);
 		memVO.setMemEmail(memEmail);
 		memVO.setMemAddress(memAddress);
 		memVO.setMemBirthday(memBirthday);
-		memVO.setMemPhone(memPhone);
-		memVO.setMemID(memID);
 		memVO.setMemPermission(memPermission);
-		
-		
-		
+		memVO.setMemID(memID);
 		
 		dao.update(memVO);
 
