@@ -1,22 +1,22 @@
 var shoppingCart = (function() {
 	// =============================
-	// Private methods and propeties
+	// Private 相關方法設置
 	// =============================
 	cart = [];
 
-	// Constructor
+	// 建構子 品項名 價格 數量
 	function Item(name, price, count) {
 		this.name = name;
 		this.price = price;
 		this.count = count;
 	}
 
-	// Save cart
+	// 儲存購物車在session
 	function saveCart() {
 		sessionStorage.setItem('shoppingCart', JSON.stringify(cart));
 	}
 
-	// Load cart
+	// 從session中讀取購物車
 	function loadCart() {
 		cart = JSON.parse(sessionStorage.getItem('shoppingCart'));
 	}
@@ -26,11 +26,11 @@ var shoppingCart = (function() {
 
 
 	// =============================
-	// Public methods and propeties
+	// Public 相關方法設置
 	// =============================
 	var obj = {};
 
-	// Add to cart
+	// 增加物品數量
 	obj.addItemToCart = function(name, price, count) {
 		for (var item in cart) {
 			if (cart[item].name === name) {
@@ -43,7 +43,7 @@ var shoppingCart = (function() {
 		cart.push(item);
 		saveCart();
 	}
-	// Set count from item
+	// 設置物品的數量
 	obj.setCountForItem = function(name, count) {
 		for (var i in cart) {
 			if (cart[i].name === name) {
@@ -52,13 +52,16 @@ var shoppingCart = (function() {
 			}
 		}
 	};
-	// Remove item from cart
+	// 點擊減少物品數量,小於1時物品消失
 	obj.removeItemFromCart = function(name) {
 		for (var item in cart) {
 			if (cart[item].name === name) {
 				cart[item].count--;
 				if (cart[item].count === 0) {
 					cart.splice(item, 1);
+					var name = $(this).data('name')
+					shoppingCart.removeItemFromCartAll(name);
+					displayCart();
 				}
 				break;
 			}
@@ -66,7 +69,7 @@ var shoppingCart = (function() {
 		saveCart();
 	}
 
-	// Remove all items from cart
+	// 購物車中移除食物品項
 	obj.removeItemFromCartAll = function(name) {
 		for (var item in cart) {
 			if (cart[item].name === name) {
@@ -77,13 +80,13 @@ var shoppingCart = (function() {
 		saveCart();
 	}
 
-	// Clear cart
+	// 購物車無東西時
 	obj.clearCart = function() {
 		cart = [];
 		saveCart();
 	}
 
-	// Count cart 
+	// 購物車有東西時,計算數量
 	obj.totalCount = function() {
 		var totalCount = 0;
 		for (var item in cart) {
@@ -92,7 +95,7 @@ var shoppingCart = (function() {
 		return totalCount;
 	}
 
-	// Total cart
+	// 購物車有東西時,計算總價
 	obj.totalCart = function() {
 		var totalCart = 0;
 		for (var item in cart) {
@@ -101,7 +104,7 @@ var shoppingCart = (function() {
 		return Number(totalCart.toFixed(2));
 	}
 
-	// List cart
+	// 購物車的清單
 	obj.listCart = function() {
 		var cartCopy = [];
 		for (i in cart) {
@@ -133,9 +136,9 @@ var shoppingCart = (function() {
 
 
 // *****************************************
-// Triggers / Events
+// 監聽事件
 // ***************************************** 
-// Add item
+// 增加物品
 $('.add-to-cart').click(function(event) {
 	event.preventDefault();
 	var name = $(this).data('name');
@@ -144,13 +147,13 @@ $('.add-to-cart').click(function(event) {
 	displayCart();
 });
 
-// Clear items
+// 清除物品
 $('.clear-cart').click(function() {
 	shoppingCart.clearCart();
 	displayCart();
 });
 
-
+// 顯示購物車外觀
 function displayCart() {
 	var cartArray = shoppingCart.listCart();
 	var output = "";
@@ -171,8 +174,7 @@ function displayCart() {
 	$('.total-count').html(shoppingCart.totalCount());
 }
 
-// Delete item button
-
+// 刪除物件按鈕
 $('.show-cart').on("click", ".delete-item", function(event) {
 	var name = $(this).data('name')
 	shoppingCart.removeItemFromCartAll(name);
@@ -180,20 +182,20 @@ $('.show-cart').on("click", ".delete-item", function(event) {
 })
 
 
-// -1
+// 數量-1按鈕
 $('.show-cart').on("click", ".minus-item", function(event) {
 	var name = $(this).data('name')
 	shoppingCart.removeItemFromCart(name);
 	displayCart();
 })
-// +1
+// 數量+1按鈕
 $('.show-cart').on("click", ".plus-item", function(event) {
 	var name = $(this).data('name')
 	shoppingCart.addItemToCart(name);
 	displayCart();
 })
 
-// Item count input
+// 當有品項加入購物車時
 $('.show-cart').on("change", ".item-count", function(event) {
 	var name = $(this).data('name');
 	var count = Number($(this).val());
@@ -201,4 +203,5 @@ $('.show-cart').on("change", ".item-count", function(event) {
 	displayCart();
 });
 
+// 執行顯示購物車
 displayCart();

@@ -1,19 +1,20 @@
 package com.shopcart.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ShopCartVO implements java.io.Serializable{
 	private Integer ordersID;
-	private Integer empID;
 	private Integer memID;
 	private Integer empCounterID;
 	private Integer empDeliveryID;
 	private Integer seatID;
 	private Integer ordersType;
 	private Integer ordersAmount;
+	private Integer ordersStatus;
 	private String ordersDestination;
-	private Date ordersBuildDate;
-	private Date ordersMakeDate;
+	private Timestamp ordersBuildDate;
+	private Timestamp ordersMakeDate;
 	
 	private Integer orddetailsID;
 	private Integer mealsID;
@@ -27,12 +28,6 @@ public class ShopCartVO implements java.io.Serializable{
 	}
 	public void setOrdersID(Integer ordersID) {
 		this.ordersID = ordersID;
-	}
-	public Integer getEmpID() {
-		return empID;
-	}
-	public void setEmpID(Integer empID) {
-		this.empID = empID;
 	}
 	public Integer getMemID() {
 		return memID;
@@ -70,24 +65,31 @@ public class ShopCartVO implements java.io.Serializable{
 	public void setOrdersAmount(Integer ordersAmount) {
 		this.ordersAmount = ordersAmount;
 	}
+	public Integer getOrdersStatus() {
+		return ordersStatus;
+	}
+	public void setOrdersStatus(Integer ordersStatus) {
+		this.ordersStatus = ordersStatus;
+	}
 	public String getOrdersDestination() {
 		return ordersDestination;
 	}
 	public void setOrdersDestination(String ordersDestination) {
 		this.ordersDestination = ordersDestination;
 	}
-	public Date getOrdersBuildDate() {
+	public Timestamp getOrdersBuildDate() {
 		return ordersBuildDate;
 	}
-	public void setOrdersBuildDate(Date ordersBuildDate) {
+	public void setOrdersBuildDate(Timestamp ordersBuildDate) {
 		this.ordersBuildDate = ordersBuildDate;
 	}
-	public Date getOrdersMakeDate() {
+	public Timestamp getOrdersMakeDate() {
 		return ordersMakeDate;
 	}
-	public void setOrdersMakeDate(Date ordersMakeDate) {
+	public void setOrdersMakeDate(Timestamp ordersMakeDate) {
 		this.ordersMakeDate = ordersMakeDate;
 	}
+	
 	public Integer getOrddetailsID() {
 		return orddetailsID;
 	}

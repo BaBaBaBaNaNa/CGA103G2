@@ -23,10 +23,12 @@ public class ShopCartDAO implements ShopCartDAOInterface {
 		}
 	}
 
-	private static final String InsertStmt1 = "INSERT INTO Orders ( memID, empCounterID,empDeliveryID,seatID,ordersType,ordersAmount,ordersDestination,ordersBuildDate,ordersMakeDate) VALUES (?,?,?,?,?,?,?,?,?);";
+	private static final String InsertStmt1 = "INSERT INTO Orders ( memID, empCounterID,empDeliveryID,seatID,ordersType,ordersAmount,ordersStatus,ordersDestination,ordersBuildDate,ordersMakeDate) VALUES (?,?,?,?,?,?,?,?,?,?);";
 	private static final String InsertStmt2 = "INSERT INTO Orddetails ( ordersID, mealsID,orddetailsMealsQuantity,orddetailsMealsAmount,orddetailsMealsStatus,orddetailsDeliverStatus) VALUES (?,?,?,?,?,?);";
 	private static final String GetOrdersIDMAX = "SELECT max(ordersID) from orders;";
 
+	private static final String InsertInsideStmt = "INSERT INTO Orders ( ordersType,ordersStatus,ordersBuildDate) VALUES (?,?,?);";
+	
 	// ----- ----- ----- 購物車新增訂單 start ----- ----- -----
 	//新增訂單
 	@Override
@@ -44,9 +46,10 @@ public class ShopCartDAO implements ShopCartDAOInterface {
 			pstmt.setInt(4, shopcartVO.getSeatID());
 			pstmt.setInt(5, shopcartVO.getOrdersType());
 			pstmt.setInt(6, shopcartVO.getOrdersAmount());
-			pstmt.setString(7, shopcartVO.getOrdersDestination());
-			pstmt.setObject(8, shopcartVO.getOrdersBuildDate());
-			pstmt.setObject(9, shopcartVO.getOrdersMakeDate());
+			pstmt.setInt(7, shopcartVO.getOrdersStatus());
+			pstmt.setString(8, shopcartVO.getOrdersDestination());
+			pstmt.setTimestamp(9, shopcartVO.getOrdersBuildDate());
+			pstmt.setTimestamp(10, shopcartVO.getOrdersMakeDate());
 
 			pstmt.executeUpdate();
 
@@ -71,7 +74,45 @@ public class ShopCartDAO implements ShopCartDAOInterface {
 		}
 
 	}
+	//新增內用訂單
+	@Override
+	public void insertInsideOrders(ShopCartVO shopcartVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
 
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(InsertInsideStmt);
+
+
+			pstmt.setInt(1, shopcartVO.getOrdersType());
+			pstmt.setInt(2, shopcartVO.getOrdersStatus());
+			pstmt.setTimestamp(3, shopcartVO.getOrdersBuildDate());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
 	// 查詢ordersID最新一筆
 	@Override
 	public ShopCartVO findByPrimaryKey(Integer ordersID) {

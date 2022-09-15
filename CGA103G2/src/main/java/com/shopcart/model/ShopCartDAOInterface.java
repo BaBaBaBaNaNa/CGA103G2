@@ -5,6 +5,7 @@ import com.login.model.EmpLoginVO;
 
 public interface ShopCartDAOInterface {
     public void insertOrders(ShopCartVO shopcart);
+    public void insertInsideOrders(ShopCartVO shopcart);
     
     public void insertOrdersDetail(ShopCartVO shopcart);
 
