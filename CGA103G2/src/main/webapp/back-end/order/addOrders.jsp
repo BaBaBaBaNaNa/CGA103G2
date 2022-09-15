@@ -181,6 +181,8 @@ th, td {
 					data-parent="#side-nav-accordion">
 					<li><a
 						href="${pageContext.request.contextPath}/back-end/order/order_details.jsp">查看訂單</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/orddetails/select_page.jsp">查看訂單明細</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 訂單 end ----- ----- ----- -->
 
@@ -367,7 +369,7 @@ th, td {
 			<ol class="breadcrumb pl-0">
 				<li class="breadcrumb-item"><a href="#"><i
 						class="material-icons">home</i>首頁</a></li>
-				<li class="breadcrumb-item"><a href="#">訂單管理</a></li>
+				<li class="breadcrumb-item"><a href="order_details.jsp">訂單管理</a></li>
 				<li class="breadcrumb-item active" aria-current="page">查看訂單</li>
 			</ol>
 		</nav>

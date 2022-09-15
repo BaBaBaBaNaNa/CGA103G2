@@ -61,7 +61,7 @@ h4 {
 <style>
 table {
 	width: 1000px;
-	background-color: white;
+	background-color: #f0f0fa;
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
@@ -180,6 +180,8 @@ th, td {
 					data-parent="#side-nav-accordion">
 					<li><a
 						href="${pageContext.request.contextPath}/back-end/order/order_details.jsp">查看訂單</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/orddetails/select_page.jsp">查看訂單明細</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 訂單 end ----- ----- ----- -->
 

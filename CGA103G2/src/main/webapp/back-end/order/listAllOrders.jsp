@@ -133,9 +133,16 @@
 			<!-- ----- ----- ----- 菜單 end ----- ----- ----- -->
 
 			<!-- ----- ----- ----- 訂單 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#orders" aria-expanded="false" aria-controls="orders"><span><i class="fas fa-file-orders fs-16"></i>訂單管理</span></a>
-				<ul id="orders" class="collapse" aria-labelledby="orders" data-parent="#side-nav-accordion">
-					<li><a href="${pageContext.request.contextPath}/back-end/order/order_details.jsp">查看訂單</a></li>
+			<li class="menu-item"><a href="#" class="has-chevron"
+				data-toggle="collapse" data-target="#orders" aria-expanded="false"
+				aria-controls="orders"><span><i
+						class="fas fa-file-orders fs-16"></i>訂單管理</span></a>
+				<ul id="orders" class="collapse" aria-labelledby="orders"
+					data-parent="#side-nav-accordion">
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/order/order_details.jsp">查看訂單</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/orddetails/select_page.jsp">查看訂單明細</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 訂單 end ----- ----- ----- -->
 

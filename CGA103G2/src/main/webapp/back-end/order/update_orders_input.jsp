@@ -1,17 +1,44 @@
-<%@page import="java.sql.Timestamp"%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.orders.model.*"%>
+<%@page import="java.sql.Timestamp"%>
 
 <%
-OrdersVO ordersVO = (OrdersVO) request.getAttribute("ordersVO"); //OrdersServlet.java (Concroller) ¦s¤JreqªºempVOª«¥ó (¥]¬AÀ°¦£¨ú¥XªºempVO, ¤]¥]¬A¿é¤J¸ê®Æ¿ù»~®ÉªºempVOª«¥ó)
+OrdersVO ordersVO = (OrdersVO) request.getAttribute("ordersVO"); //OrdersServlet.java (Concroller) å­˜å…¥reqçš„ordersVOç‰©ä»¶ (åŒ…æ‹¬å¹«å¿™å–å‡ºçš„ordersVO, ä¹ŸåŒ…æ‹¬è¼¸å…¥è³‡æ–™éŒ¯èª¤æ™‚çš„ordersVOç‰©ä»¶)
 %>
---<%=ordersVO == null%>--${ordersVO.memID}--
 
-<html>
+<!DOCTYPE html>
+<html lang="zh-tw">
+
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>­q³æ¸ê®Æ­×§ï - update_orders_input.jsp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Costic Dashboard</title>
+<!-- Iconic Fonts -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<link
+	href="../../back-assets/vendors/iconic-fonts/font-awesome/css/all.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="../../back-assets/vendors/iconic-fonts/flat-icons/flaticon.css">
+<link rel="stylesheet"
+	href="../../back-assets/vendors/iconic-fonts/cryptocoins/cryptocoins.css">
+<link rel="stylesheet"
+	href="../../back-assets/vendors/iconic-fonts/cryptocoins/cryptocoins-colors.css">
+<!-- Bootstrap core CSS -->
+<link href="../../back-assets/css/bootstrap.min.css" rel="stylesheet">
+<!-- Page Specific Css (Datatables.css) -->
+<link href="../../back-assets/css/datatables.min.css" rel="stylesheet">
+<!-- jQuery UI -->
+<link href="../../back-assets/css/jquery-ui.min.css" rel="stylesheet">
+<!-- Costic Core styles -->
+<link href="../../back-assets/css/style.css" rel="stylesheet">
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
 
 <style>
 table#table-1 {
@@ -35,7 +62,7 @@ h4 {
 <style>
 table {
 	width: 570px;
-	background-color: white;
+	background-color: #f0f0fa;
 	margin-top: 1px;
 	margin-bottom: 1px;
 }
@@ -48,133 +75,423 @@ th, td {
 	padding: 1px;
 }
 </style>
-
 </head>
-<body bgcolor='white'>
 
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>­q³æ¸ê®Æ­×§ï - update_orders_input.jsp</h3>
-				<h4>
-					<a href="order_details.jsp"><img src="images/back1.gif"
-						width="100" height="32" border="0">¦^­º­¶</a>
-				</h4>
-			</td>
-		</tr>
-	</table>
+<body
+	class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
+	<!-- Preloader -->
+	<div id="preloader-wrap">
+		<div class="spinner spinner-8">
+			<div class="ms-circle1 ms-child"></div>
+			<div class="ms-circle2 ms-child"></div>
+			<div class="ms-circle3 ms-child"></div>
+			<div class="ms-circle4 ms-child"></div>
+			<div class="ms-circle5 ms-child"></div>
+			<div class="ms-circle6 ms-child"></div>
+			<div class="ms-circle7 ms-child"></div>
+			<div class="ms-circle8 ms-child"></div>
+			<div class="ms-circle9 ms-child"></div>
+			<div class="ms-circle10 ms-child"></div>
+			<div class="ms-circle11 ms-child"></div>
+			<div class="ms-circle12 ms-child"></div>
+		</div>
+	</div>
+	<!-- Overlays -->
+	<div class="ms-aside-overlay ms-overlay-left ms-toggler"
+		data-target="#ms-side-nav" data-toggle="slideLeft"></div>
+	<div class="ms-aside-overlay ms-overlay-right ms-toggler"
+		data-target="#ms-recent-activity" data-toggle="slideRight"></div>
+	<!-- Sidebar Navigation Left -->
 
-	<h3>¸ê®Æ­×§ï:</h3>
+	<!-- ----- ----- ----- æœ€å·¦é‚Šçš„ é¸æ“‡åˆ— start ----- ----- ----- -->
+	<aside id="ms-side-nav"
+		class="side-nav fixed ms-aside-scrollable ms-aside-left">
+		<!-- Logo -->
+		<div class="logo-sn ms-d-block-lg">
+			<a class="pl-0 ml-0 text-center"
+				href="${pageContext.request.contextPath}/back-end/backstage/Back_index.jsp"><img
+				src="${pageContext.request.contextPath}/back-assets/img/logo/logo01.png"
+				alt="logo"></a>
+		</div>
+		<!-- Navigation -->
+		<ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
+			<!-- ----- ----- ----- å°å‘é¦–é  start ----- ----- ----- -->
+			<li class="menu-item"><a
+				href="${pageContext.request.contextPath}/back-end/backstage/Back_index.jsp"><span><i
+						class="material-icons fs-16"></i>å¾Œè‡ºç®¡ç†ç³»çµ± - é¦–é </span></a></li>
+			<!-- ----- ----- ----- å°å‘é¦–é  end ----- ----- ----- -->
 
-	<%-- ¿ù»~ªí¦C --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
+			<!-- ----- ----- ----- å“¡å·¥ start ----- ----- ----- -->
+			<li class="menu-item"><a href="#" class="has-chevron"
+				data-toggle="collapse" data-target="#employee" aria-expanded="false"
+				aria-controls="employee"><span><i
+						class="fas fa-file-employee fs-16"></i>å“¡å·¥ç®¡ç†</span></a>
+				<ul id="employee" class="collapse" aria-labelledby="employee"
+					data-parent="#side-nav-accordion">
+					<li><a
+						href="${pageContext.request.contextPath}/EmpShowServlet">æŸ¥çœ‹å“¡å·¥è³‡æ–™</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/employee/employee_add.jsp">æ–°å¢å“¡å·¥è³‡æ–™</a></li>
+				</ul></li>
+			<!-- ----- ----- ----- å“¡å·¥ end ----- ----- ----- -->
+
+			<!-- ----- ----- ----- æœƒå“¡ start ----- ----- ----- -->
+			<li class="menu-item"><a href="#" class="has-chevron"
+				data-toggle="collapse" data-target="#member" aria-expanded="false"
+				aria-controls="member"><span><i
+						class="fas fa-file-member fs-16"></i>æœƒå“¡ç®¡ç†</span></a>
+				<ul id="member" class="collapse" aria-labelledby="member"
+					data-parent="#side-nav-accordion">
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/member/member_detail.jsp">æŸ¥çœ‹æœƒå“¡è³‡æ–™</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/member/member_add.jsp">æ–°å¢å“¡å·¥è³‡æ–™</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/member/member_edit.jsp">ä¿®æ”¹å“¡å·¥è³‡æ–™</a></li>
+				</ul></li>
+			<!-- ----- ----- ----- æœƒå“¡ end ----- ----- ----- -->
+
+			<!-- ----- ----- ----- èœå–® start ----- ----- ----- -->
+			<li class="menu-item"><a href="#" class="has-chevron"
+				data-toggle="collapse" data-target="#product" aria-expanded="false"
+				aria-controls="product"><span><i
+						class="fa fa-archive fs-16"></i>ç¸½èœå–®</span></a>
+				<ul id="product" class="collapse" aria-labelledby="product"
+					data-parent="#side-nav-accordion">
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/product/product_cata.jsp">èœå–®ç›®éŒ„</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/product/product_list.jsp">èœå–®åˆ—è¡¨</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/product/product_grid.jsp">èœå–®ç¶²æ ¼</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/product/product_add.jsp">åŠ å…¥èœæ¨£</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/product/product_detail.jsp">ç”¢å“ç´°ç¯€</a></li>
+				</ul></li>
+			<!-- ----- ----- ----- èœå–® end ----- ----- ----- -->
+
+			<!-- ----- ----- ----- è¨‚å–® start ----- ----- ----- -->
+			<li class="menu-item"><a href="#" class="has-chevron"
+				data-toggle="collapse" data-target="#orders" aria-expanded="false"
+				aria-controls="orders"><span><i
+						class="fas fa-file-orders fs-16"></i>è¨‚å–®ç®¡ç†</span></a>
+				<ul id="orders" class="collapse" aria-labelledby="orders"
+					data-parent="#side-nav-accordion">
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/order/order_details.jsp">æŸ¥çœ‹è¨‚å–®</a></li>
+				</ul></li>
+			<!-- ----- ----- ----- è¨‚å–® end ----- ----- ----- -->
+
+			<!-- ----- ----- ----- è¨‚ä½ start ----- ----- ----- -->
+			<li class="menu-item"><a href="#" class="has-chevron"
+				data-toggle="collapse" data-target="#reservation"
+				aria-expanded="false" aria-controls="reservation"><span><i
+						class="fas fa-file-reservation fs-16"></i>è¨‚ä½ç®¡ç†</span></a>
+				<ul id="reservation" class="collapse" aria-labelledby="reservation"
+					data-parent="#side-nav-accordion">
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/reservation/reservation_detail.jsp">æŸ¥çœ‹è¨‚ä½</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/reservation/reservation_edit.jsp">ä¿®æ”¹è¨‚ä½</a></li>
+				</ul></li>
+			<!-- ----- ----- ----- è¨‚ä½ end ----- ----- ----- -->
+
+			<!-- ----- ----- ----- å€™ä½ start ----- ----- ----- -->
+			<li class="menu-item"><a href="#" class="has-chevron"
+				data-toggle="collapse" data-target="#waiting" aria-expanded="false"
+				aria-controls="waiting"><span><i
+						class="fas fa-file-waiting fs-16"></i>å€™ä½ç®¡ç†</span></a>
+				<ul id="waiting" class="collapse" aria-labelledby="waiting"
+					data-parent="#side-nav-accordion">
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/waiting/waiting_detail.jsp">æŸ¥çœ‹å€™ä½</a></li>
+				</ul></li>
+			<!-- ----- ----- ----- å€™ä½ end ----- ----- ----- -->
+
+			<!-- ----- ----- ----- æ¡Œä½ start ----- ----- ----- -->
+			<li class="menu-item"><a href="#" class="has-chevron"
+				data-toggle="collapse" data-target="#restaurant_table"
+				aria-expanded="false" aria-controls="restaurant_table"><span><i
+						class="fas fa-file-member fs-16"></i>æ¡Œä½ç®¡ç†</span></a>
+				<ul id="restaurant_table" class="collapse"
+					aria-labelledby="restaurant_table"
+					data-parent="#side-nav-accordion">
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/restaurant_table/restaurant_table_detail.jsp">æŸ¥çœ‹æ¡Œä½</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/restaurant_table/restaurant_table_add.jsp">æ–°å¢æ¡Œä½</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/restaurant_table/restaurant_table_edit.jsp">ä¿®æ”¹æ¡Œä½</a></li>
+				</ul></li>
+			<!-- ----- ----- ----- æ¡Œä½ end ----- ----- ----- -->
+
+			<!-- ----- ----- ----- æ˜ç´° start ----- ----- ----- -->
+			<li class="menu-item"><a href="#" class="has-chevron"
+				data-toggle="collapse" data-target="#invoice" aria-expanded="false"
+				aria-controls="invoice"><span><i
+						class="fas fa-file-invoice fs-16"></i>é¡§å®¢æ¶ˆè²»æ˜ç´°</span></a>
+				<ul id="invoice" class="collapse" aria-labelledby="invoice"
+					data-parent="#side-nav-accordion">
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/invoice/invoice_detail.jsp">æ¶ˆè²»æ˜ç´°</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/invoice/invoice_list.jsp">æ˜ç´°åˆ—è¡¨</a></li>
+				</ul></li>
+			<!-- ----- ----- ----- æ˜ç´° end ----- ----- ----- -->
+
+			<!-- ----- ----- ----- é¡§å®¢ start ----- ----- ----- -->
+			<li class="menu-item"><a href="#" class="has-chevron"
+				data-toggle="collapse" data-target="#customer" aria-expanded="false"
+				aria-controls="customer"><span><i
+						class="fas fa-user-friends fs-16"></i>é¡§å®¢å›æ‡‰</span></a>
+				<ul id="customer" class="collapse" aria-labelledby="customer"
+					data-parent="#side-nav-accordion">
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/customer/customer_review.jsp">é¡§å®¢å›æ‡‰</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/customer/customer_list.jsp">é¡§å®¢åˆ—è¡¨</a></li>
+				</ul></li>
+			<!-- ----- ----- ----- é¡§å®¢ end ----- ----- ----- -->
+
+			<!-- ----- ----- ----- ç©ºç™½é é¢ start ----- ----- ----- -->
+			<li class="menu-item"><a href="#" class="has-chevron"
+				data-toggle="collapse" data-target="#nothing1" aria-expanded="false"
+				aria-controls="nothing1"><span><i
+						class="fas fa-file-invoice fs-16"></i>ç©ºç™½é é¢</span></a>
+				<ul id="nothing1" class="collapse" aria-labelledby="nothing1"
+					data-parent="#side-nav-accordion">
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/nothing/nothing1.jsp">nothing1</a></li>
+				</ul></li>
+			<!-- ----- ----- ----- ç©ºç™½é é¢ end ----- ----- ----- -->
 		</ul>
-	</c:if>
+	</aside>
+	<!-- ----- ----- ----- æœ€å·¦é‚Šçš„ é¸æ“‡åˆ— end ----- ----- ----- -->
 
-	<FORM METHOD="post" ACTION="orders.do" name="form1">
-		<table>
-			<tr>
-				<td>­q³æ½s¸¹:<font color=red><b>*</b></font></td>
-				<td><%=ordersVO.getOrdersID()%></td>
-			</tr>
-			
-			<tr>
-				<td>·|­û_½s¸¹:</td>
-				<td><input type="TEXT" name="memID" size="45"
-					value="<%=ordersVO.getMemID()%>" /></td>
-			</tr>
-			<tr>
-				<td>Âd¥x­û¤u_½s¸¹:</td>
-				<td><input type="TEXT" name="empCounterID" size="45"
-					value="<%=ordersVO.getEmpCounterID()%>" /></td>
-			</tr>
-			<tr>
-				<td>¥~°e­û¤u_½s¸¹:</td>
-				<td><input type="TEXT" name="empDeliveryID" size="45"
-					value="<%=ordersVO.getEmpDeliveryID()%>" /></td>
-			</tr>
-			<tr>
-				<td>®à¤l_½s¸¹:</td>
-				<td><input type="TEXT" name="seatID" size="45"
-					value="<%=ordersVO.getSeatID()%>" /></td>
-			</tr>
-			<tr>
-				<td>­q³æ_ºØÃş(¥~±a ¥~°e ¤º¥Î):</td>
-				<td><select name="ordersType" id="ordersType">
-						<option value= "0">¥~±a</option>
-						<option value= "1">¥~°e</option>
-						<option value= "2">¤º¥Î</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>­q³æ_Á`ª÷ÃB:</td>
-				<td><input type="TEXT" name="ordersAmount" size="45"
-					value="<%=ordersVO.getOrdersAmount()%>" /></td>
-			</tr>
-			<tr>
-				<td>­q³æª¬ºA(§¹¦¨, ¥¼§¹¦¨, °h¦^):</td>
-				<td><select name= "ordersStatus" id="ordersStatus">
-						<option value="0">§¹¦¨</option>
-						<option value="1">¥¼§¹¦¨</option>
-						<option value="2">°h¦^</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>¨úÀ\¦aÂI:</td>
-				<td><input type="TEXT" name="ordersDestination" size="45"	
-					value="<%=ordersVO.getOrdersDestination()%>" /></td>
-			</tr>
-			<tr>
-				<td>¦¨¥ß­q³æ¤é:</td>
-				<td><input name="ordersBuildDate" id="f_date1" type="text"></td>
-			</tr>
-			<tr>
-				<td>¹w­p»s§@¤é:</td>
-				<td><input name="ordersMakeDate" id="f_date2" type="text"></td>
-			</tr>
+	<!-- ----- ----- ----- ä¸­é–“ start ----- ----- ----- -->
+	<main class="body-content">
+		<!-- ----- ----- -----   ä¸­é–“ä¸Šé¢Bar start ----- ----- ----- -->
+		<nav class="navbar ms-navbar">
+			<div class="ms-aside-toggler ms-toggler pl-0"
+				data-target="#ms-side-nav" data-toggle="slideLeft">
+				<span class="ms-toggler-bar bg-primary"></span><span
+					class="ms-toggler-bar bg-primary"></span><span
+					class="ms-toggler-bar bg-primary"></span>
+			</div>
+			<div class="logo-sn logo-sm ms-d-block-sm">
+				<a class="pl-0 ml-0 text-center navbar-brand mr-0"
+					href="${pageContext.request.contextPath}/back-end/backstage/Back_index.jsp"><img
+					src="${pageContext.request.contextPath}/back-assets/img/logo/logo01.png"
+					alt="logo"></a>
+			</div>
+			<ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
+				<li class="ms-nav-item ms-search-form pb-0 py-0">
+					<form class="ms-form" method="post">
+						<div class="ms-form-group my-0 mb-0 has-icon fs-14">
+							<input type="search" class="ms-form-input" name="search"
+								placeholder="Search here..." value=""><i
+								class="flaticon-search text-disabled"></i>
+						</div>
+					</form>
+				</li>
+				<li class="ms-nav-item dropdown"><a href="#"
+					class="text-disabled ms-has-notification" id="mailDropdown"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+						class="flaticon-mail"></i></a>
+					<ul class="dropdown-menu dropdown-menu-right"
+						aria-labelledby="mailDropdown">
+						<li class="dropdown-menu-header">
+							<h6 class="dropdown-header ms-inline m-0">
+								<span class="text-disabled">ä¿¡ç®±</span>
+							</h6> <span class="badge badge-pill badge-success">0 New</span>
+						</li>
+						<li class="dropdown-divider"></li>
 
-
+						<li class="dropdown-divider"></li>
+						<li class="dropdown-menu-footer text-center"><a href="">Go
+								to Inbox</a></li>
+					</ul></li>
+				<li class="ms-nav-item dropdown"><a href="#"
+					class="text-disabled ms-has-notification" id="notificationDropdown"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+						class="flaticon-bell"></i></a>
+					<ul class="dropdown-menu dropdown-menu-right"
+						aria-labelledby="notificationDropdown">
+						<li class="dropdown-menu-header">
+							<h6 class="dropdown-header ms-inline m-0">
+								<span class="text-disabled">é€šçŸ¥</span>
+							</h6> <span class="badge badge-pill badge-info">0 New</span>
+						</li>
+						<li class="dropdown-divider"></li>
+						<li class="dropdown-menu-footer text-center"><a href="#">æŸ¥çœ‹æ‰€æœ‰é€šçŸ¥</a></li>
+					</ul></li>
+				<li class="ms-nav-item ms-nav-user dropdown"><a href="#"
+					id="userDropdown" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"><img
+						class="ms-user-img ms-img-round float-right"
+						src="${pageContext.request.contextPath}/back-assets/img/costic/customer-6.jpg"
+						alt="people"></a>
+					<ul class="dropdown-menu dropdown-menu-right user-dropdown"
+						aria-labelledby="userDropdown">
+						<li class="dropdown-menu-header">
+							<h6 class="dropdown-header ms-inline m-0">
+								<span class="text-disabled">Welcome, å“¡å·¥å§“å</span>
+							</h6>
+						</li>
+						<li class="dropdown-divider"></li>
+						<li class="ms-dropdown-list"><a class="media fs-14 p-2"
+							href=""><span><i class="flaticon-user mr-2"></i>å€‹äººåŸºæœ¬è³‡æ–™</span></a><a
+							class="media fs-14 p-2" href=""><span><i
+									class="flaticon-mail mr-2"></i>ä¿¡ç®±</span><span
+								class="badge badge-pill badge-info">3</span></a><a
+							class="media fs-14 p-2" href=""><span><i
+									class="flaticon-gear mr-2"></i>å¸³è™Ÿè¨­å®š</span></a></li>
+						<li class="dropdown-divider"></li>
+						<li class="dropdown-menu-footer"><a class="media fs-14 p-2"
+							href="${pageContext.request.contextPath}/back-end/prebuilt-pages/default-login.html"><span><i
+									class="flaticon-shut-down mr-2"></i>Logout</span></a></li>
+					</ul></li>
+			</ul>
+			<div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler"
+				data-toggle="slideDown" data-target="#ms-nav-options">
+				<span class="ms-toggler-bar bg-primary"></span><span
+					class="ms-toggler-bar bg-primary"></span><span
+					class="ms-toggler-bar bg-primary"></span>
+			</div>
+		</nav>
+		<!-- ----- ----- -----   ä¸­é–“ä¸Šé¢Bar end ----- ----- ----- -->
+		<!-- ----- ----- -----   ä¸­é–“ç›®éŒ„æ¢ start ----- ----- ----- -->
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb pl-0">
+				<li class="breadcrumb-item"><a href="#"><i
+						class="material-icons">home</i>é¦–é </a></li>
+				<li class="breadcrumb-item"><a href="order_details.jsp">è¨‚å–®ç®¡ç†</a></li>
+				<li class="breadcrumb-item active" aria-current="page">æŸ¥çœ‹è¨‚å–®</li>
+			</ol>
+		</nav>
+		<!-- ----- ----- -----   ä¸­é–“ç›®éŒ„æ¢ end ----- ----- ----- -->
+		<!-- ----- ----- -----   ä¸­é–“ä¸‹é¢å…§å®¹ start ----- ----- ----- -->
+		<table id="table-1">
+			<tr>
+				<td>
+					<h3>è¨‚å–®è³‡æ–™ä¿®æ”¹ - update_orders_input.jsp</h3>
+					<h4>
+						<a href="order_details.jsp"><img src="images/back1.gif"
+							width="100" height="32" border="0">å›é¦–é </a>
+					</h4>
+				</td>
+			</tr>
 		</table>
-		<br> <input type="hidden" name="action" value="update"> <input
-			type="hidden" name="ordersID" value="<%=ordersVO.getOrdersID()%>">
-		<input type="submit" value="°e¥X­×§ï">
-	</FORM>
-</body>
+
+		<h3>è³‡æ–™ä¿®æ”¹:</h3>
+
+		<%-- éŒ¯èª¤è¡¨åˆ— --%>
+		<c:if test="${not empty errorMsgs}">
+			<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
+			<ul>
+				<c:forEach var="message" items="${errorMsgs}">
+					<li style="color: red">${message}</li>
+				</c:forEach>
+			</ul>
+		</c:if>
+
+		<FORM METHOD="post" ACTION="orders.do" name="form1">
+			<table>
+				<tr>
+					<td>è¨‚å–®ç·¨è™Ÿ:<font color=red><b>*</b></font></td>
+					<td><%=ordersVO.getOrdersID()%></td>
+				</tr>
+
+				<tr>
+					<td>æœƒå“¡_ç·¨è™Ÿ:</td>
+					<td><input type="TEXT" name="memID" size="45"
+						value="<%=ordersVO.getMemID()%>" /></td>
+				</tr>
+				<tr>
+					<td>æ«ƒå°å“¡å·¥_ç·¨è™Ÿ:</td>
+					<td><input type="TEXT" name="empCounterID" size="45"
+						value="<%=ordersVO.getEmpCounterID()%>" /></td>
+				</tr>
+				<tr>
+					<td>å¤–é€å“¡å·¥_ç·¨è™Ÿ:</td>
+					<td><input type="TEXT" name="empDeliveryID" size="45"
+						value="<%=ordersVO.getEmpDeliveryID()%>" /></td>
+				</tr>
+				<tr>
+					<td>æ¡Œå­_ç·¨è™Ÿ:</td>
+					<td><input type="TEXT" name="seatID" size="45"
+						value="<%=ordersVO.getSeatID()%>" /></td>
+				</tr>
+				<tr>
+					<td>è¨‚å–®_ç¨®é¡(å¤–å¸¶ å¤–é€ å…§ç”¨):</td>
+					<td><select name="ordersType" id="ordersType">
+							<option value="0">å¤–å¸¶</option>
+							<option value="1">å¤–é€</option>
+							<option value="2">å…§ç”¨</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>è¨‚å–®_ç¸½é‡‘é¡:</td>
+					<td><input type="TEXT" name="ordersAmount" size="45"
+						value="<%=ordersVO.getOrdersAmount()%>" /></td>
+				</tr>
+				<tr>
+					<td>è¨‚å–®ç‹€æ…‹(å®Œæˆ, æœªå®Œæˆ, é€€å›):</td>
+					<td><select name="ordersStatus" id="ordersStatus">
+							<option value="0">å®Œæˆ</option>
+							<option value="1">æœªå®Œæˆ</option>
+							<option value="2">é€€å›</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>å–é¤åœ°é»:</td>
+					<td><input type="TEXT" name="ordersDestination" size="45"
+						value="<%=ordersVO.getOrdersDestination()%>" /></td>
+				</tr>
+				<tr>
+					<td>æˆç«‹è¨‚å–®æ—¥:</td>
+					<td><input name="ordersBuildDate" id="f_date1" type="text"></td>
+				</tr>
+				<tr>
+					<td>é è¨ˆè£½ä½œæ—¥:</td>
+					<td><input name="ordersMakeDate" id="f_date2" type="text"></td>
+				</tr>
 
 
+			</table>
+			<br> <input type="hidden" name="action" value="update">
+			<input type="hidden" name="ordersID"
+				value="<%=ordersVO.getOrdersID()%>"> <input type="submit"
+				value="é€å‡ºä¿®æ”¹">
+		</FORM>
+		<!-- ----- ----- -----   ä¸­é–“ä¸‹é¢å…§å®¹ end ----- ----- ----- -->
+	</main>
+	<!-- ----- ----- ----- ä¸­é–“ end ----- ----- ----- -->
+	<%
+	Timestamp ordersBuildDate = null;
+	try {
+		ordersBuildDate = ordersVO.getOrdersBuildDate();
+	} catch (Exception e) {
+		ordersBuildDate = new Timestamp(System.currentTimeMillis());
+	}
+	%>
+	<%
+	Timestamp ordersMakeDate = null;
+	try {
+		ordersMakeDate = ordersVO.getOrdersMakeDate();
+	} catch (Exception e) {
+		ordersMakeDate = new Timestamp(System.currentTimeMillis());
+	}
+	%>
 
-<!-- =========================================¥H¤U¬° datetimepicker ¤§¬ÛÃö³]©w========================================== -->
+	<link rel="stylesheet" type="text/css"
+		href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
-
-<% 
-Timestamp ordersBuildDate = null;
-  try {
-	  ordersBuildDate = ordersVO.getOrdersBuildDate();
-   } catch (Exception e) {
-	   ordersBuildDate = new Timestamp(System.currentTimeMillis());
-   }
-%>
-<% 
-  Timestamp ordersMakeDate = null;
-  try {
-	  ordersMakeDate = ordersVO.getOrdersMakeDate();
-   } catch (Exception e) {
-	   ordersMakeDate = new Timestamp(System.currentTimeMillis());
-   }
- %> 
-
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script
-	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-<style>
+	<style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
 	width: 300px; /* width:  300px; */
 }
@@ -184,7 +501,7 @@ Timestamp ordersBuildDate = null;
 }
 </style>
 
-<script>
+	<script>
 
 document.getElementById('ordersType').onchange = () => {
 	console.log(this);
@@ -198,13 +515,13 @@ $.datetimepicker.setLocale('zh');
 $('#f_date1').datetimepicker({
    theme: '',              //theme: 'dark',
    timepicker:true,       //timepicker:true,
-   step: 30,                //step: 60 (³o¬Otimepickerªº¹w³]¶¡¹j60¤ÀÄÁ)
+   step: 30,                //step: 60 (é€™æ˜¯timepickerçš„é è¨­é–“éš”60åˆ†é˜)
    format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
    value: '<%=ordersVO.getOrdersBuildDate()%>', // value:   new Date(),
-   //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // ¥h°£¯S©w¤£§t
-   //startDate:	            '2017/07/10',  // °_©l¤é
-   //minDate:               '-1970-01-01', // ¥h°£¤µ¤é(¤£§t)¤§«e
-   //maxDate:               '+1970-01-01'  // ¥h°£¤µ¤é(¤£§t)¤§«á
+   //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // å»é™¤ç‰¹å®šä¸å«
+   //startDate:	            '2017/07/10',  // èµ·å§‹æ—¥
+   //minDate:               '-1970-01-01', // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å‰
+   //maxDate:               '+1970-01-01'  // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å¾Œ
 });
 
 
@@ -212,58 +529,31 @@ $.datetimepicker.setLocale('zh');
 $('#f_date2').datetimepicker({
    theme: '',              //theme: 'dark',
    timepicker:true,       //timepicker:true,
-   step: 30,                //step: 60 (³o¬Otimepickerªº¹w³]¶¡¹j60¤ÀÄÁ)
+   step: 30,                //step: 60 (é€™æ˜¯timepickerçš„é è¨­é–“éš”60åˆ†é˜)
    format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
    value: '<%=ordersVO.getOrdersMakeDate()%>', // value:   new Date(),
-	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // ¥h°£¯S©w¤£§t
-	//startDate:	            '2017/07/10',  // °_©l¤é
-	//minDate:               '-1970-01-01', // ¥h°£¤µ¤é(¤£§t)¤§«e
+	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // å»é™¤ç‰¹å®šä¸å«
+	//startDate:	            '2017/07/10',  // èµ·å§‹æ—¥
+	//minDate:               '-1970-01-01', // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å‰
 	});
+	<!-- SCRIPTS -->
+	<!-- Global Required Scripts Start -->
+	<script src="../../back-assets/js/jquery-3.3.1.min.js"></script>
+	<script src="../../back-assets/js/popper.min.js"></script>
+	<script src="../../back-assets/js/bootstrap.min.js"></script>
+	<script src="../../back-assets/js/perfect-scrollbar.js"></script>
+	<script src="../../back-assets/js/jquery-ui.min.js"></script>
+	<!-- Global Required Scripts End -->
+	<!-- Page Specific Scripts Start -->
+	<script src="../../back-assets/js/Chart.bundle.min.js"></script>
+	<!-- Page Specific Scripts End -->
+	<!-- Page Specific Scripts Finish -->
+	<script src="../../back-assets/js/datatables.min.js"></script>
+	<script src="../../back-assets/js/data-tables.js"></script>
+	<!-- Costic core JavaScript -->
+	<script src="../../back-assets/js/framework.js"></script>
+	<!-- Settings -->
+	<script src="../../back-assets/js/settings.js"></script>
+</body>
 
-	// ----------------------------------------------------------¥H¤U¥Î¨Ó±Æ©wµLªk¿ï¾Üªº¤é´Á-----------------------------------------------------------
-
-	//      1.¥H¤U¬°¬Y¤@¤Ñ¤§«eªº¤é´ÁµLªk¿ï¾Ü
-	//      var somedate1 = new Date('2017-06-15');
-	//      $('#f_date1').datetimepicker({
-	//          beforeShowDay: function(date) {
-	//        	  if (  date.getYear() <  somedate1.getYear() || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-	//              ) {
-	//                   return [false, ""]
-	//              }
-	//              return [true, ""];
-	//      }});
-
-	//      2.¥H¤U¬°¬Y¤@¤Ñ¤§«áªº¤é´ÁµLªk¿ï¾Ü
-	//      var somedate2 = new Date('2017-06-15');
-	//      $('#f_date1').datetimepicker({
-	//          beforeShowDay: function(date) {
-	//        	  if (  date.getYear() >  somedate2.getYear() || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-	//              ) {
-	//                   return [false, ""]
-	//              }
-	//              return [true, ""];
-	//      }});
-
-	//      3.¥H¤U¬°¨â­Ó¤é´Á¤§¥~ªº¤é´ÁµLªk¿ï¾Ü (¤]¥i«ö»İ­n´«¦¨¨ä¥L¤é´Á)
-	//      var somedate1 = new Date('2017-06-15');
-	//      var somedate2 = new Date('2017-06-25');
-	//      $('#f_date1').datetimepicker({
-	//          beforeShowDay: function(date) {
-	//        	  if (  date.getYear() <  somedate1.getYear() || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-	//		             ||
-	//		            date.getYear() >  somedate2.getYear() || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-	//              ) {
-	//                   return [false, ""]
-	//              }
-	//              return [true, ""];
-	//      }});
-</script>
 </html>

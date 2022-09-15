@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -11,12 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<<<<<<< HEAD
-<title>義鄉人-義式餐酒館-管理中心</title>
-<!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
-=======
 <title>義鄉人_訂單後台</title>
->>>>>>> refs/heads/GU
 <!-- Iconic Fonts -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
@@ -39,9 +33,6 @@
 <link href="../../back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
-<<<<<<< HEAD
-<!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
-=======
 
 <style>
 table#table-1 {
@@ -67,18 +58,8 @@ h4 {
 }
 </style>
 
->>>>>>> refs/heads/GU
 </head>
 
-<<<<<<< HEAD
-<body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
-	<!-- ----- ----- ----- 進入網站的讀取圈圈 start ----- ----- ----- -->
-	<%@ include file="../../back-end/tool/ReadingCircle.file"%>
-	<!-- ----- ----- ----- 進入網站的讀取圈圈 end ----- ----- ----- -->
-	
-	<div class="ms-aside-overlay ms-overlay-left ms-toggler" data-target="#ms-side-nav" data-toggle="slideLeft"></div>
-	<div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"></div>
-=======
 <body
 	class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
 	<!-- Preloader -->
@@ -103,13 +84,9 @@ h4 {
 		data-target="#ms-side-nav" data-toggle="slideLeft"></div>
 	<div class="ms-aside-overlay ms-overlay-right ms-toggler"
 		data-target="#ms-recent-activity" data-toggle="slideRight"></div>
->>>>>>> refs/heads/GU
 	<!-- Sidebar Navigation Left -->
 
 	<!-- ----- ----- ----- 最左邊的 選擇列 start ----- ----- ----- -->
-<<<<<<< HEAD
-	<%@ include file="../../back-end/tool/LeftSideBar.file"%>
-=======
 	<aside id="ms-side-nav"
 		class="side-nav fixed ms-aside-scrollable ms-aside-left">
 		<!-- Logo -->
@@ -186,6 +163,8 @@ h4 {
 					data-parent="#side-nav-accordion">
 					<li><a
 						href="${pageContext.request.contextPath}/back-end/order/order_details.jsp">查看訂單</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/orddetails/select_page.jsp">查看訂單明細</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 訂單 end ----- ----- ----- -->
 
@@ -273,15 +252,11 @@ h4 {
 			<!-- ----- ----- ----- 空白頁面 end ----- ----- ----- -->
 		</ul>
 	</aside>
->>>>>>> refs/heads/GU
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
 	<main class="body-content">
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
-<<<<<<< HEAD
-			<%@ include file="../../back-end/tool/UpSideBar.file"%>
-=======
 		<nav class="navbar ms-navbar">
 			<div class="ms-aside-toggler ms-toggler pl-0"
 				data-target="#ms-side-nav" data-toggle="slideLeft">
@@ -370,13 +345,8 @@ h4 {
 					class="ms-toggler-bar bg-primary"></span>
 			</div>
 		</nav>
->>>>>>> refs/heads/GU
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
-		
 		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
-<<<<<<< HEAD
-			<%@ include file="../../back-end/tool/Upicon.file"%>
-=======
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb pl-0">
 				<li class="breadcrumb-item"><a href="../../back-end/backstage/Back_index.jsp"><i
@@ -385,9 +355,7 @@ h4 {
 				<li class="breadcrumb-item active" aria-current="page">查看訂單</li>
 			</ol>
 		</nav>
->>>>>>> refs/heads/GU
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
-		
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 
 		<h3>資料查詢:</h3>
@@ -451,8 +419,7 @@ h4 {
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
-	
-	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
+	<!-- SCRIPTS -->
 	<!-- Global Required Scripts Start -->
 	<script src="../../back-assets/js/jquery-3.3.1.min.js"></script>
 	<script src="../../back-assets/js/popper.min.js"></script>
@@ -470,7 +437,6 @@ h4 {
 	<script src="../../back-assets/js/framework.js"></script>
 	<!-- Settings -->
 	<script src="../../back-assets/js/settings.js"></script>
-	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 </body>
 
 </html>

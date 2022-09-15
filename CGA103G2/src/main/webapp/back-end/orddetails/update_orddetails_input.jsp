@@ -372,88 +372,105 @@ th, td {
 		</nav>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<body bgcolor='white'>
-
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>訂單資料修改 - update_orddetails_input.jsp</h3>
-				<h4>
-					<a href="select_page.jsp"><img src="images/back1.gif"
-						width="100" height="32" border="0">回首頁</a>
-				</h4>
-			</td>
-		</tr>
-	</table>
-
-	<h3>資料修改:</h3>
-
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
-
-	<FORM METHOD="post" ACTION="orddetails.do" name="form1">
-		<table>
+		<table id="table-1">
 			<tr>
-				<td>訂單明細編號:<font color=red><b>*</b></font></td>
-				<td><%=orddetailsVO.getOrddetailsID()%></td>
+				<td>
+					<h3>訂單資料修改 - update_orddetails_input.jsp</h3>
+					<h4>
+						<a href="select_page.jsp"><img src="images/back1.gif"
+							width="100" height="32" border="0">回首頁</a>
+					</h4>
+				</td>
 			</tr>
-
-			<tr>
-				<td>訂單編號:</td>
-				<td><input type="TEXT" name="ordersID" size="45"
-					value="<%=orddetailsVO.getOrdersID()%>" /></td>
-			</tr>
-			<tr>
-				<td>餐點編號:</td>
-				<td><input type="TEXT" name="mealsID" size="45"
-					value="<%=orddetailsVO.getMealsID()%>" /></td>
-			</tr>
-			<tr>
-				<td>餐點數量:</td>
-				<td><input type="TEXT" name="orddetailsMealsQuantity" size="45"
-					value="<%=orddetailsVO.getOrddetailsMealsQuantity()%>" /></td>
-			</tr>
-			<tr>
-				<td>餐點總金額:</td>
-				<td><input type="TEXT" name="orddetailsMealsAmount" size="45"
-					value="<%=orddetailsVO.getOrddetailsMealsAmount()%>" /></td>
-			</tr>
-			<tr>
-				<td>製作狀態(0:已製作 , 1:未製作 ):</td>
-				<td><select name="orddetailsMealsStatus"
-					id="orddetailsMealsStatus">
-						<option value="0">已製作</option>
-						<option value="1">未製作</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>送餐狀態(0:已製作 , 1:未製作 ):</td>
-				<td><select name="orddetailsDeliverStatus"
-					id="orddetailsDeliverStatus">
-						<option value="0">已製作</option>
-						<option value="1">未製作</option>
-				</select></td>
-			</tr>
-
-
 		</table>
-		<br> <input type="hidden" name="action" value="update"> <input
-			type="hidden" name="orddetailsID"
-			value="<%=orddetailsVO.getOrddetailsID()%>"> <input
-			type="submit" value="送出修改">
-	</FORM>
-</body>
+
+		<h3>資料修改:</h3>
+
+		<%-- 錯誤表列 --%>
+		<c:if test="${not empty errorMsgs}">
+			<font style="color: red">請修正以下錯誤:</font>
+			<ul>
+				<c:forEach var="message" items="${errorMsgs}">
+					<li style="color: red">${message}</li>
+				</c:forEach>
+			</ul>
+		</c:if>
+
+		<FORM METHOD="post" ACTION="orddetails.do" name="form1">
+			<table>
+				<tr>
+					<td>訂單明細編號:<font color=red><b>*</b></font></td>
+					<td><%=orddetailsVO.getOrddetailsID()%></td>
+				</tr>
+
+				<tr>
+					<td>訂單編號:</td>
+					<td><input type="TEXT" name="ordersID" size="45"
+						value="<%=orddetailsVO.getOrdersID()%>" /></td>
+				</tr>
+				<tr>
+					<td>餐點編號:</td>
+					<td><input type="TEXT" name="mealsID" size="45"
+						value="<%=orddetailsVO.getMealsID()%>" /></td>
+				</tr>
+				<tr>
+					<td>餐點數量:</td>
+					<td><input type="TEXT" name="orddetailsMealsQuantity"
+						size="45" value="<%=orddetailsVO.getOrddetailsMealsQuantity()%>" /></td>
+				</tr>
+				<tr>
+					<td>餐點總金額:</td>
+					<td><input type="TEXT" name="orddetailsMealsAmount" size="45"
+						value="<%=orddetailsVO.getOrddetailsMealsAmount()%>" /></td>
+				</tr>
+				<tr>
+					<td>製作狀態(0:已製作 , 1:未製作 ):</td>
+					<td><select name="orddetailsMealsStatus"
+						id="orddetailsMealsStatus">
+							<option value="0">已製作</option>
+							<option value="1">未製作</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>送餐狀態(0:已製作 , 1:未製作 ):</td>
+					<td><select name="orddetailsDeliverStatus"
+						id="orddetailsDeliverStatus">
+							<option value="0">已製作</option>
+							<option value="1">未製作</option>
+					</select></td>
+				</tr>
+
+
+			</table>
+			<br> <input type="hidden" name="action" value="update">
+			<input type="hidden" name="orddetailsID"
+				value="<%=orddetailsVO.getOrddetailsID()%>"> <input
+				type="submit" value="送出修改">
+		</FORM>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
-	<link rel="stylesheet" type="text/css"
+
+	<!-- SCRIPTS -->
+	<!-- Global Required Scripts Start -->
+	<script src="../../back-assets/js/jquery-3.3.1.min.js"></script>
+	<script src="../../back-assets/js/popper.min.js"></script>
+	<script src="../../back-assets/js/bootstrap.min.js"></script>
+	<script src="../../back-assets/js/perfect-scrollbar.js"></script>
+	<script src="../../back-assets/js/jquery-ui.min.js"></script>
+	<!-- Global Required Scripts End -->
+	<!-- Page Specific Scripts Start -->
+	<script src="../../back-assets/js/Chart.bundle.min.js"></script>
+	<!-- Page Specific Scripts End -->
+	<!-- Page Specific Scripts Finish -->
+	<script src="../../back-assets/js/datatables.min.js"></script>
+	<script src="../../back-assets/js/data-tables.js"></script>
+	<!-- Costic core JavaScript -->
+	<script src="../../back-assets/js/framework.js"></script>
+	<!-- Settings -->
+	<script src="../../back-assets/js/settings.js"></script>
+</body>
+<link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script
@@ -480,24 +497,4 @@ document.getElementById('orddetailsDeliverStatus').onchange = () => {
 
 
 </script>
-	<!-- SCRIPTS -->
-	<!-- Global Required Scripts Start -->
-	<script src="../../back-assets/js/jquery-3.3.1.min.js"></script>
-	<script src="../../back-assets/js/popper.min.js"></script>
-	<script src="../../back-assets/js/bootstrap.min.js"></script>
-	<script src="../../back-assets/js/perfect-scrollbar.js"></script>
-	<script src="../../back-assets/js/jquery-ui.min.js"></script>
-	<!-- Global Required Scripts End -->
-	<!-- Page Specific Scripts Start -->
-	<script src="../../back-assets/js/Chart.bundle.min.js"></script>
-	<!-- Page Specific Scripts End -->
-	<!-- Page Specific Scripts Finish -->
-	<script src="../../back-assets/js/datatables.min.js"></script>
-	<script src="../../back-assets/js/data-tables.js"></script>
-	<!-- Costic core JavaScript -->
-	<script src="../../back-assets/js/framework.js"></script>
-	<!-- Settings -->
-	<script src="../../back-assets/js/settings.js"></script>
-</body>
-
 </html>
