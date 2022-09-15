@@ -1,6 +1,7 @@
 package com.meals.model;
 
 import java.util.List;
+import java.util.Map;
 
 
 
@@ -56,5 +57,8 @@ public class MealsService {
 	public List<MealsVO> getAll(){
 		return dao.getAll();
 	}
+	 public List<MealsVO> getAll(Map<String, String[]> map){
+		 return dao.getAll(map);
+	 }
 	
 }

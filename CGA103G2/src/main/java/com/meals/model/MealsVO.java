@@ -51,5 +51,9 @@ public class MealsVO implements java.io.Serializable{
 	public void setMealsControl(Integer mealsControl) {
 		this.mealsControl = mealsControl;
 	}
-	
+	public com.mealscateory.model.MealsCategoryVO getMealsVO() {
+		com.mealscateory.model.MealsCategoryService mealsCategorySvc = new com.mealscateory.model.MealsCategoryService();
+		com.mealscateory.model.MealsCategoryVO mealsCategoryVO =mealsCategorySvc.getOneMealsCategory(mealsCategoryID);
+		return mealsCategoryVO;
+    }
 }

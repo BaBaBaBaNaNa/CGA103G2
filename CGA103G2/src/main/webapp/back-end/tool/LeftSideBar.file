@@ -38,6 +38,8 @@
 					<li><a href="${pageContext.request.contextPath}/back-end/product/product_grid.jsp">菜單網格</a></li>
 					<li><a href="${pageContext.request.contextPath}/back-end/product/product_add.jsp">加入菜樣</a></li>
 					<li><a href="${pageContext.request.contextPath}/back-end/product/product_detail.jsp">產品細節</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/mealscategory/nothing1.jsp">查詢目前菜系</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/mealscategory/MealsCategoryServlet.do?action=getAll">查看員工資料</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 菜單 end ----- ----- ----- -->
 

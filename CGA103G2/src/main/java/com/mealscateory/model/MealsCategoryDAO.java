@@ -7,6 +7,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.emp.model.EmpCompositeQuery;
+import com.emp.model.EmpVO;
+import com.meals.model.MealsVO;
 
 import java.sql.*;
 
@@ -25,7 +28,10 @@ public class MealsCategoryDAO implements MealsCategory_interface {
 	private static final String GET_ONE_STMT = "SELECT mealsCategoryID,mealsCategory FROM mealscategory where mealsCategoryID = ?";
 	private static final String DELETE = "DELETE FROM mealscategory where mealsCategoryID = ?";
 	private static final String UPDATE = "UPDATE mealscategory set mealsCategory=? where mealsCategoryID = ?";
-
+	
+	private static final String GET_Meals_ByMealsCategoryID_STMT = "SELECT mealsID,mealsCategoryID,mealsName,mealsPrice,mealsInfo,mealsPicture,mealsControl FROM meals where mealsCategoryID = ? order by mealsID";
+	
+	
 	@Override
 	public void insert(MealsCategoryVO mealsCategoryVO) {
 
@@ -250,5 +256,121 @@ public class MealsCategoryDAO implements MealsCategory_interface {
 		}
 		return list;
 	}
+
+	@Override
+	public List<MealsCategoryVO> getAll(Map<String, String[]> map) {
+		List<MealsCategoryVO> list = new ArrayList<MealsCategoryVO>();
+		MealsCategoryVO mealsCategoryVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			con = ds.getConnection();
+			String finalSQL = "select * from MealsCategory "
+		          + EmpCompositeQuery.getWhereCondition(map)
+		          + "order by mealsCategoryID";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				mealsCategoryVO = new MealsCategoryVO();
+				
+				
+				mealsCategoryVO.setMealsCategoryId(rs.getInt("mealsCategoryID"));
+				mealsCategoryVO.setMealsCategory(rs.getString("mealsCategory"));
+
+				
+				list.add(mealsCategoryVO); // Store the row in the List
+			}
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	   public Set<MealsVO> getMealsByMealsCategoryID(Integer mealsCategoryID){
+		   Set<MealsVO> set = new LinkedHashSet<MealsVO>();
+		   MealsVO mealsVO = null;
+		
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+		
+			try {
+		
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(GET_Meals_ByMealsCategoryID_STMT);
+				pstmt.setInt(1, mealsCategoryID);
+				rs = pstmt.executeQuery();
+		
+				while (rs.next()) {
+					mealsVO = new MealsVO();
+					mealsVO.setMealsID(rs.getInt("mealsID"));
+					mealsVO.setMealsCategoryID(rs.getInt("mealsCategoryID"));
+					mealsVO.setMealsName(rs.getString("mealsName"));
+					mealsVO.setMealsPrice(rs.getInt("mealsPrice"));
+					mealsVO.setMealsInfo(rs.getString("mealsInfo"));
+					mealsVO.setMealsPicture(rs.getBytes("mealsPicture"));
+					mealsVO.setMealsControl(rs.getInt("mealsControl"));
+				
+					set.add(mealsVO); // Store the row in the vector
+				}
+		
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return set;
+	   }
 
 }
