@@ -10,7 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import com.orders.model.*;
-//@WebServlet("/OrdersServlet.do")
+
+
+//@WebServlet("/OrdersServlet")
 public class OrdersServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -29,7 +31,7 @@ public class OrdersServlet extends HttpServlet {
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			String str = req.getParameter("ordersID");
-			if (str == null || (str.trim()).length() == 0) {
+			if (str == null || (str.trim()).length() == 0||str == "0") {
 				errorMsgs.add("請輸入訂單編號");
 			}
 
@@ -87,6 +89,8 @@ public class OrdersServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
+		
+//						update
 		if ("update".equals(action)) { // 來自update_orders_input.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -164,7 +168,7 @@ public class OrdersServlet extends HttpServlet {
 			}
 //			else if (!ordersDestination.trim().matches(ordersDestination)) { // 以下練習正則(規)表示式(regular-expression)
 //				errorMsgs.add("地址: 只能是中、英文字母、數字和_ ");
-//			}
+//			}f
 
 			Timestamp ordersBuildDate = null;
 			try {
@@ -354,8 +358,7 @@ public class OrdersServlet extends HttpServlet {
 		}
 		
 		
-		
-		
+	
 		
 
 	}

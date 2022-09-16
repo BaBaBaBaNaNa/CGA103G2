@@ -486,10 +486,10 @@ th, td {
 	%>
 
 	<link rel="stylesheet" type="text/css"
-		href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+		href="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.datetimepicker.css" />
+	<script src="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.js"></script>
 	<script
-		src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+		src="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 	<style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
@@ -501,7 +501,7 @@ th, td {
 }
 </style>
 
-	<script>
+<script>
 
 document.getElementById('ordersType').onchange = () => {
 	console.log(this);
@@ -536,6 +536,9 @@ $('#f_date2').datetimepicker({
 	//startDate:	            '2017/07/10',  // 起始日
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前
 	});
+
+</script>
+
 	<!-- SCRIPTS -->
 	<!-- Global Required Scripts Start -->
 	<script src="../../back-assets/js/jquery-3.3.1.min.js"></script>

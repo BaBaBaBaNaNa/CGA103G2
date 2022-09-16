@@ -357,6 +357,12 @@ h4 {
 		</nav>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
+<table id="table-1">
+   <tr><td><h3>IBM orddetails: Home</h3><h4>( MVC )</h4></td></tr>
+</table>
+
+<p>This is the Home page for IBM Orders: Home</p>
+
 <h3>資料查詢:</h3>
 	
 <%-- 錯誤表列 --%>
@@ -370,7 +376,7 @@ h4 {
 </c:if>
 
 <ul>
-  <li style="margin-left: 10px"><a href='listAllOrddetails.jsp'>List</a> all Orddetails.  <br><br></li>
+  <li><a href='listAllOrddetails.jsp'>List</a> all Orddetails.  <br><br></li>
   
   
   <li>
@@ -382,10 +388,9 @@ h4 {
     </FORM>
   </li>
 
-			<jsp:useBean id="orddetailsSvc" scope="page"
-				class="com.orddetails.model.OrddetailsService" />
-
-			<li>
+  <jsp:useBean id="orddetailsSvc" scope="page" class="com.orddetails.model.OrddetailsService"/>
+   
+  <li>
      <FORM METHOD="post" ACTION="orddetails.do" >
        <b>訂單編號:</b>
        <select size="1" name="orddetailsID">
@@ -404,7 +409,7 @@ h4 {
 <h3>訂單明細管理</h3>
 
 <ul>
-  <li style="margin-left: 10px"><a href='addOrddetails.jsp'>Add</a> a new Orddetails.</li>
+  <li><a href='addOrddetails.jsp'>Add</a> a new Orddetails.</li>
 </ul>
 
 
