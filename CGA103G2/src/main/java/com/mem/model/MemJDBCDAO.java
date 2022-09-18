@@ -382,6 +382,12 @@ public class MemJDBCDAO implements MemDAO_interface {
 //			System.out.println(aMem.getMempermission()+ ",");
 //			System.out.println("---------------------");
 		}
+
+	@Override
+	public boolean loginAdmin(MemLoginVO admin) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
 
 	

@@ -8,6 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+
 import com.mem.model.MemVO;
 
 import java.sql.*;
@@ -27,11 +28,50 @@ public class MemDAO implements MemDAO_interface {
 		}
 	}
 
-private static final String INSERTSTMT = "INSERT INTO members (memID,memName,memAccount,memPassword,memGender,memPhone,memEmail,memAddress,memBirthday,memPermission) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+private static final String LOGIN_STMT = "SELECT memAccount,memPassword from Members where memAccount = ? and memPassword = ?";
+private static final String INSERTSTMT = "INSERT INTO members (memName,memAccount,memPassword,memGender,memPhone,memEmail,memAddress,memBirthday,memPermission) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 private static final String GETALLSTMT = "SELECT memID, memname, memaccount, mempassword, memgender, memphone, mememail, memaddress, membirthday, mempermission FROM members order by memID";
 private static final String GETONESTMT = "SELECT memID, memname, memaccount, mempassword, memgender, memphone, mememail, memaddress, membirthday, mempermission FROM members  where memID = ?";
 private static final String DELETE = "DELETE FROM members where memID = ?";
 private static final String UPDATE = "UPDATE members set memname=?, memaccount=?, mempassword=?, memgender=?, memphone=?, mememail=?, memaddress=?, membirthday=?, mempermission=? where memID = ?";
+
+
+
+@Override
+public boolean loginAdmin(MemLoginVO admin) {
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	
+	int res = 0;
+	try {
+		con = ds.getConnection();
+		pstmt = con.prepareStatement(LOGIN_STMT);
+		
+		pstmt.setString(1, admin.getMemAccount());
+		pstmt.setString(2, admin.getMemPassword());
+
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next()) {
+			res = 1;
+		}
+		pstmt.close();
+		rs.close();
+		if (res == 1) {
+			return true;
+		}
+	} catch (SQLException se) {
+		throw new RuntimeException("A database error occured. " + se.getMessage());
+	}if (con != null) {
+		try {
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace(System.err);
+		}
+	}
+	return false;
+}
+
+
 
 
 @Override
@@ -43,16 +83,15 @@ public void insert(MemVO memVO) {
 		con = ds.getConnection();
 		pstmt = con.prepareStatement(INSERTSTMT);
 	
-		pstmt.setInt(1, memVO.getMemID());
-		pstmt.setString(2, memVO.getMemName());
-		pstmt.setString(3, memVO.getMemAccount());
-		pstmt.setString(4, memVO.getMemPassword());
-		pstmt.setInt(5, memVO.getMemGender());
-		pstmt.setString(6, memVO.getMemPhone());
-		pstmt.setString(7, memVO.getMemEmail());
-		pstmt.setString(8, memVO.getMemAddress());
-		pstmt.setDate(9, memVO.getMemBirthday());
-		pstmt.setInt(10, memVO.getMemPermission());
+		pstmt.setString(1, memVO.getMemName());
+		pstmt.setString(2, memVO.getMemAccount());
+		pstmt.setString(3, memVO.getMemPassword());
+		pstmt.setInt(4, memVO.getMemGender());
+		pstmt.setString(5, memVO.getMemPhone());
+		pstmt.setString(6, memVO.getMemEmail());
+		pstmt.setString(7, memVO.getMemAddress());
+		pstmt.setDate(8, memVO.getMemBirthday());
+		pstmt.setInt(9, memVO.getMemPermission());
 
 		pstmt.executeUpdate();
 		
@@ -296,7 +335,7 @@ public static void main(String[] args) {
 	MemJDBCDAO dao = new MemJDBCDAO();
 	// 新增  done
 //	MemVO memVO1 = new MemVO();
-//	memVO1.setmemID(12);
+//	memVO1.setMemID(12);
 //	memVO1.setMemName("LEO");
 //	memVO1.setMemAccount ("1qwewqewqe");
 //	memVO1.setMemPassword("qwewqewqe");
@@ -307,16 +346,16 @@ public static void main(String[] args) {
 //	memVO1.setMemBirthday(new Date(System.currentTimeMillis()));
 //	memVO1.setMemPermission(1);
 //	dao.insert(memVO1);
-//	
+	
 	
 	
 	// 修改  done
 //	MemVO memVO2 = new MemVO();
-//	memVO2.setmemID(9);
-//	memVO2.setMemName("Ooo");
+//	memVO2.setMemID(1);
+//	memVO2.setMemName("連勝文");
 //	memVO2.setMemAccount ("wowowo");
 //	memVO2.setMemPassword("123");
-//	memVO2.setMemGender(1);
+//	memVO2.setMemGender(0);
 //	memVO2.setMemPhone("987654323");
 //	memVO2.setMemEmail("a2s@as.com");
 //	memVO2.setMemAddress("市區路巷弄");
@@ -333,34 +372,34 @@ public static void main(String[] args) {
 	
 	// 單筆查詢  done
 //	MemVO memVO3 = dao.findByPrimaryKey(11);
-//	System.out.print(memVO3.getmemID() + ",");
-//	System.out.print(memVO3.getMemname() + ",");
-//	System.out.print(memVO3.getMemaccount() + ",");
-//	System.out.print(memVO3.getMempassword() + ",");
-//	System.out.print(memVO3.getMempermission() + ",");
-//	System.out.print(memVO3.getMemphone() + ",");
-//	System.out.println(memVO3.getMemaddress() + ",");
-//	System.out.println(memVO3.getMememail() + ",");
-//	System.out.println(memVO3.getMembirthday()+ ",");
-//	System.out.println(memVO3.getMempermission()+ ",");
+//	System.out.print(memVO3.getMemID() + ",");
+//	System.out.print(memVO3.getMemName() + ",");
+//	System.out.print(memVO3.getMemAccount() + ",");
+//	System.out.print(memVO3.getMemPassword() + ",");
+//	System.out.print(memVO3.getMemPermission() + ",");
+//	System.out.print(memVO3.getMemPhone() + ",");
+//	System.out.println(memVO3.getMemAddress() + ",");
+//	System.out.println(memVO3.getMemEmail() + ",");
+//	System.out.println(memVO3.getMemBirthday()+ ",");
+//	System.out.println(memVO3.getMemPermission()+ ",");
 //	System.out.println("---------------------");
 	
 	
 	// 多筆查詢  done
-//	List<MemVO> list = dao.getAll();
-//	for (MemVO aMem : list) {
-//		System.out.print(aMem.getMemID() + ",");
-//		System.out.print(aMem.getMemName() + ",");
-//		System.out.print(aMem.getMemAccount() + ",");
-//		System.out.print(aMem.getMemPassword() + ",");
-//		System.out.print(aMem.getMemPermission() + ",");
-//		System.out.print(aMem.getMemPhone() + ",");
-//		System.out.println(aMem.getMemAddress() + ",");
-//		System.out.println(aMem.getMemEmail() + ",");
-//		System.out.println(aMem.getMemBirthday()+ ",");
-//		System.out.println(aMem.getMemPermission()+ ",");
-//		System.out.println("---------------------");
-//	}
+	List<MemVO> list = dao.getAll();
+	for (MemVO aMem : list) {
+		System.out.print(aMem.getMemID() + ",");
+		System.out.print(aMem.getMemName() + ",");
+		System.out.print(aMem.getMemAccount() + ",");
+		System.out.print(aMem.getMemPassword() + ",");
+		System.out.print(aMem.getMemPermission() + ",");
+		System.out.print(aMem.getMemPhone() + ",");
+		System.out.println(aMem.getMemAddress() + ",");
+		System.out.println(aMem.getMemEmail() + ",");
+		System.out.println(aMem.getMemBirthday()+ ",");
+		System.out.println(aMem.getMemPermission()+ ",");
+		System.out.println("---------------------");
+	}
 }
 
 }

@@ -107,10 +107,13 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 					</div>
 					<div class="col-md-12 ">
 						<label>地址</label><p>${errorMsgs.empAddress}</p>
-						<div role="tw-city-selector" class="tw-city-selector" data-has-zipcode data-bootstrap-style value="${param.empAddress1}">
-						</div>
+<!-- 						<div role="tw-city-selector" class="city-selector-set-has-value" data-has-zipcode data-bootstrap-style"> -->
+<%-- 						 	<div class="col-md-12 "><input name="empAddress1" type="text" class="zipcode" data-value="${param.empAddress1}"readonly></div> --%>
+<%-- 						 	<div>請選擇縣市:</div><div><select name="empAddress2" class="county" data-value="${param.empAddress2}"></select></div> --%>
+<%-- 						 	<div>請選擇地區:</div><div><select name="empAddress3" class="district" data-value="${param.empAddress3}"></select></div> --%>
+<!-- 						</div> -->
 						<div class="input-group">
-							<input type="text" name="empAddress" value="${param.empAddress}" class="form-control" placeholder="請輸入員工地址">
+							<input type="text" name="empAddress" value="${param.empAddress3}" class="form-control" placeholder="請接續輸入地址">
 						</div>
 					</div>
 					<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
@@ -159,11 +162,37 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 	<script src="../../back-assets/js/settings.js"></script>
 	<!-- 台灣地址選擇 -->
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/back-assets/js/tw-city-selector.js"></script>
+	<script src="${pageContext.request.contextPath}/back-assets/js/twcityselector/tw-city-selector.js"></script>
 <!-- 	<script src="https://cdn.jsdelivr.net/npm/tw-city-selector@2.1.0/dist/tw-city-selector.min.js"></script> -->
 	<script>
-		new TwCitySelector();
+// 		new TwCitySelector();
+		new TwCitySelector({
+			  el: '.city-selector-set-has-value',
+			  elCounty: '.county',
+			  elDistrict: '.district',
+			  elZipcode: '.zipcode'
+			});
 	</script>
+	<style>
+	.city-selector-set-has-value{
+		display:left;
+	}
+	.zipcode{
+  		width: 33%;
+  		display: inline-block;
+  		height: calc(1.5em + .75rem + 2px);
+  		padding: .375rem .75rem;
+  		font-size: 1rem;
+  		font-weight: 400;
+  		line-height: 1.5;
+  		color: #495057;
+  		background-color: #fff;
+  		background-clip: padding-box;
+  		border: 1px solid #ced4da;
+  		border-radius: .25rem;
+ 		transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		}
+	</style>
 	
 	
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->

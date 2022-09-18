@@ -154,15 +154,15 @@ public class EmpServlet extends HttpServlet {
 			//地址
 			String empAddress = req.getParameter("empAddress").trim();
 			
-//			String empAddress1 = req.getParameter("empAddress1");
-			System.out.println(req.getParameter("county"));
-			System.out.println(req.getParameter("district"));
-			System.out.println(req.getParameter("zipcode"));
+//			String empAddress2 = req.getParameter("county").trim();
+//			System.out.println(empAddress2);
+//			String empAddress3 = req.getParameter("district").trim();
+//			System.out.println(empAddress3);
 			
 			String empAddressReg = "^[(\\u4e00-\\u9fa5)]{1,100}$";
 			if (empAddress == null || empAddress.trim().length() == 0) {
 				errorMsgs.put("empAddress","  地址請勿空白");
-			} else if (!empPhone.trim().matches(empPhoneReg)) {
+			} else if (!empAddress.trim().matches(empAddressReg)) {
 			errorMsgs.put("empPhone","  地址只能是中、英文字母、數字 , 且長度必需在1到100之間");
 			}
 			
@@ -388,6 +388,9 @@ public class EmpServlet extends HttpServlet {
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			String str =  (String) req.getSession().getAttribute("LoginSessionName");
+			
+			System.out.println(req.getSession().getAttribute("LoginSessionName"));
+			
 			//--- 判斷輸入是否是空值 ---
 			if (str == null || (str.trim()).length() == 0) {
 				errorMsgs.put("empID","請輸入員工編號");  

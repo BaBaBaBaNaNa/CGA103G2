@@ -54,8 +54,8 @@ public class EmpLoginServlet extends HttpServlet {
 			request.getRequestDispatcher("/back-end/index/BackIndex.jsp").forward(request, response);
 			
 			//測試登入狀態
-//			System.out.println("SessionId : "+request.getRequestedSessionId());
-//			System.out.println("登入成功!");
+			System.out.println("SessionId : "+request.getRequestedSessionId());
+			System.out.println("登入成功!");
 			
 			return;
 		} else {

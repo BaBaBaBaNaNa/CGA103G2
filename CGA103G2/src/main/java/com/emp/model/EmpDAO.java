@@ -12,7 +12,7 @@ import com.login.model.EmpLoginVO;
 
 import java.sql.*;
 
-public class EmpDAO implements EmpDAO_interface {
+public class EmpDAO implements EmpDAOInterface {
 //	共用DataSource
 	private static DataSource ds = null;
 	static {

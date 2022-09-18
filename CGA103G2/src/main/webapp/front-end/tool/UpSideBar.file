@@ -22,58 +22,30 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/FrontIndex.jsp">首頁</a>
-                        <ul>
-                            <li><a class="nav-link1" href="${pageContext.request.contextPath}/FrontIndex.jsp">1</a></li>
-                            <li><a class="nav-link1" href="${pageContext.request.contextPath}/FrontIndex.jsp">2</a></li>
-                        </ul>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/front-end/news/news.jsp">最新資訊</a>
-                        <ul>
-                            <li><a class="nav-link1" href="${pageContext.request.contextPath}/FrontIndex.jsp">所有消息</a></li>
-                            <li><a class="nav-link1" href="${pageContext.request.contextPath}/FrontIndex.jsp">2</a></li>
-                        </ul>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/front-end/menu/menu.jsp">美味餐點</a>
-                        <ul>
-                            <li><a class="nav-link1" href="${pageContext.request.contextPath}/FrontIndex.jsp">1</a></li>
-                            <li><a class="nav-link1" href="${pageContext.request.contextPath}/FrontIndex.jsp">2</a></li>
-                        </ul>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/front-end/order/order.jsp">訂單查詢</a>
-                        <ul>
-                            <li><a class="nav-link1" href="${pageContext.request.contextPath}/FrontIndex.jsp">1</a></li>
-                            <li><a class="nav-link1" href="${pageContext.request.contextPath}/FrontIndex.jsp">2</a></li>
-                        </ul>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/front-end/about/about.jsp">關於我們</a>
-                        <ul>
-                            <li><a class="nav-link1" href="${pageContext.request.contextPath}/FrontIndex.jsp">1</a></li>
-                            <li><a class="nav-link1" href="${pageContext.request.contextPath}/FrontIndex.jsp">2</a></li>
-                        </ul>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/front-end/contact/contact.jsp">客服</a>
-                        <ul>
-                            <li><a class="nav-link1" href="${pageContext.request.contextPath}/FrontIndex.jsp">1</a></li>
-                            <li><a class="nav-link1" href="${pageContext.request.contextPath}/FrontIndex.jsp">2</a></li>
-                        </ul>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/front-end/member/members.jsp">會員中心</a>
-                        <ul>
-                            <li><a class="nav-link1" href="${pageContext.request.contextPath}/FrontIndex.jsp">1</a></li>
-                            <li><a class="nav-link1" href="${pageContext.request.contextPath}/FrontIndex.jsp">2</a></li>
-                        </ul>
                     </li>
 
                 </ul>

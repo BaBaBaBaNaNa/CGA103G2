@@ -7,7 +7,7 @@ import com.job.model.JobVO;
 
 public class EmpService {
 
-	private EmpDAO_interface dao;
+	private EmpDAOInterface dao;
 
 	public EmpService() {
 		dao = new EmpDAO();
