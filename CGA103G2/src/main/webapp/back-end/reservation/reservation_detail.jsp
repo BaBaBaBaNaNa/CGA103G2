@@ -46,22 +46,39 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); // 日�
 	text-align: center;
 	background-color: white;
 }
+.table tr:nth-child(even) td{
+	background-color: aliceblue;
+}
+.table tr th,td{
+line-height:37px;
+}
 .input_btn {
 	border-radius: 10px;
+	background-color:white;
+	border:1px solid aliceblue !important;
 	border: none;
 	width: 50px;
 	height: 50px;
 }
 
+#cName:focus{
+	background-color:aliceblue !important;
+	border: 0;
+	outline: none;
+}
+#cName{
+	border: 1px solid aliceblue;
+	outline: none;
+}
 .input_btn:active {
 	box-shadow: inset -1px -1px 1px 1 red;
 }
 
 .input_btn:hover {
 	cursor: pointer;
-	background-image: linear-gradient(90deg, #FA748B 0%, #f5a623 100%);
+	background-image: linear-gradient(90deg, #F0F8FF 0%, #9DD3DF 100%);
 	color: #fff;
-	box-shadow: 0px 10px 5px -2px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.3);
 	/*   width: 100px;
   height: 100px; */
 /* 	transform: scale(1.5); */
@@ -82,7 +99,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); // 日�
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
-	<main class="body-content"padding-right: 0 px;>
+	<main class="body-content" style="padding-right: 0 px;">
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
 			<%@ include file="../../back-end/tool/UpSideBar.file"%>
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
@@ -103,9 +120,12 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); // 日�
 			<th>時段</th>
 			<th>入座狀態</th>
 			<th>訂位日期</th>
-			<th><input type="hidden" name="rsvtDate" class=>用餐日期</th>
-			<th></th>
-			<th></th>
+			<th>用餐日期</th>
+
+			<th><FORM METHOD="post" ACTION="RsvtServlet" style="margin-bottom: 0px;" id="search_form">
+			<label for="cName">搜尋：</label><input type="text" name="customerName" id="cName"> 
+				<input type="hidden" name="action" value="getOne_For_CustomerName"></FORM></th>
+			<th><input type="submit" class="input_btn" value="送出" id="search_btn"></th>
 		</tr>
 		<%@ include file="page1.file"%>
 		<c:forEach var="rsvtVO" items="${list}" begin="<%=pageIndex%>"
@@ -154,6 +174,12 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); // 日�
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 	<script>
+	let search_btn = document.getElementById('search_btn');
+	let search_form = document.getElementById('search_form');
+	search_btn.addEventListener('click',() =>{
+		search_form.submit();
+	})
+	
 	</script>
 	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>

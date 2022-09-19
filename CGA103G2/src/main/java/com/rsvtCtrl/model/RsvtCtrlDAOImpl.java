@@ -159,11 +159,12 @@ public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
 		return null;
 	}
 
-	public RsvtCtrlVO findByDate(String rsvtCtrlDate) {
+	public List<RsvtCtrlVO> findByDate(String rsvtCtrlDate) {
 		try (Connection conn = ds.getConnection();
 				PreparedStatement ps = conn.prepareStatement(GET_DATE_STMT)) {
 			ps.setString(1, rsvtCtrlDate);
 			ResultSet rs = ps.executeQuery();
+			List<RsvtCtrlVO> list = new ArrayList<>();
 			while (rs.next()) {
 				RsvtCtrlVO rsvtCtrl = new RsvtCtrlVO();
 				rsvtCtrl.setRsvtCtrlId(rs.getInt("rsvtctrlid"));
@@ -173,9 +174,10 @@ public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
 				rsvtCtrl.setRsvtCtrlPeriod(rs.getInt("rsvtctrlperiod"));
 				rsvtCtrl.setRsvtCtrlMax(rs.getInt("rsvtctrlmax"));
 				rsvtCtrl.setRsvtCtrlNumber(rs.getInt("rsvtctrlnumber"));
-				return rsvtCtrl;
+				list.add(rsvtCtrl);
 			}
 			rs.close();
+			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

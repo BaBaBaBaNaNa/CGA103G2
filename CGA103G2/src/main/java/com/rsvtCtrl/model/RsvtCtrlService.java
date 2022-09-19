@@ -48,7 +48,7 @@ public class RsvtCtrlService {
 		return dao.findByPrimaryKey(rsvtCtrlId);
 	}
 	
-	public RsvtCtrlVO getOneDate(String rsvtCtrlDate) {
+	public List<RsvtCtrlVO> getOneDate(String rsvtCtrlDate) {
 		return dao.findByDate(rsvtCtrlDate);
 	}
 
@@ -56,14 +56,4 @@ public class RsvtCtrlService {
 		return dao.getAll();
 	}
 	
-	public static void main(String[] args) {
-		RsvtCtrlService rsvtCtrlSvc = new RsvtCtrlService();
-		List<RsvtCtrlVO> list = rsvtCtrlSvc.getAll();
-		List<String> dateList = new ArrayList<>();
-		for (RsvtCtrlVO all : list) {
-			if (all.getRsvtCtrlOpen() == 1) {
-				dateList.add(all.getRsvtCtrlDate().toString());
-			}
-		}
-	}
 }

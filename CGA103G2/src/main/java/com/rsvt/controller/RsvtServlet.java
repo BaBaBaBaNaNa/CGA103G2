@@ -191,7 +191,7 @@ public class RsvtServlet extends HttpServlet {
 			java.sql.Date rsvtDate = null;
 			try {
 				rsvtDate = java.sql.Date.valueOf(req.getParameter("rsvtDate").trim());
-			} catch (IllegalArgumentException e) {
+			} catch (Exception e) {
 				rsvtDate = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.add("請輸入日期!");
 			}
@@ -203,6 +203,7 @@ public class RsvtServlet extends HttpServlet {
 				rsvtMealDate = null;
 			}
 			RsvtVO rsvtVO = new RsvtVO();
+			rsvtVO.setRsvtId(rsvtId);
 			rsvtVO.setCustomerName(cName);
 			rsvtVO.setCustomerPhone(cPhone);
 			rsvtVO.setRsvtNum(rsvtNum);

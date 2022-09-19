@@ -1,7 +1,6 @@
 package com.rsvtCtrl.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 import com.rsvtCtrl.model.RsvtCtrlService;
 import com.rsvtCtrl.model.RsvtCtrlVO;
 
@@ -208,12 +206,12 @@ public class RsvtCtrlServlet extends HttpServlet {
 			rsvtCtrlVO.setRsvtCtrlDate(rsvtCtrlDate);
 			rsvtCtrlVO.setRsvtCtrlMax(rsvtCtrlMax);
 			RsvtCtrlService rsvtCtrlSvc = new RsvtCtrlService();
-			try {
-				if (rsvtCtrlPeriod == rsvtCtrlSvc.getOneDate(rsvtCtrlDate.toString()).getRsvtCtrlPeriod()) {
-					errorMsgs.add("此時段已被設定");
-				}
-			} catch (Exception ignore) {
-			}
+//			try {
+//				if (rsvtCtrlPeriod == rsvtCtrlSvc.getOneDate(rsvtCtrlDate.toString()).getRsvtCtrlPeriod()) {
+//					errorMsgs.add("此時段已被設定");
+//				}
+//			} catch (Exception ignore) {
+//			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("rsvtCtrlVO", rsvtCtrlVO); // 含有輸入格式錯誤的rsvtCtrlVO物件,也存入req

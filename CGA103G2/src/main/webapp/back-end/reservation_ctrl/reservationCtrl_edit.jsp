@@ -14,7 +14,6 @@ try {
 }
 RsvtCtrlService rsvtCtrlSvc = new RsvtCtrlService();
 List<RsvtCtrlVO> list = rsvtCtrlSvc.getAll();
-List<String> lists = new ArrayList<>();
 
 String DateString = "";
 for (RsvtCtrlVO all : list) {
