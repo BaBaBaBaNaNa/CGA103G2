@@ -36,6 +36,8 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 <link href="../../back-assets/css/empStyle.css" rel="stylesheet">
 
 <link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
+<!-- GoTop -->
+<link href="${pageContext.request.contextPath}/back-assets/css//gotop/GoTop.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -58,7 +60,14 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
-		<%@ include file="../../back-end/tool/Upicon.file"%>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb pl-0">
+				<li class="breadcrumb-item"><a href="../../back-end/index/BackIndex.jsp"><i
+						class="material-icons">home</i>首頁</a></li>
+				<li class="breadcrumb-item">員工管理</li>
+				<li class="breadcrumb-item active" aria-current="page">修改員工資料</li>
+			</ol>
+		</nav>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
@@ -143,6 +152,9 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 			</form>
 		</div>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
+		<!-- ----- ----- -----   按鈕-回到網頁最上面 start ----- ----- ----- -->
+		<button type="button" id="GoTop" class="GoTop-arrow"></button>
+		<!-- ----- ----- -----   按鈕-回到網頁最上面 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 
@@ -164,6 +176,8 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroll
 	<script src="../../back-assets/js/framework.js"></script>
 	<!-- Settings -->
 	<script src="../../back-assets/js/settings.js"></script>
+	<!-- GoTop -->
+	<script src="${pageContext.request.contextPath}/back-assets/js/gotop/GoTop.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 	<%

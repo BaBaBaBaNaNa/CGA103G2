@@ -38,6 +38,8 @@ pageContext.setAttribute("list", list);
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
 
 <link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
+<!-- GoTop -->
+<link href="${pageContext.request.contextPath}/back-assets/css//gotop/GoTop.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -61,7 +63,13 @@ pageContext.setAttribute("list", list);
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
-		<%@ include file="../../back-end/tool/Upicon.file"%>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb pl-0">
+				<li class="breadcrumb-item"><a href="../../back-end/index/BackIndex.jsp"><i
+						class="material-icons">home</i>首頁</a></li>
+				<li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do?action=getEmpPersonalData">查看個人資料</a></li>
+			</ol>
+		</nav>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
@@ -71,12 +79,14 @@ pageContext.setAttribute("list", list);
 
 						<th style="width: 10% ;">員工<br>編號</th>
 						<td style="width: 30% ; text-align: left;">&emsp;&emsp;&emsp;${empVO.empID}</td>
-						<th style="width: 40% ;">員工照片</th>
+						<!-- 照片未完成 -->
+<!-- 						<th style="width: 40% ;">員工照片</th> -->
 			</tr>
 			<tr>
 						<th style="width: 10% ;">員工<br>姓名</th>
 						<td style="width: 30% ; text-align: left;">&emsp;&emsp;&emsp;${empVO.empName}</td>
-						<td style="width: 40% ; "rowspan="4"></td>
+						<!-- 照片未完成 -->
+<!-- 						<td style="width: 40% ; "rowspan="4"></td> -->
 			</tr>
 			<tr>
 				<th style="width: 10% ;">帳號</th>
@@ -117,7 +127,9 @@ pageContext.setAttribute("list", list);
 			</tr>
 		</table>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
-
+		<!-- ----- ----- -----   按鈕-回到網頁最上面 start ----- ----- ----- -->
+		<button type="button" id="GoTop" class="GoTop-arrow"></button>
+		<!-- ----- ----- -----   按鈕-回到網頁最上面 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 
@@ -139,6 +151,8 @@ pageContext.setAttribute("list", list);
 	<script src="../../back-assets/js/framework.js"></script>
 	<!-- Settings -->
 	<script src="../../back-assets/js/settings.js"></script>
+	<!-- GoTop -->
+	<script src="${pageContext.request.contextPath}/back-assets/js/gotop/GoTop.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 </body>
 

@@ -1,4 +1,5 @@
 package com.emp.model;
+
 import java.util.*;
 
 import com.login.model.EmpLoginVO;
@@ -6,7 +7,7 @@ import com.login.model.EmpLoginVO;
 public interface EmpDAOInterface {
     public void insert(EmpVO empVO);
     public void update(EmpVO empVO);
-    public void delete(Integer empno);
+    public void delete(Integer empID);
     public EmpVO findByPrimaryKey(Integer empID);
     public List<EmpVO> getAll();
     public EmpVO checkRepeatEmpAccount(String empAccount);

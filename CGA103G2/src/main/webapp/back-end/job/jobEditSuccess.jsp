@@ -66,7 +66,14 @@ h2{
 	<div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"></div>
 
 	<!-- ----- ----- ----- 最左邊的 選擇列 start ----- ----- ----- -->
-	<%@ include file="../../back-end/tool/LeftSideBar.file"%>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb pl-0">
+				<li class="breadcrumb-item"><a href="../../back-end/index/BackIndex.jsp"><i
+						class="material-icons">home</i>首頁</a></li>
+				<li class="breadcrumb-item">員工管理</li>
+				<li class="breadcrumb-item active" aria-current="page">職務修改成功</li>
+			</ol>
+		</nav>
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->

@@ -58,7 +58,14 @@ JobVO jobVO = (JobVO) request.getAttribute("jobVO"); //EmpServlet.java (Concroll
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
-		<%@ include file="../../back-end/tool/Upicon.file"%>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb pl-0">
+				<li class="breadcrumb-item"><a href="../../back-end/index/BackIndex.jsp"><i
+						class="material-icons">home</i>首頁</a></li>
+				<li class="breadcrumb-item">員工管理</li>
+				<li class="breadcrumb-item active" aria-current="page">職務新增成功</li>
+			</ol>
+		</nav>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
