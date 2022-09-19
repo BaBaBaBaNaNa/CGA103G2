@@ -18,4 +18,6 @@ public class MealsCategoryVO implements java.io.Serializable {
 	public void setMealsCategory(String mealsCategory) {
 		this.mealsCategory = mealsCategory;
 	}
+	
+	
 }

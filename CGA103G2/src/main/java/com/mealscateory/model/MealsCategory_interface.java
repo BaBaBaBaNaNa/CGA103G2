@@ -1,5 +1,6 @@
 package com.mealscateory.model;
-import java.util.List;
+import java.util.*;
+import com.meals.model.*;
 
 public interface MealsCategory_interface {
 	public void insert(MealsCategoryVO MealsCategoryVO);
@@ -8,6 +9,8 @@ public interface MealsCategory_interface {
     public MealsCategoryVO findByPrimaryKey(Integer mealsCategoryID);
     public List<MealsCategoryVO> getAll();
     
-//  public List<EmpVO> getAll(Map<String, String[]> map); 
+    public List<MealsCategoryVO> getAll(Map<String, String[]> map); 
+    
+    public Set<MealsVO> getMealsByMealsCategoryID(Integer mealsCategoryID);
 
 }

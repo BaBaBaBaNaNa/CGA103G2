@@ -1,6 +1,9 @@
 package com.mealscateory.model;
 
 import java.util.List;
+import java.util.Set;
+
+import com.meals.model.MealsVO;
 
 
 public class MealsCategoryService {
@@ -48,4 +51,8 @@ public class MealsCategoryService {
 	public List<MealsCategoryVO> getAll() {
 		return dao.getAll();
 	}
+	 public Set<MealsVO> getMealsByMealsCategoryID(Integer mealsCategoryID){
+		 return dao.getMealsByMealsCategoryID(mealsCategoryID);
+	 }
+
 }

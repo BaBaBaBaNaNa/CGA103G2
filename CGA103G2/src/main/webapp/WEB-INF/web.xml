@@ -45,7 +45,7 @@
 	<servlet-mapping>
 		<servlet-name>MealsServlet</servlet-name>
 		<url-pattern>/back-end/meals/Meals.do</url-pattern>
-<!-- 		<url-pattern>/meals/Meals.do</url-pattern> -->
+		<url-pattern>/meals/Meals.do</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>

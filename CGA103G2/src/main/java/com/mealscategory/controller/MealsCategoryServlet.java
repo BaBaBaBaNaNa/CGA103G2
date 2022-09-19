@@ -4,11 +4,15 @@ import java.io.*;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+
+import com.emp.model.EmpDAO;
+import com.emp.model.EmpVO;
 import com.mealscateory.model.*;
 
 
-
+@WebServlet("/back-end/mealscategory/MealsCategoryServlet.do")
 public class MealsCategoryServlet extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
@@ -20,6 +24,21 @@ public class MealsCategoryServlet extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
+		// ----- ----- ----- getAll start ----- ----- -----
+		if ("getAll".equals(action)) {
+			/*************************** 開始查詢資料 ****************************************/
+		    MealsCategoryDAO dao = new MealsCategoryDAO();
+			List<MealsCategoryVO> list = dao.getAll();
+			/*************************** 查詢完成,準備轉交(Send the Success view) *************/
+			HttpSession session = req.getSession();
+			session.setAttribute("list", list); // 資料庫取出的list物件,存入session
+			// Send the Success view
+			String url = "/back-end/mealscategory/listAllMC.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+			return;
+		}
+		// ----- ----- ----- getAll end ----- ----- -----
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 

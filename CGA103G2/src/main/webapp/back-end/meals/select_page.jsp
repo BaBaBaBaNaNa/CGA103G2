@@ -88,6 +88,36 @@
      </FORM>
   </li>
 </ul>
+   <jsp:useBean id="MealscategorySvc" scope="page" class="com.mealscateory.model.MealsCategoryService" />
+<%-- 萬用複合查詢-以下欄位-可隨意增減 --%>
+<ul>  
+  <li>   
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/meals/Meals.do" name="form1" enctype="multipart/form-data">
+        <b><font color=blue>萬用複合查詢:</font></b> <br>
+        <b>輸入員工編號:</b>
+        <input type="text" name="mealsID" value="1"><br>
+           
+       <b>輸入員工姓名:</b>
+       <input type="text" name="mealsName" value="mealsName"><br>
+       
+<!--        <b>輸入員工職位:</b> -->
+<!--        <input type="text" name="job" value="PRESIDENT"><br> -->
+    
+       <b>選擇部門:</b>
+       <select size="1" name="mealsCategoryId" >
+          <option value="">
+         <c:forEach var="MealsCategoryVO" items="${MealscategorySvc.all}" > 
+          <option value="${MealsCategoryVO.mealsCategoryId}">${MealsCategoryVO.mealsCategory}
+         </c:forEach>  
+       </select><br>
+           
+
+		        
+        <input type="submit" value="送出">
+        <input type="hidden" name="action" value="listMeals_ByCompositeQuery">
+     </FORM>
+  </li>
+</ul>
 
 
 <h3>菜系管理</h3>
