@@ -39,6 +39,8 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 <link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
 <!-- 台灣地址選擇 -->
 <link href="../../back-assets/css/tw-city-selector.css" rel="stylesheet">
+<!-- GoTop -->
+<link href="${pageContext.request.contextPath}/back-assets/css//gotop/GoTop.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -63,7 +65,14 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
-		<%@ include file="../../back-end/tool/Upicon.file"%>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb pl-0">
+				<li class="breadcrumb-item"><a href="../../back-end/index/BackIndex.jsp"><i
+						class="material-icons">home</i>首頁</a></li>
+				<li class="breadcrumb-item">員工管理</li>
+				<li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/back-end/employee/empAdd.jsp">新增員工資料</a></li>
+			</ol>
+		</nav>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
@@ -107,13 +116,8 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 					</div>
 					<div class="col-md-12 ">
 						<label>地址</label><p>${errorMsgs.empAddress}</p>
-<!-- 						<div role="tw-city-selector" class="city-selector-set-has-value" data-has-zipcode data-bootstrap-style"> -->
-<%-- 						 	<div class="col-md-12 "><input name="empAddress1" type="text" class="zipcode" data-value="${param.empAddress1}"readonly></div> --%>
-<%-- 						 	<div>請選擇縣市:</div><div><select name="empAddress2" class="county" data-value="${param.empAddress2}"></select></div> --%>
-<%-- 						 	<div>請選擇地區:</div><div><select name="empAddress3" class="district" data-value="${param.empAddress3}"></select></div> --%>
-<!-- 						</div> -->
 						<div class="input-group">
-							<input type="text" name="empAddress" value="${param.empAddress3}" class="form-control" placeholder="請接續輸入地址">
+							<input type="text" name="empAddress" value="${param.empAddress}" class="form-control" placeholder="請輸入地址">
 						</div>
 					</div>
 					<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
@@ -139,7 +143,9 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 			</form>
 		</div>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
-
+		<!-- ----- ----- -----   按鈕-回到網頁最上面 start ----- ----- ----- -->
+		<button type="button" id="GoTop" class="GoTop-arrow"></button>
+		<!-- ----- ----- -----   按鈕-回到網頁最上面 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 
@@ -160,6 +166,8 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 	<script src="../../back-assets/js/framework.js"></script>
 	<!-- Settings -->
 	<script src="../../back-assets/js/settings.js"></script>
+	<!-- GoTop -->
+	<script src="${pageContext.request.contextPath}/back-assets/js/gotop/GoTop.js"></script>
 	<!-- 台灣地址選擇 -->
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/back-assets/js/twcityselector/tw-city-selector.js"></script>

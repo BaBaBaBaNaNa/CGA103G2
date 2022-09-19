@@ -25,6 +25,8 @@
 <link href="${pageContext.request.contextPath}/back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+<!-- GoTop -->
+<link href="${pageContext.request.contextPath}/back-assets/css//gotop/GoTop.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -41,21 +43,139 @@
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
 	
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
-	<main class="body-content"padding-right: 0 px;>
+	<main class="body-content">
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
 			<%@ include file="../../back-end/tool/UpSideBar.file"%>
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
 		
 		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
-			<%@ include file="../../back-end/tool/Upicon.file"%>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb pl-0">
+				<li class="breadcrumb-item"><a href="../../back-end/index/BackIndex.jsp"><i
+						class="material-icons">home</i>首頁</a></li>
+			</ol>
+		</nav>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-<%-- 	        <%@ include file="${pageContext.request.contextPath}/back-end/tool/picture01.file"%> --%>
-<pre>
+		<div style="text-align:center;">
+		<span style="font-size:50px; font-family:微軟正黑體; margin:0px;">義鄉人</span>
+		<br>
+		<span style="font-size:25px; font-family:微軟正黑體; margin:0px;">餐廳管理系統</span>
+		</div>
+		<!-- 近10筆訂單< -->
+        <div class="col-12">
+          <div class="ms-panel">
+            <div class="ms-panel-header">
+              <h6>最新10筆訂單</h6>
+            </div>
+            <div class="ms-panel-body">
+              <div class="table-responsive">
+                <table class="table table-hover thead-primary">
+                  <thead>
+                    <tr>
+                      <th scope="col">訂單數量</th>
+                      <th scope="col">餐點品項</th>
+                      <th scope="col">品項數量</th>
+                      <th scope="col">訂單種類</th>
+                      <th scope="col">訂單狀態</th>
+                      <th scope="col">訂單產生時間</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>French Fries</td>
+                      <td>Jhon Leo</td>
+                      <td>New Town</td>
+                      <td><span class="badge badge-primary">Pending</span></td>
+                      <td>10:05</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Mango Pie</td>
+                      <td>Kristien</td>
+                      <td>Old Town</td>
+                      <td><span class="badge badge-dark">Cancelled</span></td>
+                      <td>14:05</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>FrieD Egg Sandwich</td>
+                      <td>Jack Suit</td>
+                      <td>Oxford Street</td>
+                      <td><span class="badge badge-success">Delivered</span></td>
+                      <td>12:05</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">4</th>
+                      <td>Lemon Yogurt Parfait</td>
+                      <td>Alesdro Guitto</td>
+                      <td>Church hill</td>
+                      <td><span class="badge badge-success">Delivered</span></td>
+                      <td>12:05</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">5</th>
+                      <td>Spicy Grill Sandwich</td>
+                      <td>Jacob Sahwny</td>
+                      <td>palace Road</td>
+                      <td><span class="badge badge-success">Delivered</span></td>
+                      <td>12:05</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">6</th>
+                      <td>Chicken Sandwich</td>
+                      <td>Peter Gill</td>
+                      <td>Street 21</td>
+                      <td><span class="badge badge-primary">Pending</span></td>
+                      <td>12:05</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">7</th>
+                      <td>Chicken Sandwich</td>
+                      <td>Peter Gill</td>
+                      <td>Street 21</td>
+                      <td><span class="badge badge-primary">Pending</span></td>
+                      <td>12:05</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">8</th>
+                      <td>Chicken Sandwich</td>
+                      <td>Peter Gill</td>
+                      <td>Street 21</td>
+                      <td><span class="badge badge-primary">Pending</span></td>
+                      <td>12:05</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">9</th>
+                      <td>Chicken Sandwich</td>
+                      <td>Peter Gill</td>
+                      <td>Street 21</td>
+                      <td><span class="badge badge-primary">Pending</span></td>
+                      <td>12:05</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">10</th>
+                      <td>Chicken Sandwich</td>
+                      <td>Peter Gill</td>
+                      <td>Street 21</td>
+                      <td><span class="badge badge-primary">Pending</span></td>
+                      <td>12:05</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div><!-- Recent Orders< -->
+		<pre>
 		<%@ include file="../../back-end/tool/picture02.file"%> --%>
-</pre>
+		</pre>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
+		<!-- ----- ----- -----   按鈕-回到網頁最上面 start ----- ----- ----- -->
+		<button type="button" id="GoTop" class="GoTop-arrow"></button>
+		<!-- ----- ----- -----   按鈕-回到網頁最上面 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 	
@@ -77,6 +197,8 @@
 	<script src="${pageContext.request.contextPath}/back-assets/js/framework.js"></script>
 	<!-- Settings -->
 	<script src="${pageContext.request.contextPath}/back-assets/js/settings.js"></script>
+	<!-- GoTop -->
+	<script src="${pageContext.request.contextPath}/back-assets/js/gotop/GoTop.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 </body>
 

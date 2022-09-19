@@ -2,7 +2,6 @@ package com.emp.model;
 
 import java.util.*;
 
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -13,7 +12,8 @@ import com.login.model.EmpLoginVO;
 import java.sql.*;
 
 public class EmpDAO implements EmpDAOInterface {
-//	共用DataSource
+	
+	//	共用DataSource
 	private static DataSource ds = null;
 	static {
 		try {

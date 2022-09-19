@@ -22,7 +22,6 @@ public class ShopCartDAO implements ShopCartDAOInterface {
 			e.printStackTrace();
 		}
 	}
-
 	private static final String InsertStmt1 = "INSERT INTO Orders ( memID, empCounterID,empDeliveryID,seatID,ordersType,ordersAmount,ordersStatus,ordersDestination,ordersBuildDate,ordersMakeDate) VALUES (?,?,?,?,?,?,?,?,?,?);";
 	private static final String InsertStmt2 = "INSERT INTO Orddetails ( ordersID, mealsID,orddetailsMealsQuantity,orddetailsMealsAmount,orddetailsMealsStatus,orddetailsDeliverStatus) VALUES (?,?,?,?,?,?);";
 	private static final String GetOrdersIDMAX = "SELECT max(ordersID) from orders;";
@@ -34,32 +33,74 @@ public class ShopCartDAO implements ShopCartDAOInterface {
 	@Override
 	public void insertOrders(ShopCartVO shopcartVO) {
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt1 = null;
+		
+		PreparedStatement pstmt2 = null;
+		
+		PreparedStatement pstmtGetBackID = null;
+		
+		ResultSet rs = null;
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(InsertStmt1);
+			pstmt1 = con.prepareStatement(InsertStmt1);
+			
+			//關閉自動交易控制
+			con.setAutoCommit(false);
+			//儲存第一個點,以便回復
+			Savepoint savepoint1 = con.setSavepoint("savepoint1");
+			
+			pstmt1.setInt(1, shopcartVO.getMemID());
+			pstmt1.setInt(2, shopcartVO.getEmpCounterID());
+			pstmt1.setInt(3, shopcartVO.getEmpDeliveryID());
+			pstmt1.setInt(4, shopcartVO.getSeatID());
+			pstmt1.setInt(5, shopcartVO.getOrdersType());
+			pstmt1.setInt(6, shopcartVO.getOrdersAmount());
+			pstmt1.setInt(7, shopcartVO.getOrdersStatus());
+			pstmt1.setString(8, shopcartVO.getOrdersDestination());
+			pstmt1.setTimestamp(9, shopcartVO.getOrdersBuildDate());
+			pstmt1.setTimestamp(10, shopcartVO.getOrdersMakeDate());
+			
+			pstmt1.executeUpdate();
+			
+			// ===== 取回訂單ID,要放進訂單明細 =====
+			pstmtGetBackID = con.prepareStatement(GetOrdersIDMAX);
+			rs = pstmtGetBackID.executeQuery();
+			int GetBackOrdersID = rs.getInt("ordersID");
+			
+			pstmt2 = con.prepareStatement(InsertStmt2);
+			
+			pstmt2.setInt(1, shopcartVO.getMemID());
+			pstmt2.setInt(2, shopcartVO.getEmpCounterID());
+			pstmt2.setInt(3, shopcartVO.getEmpDeliveryID());
+			pstmt2.setInt(4, shopcartVO.getSeatID());
+			pstmt2.setInt(5, shopcartVO.getOrdersType());
+			pstmt2.setInt(6, shopcartVO.getOrdersAmount());
+			pstmt2.setInt(7, shopcartVO.getOrdersStatus());
+			pstmt2.setString(8, shopcartVO.getOrdersDestination());
+			pstmt2.setTimestamp(9, shopcartVO.getOrdersBuildDate());
+			pstmt2.setTimestamp(10, shopcartVO.getOrdersMakeDate());
+			
+			//儲存第二個點,以便回復
+			Savepoint savepoint2 = con.setSavepoint("savepoint2");
+			
+			// 遇到有問題,rollback回savepoint1
+//			con.rollback(savepoint1);
+			// 遇到有問題,rollback回savepoint2
+//			con.rollback(savepoint2);
 
-			pstmt.setInt(1, shopcartVO.getMemID());
-			pstmt.setInt(2, shopcartVO.getEmpCounterID());
-			pstmt.setInt(3, shopcartVO.getEmpDeliveryID());
-			pstmt.setInt(4, shopcartVO.getSeatID());
-			pstmt.setInt(5, shopcartVO.getOrdersType());
-			pstmt.setInt(6, shopcartVO.getOrdersAmount());
-			pstmt.setInt(7, shopcartVO.getOrdersStatus());
-			pstmt.setString(8, shopcartVO.getOrdersDestination());
-			pstmt.setTimestamp(9, shopcartVO.getOrdersBuildDate());
-			pstmt.setTimestamp(10, shopcartVO.getOrdersMakeDate());
-
-			pstmt.executeUpdate();
-
+			//commit
+			con.commit();
+			//開啟自動交易控制
+			con.setAutoCommit(true);
+			
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
-			if (pstmt != null) {
+			if (pstmt1 != null) {
 				try {
-					pstmt.close();
+					pstmt1.close();
 				} catch (SQLException se) {
 					se.printStackTrace(System.err);
 				}

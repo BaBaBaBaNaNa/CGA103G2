@@ -5,53 +5,68 @@
 			<div class="ms-aside-toggler ms-toggler pl-0" data-target="#ms-side-nav" data-toggle="slideLeft">
 				<span class="ms-toggler-bar bg-primary"></span><span class="ms-toggler-bar bg-primary"></span><span class="ms-toggler-bar bg-primary"></span>
 			</div>
+			
 			<div class="logo-sn logo-sm ms-d-block-sm">
 				<a class="pl-0 ml-0 text-center navbar-brand mr-0" href="${pageContext.request.contextPath}/back-end/index/BackIndexServlet.do"><img src="${pageContext.request.contextPath}/back-assets/img/logo/logo01.png" alt="logo"></a>
 			</div>
 			<ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
-				<li class="ms-nav-item ms-search-form pb-0 py-0">
-					<form class="ms-form" method="post">
-						<div class="ms-form-group my-0 mb-0 has-icon fs-14">
-							<input type="search" class="ms-form-input" name="search" placeholder="Search here..." value=""><i class="flaticon-search text-disabled"></i>
-						</div>
-					</form>
-				</li>
-				<li class="ms-nav-item dropdown"><a href="#" class="text-disabled ms-has-notification" id="mailDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flaticon-mail"></i></a>
-					<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="mailDropdown">
-						<li class="dropdown-menu-header">
-							<h6 class="dropdown-header ms-inline m-0">
-								<span class="text-disabled">信箱</span>
-							</h6> <span class="badge badge-pill badge-success">0 New</span>
-						</li>
-						<li class="dropdown-divider"></li>
+<!-- =========================================== -->
+<!-- 				搜尋欄位 關閉不使用 -->
+<!-- 				<li class="ms-nav-item ms-search-form pb-0 py-0"> -->
+<!-- 					<form class="ms-form" method="post"> -->
+<!-- 						<div class="ms-form-group my-0 mb-0 has-icon fs-14"> -->
+<!-- 							<input type="search" class="ms-form-input" name="search" placeholder="Search here..." value=""><i class="flaticon-search text-disabled"></i> -->
+<!-- 						</div> -->
+<!-- 					</form> -->
+<!-- 				</li> -->
+<!-- =========================================== -->
+<!-- 				信箱欄位 關閉不使用 -->
+<!-- 				<li class="ms-nav-item dropdown"><a href="#" class="text-disabled ms-has-notification" id="mailDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flaticon-mail"></i></a> -->
+<!-- 					<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="mailDropdown"> -->
+<!-- 						<li class="dropdown-menu-header"> -->
+<!-- 							<h6 class="dropdown-header ms-inline m-0"> -->
+<!-- 								<span class="text-disabled">信箱</span> -->
+<!-- 							</h6> <span class="badge badge-pill badge-success">0 New</span> -->
+<!-- 						</li> -->
+<!-- 						<li class="dropdown-divider"></li> -->
+
+<!-- 						<li class="dropdown-divider"></li> -->
+<!-- 						<li class="dropdown-menu-footer text-center"><a href="">Go to Inbox</a></li> -->
+<!-- 					</ul></li> -->
+<!-- =========================================== -->
+<!-- 				通知欄位 關閉不使用 -->
+<!-- 				<li class="ms-nav-item dropdown"><a href="#" class="text-disabled ms-has-notification" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flaticon-bell"></i></a> -->
+<!-- 					<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown"> -->
+<!-- 						<li class="dropdown-menu-header"> -->
+<!-- 							<h6 class="dropdown-header ms-inline m-0"> -->
+<!-- 								<span class="text-disabled">通知</span> -->
+<!-- 							</h6> <span class="badge badge-pill badge-info">0 New</span> -->
+<!-- 						</li> -->
+<!-- 						<li class="dropdown-divider"></li> -->
+<!-- 						<li class="dropdown-menu-footer text-center"><a href="#">查看所有通知</a></li> -->
+<!-- 					</ul></li> -->
+<!-- =========================================== -->
+<!-- =========================================== -->
+<!-- 				圖片未完成,關閉不使用 -->
+<!-- 				<li class="ms-nav-item ms-nav-user dropdown"><a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="ms-user-img ms-img-round float-right" src="${pageContext.request.contextPath}/back-assets/img/costic/customer-6.jpg" alt="people"></a> -->
+<!-- =========================================== -->
+				
+				<li class="ms-nav-item ms-nav-user dropdown"><a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="text-disabled" style="text-decoration:underline; color:red;">員工 : <%= request.getSession().getAttribute("LoginSessionName") %></span></a>
+					<ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
 
 						<li class="dropdown-divider"></li>
-						<li class="dropdown-menu-footer text-center"><a href="">Go to Inbox</a></li>
-					</ul></li>
-				<li class="ms-nav-item dropdown"><a href="#" class="text-disabled ms-has-notification" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flaticon-bell"></i></a>
-					<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
-						<li class="dropdown-menu-header">
-							<h6 class="dropdown-header ms-inline m-0">
-								<span class="text-disabled">通知</span>
-							</h6> <span class="badge badge-pill badge-info">0 New</span>
-						</li>
-						<li class="dropdown-divider"></li>
-						<li class="dropdown-menu-footer text-center"><a href="#">查看所有通知</a></li>
-					</ul></li>
-				<li class="ms-nav-item ms-nav-user dropdown"><a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="ms-user-img ms-img-round float-right" src="${pageContext.request.contextPath}/back-assets/img/costic/customer-6.jpg" alt="people"></a>
-					<ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
-						<li class="dropdown-menu-header">
-							<h6 class="dropdown-header ms-inline m-0">
-								<span class="text-disabled">你好 , 員工 <%= request.getSession().getAttribute("LoginSessionName") %></span>
-							</h6>
-						</li>
-						<li class="dropdown-divider"></li>
-						<li class="ms-dropdown-list"><a class="media fs-14 p-2" href="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do?action=getEmpPersonalData"><span><i class="flaticon-user mr-2"></i>個人基本資料</span></a>
-													 <a class="media fs-14 p-2" href=""><span><i class="flaticon-mail mr-2"></i>信箱</span><span class="badge badge-pill badge-info">3</span></a>
-													 <a class="media fs-14 p-2" href=""><span><i class="flaticon-gear mr-2"></i>帳號設定</span></a>
+						<li class="ms-dropdown-list">
+							<a class="media fs-14 p-2" href="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do?action=getEmpPersonalData"><span><i class="flaticon-user mr-2"></i>個人基本資料</span></a>
+						
+<!-- =========================================== -->
+<!-- 				信箱及帳號設定欄位 關閉不使用 -->
+<!-- 													 <a class="media fs-14 p-2" href=""><span><i class="flaticon-mail mr-2"></i>信箱</span><span class="badge badge-pill badge-info">3</span></a> -->
+<!-- 													 <a class="media fs-14 p-2" href=""><span><i class="flaticon-gear mr-2"></i>帳號設定</span></a> -->
+<!-- =========================================== -->
+
 					    </li>
 						<li class="dropdown-divider"></li>
-						<li class="dropdown-menu-footer"><a class="media fs-14 p-2" href="${pageContext.request.contextPath}/EmpLogoutServlet.do"><span><i class="flaticon-shut-down mr-2"></i>Logout</span></a></li>
+						<li class="dropdown-menu-footer"><a class="media fs-14 p-2" href="${pageContext.request.contextPath}/EmpLogoutServlet.do"><span><i class="flaticon-shut-down mr-2"></i>登出/Logout</span></a></li>
 					</ul></li>
 			</ul>
 			<div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler" data-toggle="slideDown" data-target="#ms-nav-options">

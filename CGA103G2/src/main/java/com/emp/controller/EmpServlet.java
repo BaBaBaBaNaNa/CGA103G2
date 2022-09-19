@@ -153,17 +153,11 @@ public class EmpServlet extends HttpServlet {
 			
 			//地址
 			String empAddress = req.getParameter("empAddress").trim();
-			
-//			String empAddress2 = req.getParameter("county").trim();
-//			System.out.println(empAddress2);
-//			String empAddress3 = req.getParameter("district").trim();
-//			System.out.println(empAddress3);
-			
-			String empAddressReg = "^[(\\u4e00-\\u9fa5)]{1,100}$";
+			String empAddressReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9)]{1,100}$";
 			if (empAddress == null || empAddress.trim().length() == 0) {
 				errorMsgs.put("empAddress","  地址請勿空白");
-			} else if (!empAddress.trim().matches(empAddressReg)) {
-			errorMsgs.put("empPhone","  地址只能是中、英文字母、數字 , 且長度必需在1到100之間");
+			}else if (!empAddress.trim().matches(empAddressReg)) {
+			errorMsgs.put("empAddress","  地址只能是中、英文字母、數字 , 且長度必需在1到100之間");
 			}
 			
 			//職位
@@ -250,20 +244,6 @@ public class EmpServlet extends HttpServlet {
 
 			//--- 帳號 ---
 			String empAccount = req.getParameter("empAccount").trim();
-//			String empAccountReg = "^[(a-zA-Z0-9)]{5,30}$";
-			//----- 此段去查詢資料庫是否有重複的empAccount員工帳號資料 start-----
-//			EmpService empSvc = new EmpService();
-//			EmpVO empVO = empSvc.getEmpAccountCheck(empAccount); 
-			//----- 此段去查詢資料庫是否有重複的empAccount員工帳號資料 end -----
-//			if (empAccount == null || empAccount.trim().length() == 0) {
-//				errorMsgs.put("empAccount","  帳號請勿空白");
-//			} else if (!empAccount.trim().matches(empAccountReg)) {
-//				errorMsgs.put("empAccount","  帳號只能是中、英文字母、數字 , 且長度必需在5到30之間");
-//			}
-//			else if(empVO != null) {
-//				errorMsgs.put("empAccount","  帳號重複,請重新輸入");
-//			}
-
 
 			//--- 密碼 ---
 			String empPassword = req.getParameter("empPassword").trim();
@@ -288,11 +268,11 @@ public class EmpServlet extends HttpServlet {
 			
 			//--- 地址 ---
 			String empAddress = req.getParameter("empAddress").trim();
-			String empAddressReg = "^[(\\u4e00-\\u9fa5)]{1,100}$";
+			String empAddressReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9)]{1,100}$";
 			if (empAddress == null || empAddress.trim().length() == 0) {
 				errorMsgs.put("empAddress","  地址請勿空白");
-			} else if (!empPhone.trim().matches(empPhoneReg)) {
-			errorMsgs.put("empPhone","  地址只能是中、英文字母、數字 , 且長度必需在1到100之間");
+			}else if (!empAddress.trim().matches(empAddressReg)) {
+			errorMsgs.put("empAddress","  地址只能是中、英文字母、數字 , 且長度必需在1到100之間");
 			}
 			
 			//--- 職位 ---

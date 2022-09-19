@@ -64,7 +64,6 @@ public class ShopCartServlet extends HttpServlet{
 				failureView.forward(req, res);
 				return;
 			}
-
 			/*************************** 2.開始新增資料 ***************************************/
 			ShopCartService shopcartSvc = new ShopCartService();
 			shopcartSvc.addInsideOrder(ordersType, ordersStatus, ordersBuildDate);
