@@ -3,9 +3,6 @@ package com.queuer.model;
 import redis.clients.jedis.Jedis;
 
 public class QueuerRedisService {
-	public static void main(String[] args) {
-		closeShop();
-	}
 	
 	private static Jedis getJedisConnection() {
 		// 取得redis 連線
@@ -14,6 +11,39 @@ public class QueuerRedisService {
 		// 選擇db15
 		jedis.select(15);
 		return jedis;
+	}
+	
+	
+	public String getTotalNO() {
+		// 取得redis連線
+		Jedis jedis = getJedisConnection();
+		// 宣告變數
+		String totalNO = "";
+		long totalNOValue = 0;
+		
+		totalNOValue = jedis.llen("queuerList");
+		totalNO =  Long.toString(totalNOValue);
+		
+		return totalNO;
+	}
+	
+	public String getRemainNO() {
+		// 取得redis連線
+		Jedis jedis = getJedisConnection();
+		// 宣告變數
+		String remainNO = "";
+		long remainNOValue = 0;
+		if(jedis.exists("currentCount")){
+			
+			remainNOValue = (jedis.llen("queuerList") - Integer.parseInt(jedis.get("currentCount") ));
+			remainNO = Long.toString(remainNOValue);
+		}else{
+			remainNOValue = jedis.llen("queuerList");
+			remainNO = Long.toString(remainNOValue);
+		}
+		
+		return remainNO;
+		
 	}
 	
 	public String getQueuerNO() {
@@ -67,7 +97,7 @@ public class QueuerRedisService {
 		
 	}
 	
-	public String getNextNO() {
+	public String getCurrentNO() {
 		
 		// 取得redis連線
 		Jedis jedis = getJedisConnection();
@@ -102,7 +132,26 @@ public class QueuerRedisService {
 		
 		jedis.close();
 		return currentNO;
+	}
+
+	public String getNextNO() {
+		// 取得redis連線
+		Jedis jedis = getJedisConnection();
+				
+		// 宣告空字串存放元素
+		String nextNO = "";
+				
+		// 宣告整數索引值
+		int index = 0;			
 		
+
+		//設定索引值
+		index = Integer.valueOf(jedis.get("currentCount")) + 1;
+					
+		// 取出排隊list中當前號碼，並存入字串變數中。
+		nextNO = jedis.lrange("queuerList", index, index).get(0);
+		
+		return nextNO;
 	}
 	
 	public void doOverList() {
@@ -175,7 +224,7 @@ public class QueuerRedisService {
 		jedis.close();
 	}
 	
-	public static void closeShop() {
+	public  void closeShop() {
 		// 取得redis連線
 		Jedis jedis = getJedisConnection();
 		

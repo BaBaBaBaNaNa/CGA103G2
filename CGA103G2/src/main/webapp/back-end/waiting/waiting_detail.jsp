@@ -114,6 +114,7 @@ input:checked + label:after {
 		
 
 		<div class="ms-content-wrapper">
+		<button id="openOrCloseBtn" onclick="openOrCloseBtn">開/關</button>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="alert alert-success" role="hidden" style="display:none">
@@ -150,27 +151,27 @@ input:checked + label:after {
 								<div class="ms-panel-body">
 									<div id="imagesSlider" class="ms-image-slider carousel slide" data-ride="carousel">
 										<div class="carousel-inner">
-										當前編號：(動態取值)
-										<span id="currentNO"></span>
+										當前編號：
+										<span id="currentNO">0</span>
 										</div>
 										<div>
-										<button type="button">入座(更改候位狀態為入座)</button>
-										<button type="button">過號(更改候位狀態為過號)</button>
-										<button type="button">下一號(跳轉至下一號)</button>
+										<button type="button" id="getNextNOBtn" onclick="getNextNOBtn">下一號</button>
+										<button type="button" id="doSeatedListBtn" onclick="doSeatedListBtn">入座</button>
+										<button type="button" id="doOverListBtn" onclick="doOverListBtn">過號</button>
 										</div>
 
 										<div class="carousel-inner">
-										下一號：( 動態取值 當前編號+1)
-										<span id="nextNO"></span>
+										下一號：
+										<span id="nextNO">0</span>
 										</div>
 
 										<div class="carousel-inner">
-										剩餘組數：(動態取值 總候位編號-當前編號)
-										<span id="remainNO"></span>
+										剩餘組數：
+										<span id="remainNO">0</span>
 										</div>
 										<div class="carousel-inner">
-										總組數：(動態取值 背後位了幾次)
-										<span id="totalNO"></span>
+										總組數：
+										<span id="totalNO">0</span>
 										</div>
 
 									</div>
@@ -188,7 +189,7 @@ input:checked + label:after {
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
-	<!-- Global Required Scripts Start -->
+		<!-- Global Required Scripts Start -->
 	<script src="${pageContext.request.contextPath}/back-assets/js/jquery-3.3.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/back-assets/js/popper.min.js"></script>
 	<script src="${pageContext.request.contextPath}/back-assets/js/bootstrap.min.js"></script>
@@ -206,7 +207,117 @@ input:checked + label:after {
 	<!-- Settings -->
 	<script src="${pageContext.request.contextPath}/back-assets/js/settings.js"></script>
 	
-	<script type="text/javascript">
+	
+		<script type="text/javascript">
+		$(document).ready(function(){
+			
+	        $("#getNextNOBtn").click(function(){
+	        	
+	        	
+
+	            $.ajax({
+
+
+	                 url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
+
+	                 data: {
+	                	 action:  "getNextNO", 
+	                 },
+
+	                 success : function(res){
+	                	 
+	                	 showCurrentNO(res)
+	                	 showNextNO(res)
+	                	 showRemainNO(res)
+	                	 
+	                 },
+
+	                 error:function(xhr, ajaxOptions, thrownError){
+
+	                     alert(xhr.status+"\n"+thrownError);
+	                 }
+
+	             });
+
+	        });
+	    	 
+	        $("#doSeatedListBtn").click(function(){
+	        	
+	        	
+
+	            $.ajax({
+
+
+	                 url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
+
+	                 data: {
+	                	 action:  "doSeatedList", 
+	                 },
+
+	                 success : function(res){
+	                	 doSeatedList(res)
+	                 },
+
+	                 error:function(xhr, ajaxOptions, thrownError){
+
+	                     alert(xhr.status+"\n"+thrownError);
+	                 }
+
+	             });
+
+	        });
+	        
+	        $("#doOverListBtn").click(function(){
+
+	            $.ajax({
+
+
+	                 url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
+
+	                 data: {
+	                	 action:  "doOverList", 
+	                 },
+
+	                 success : function(res){
+	                	 doOverList(res)
+	                 },
+
+	                 error:function(xhr, ajaxOptions, thrownError){
+
+	                     alert(xhr.status+"\n"+thrownError);
+	                 }
+
+	             });
+
+	        });
+	        
+	        $("#openOrCloseBtn").click(function(){
+
+	            $.ajax({
+
+
+	                 url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
+
+	                 data: {
+	                	 action:  "openOrClose", 
+	                 },
+
+	                 success : function(res){
+	                	 console.log(JSON.parse(res));
+	                 },
+
+	                 error:function(xhr, ajaxOptions, thrownError){
+
+	                     alert(xhr.status+"\n"+thrownError);
+	                 }
+
+	             });
+
+	        });
+
+	     });  
+	</script>
+		<script type="text/javascript">
 	Today = new Date();
 	yy=Today.getFullYear();
 	mm=Today.getMonth()+1;
@@ -228,6 +339,56 @@ input:checked + label:after {
 	</script>
 	
 	<script type="text/javascript">
+	function showCurrentNO(res){
+		document.getElementById("currentNO").innerHTML = JSON.parse(res).currentNO
+	}
+	
+	function showNextNO(res){
+		document.getElementById("nextNO").innerHTML = JSON.parse(res).nextNO
+	}
+	
+	function showRemainNO(res){
+		document.getElementById("remainNO").innerHTML = JSON.parse(res).remainNO
+	}
+	
+	function doSeatedList(res){
+		console.log(JSON.parse(res))
+	}
+	function doOverList(res){
+		console.log(JSON.parse(res))
+	}
+	</script>
+		
+	<script type="text/javascript">
+	
+	function showTotalNO(){
+		 $.ajax({
+
+
+	          url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
+
+	          data: {
+	         	 action: "showTotalNO", 
+	          },
+
+	          success : function(res){
+	         	 
+			  document.getElementById("totalNO").innerHTML = JSON.parse(res).totalNO
+	         	 
+	          },
+	         	 
+	              
+	          
+
+	          error:function(xhr, ajaxOptions, thrownError){
+
+	              alert(xhr.status+"\n"+thrownError);
+	          }
+
+	      });
+	}
+	
+	window.onload = setInterval(showTotalNO, 5000);
 	
 	</script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
