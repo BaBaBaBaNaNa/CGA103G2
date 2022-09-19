@@ -345,7 +345,7 @@
 		  document.getElementById("remainNO").innerHTML = JSON.parse(res).remainNO
          	 
           },
-         	 
+         	
               
           
 
