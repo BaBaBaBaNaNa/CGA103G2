@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-OrddetailsVO orddetailsVO = (OrddetailsVO) request.getAttribute("orddetailsVO"); //OrdersServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+OrddetailsVO orddetailsVO = (OrddetailsVO) request.getAttribute("orddetailsVO"); 
 %>
 
 
@@ -380,12 +380,12 @@ th, td {
 		<table id="table-1">
 			<tr>
 				<td>
-					<h3>訂單詳細新增 - addOrddetails</h3>
+					<h3>訂單明細新增 - addOrddetails</h3>
 				</td>
 				<td>
 					<h4>
 						<a href="select_page.jsp"><img src="images/capoo.gif"
-							width="250" height="250" border="0">回首頁</a>
+							width="250" height="250" border="0">返回訂單明細查詢</a>
 					</h4>
 				</td>
 			</tr>
@@ -438,6 +438,15 @@ th, td {
 						<option value="1">未製作</option>
 				</select></td>
 				</tr>
+<!-- 				<tr> -->
+<!-- 					<th id="test">製作狀態(0:已製作 , 1:未製作):</th> -->
+<!-- 					<td><select name="orddetailsMealsStatus" id="orddetailsMealsStatus"> -->
+<!-- 							<option value="0" -->
+<%-- 								<c:if test="${orddetailsVO.orddetailsMealsStatus == 0}">selected</c:if>>已製作</option> --%>
+<!-- 							<option value="1" -->
+<%-- 								<c:if test="${orddetailsVO.orddetailsMealsStatus == 1}">selected</c:if>>未製作</option> --%>
+<!-- 					</select></td> -->
+<!-- 				</tr> -->
 				<tr>
 					<td>送餐狀態(0:已送餐 , 1:未送餐):</td>
 					<td><select id="orddetailsDeliverStatus"
@@ -446,6 +455,15 @@ th, td {
 							<option value="1">未送餐</option>
 					</select></td>
 				</tr>
+				<tr>
+<!-- 					<th id="test">送餐狀態(0:已送餐 , 1:未送餐):</th> -->
+<!-- 					<td><select name="orddetailsDeliverStatus" id="orddetailsDeliverStatus"> -->
+<!-- 							<option value="0" -->
+<%-- 								<c:if test="${orddetailsVO.orddetailsDeliverStatus == 0}">selected</c:if>>已送餐</option> --%>
+<!-- 							<option value="1" -->
+<%-- 								<c:if test="${orddetailsVO.orddetailsDeliverStatus == 1}">selected</c:if>>未送餐</option> --%>
+<!-- 					</select></td> -->
+<!-- 				</tr> -->
 
 			</table>
 
@@ -475,13 +493,8 @@ th, td {
 	<!-- Settings -->
 	<script src="../../back-assets/js/settings.js"></script>
 
-<!-- ===================================================================================================================== -->
+	<!-- ===================================================================================================================== -->
 
-	<link rel="stylesheet" type="text/css"
-		href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 	<style>
 .xdsoft_datetimepicker .xdsoft_datepicker {

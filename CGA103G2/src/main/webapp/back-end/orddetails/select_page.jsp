@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Costic Dashboard</title>
+<title>義鄉人_訂單明細後台</title>
 <!-- Iconic Fonts -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
@@ -241,13 +241,13 @@ h4 {
 
 			<!-- ----- ----- ----- 空白頁面 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#nothing1" aria-expanded="false"
-				aria-controls="nothing1"><span><i
-						class="fas fa-file-invoice fs-16"></i>空白頁面</span></a>
-				<ul id="nothing1" class="collapse" aria-labelledby="nothing1"
+				data-toggle="collapse" data-target="#listAllNews" aria-expanded="false"
+				aria-controls="listAllNews"><span><i
+						class="fas fa-file-invoice fs-16"></i>最新消息</span></a>
+				<ul id="listAllNews" class="collapse" aria-labelledby="listAllNews"
 					data-parent="#side-nav-accordion">
 					<li><a
-						href="${pageContext.request.contextPath}/back-end/nothing/nothing1.jsp">nothing1</a></li>
+						href="${pageContext.request.contextPath}/back-end/news/listAllNews.jsp">最新消息後台管理</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 空白頁面 end ----- ----- ----- -->
 		</ul>
@@ -352,7 +352,7 @@ h4 {
 				<li class="breadcrumb-item"><a href="#"><i
 						class="material-icons">home</i>首頁</a></li>
 				<li class="breadcrumb-item"><a href="#">訂單管理</a></li>
-				<li class="breadcrumb-item active" aria-current="page">查看訂單</li>
+				<li class="breadcrumb-item active" aria-current="page">查看訂單明細</li>
 			</ol>
 		</nav>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
@@ -370,7 +370,7 @@ h4 {
 </c:if>
 
 <ul>
-  <li style="margin-left: 10px"><a href='listAllOrddetails.jsp'>List</a> all Orddetails.  <br><br></li>
+  <li><a href='listAllOrddetails.jsp'>List</a> all Orddetails.  <br><br></li>
   
   
   <li>
@@ -382,10 +382,9 @@ h4 {
     </FORM>
   </li>
 
-			<jsp:useBean id="orddetailsSvc" scope="page"
-				class="com.orddetails.model.OrddetailsService" />
-
-			<li>
+  <jsp:useBean id="orddetailsSvc" scope="page" class="com.orddetails.model.OrddetailsService"/>
+   
+  <li>
      <FORM METHOD="post" ACTION="orddetails.do" >
        <b>訂單編號:</b>
        <select size="1" name="orddetailsID">
@@ -404,8 +403,10 @@ h4 {
 <h3>訂單明細管理</h3>
 
 <ul>
-  <li style="margin-left: 10px"><a href='addOrddetails.jsp'>Add</a> a new Orddetails.</li>
+  <li><a href='addOrddetails.jsp'>Add</a> a new Orddetails.</li>
 </ul>
+
+
 
 
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->

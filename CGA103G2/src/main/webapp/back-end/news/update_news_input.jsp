@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.orders.model.*"%>
+<%@page import="com.news.model.NewsVO"%>
 <%@page import="java.sql.Timestamp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-OrdersVO ordersVO = (OrdersVO) request.getAttribute("ordersVO");
+NewsVO newsVO = (NewsVO) request.getAttribute("newsVO"); 
 %>
-
 
 <!DOCTYPE html>
 <html lang="zh-tw">
@@ -61,11 +60,10 @@ h4 {
 
 <style>
 table {
-	width: 570px;
-	background-color: f0f0fa;
+	width: 750px;
+	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
-	margin-left: 10px;
 }
 
 table, th, td {
@@ -76,6 +74,9 @@ th, td {
 	padding: 1px;
 }
 </style>
+
+
+
 </head>
 
 <body
@@ -259,13 +260,13 @@ th, td {
 
 			<!-- ----- ----- ----- 空白頁面 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#nothing1" aria-expanded="false"
-				aria-controls="nothing1"><span><i
-						class="fas fa-file-invoice fs-16"></i>空白頁面</span></a>
-				<ul id="nothing1" class="collapse" aria-labelledby="nothing1"
+				data-toggle="collapse" data-target="#listAllNews"
+				aria-expanded="false" aria-controls="listAllNews"><span><i
+						class="fas fa-file-invoice fs-16"></i>最新消息</span></a>
+				<ul id="listAllNews" class="collapse" aria-labelledby="listAllNews"
 					data-parent="#side-nav-accordion">
 					<li><a
-						href="${pageContext.request.contextPath}/back-end/nothing/nothing1.jsp">nothing1</a></li>
+						href="${pageContext.request.contextPath}/back-end/news/listAllNews.jsp">最新消息後台</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 空白頁面 end ----- ----- ----- -->
 		</ul>
@@ -369,110 +370,95 @@ th, td {
 			<ol class="breadcrumb pl-0">
 				<li class="breadcrumb-item"><a href="#"><i
 						class="material-icons">home</i>首頁</a></li>
-				<li class="breadcrumb-item"><a href="order_details.jsp">訂單管理</a></li>
-				<li class="breadcrumb-item active" aria-current="page">查看訂單</li>
 			</ol>
 		</nav>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<table id="table-1">
+
+	<table id="table-1">
+		<tr>
+			<td>
+				<h3>訂單資料修改 - update_news_input.jsp</h3>
+				<h4>
+					<a href="listAllNews.jsp"><img src="images/back.png"
+						width="100" height="100" border="0">回首頁</a>
+				</h4>
+			</td>
+		</tr>
+	</table>
+
+	<h3>資料修改:</h3>
+
+	<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
+
+	<FORM METHOD="post" ACTION="news.do" name="form1"
+		enctype="multipart/form-data">
+		<table>
 			<tr>
-				<td>
-					<h3>訂單新增 - addOrders.jsp</h3>
-				</td>
-				<td>
-					<h4>
-						<a href="order_details.jsp"><img src="images/giphy.gif"
-							width="250" height="250" border="0">回首頁</a>
-					</h4>
-				</td>
+				<td>消息編號:<font color=red><b>*</b></font></td>
+				<td><%=newsVO.getNewsID()%></td>
 			</tr>
+
+			<tr>
+				<td>員工編號 :</td>
+				<td><input type="TEXT" name="empID" size="45"
+					value="<%=newsVO.getEmpID()%>" /></td>
+			</tr>
+			<tr>
+				<td>消息日期:</td>
+				<td><input name="newsDate" id="f_date1" type="text"></td>
+			</tr>
+			<tr>
+				<td>消息標題 :</td>
+				<td><input type="TEXT" name="newsTitle" size="45"
+					value="<%=newsVO.getNewsTitle()%>" /></td>
+			</tr>
+			<tr>
+				<td >消息內容:</td>
+				<td  class="col-md-8 form-group">
+				<textarea class="form-control" id="newsInformation" rows="3" name="newsInformation">
+				<%=(newsVO==null)?"":newsVO.getNewsInformation()%></textarea>
+				</td>
+<!--  				<td><input type="TEXT" name="newsInformation" size="45" -->
+<%-- 					value="<%=(newsVO == null) ? "TEST" : newsVO.getNewsInformation()%>" /></td> --%>
+			</tr>
+
+			<tr>
+				<td>消息控制(上架 下架):</td>
+				<td><select name="newsControl" id="newsControl">
+						<option value="0">上架</option>
+						<option value="1">下架</option>
+				</select></td>
+			</tr>
+
+			<div>
+				<label for="newsPictures">圖片:</label> <input id="newsPictures"
+					name="newsPictures" type="file" onclick="previewImage()"
+					multiple="multiple " accept="image/*" />
+				<%-- 				可以不修改圖片 <span  id ="newsPictures.errors" class="error">${errorMsgs.newsPictures}</span> --%>
+				<div id="blob_holder">
+					<img
+						src="<%=request.getContextPath()%>/news/DBGifReader4?newsID=${param.newsID}"width="200px">
+				</div>
+			</div>
+
 		</table>
-
-		<h3>資料新增:</h3>
-
-		<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-			<font style="color: red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
-		</c:if>
-
-		<FORM METHOD="post" ACTION="orders.do" name="form1">
-			<table>
-				<tr>
-					<td>訂單編號:</td>
-					<td><input type="TEXT" name="ordersID" size="45"
-						value="<%=(ordersVO == null) ? "" : ordersVO.getOrdersID()%>" /></td>
-				</tr>
-				<tr>
-					<td>會員編號:</td>
-					<td><input type="TEXT" name="memID" size="45"
-						value="<%=(ordersVO == null) ? "" : ordersVO.getMemID()%>" /></td>
-				</tr>
-				<tr>
-					<td>櫃台員工編號:</td>
-					<td><input type="TEXT" name="empCounterID" size="45"
-						value="<%=(ordersVO == null) ? "" : ordersVO.getEmpCounterID()%>" /></td>
-				</tr>
-				<tr>
-					<td>外送員工編號:</td>
-					<td><input type="TEXT" name="empDeliveryID" size="45"
-						value="<%=(ordersVO == null) ? "" : ordersVO.getEmpDeliveryID()%>" /></td>
-				</tr>
-				<tr>
-					<td>桌子編號:</td>
-					<td><input type="TEXT" name="seatID" size="45"
-						value="<%=(ordersVO == null) ? "" : ordersVO.getSeatID()%>" /></td>
-				</tr>
-				<tr>
-					<td>訂單種類(外帶 外送 內用):</td>
-					<td><select name="ordersType" id="ordersType">
-							<option value="0">外帶</option>
-							<option value="1">外送</option>
-							<option value="2">內用</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>訂單總金額:</td>
-					<td><input type="TEXT" name="ordersAmount" size="45"
-						value="<%=(ordersVO == null) ? "" : ordersVO.getOrdersAmount()%>" /></td>
-				</tr>
-				<tr>
-					<td>訂單狀態(完成, 未完成, 退回):</td>
-					<td><select id="ordersStatus" name="ordersStatus">
-							<option value="0">完成</option>
-							<option value="1">未完成</option>
-							<option value="2">退回</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>取餐地點:</td>
-					<td><input type="TEXT" name="ordersDestination" size="45"
-						value="<%=(ordersVO == null) ? "" : ordersVO.getOrdersDestination()%>" /></td>
-				</tr>
-				<tr>
-					<td>成立訂單日:</td>
-					<td><input name="ordersBuildDate" id="f_date1" type="text"></td>
-				</tr>
-				<tr>
-					<td>預計製作日:</td>
-					<td><input name="ordersMakeDate" id="f_date2" type="text"></td>
-				</tr>
-
-				<%-- 	<jsp:useBean id="ordersSvc" scope="page" class="com.orders.model.OrdersService" /> --%>
-
-			</table>
-
-			<br> <input type="hidden" name="action" value="insert">
-			<input type="submit" value="送出新增" style="margin-left: 10px;" >
-		</FORM>
+		<br> <input type="hidden" name="action" value="update"> <input
+			type="hidden" name="newsID" value="<%=newsVO.getNewsID()%>">
+		<input type="submit" value="送出修改">
+	</FORM>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
+
 	<!-- SCRIPTS -->
 	<!-- Global Required Scripts Start -->
 	<script src="../../back-assets/js/jquery-3.3.1.min.js"></script>
@@ -491,27 +477,22 @@ th, td {
 	<script src="../../back-assets/js/framework.js"></script>
 	<!-- Settings -->
 	<script src="../../back-assets/js/settings.js"></script>
-	<%
-Timestamp ordersBuildDate = null;
-try {
-	ordersBuildDate = ordersVO.getOrdersBuildDate();
-} catch (Exception e) {
-	ordersBuildDate = new Timestamp(System.currentTimeMillis());
-}
-%>
+</body>
 <%
-Timestamp ordersMakeDate = null;
+Timestamp newsDate = null;
 try {
-	ordersMakeDate = ordersVO.getOrdersMakeDate();
+	newsDate = newsVO.getNewsDate();
 } catch (Exception e) {
-	ordersMakeDate = new Timestamp(System.currentTimeMillis());
+	newsDate = new Timestamp(System.currentTimeMillis());
 }
 %>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.datetimepicker.css" />
+<script
+	src="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.js"></script>
 <script
 	src="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
-
 
 <style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
@@ -522,41 +503,68 @@ try {
 	height: 151px; /* height:  151px; */
 }
 </style>
+
 <script>
-	
-	document.getElementById('ordersType').onchange = () => {
-		console.log(this);
-	}
-	document.getElementById('ordersStatus').onchange = () => {
-		console.log(this);
-	}
 
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-	       theme: '',              //theme: 'dark',
-	       timepicker:true,       //timepicker:true,
-	       step: 30,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
-		   value: '<%=ordersBuildDate%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        
-        $.datetimepicker.setLocale('zh');
-        $('#f_date2').datetimepicker({
-	       theme: '',              //theme: 'dark',
-	       timepicker:true,       //timepicker:true,
-	       step: 30,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
-		   value: '<%=ordersMakeDate%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-        });
+document.getElementById('newsControl').onchange = ()=> {
+	console.log(this);
+}
+
+
+$.datetimepicker.setLocale('zh');
+$('#f_date1').datetimepicker({
+   theme: '',              //theme: 'dark',
+   timepicker:true,       //timepicker:true,
+   step: 30,                //step: 60 (這是timepicker的預設間隔60分鐘)
+   format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
+   value: '<%=newsDate%>', // value:   new Date(),
+});
+
+
+//照片上傳-預覽用
+var filereader_support = typeof FileReader != 'undefined';
+if (!filereader_support) {
+	alert("No FileReader support");
+}
+acceptedTypes = {
+		'image/png' : true,
+		'image/jpeg' : true,
+		'image/gif' : true
+};
+function previewImage() {
+	var newsPictures1 = document.getElementById("newsPictures");
+	newsPictures1.addEventListener("change", function(event) {
+		var files = event.target.files || event.dataTransfer.files;
+		for (var i = 0; i < files.length; i++) {
+			previewfile(files[i])
+		}
+	}, false);
+}
+function previewfile(file) {
+	if (filereader_support === true && acceptedTypes[file.type] === true) {
+		var reader = new FileReader();
+		reader.onload = function(event) {
+			var image = new Image();
+			image.src = event.target.result;
+			image.width = 200;
+			image.height = 200;
+			image.border = 2;
+			blob_holder.innerHTML = '';
+// 			if (blob_holder.hasChildNodes()) {
+// 				blob_holder.removeChild(blob_holder.childNodes[0]);
+// 			}
+			blob_holder.appendChild(image);
+		};
+		reader.readAsDataURL(file);
+		document.getElementById('submit');
+	} else {
+		blob_holder.innerHTML = "<div  style='text-align: left;'>" + "● filename: " + file.name
+				+ "<br>" + "● ContentTyp: " + file.type
+				+ "<br>" + "● size: " + file.size + "bytes"
+				+ "<br>" + "● 上傳ContentType限制: <b> <font color=red>image/png、image/jpeg、image/gif </font></b></div>";
+		document.getElementById('submit');
+	}
+}
+
 </script>
-</body>
-
 </html>

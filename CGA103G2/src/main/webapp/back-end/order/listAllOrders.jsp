@@ -267,7 +267,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>所有訂單資料 - listAllOrders.jsp</h3>
-		 <h4><a href="order_details.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="order_details.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -285,7 +285,7 @@
 		<th>成立訂單日</th>
 		<th>預計製作日</th>
 		<th>修改</th>
-		<th>刪除</th>
+<!-- 		<th>刪除</th> -->
 	</tr>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="ordersVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
@@ -308,12 +308,12 @@
 			     <input type="hidden" name="ordersID"  value="${ordersVO.ordersID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/order/orders.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
-			     <input type="hidden" name="ordersID"  value="${ordersVO.ordersID}">
-			     <input type="hidden" name="action" value="delete"></FORM>
-			</td>
+<!-- 			<td> -->
+<%-- 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/order/orders.do" style="margin-bottom: 0px;"> --%>
+<!-- 			     <input type="submit" value="刪除"> -->
+<%-- 			     <input type="hidden" name="ordersID"  value="${ordersVO.ordersID}"> --%>
+<!-- 			     <input type="hidden" name="action" value="delete"></FORM> -->
+<!-- 			</td> -->
 		</tr>
 	</c:forEach>
 </table>

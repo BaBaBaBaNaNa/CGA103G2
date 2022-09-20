@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@page import="com.news.model.NewsService"%>
+<%@page import="com.news.model.NewsVO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+
+<%
+	NewsService newsSvc = new NewsService();
+    List<NewsVO> list = newsSvc.getAll();
+    pageContext.setAttribute("list",list);
+%>
+
+
 <!doctype html>
 <html lang="zh-tw">
 
@@ -37,7 +49,6 @@
 	<!-- ----- ----- ----- 最上面 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
-    <main>
         <!-- ----- ----- ----- 中間上面 start ----- ----- ----- -->
         <header>
 
@@ -47,22 +58,18 @@
         <!-- ----- ----- ----- 中間內容 start ----- ----- ----- -->
     <main>
     <!-- ----- ----- ----- 中間上面 start ----- ----- ----- -->
-        <!-- <header class="site-header site-menu-header">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-10 col-12 mx-auto">
-                        <h1 class="text-white">最新消息</h1>
-
-                        <strong class="text-white">餐廳最新消息</strong>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="overlay"></div>
-        </header> -->
-        <header ></header>
+<!--         <header class="site-header site-menu-header">
+<!--             <div class="container"> -->
+<!--                 <div class="row"> -->
+<!--                     <div class="col-lg-10 col-12 mx-auto"> -->
+<!--                         <h1 class="text-white">最新消息</h1> -->
+<!--                         <strong class="text-white">餐廳最新消息</strong> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--             <div class="overlay"></div> -->
+<!--         </header> -->
+<!--         <header ></header> -->
     <!-- ----- ----- ----- 中間上面 end ----- ----- ----- -->
     <!-- ----- ----- ----- 中間內容 start ----- ----- ----- -->
         <section class="news section-padding bg-white">
@@ -109,80 +116,51 @@
 
                 </div>
             </div>
+      
         </section>
 
-        <section class="news section-padding">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-12">
-                        <h2 class="mb-lg-5 mb-4">News &amp; Events</h2>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="news-thumb mb-4">
-                            <a href="../../front-end/news/news-detail.jsp">
-                                <img src="../../front-assets/images/news/gilles-lambert-S_LhjpfIdm4-unsplash.jpg"
-                                    class="img-fluid news-image" alt="">
-                            </a>
-
-                            <div class="news-text-info">
-                                <span class="category-tag me-3 bg-info">Promotions</span>
-
-                                <strong>12 April 2022</strong>
-
-                                <h5 class="news-title mt-2">
-                                    <a href="../../front-end/news/news-detail.jsp" class="news-title-link">Is Coconut good
-                                        for your health?</a>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="news-thumb mb-4">
-                            <a href="news-detail.jsp">
-                                <img src="../../front-assets/images/news/ella-olsson-mmnKI8kMxpc-unsplash.jpg"
-                                    class="img-fluid news-image" alt="">
-                            </a>
-
-                            <div class="news-text-info">
-                                <span class="category-tag me-3 bg-info">Career</span>
-
-                                <strong>18 April 2022</strong>
-
-                                <h5 class="news-title mt-2">
-                                    <a href="../../front-end/news/news-detail.jsp" class="news-title-link">How to run a
-                                        sushi business?</a>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="news-thumb mb-4">
-                            <a href="news-detail.jsp">
-                                <img src="../../front-assets/images/news/louis-hansel-GiIiRV0FjwU-unsplash.jpg"
-                                    class="img-fluid news-image" alt="">
-                            </a>
-
-                            <div class="news-text-info">
-                                <span class="category-tag me-3 bg-info">Meeting</span>
-
-                                <strong>30 April 2022</strong>
-
-                                <h5 class="news-title mt-2">
-                                    <a href="../../front-end/news/news-detail.jsp" class="news-title-link">Learning a fine
-                                        dining experience</a>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
+        
         <!-- ----- ----- ----- 中間內容 end ----- ----- ----- -->
+        <div class="container">
+        <c:forEach var="NewsVO" items="${list}" varStatus="aaa">
+        <c:if test="${aaa.index%2 == 0}">
+	        <div class="row">
+	            <div class="col-md-6 img-cols">
+	                <div class="img-col">
+	                    <img class="img-fluid news-image" src="<%=request.getContextPath() %>/back-end/news/DBGifReader4?newsID=${NewsVO.newsID}">
+	                </div>
+	            </div>
+	            <div class="col-md-6 content-cols">
+	                <div class="content-col">
+	                    <h3>${NewsVO.newsTitle}</h3>
+	                    <p>${NewsVO.newsInformation}</p>
+	                    
+	                </div>
+	            </div>
+	        </div>
+        </c:if>
+        <c:if test="${aaa.index%2 == 1}">    
+        
+            <div class="row">
+	            <div class="col-md-6 img-cols d-block d-md-none">
+	                <div class="img-col">
+	                    <img class="img-fluid news-image" src="<%=request.getContextPath() %>/back-end/news/DBGifReader4?newsID=${NewsVO.newsID}">
+	                </div>
+	            </div>
+	            <div class="col-md-6 content-cols">
+	                <div class="content-col">
+	                    <h3>${NewsVO.newsTitle}</h3>
+	                    <p>${NewsVO.newsInformation}</p>
+	                   
+	                </div>
+	            </div>
+	        </div>
+        
+        </c:if>
+        </c:forEach>
+    </div>
+        
+        
     </main>
     <!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 
