@@ -36,7 +36,7 @@ public class OrdersServlet extends HttpServlet {
 			}
 
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/order/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/order/order_details.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷	
 			}
@@ -48,7 +48,7 @@ public class OrdersServlet extends HttpServlet {
 				errorMsgs.add("訂單編號格式不正確");
 			}
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/order/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/order/order_details.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -61,7 +61,7 @@ public class OrdersServlet extends HttpServlet {
 			}
 //			
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/order/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/order/order_details.jsp");
 				failureView.forward(req, res);
 				return;
 			}

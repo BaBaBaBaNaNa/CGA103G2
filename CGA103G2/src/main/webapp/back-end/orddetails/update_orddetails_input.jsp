@@ -443,9 +443,8 @@ th, td {
 
 			</table>
 			<br> <input type="hidden" name="action" value="update">
-			<input type="hidden" name="orddetailsID"
-				value="<%=orddetailsVO.getOrddetailsID()%>"> <input
-				type="submit" value="送出修改">
+			<input type="hidden" name="orddetailsID"value="<%=orddetailsVO.getOrddetailsID()%>"> 
+			<input type="submit" value="送出修改">
 		</FORM>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
