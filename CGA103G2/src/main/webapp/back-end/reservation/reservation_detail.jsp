@@ -123,7 +123,7 @@ line-height:37px;
 			<th>用餐日期</th>
 
 			<th><FORM METHOD="post" ACTION="RsvtServlet" style="margin-bottom: 0px;" id="search_form">
-			<label for="cName">搜尋：</label><input type="text" name="customerName" id="cName"> 
+			<label for="cName">搜尋：</label><input type="text" name="customerName" id="cName" autoComplete="off"> 
 				<input type="hidden" name="action" value="getOne_For_CustomerName"></FORM></th>
 			<th><input type="submit" class="input_btn" value="送出" id="search_btn"></th>
 		</tr>

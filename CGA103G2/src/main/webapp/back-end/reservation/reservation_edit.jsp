@@ -234,22 +234,6 @@ margin: 0 auto;
 	<!-- Settings -->
 	<script src="../../back-assets/js/settings.js"></script>
 	<script src="../../back-assets/js/rsvtDatepicker.js"></script>
-	<% 
-	RsvtCtrlService rsvtCtrlSvc = new RsvtCtrlService();
-	List<RsvtCtrlVO> list = rsvtCtrlSvc.getAll();
-	String DateString = "";
-	String PeriodString = "";
-	for (RsvtCtrlVO all : list) {
-		//STEP1 判斷有無開放
-		if (all.getRsvtCtrlOpen() == 1) {
-		DateString += "'" + all.getRsvtCtrlDate() + "'" + ",";
-	}
-// 	if (all.getRsvtCtrlOpen() == 1 && all.getRsvtCtrlPeriod() == 1) {
-// 		DateString += "'" + all.getRsvtCtrlDate() + "'" + ",";
-// 		PeriodString = "1";
-// 	}}
-	}
-		%>
 	<script>
 		var dp1 = document.getElementById('dp1');
 		var period = document.getElementById('period');

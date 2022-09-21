@@ -16,7 +16,7 @@ public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT RSVTCTRLID,TABLETYPEID,RSVTCTRLOPEN,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX,RSVTCTRLNUMBER FROM RESERVATIONCTRL WHERE RSVTCTRLID = ?";
 	private static final String GET_DATE_STMT = "SELECT RSVTCTRLID,TABLETYPEID,RSVTCTRLOPEN,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX,RSVTCTRLNUMBER FROM RESERVATIONCTRL WHERE RSVTCTRLDATE = ?";
 	private static final String DELETE_STMT = "DELETE FROM RESERVATIONCTRL WHERE RSVTCTRLID = ?";
-	private static final String UPDATE_STMT = "UPDATE RESERVATIONCTRL SET TABLETYPEID = ?,RSVTCTRLOPEN = ?,RSVTCTRLDATE = ?,RSVTCTRLPERIOD = ?,RSVTCTRLMAX = ?,RSVTCTRLNUMBER = ? WHERE RSVTCTRLID = ? ;";
+	private static final String UPDATE_STMT = "UPDATE RESERVATIONCTRL SET TABLETYPEID = ?,RSVTCTRLOPEN = ?,RSVTCTRLMAX = ? WHERE RSVTCTRLID = ? ;";
 	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
 	private static DataSource ds = null;
 	static {
@@ -84,11 +84,8 @@ public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
 				PreparedStatement ps = conn.prepareStatement(UPDATE_STMT);) {
 			ps.setInt(1, rsvtCtrl.getTableTypeId());
 			ps.setInt(2, rsvtCtrl.getRsvtCtrlOpen());
-			ps.setDate(3, rsvtCtrl.getRsvtCtrlDate());
-			ps.setInt(4, rsvtCtrl.getRsvtCtrlPeriod());
-			ps.setInt(5, rsvtCtrl.getRsvtCtrlMax());
-			ps.setInt(6, rsvtCtrl.getRsvtCtrlNumber());
-			ps.setInt(7, rsvtCtrl.getRsvtCtrlId());
+			ps.setInt(3, rsvtCtrl.getRsvtCtrlMax());
+			ps.setInt(4, rsvtCtrl.getRsvtCtrlId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

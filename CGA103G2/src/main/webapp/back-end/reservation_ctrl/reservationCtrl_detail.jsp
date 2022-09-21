@@ -19,9 +19,46 @@ pageContext.setAttribute("list", list);
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>義鄉人-義式餐酒館-管理中心</title>
 <style>
-.table th,.table tr{
+.table th,.table td{
 	text-align: center;
 	background-color: white;
+}
+.table tr:nth-child(even) td{
+	background-color: aliceblue;
+}
+.table tr th,td{
+line-height:37px;
+}
+.input_btn {
+	border-radius: 10px;
+	background-color:white;
+	border:1px solid aliceblue !important;
+	border: none;
+	width: 50px;
+	height: 50px;
+}
+
+#cName:focus{
+	background-color:aliceblue !important;
+	border: 0;
+	outline: none;
+}
+#cName{
+	border: 1px solid aliceblue;
+	outline: none;
+}
+.input_btn:active {
+	box-shadow: inset -1px -1px 1px 1 red;
+}
+
+.input_btn:hover {
+	cursor: pointer;
+	background-image: linear-gradient(90deg, #F0F8FF 0%, #9DD3DF 100%);
+	color: #fff;
+	box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.3);
+	/*   width: 100px;
+  height: 100px; */
+/* 	transform: scale(1.5); */
 }
 </style>
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
@@ -145,11 +182,11 @@ pageContext.setAttribute("list", list);
 
 	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
 	<!-- Global Required Scripts Start -->
-<!-- 	<script src="../../back-assets/js/jquery-3.3.1.min.js"></script> -->
+	<script src="../../back-assets/js/jquery-3.3.1.min.js"></script>
 	<script src="../../back-assets/js/popper.min.js"></script>
-<!-- 	<script src="../../back-assets/js/bootstrap.min.js"></script> -->
+	<script src="../../back-assets/js/bootstrap.min.js"></script>
 	<script src="../../back-assets/js/perfect-scrollbar.js"></script>
-<!-- 	<script src="../../back-assets/js/jquery-ui.min.js"></script> -->
+	<script src="../../back-assets/js/jquery-ui.min.js"></script>
 	<!-- Global Required Scripts End -->
 	<!-- Page Specific Scripts Start -->
 	<script src="../../back-assets/js/d3.v3.min.js"></script>

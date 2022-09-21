@@ -91,7 +91,7 @@
 			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#reservationCtrl" aria-expanded="false" aria-controls="reservationCtrl"><span><i class="fas fa-file-reservation fs-16"></i>訂位控制</span></a>
 				<ul id="reservationCtrl" class="collapse" aria-labelledby="reservationCtrl" data-parent="#side-nav-accordion">
 					<li><a href="${pageContext.request.contextPath}/back-end/reservation_ctrl/reservationCtrl_detail.jsp">查看訂位控制</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/reservation_ctrl/reservationCtrl_edit.jsp">新增訂位控制</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/reservation_ctrl/reservationCtrl_add.jsp">新增訂位控制</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 訂位控制 end ----- ----- ----- -->
 			<!-- ----- ----- ----- 空白頁面 start ----- ----- ----- -->

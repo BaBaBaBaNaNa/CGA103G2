@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.rsvt.model.RsvtService;
 import com.rsvt.model.RsvtVO;
+import com.rsvtCtrl.model.RsvtCtrlDAOImpl;
+import com.rsvtCtrl.model.RsvtCtrlService;
+import com.rsvtCtrl.model.RsvtCtrlVO;
 @WebServlet("/RsvtFEServlet")
 public class RsvtForwardEndServlet extends HttpServlet{
 		public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -28,9 +31,11 @@ public class RsvtForwardEndServlet extends HttpServlet{
 			{ // 來自addRsvt.jsp的請求
 
 				List<String> errorMsgs = new LinkedList<String>();
+				List<String> rsvtMsgs = new LinkedList<String>();
 				// Store this set in the request scope, in case we need to
 				// send the ErrorPage view.
 				req.setAttribute("errorMsgs", errorMsgs);
+				rsvtMsgs.add("以下為你的訂位資料:");
 
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 				String cName = req.getParameter("customerName");
@@ -41,6 +46,7 @@ public class RsvtForwardEndServlet extends HttpServlet{
 				} else if (!cName.trim().matches(rsvtIdReg)) { // 以下練習正則(規)表示式(regular-expression)
 					errorMsgs.add("顧客姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到20之間");
 				}
+				rsvtMsgs.add("顧客姓名:" + cName);
 
 				String phoneReg = "^[0]{1}[9]{1}[0-9]{8}$";
 				String cPhone = req.getParameter("customerPhone");
@@ -90,8 +96,16 @@ public class RsvtForwardEndServlet extends HttpServlet{
 				/*************************** 2.開始新增資料 ***************************************/
 				RsvtService rsvtSvc = new RsvtService();
 				rsvtVO = rsvtSvc.addRsvt(cName, cPhone, rsvtNum, rsvtPeriod, rsvtDate);
+				RsvtCtrlDAOImpl dao = new RsvtCtrlDAOImpl();
+				// 判斷人數
+				List<RsvtCtrlVO> list = new RsvtCtrlService().getOneDate(rsvtDate.toString());
+				for(RsvtCtrlVO vo : list) {
+					if(vo.getRsvtCtrlPeriod() == rsvtPeriod) {
+						dao.updateForOne(vo.getRsvtCtrlId(), "rsvtCtrlNum", vo.getRsvtCtrlNumber() + rsvtNum);
+					}
+				}
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/back-end/reservation/listAllRsvt.jsp";
+//				String url = "/back-end/reservation/listAllRsvt.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher("/FrontIndex.jsp"); // 新增成功後轉交listAllRsvt.jsp
 				successView.forward(req, res);
 			}

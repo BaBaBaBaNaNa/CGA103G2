@@ -24,16 +24,13 @@ public class RsvtCtrlService {
 		return rsvt;
 	}
 
-	public RsvtCtrlVO updateRsvtCtrl(Integer tbtId, Integer rsvtCtrlOpen, Date rsvtCtrlDate, Integer rsvtCtrlPeriod,
-			Integer rsvtCtrlMax, Integer rsvtCtrlNumber, Integer rsvtCtrlId) {
+	public RsvtCtrlVO updateRsvtCtrl(Integer tbtId, Integer rsvtCtrlOpen,
+			Integer rsvtCtrlMax, Integer rsvtCtrlId) {
 
 		RsvtCtrlVO rsvt = new RsvtCtrlVO();
 		rsvt.setTableTypeId(tbtId);
 		rsvt.setRsvtCtrlOpen(rsvtCtrlOpen);
-		rsvt.setRsvtCtrlDate(rsvtCtrlDate);
-		rsvt.setRsvtCtrlPeriod(rsvtCtrlPeriod);
 		rsvt.setRsvtCtrlMax(rsvtCtrlMax);
-		rsvt.setRsvtCtrlNumber(rsvtCtrlNumber);
 		rsvt.setRsvtCtrlId(rsvtCtrlId);
 		dao.update(rsvt);
 
