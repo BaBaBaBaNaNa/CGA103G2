@@ -378,11 +378,6 @@
   <li><a href='addNews.jsp'> <input type="submit" value="新增消息"></a></li>
 </ul>
 
-<table id="table-1">
-	<tr><td>
-		 <h3>所有消息 - listAllNews.jsp</h3>
-	</td></tr>
-</table>
 
 <table>
 	<tr>
@@ -399,9 +394,9 @@
 		<tr>
 			<td>${newsVO.newsID}</td>
 			<td>${newsVO.newsTitle}</td>
-			<td>${newsVO.newsControl}</td>
+			<td>${newsVO.newsControl== 0 ?"上架中":"下架中"}</td>
 			<td>${newsVO.newsDate}</td> 
-			<td><img src="<%=request.getContextPath()%>/news/DBGifReader4?newsID=${newsVO.newsID}" width="100px"></td> 
+			<td><img src="<%=request.getContextPath()%>/back-end/news/DBGifReader4?newsID=${newsVO.newsID}"></td> 
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/news/news.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">

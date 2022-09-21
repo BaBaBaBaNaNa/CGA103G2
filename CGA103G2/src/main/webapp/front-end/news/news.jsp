@@ -58,18 +58,6 @@
         <!-- ----- ----- ----- 中間內容 start ----- ----- ----- -->
     <main>
     <!-- ----- ----- ----- 中間上面 start ----- ----- ----- -->
-<!--         <header class="site-header site-menu-header">
-<!--             <div class="container"> -->
-<!--                 <div class="row"> -->
-<!--                     <div class="col-lg-10 col-12 mx-auto"> -->
-<!--                         <h1 class="text-white">最新消息</h1> -->
-<!--                         <strong class="text-white">餐廳最新消息</strong> -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--             <div class="overlay"></div> -->
-<!--         </header> -->
-<!--         <header ></header> -->
     <!-- ----- ----- ----- 中間上面 end ----- ----- ----- -->
     <!-- ----- ----- ----- 中間內容 start ----- ----- ----- -->
         <section class="news section-padding bg-white">
@@ -89,44 +77,25 @@
                                 <span class="category-tag bg-danger">Featured</span>
 
                                 <h5 class="news-title mt-2">
-                                    <a href="../../front-end/news/news-detail.jsp" class="news-title-link">How to make a
-                                        healthy diet?</a>
+                                    <a href="../../front-end/news/news-detail.jsp" class="news-title-link">甚麼是義大利麵</a>
                                 </h5>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="news-thumb mb-4">
-                            <a href="../../front-end/news/news-detail.jsp">
-                                <img src="../../front-assets/images/news/stefan-johnson-xIFbDeGcy44-unsplash.jpg"
-                                    class="img-fluid news-image" alt="">
-                            </a>
-
-                            <div class="news-text-info news-text-info-large">
-                                <span class="category-tag bg-danger">Featured</span>
-
-                                <h5 class="news-title mt-2">
-                                    <a href="../../front-end/news/news-detail.jsp" class="news-title-link">Happy Living and
-                                        happy eating tips</a>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
             </div>
       
         </section>
 
         
         <!-- ----- ----- ----- 中間內容 end ----- ----- ----- -->
+        <%@ include file="page1.file" %> 
         <div class="container">
-        <c:forEach var="NewsVO" items="${list}" varStatus="aaa">
-        <c:if test="${aaa.index%2 == 0}">
+        <c:forEach var="NewsVO" items="${list}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+        <c:if test="${NewsVO.newsControl == 0}" >
 	        <div class="row">
 	            <div class="col-md-6 img-cols">
-	                <div class="img-col">
+	                <div	 class="img-col">
 	                    <img class="img-fluid news-image" src="<%=request.getContextPath() %>/back-end/news/DBGifReader4?newsID=${NewsVO.newsID}">
 	                </div>
 	            </div>
@@ -134,33 +103,14 @@
 	                <div class="content-col">
 	                    <h3>${NewsVO.newsTitle}</h3>
 	                    <p>${NewsVO.newsInformation}</p>
-	                    
 	                </div>
 	            </div>
 	        </div>
-        </c:if>
-        <c:if test="${aaa.index%2 == 1}">    
-        
-            <div class="row">
-	            <div class="col-md-6 img-cols d-block d-md-none">
-	                <div class="img-col">
-	                    <img class="img-fluid news-image" src="<%=request.getContextPath() %>/back-end/news/DBGifReader4?newsID=${NewsVO.newsID}">
-	                </div>
-	            </div>
-	            <div class="col-md-6 content-cols">
-	                <div class="content-col">
-	                    <h3>${NewsVO.newsTitle}</h3>
-	                    <p>${NewsVO.newsInformation}</p>
-	                   
-	                </div>
-	            </div>
-	        </div>
-        
         </c:if>
         </c:forEach>
     </div>
         
-        
+        <%@ include file="page2.file" %>
     </main>
     <!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 

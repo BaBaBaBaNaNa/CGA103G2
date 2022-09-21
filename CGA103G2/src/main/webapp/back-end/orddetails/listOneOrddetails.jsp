@@ -399,8 +399,8 @@ th, td {
 		<td><%=orddetailsVO.getMealsID()%></td>
 		<td><%=orddetailsVO.getOrddetailsMealsQuantity()%></td>
 		<td><%=orddetailsVO.getOrddetailsMealsAmount()%></td>
-		<td><%=orddetailsVO.getOrddetailsMealsStatus()%></td>
-		<td><%=orddetailsVO.getOrddetailsDeliverStatus()%></td>
+		<td>${orddetailsVO.orddetailsMealsStatus == 0 ?"已製作":"未製作"}</td>
+		<td>${orddetailsVO.orddetailsDeliverStatus == 0 ?"已送餐":"未送餐"}</td>
 	</tr>
 </table>
 

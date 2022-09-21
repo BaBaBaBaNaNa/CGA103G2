@@ -366,14 +366,14 @@
 				<li class="breadcrumb-item"><a href="#"><i
 						class="material-icons">home</i>首頁</a></li>
 				<li class="breadcrumb-item"><a href="#">訂單管理</a></li>
-				<li class="breadcrumb-item active" aria-current="page">查看訂單</li>
+				<li class="breadcrumb-item active" aria-current="page">訂單明細</li>
 			</ol>
 		</nav>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 <table id="table-1">
 	<tr><td>
-		 <h3>所有訂單明細資料 - listAllOrddetails.jsp</h3>
+		 <h3>所有訂單明細資料 </h3>
 		 <h4><a href="select_page.jsp">返回訂單明細查詢</a></h4>
 	</td></tr>
 </table>
@@ -400,8 +400,8 @@
 			<td>${orddetailsVO.mealsID}</td> 
 			<td>${orddetailsVO.orddetailsMealsQuantity}</td>
 			<td>${orddetailsVO.orddetailsMealsAmount}</td>
-			<td>${orddetailsVO.orddetailsMealsStatus}</td>
-			<td>${orddetailsVO.orddetailsDeliverStatus}</td>
+			<td>${orddetailsVO.orddetailsMealsStatus == 0 ?"已製作":"未製作"}</td>
+			<td>${orddetailsVO.orddetailsDeliverStatus == 0 ?"已送餐":"未送餐"}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/orddetails/orddetails.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">

@@ -266,8 +266,8 @@
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 <table id="table-1">
 	<tr><td>
-		 <h3>所有訂單資料 - listAllOrders.jsp</h3>
-		 <h4><a href="order_details.jsp">回首頁</a></h4>
+		 <h3>所有訂單資料 </h3>
+		 <h4><a href="order_details.jsp">返回訂單查詢</a></h4>
 	</td></tr>
 </table>
 
@@ -296,9 +296,17 @@
 			<td>${ordersVO.empCounterID}</td> 
 			<td>${ordersVO.empDeliveryID}</td>
 			<td>${ordersVO.seatID}</td>
-			<td>${ordersVO.ordersType}</td>
+			<td>
+				<c:if test="${ordersVO.ordersType == 0}">外帶</c:if>
+				<c:if test="${ordersVO.ordersType == 1}">外送</c:if>
+				<c:if test="${ordersVO.ordersType == 2}">內用</c:if>
+			</td>
 			<td>${ordersVO.ordersAmount}</td>
-			<td>${ordersVO.ordersStatus}</td>
+			<td>
+			   <c:if test="${ordersVO.ordersStatus == 0}">完成</c:if>
+    	       <c:if test="${ordersVO.ordersStatus == 1}">未完成</c:if>
+    	       <c:if test="${ordersVO.ordersStatus == 2}">退回</c:if>
+    	    </td>
 			<td>${ordersVO.ordersDestination}</td>
 			<td>${ordersVO.ordersBuildDate}</td> 
 			<td>${ordersVO.ordersMakeDate}</td>
