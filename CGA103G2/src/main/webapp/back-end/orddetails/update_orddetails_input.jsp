@@ -435,8 +435,8 @@ th, td {
 					<td>送餐狀態(0:已製作 , 1:未製作 ):</td>
 					<td><select name="orddetailsDeliverStatus"
 						id="orddetailsDeliverStatus">
-							<option value="0">已製作</option>
-							<option value="1">未製作</option>
+							<option value="0">已送餐</option>
+							<option value="1">未送餐</option>
 					</select></td>
 				</tr>
 

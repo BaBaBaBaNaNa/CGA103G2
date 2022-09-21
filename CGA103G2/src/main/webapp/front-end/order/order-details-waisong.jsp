@@ -79,38 +79,35 @@
 				<div class="row">
 
 					<div class="col-lg-6 col-12 mb-2">
-							<h4><a href="../../front-end/order/order.jsp">訂單查詢</a>
-							<a class="mb-3 ">內用</a>
-							</h4>
+							<h4 class="mb-3" ><a href="../../front-end/order/order.jsp">訂單查詢 </a>
+                        <a class="mb-3 " href="../../front-end/order/order-wai-song.jsp">外送</a>
+                        <a class="mb-3 ">外送明細</a>
+                        </h4>
 					</div>
 	
 <table>
 	<tr>
 		<th>訂單編號</th>
 		<th>會員編號</th>
-		<th>桌子編號</th>
 		<th>訂單總金額</th>
 		<th>訂單狀態</th>
+		<th>取餐地點</th>
 		<th>成立訂單日</th>
 	</tr>
+	
 	<c:forEach var="ordersVO" items="${list}">
-	<c:if test="${ordersVO.ordersType == 2}">
-		
+	<c:if test="${ordersVO.ordersType == 1}">
 		<tr>
 			<td>${ordersVO.ordersID}</td>
 			<td>${ordersVO.memID}</td>
-			<td>${ordersVO.seatID}</td>
 			<td>${ordersVO.ordersAmount}</td>
 			<td>
 			   <c:if test="${ordersVO.ordersStatus == 0}">完成</c:if>
     	       <c:if test="${ordersVO.ordersStatus == 1}">未完成</c:if>
     	       <c:if test="${ordersVO.ordersStatus == 2}">退回</c:if>
     	    </td>
+    	    <td>${ordersVO.ordersDestination}</td>
 			<td>${ordersVO.ordersBuildDate}</td> 
-			<td>
-				 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/order/order-details.jsp" style="margin-bottom: 0px;">
-			     <input type="submit" value="明細"></FORM>
-			</td>
 		</tr>
 		</c:if>
 	</c:forEach>

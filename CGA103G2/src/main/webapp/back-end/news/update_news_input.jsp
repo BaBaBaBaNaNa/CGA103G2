@@ -61,7 +61,7 @@ h4 {
 <style>
 table {
 	width: 750px;
-	background-color: white;
+	background-color: #f0f0fa;
 	margin-top: 1px;
 	margin-bottom: 1px;
 }
@@ -446,7 +446,7 @@ th, td {
 				<%-- 				可以不修改圖片 <span  id ="newsPictures.errors" class="error">${errorMsgs.newsPictures}</span> --%>
 				<div id="blob_holder">
 					<img
-						src="<%=request.getContextPath()%>/news/DBGifReader4?newsID=${param.newsID}"width="200px">
+						src="<%=request.getContextPath()%>/back-end/news/DBGifReader4?newsID=${param.newsID}"width="200px">
 				</div>
 			</div>
 

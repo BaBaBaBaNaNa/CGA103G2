@@ -239,17 +239,17 @@ h4 {
 				</ul></li>
 			<!-- ----- ----- ----- 顧客 end ----- ----- ----- -->
 
-			<!-- ----- ----- ----- 空白頁面 start ----- ----- ----- -->
+			<!-- ----- ----- ----- 最新消息 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#nothing1" aria-expanded="false"
-				aria-controls="nothing1"><span><i
-						class="fas fa-file-invoice fs-16"></i>空白頁面</span></a>
-				<ul id="nothing1" class="collapse" aria-labelledby="nothing1"
+				data-toggle="collapse" data-target="#listAllNews" aria-expanded="false"
+				aria-controls="listAllNews"><span><i
+						class="fas fa-file-invoice fs-16"></i>最新消息</span></a>
+				<ul id="listAllNews" class="collapse" aria-labelledby="listAllNews"
 					data-parent="#side-nav-accordion">
 					<li><a
-						href="${pageContext.request.contextPath}/back-end/nothing/nothing1.jsp">nothing1</a></li>
+						href="${pageContext.request.contextPath}/back-end/news/listAllNews.jsp">最新消息後台</a></li>
 				</ul></li>
-			<!-- ----- ----- ----- 空白頁面 end ----- ----- ----- -->
+			<!-- ----- ----- ----- 最新消息 end ----- ----- ----- -->
 		</ul>
 	</aside>
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->

@@ -1,4 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.orders.model.*"%>
+<%@ page import="java.sql.*"%>
+
+<%
+    OrdersService ordersSvc = new OrdersService();
+    List<OrdersVO> list = ordersSvc.getAll();
+    pageContext.setAttribute("list",list);
+%>
 
 <!doctype html>
 <html lang="zh-tw">
@@ -28,6 +38,21 @@
 
     <link href="../../front-assets/css/navbar.css" rel="stylesheet">
 
+<style>
+  table {
+	width: 100%;
+	background-color: #f0f0fa;
+	margin-top: 5px;
+	margin-bottom: 5px;
+  }
+  table, th, td {
+    border: 1px solid #CCCCFF;
+  }
+  th, td {
+    padding: 5px;
+    text-align: center;
+  }
+</style>
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -50,19 +75,42 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-12 mb-2">
-                        <h4 class="mb-3 " ><a href="../../front-end/order/order.jsp">訂單查詢</a></h4>
-
-                        <a href="../../front-end/order/order-waidai.jsp" class="custom-btn btn btn-danger mt-3 ms-3">外帶</a>
-
+                        <h4 class="mb-3 "><a href="../../front-end/order/order.jsp">訂單查詢</a>
+                        <a class="mb-3 ">外帶</a>
+                        </h4>
                     </div>
 
-                    <div class="col-lg-6 col-12">
 
-                        <p><strong>緯育 中壢Java班 CGA_103 第二組 </strong> 加油.</p>
-
-                        <p>會員的登入區</p>
-
-                    </div>
+<table>
+	<tr>
+		<th>訂單編號</th>
+		<th>會員編號</th>
+		<th>訂單總金額</th>
+		<th>訂單狀態</th>
+		<th>成立訂單日</th>
+		<th>預計製作日</th>
+	</tr>
+	<c:forEach var="ordersVO" items="${list}" >
+				<c:if test="${ordersVO.ordersType == 0}">
+		<tr>
+			<td>${ordersVO.ordersID}</td>
+			<td>${ordersVO.memID}</td>
+			<td>${ordersVO.ordersAmount}</td>
+			<td>
+			   <c:if test="${ordersVO.ordersStatus == 0}">完成</c:if>
+    	       <c:if test="${ordersVO.ordersStatus == 1}">未完成</c:if>
+    	       <c:if test="${ordersVO.ordersStatus == 2}">退回</c:if>
+    	    </td>
+			<td>${ordersVO.ordersBuildDate}</td> 
+			<td>${ordersVO.ordersMakeDate}</td>
+			<td>
+				 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/order/order-details-waidai.jsp" style="margin-bottom: 0px;">
+			     <input type="submit" value="明細"></FORM>
+			</td>
+		</tr>
+			</c:if>
+	</c:forEach>
+</table>
 
                 </div>
             </div>
