@@ -343,9 +343,8 @@
           success : function(res){
          	 
 		  document.getElementById("remainNO").innerHTML = JSON.parse(res).remainNO
-         	 
           },
-         	
+         	 
               
           
 
@@ -358,7 +357,39 @@
 	  
   }
   
-  window.onload = setInterval(showRemainNO, 5000);
+  function showCurrentNO(){
+      $.ajax({
+
+
+          url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
+
+          data: {
+         	 action: "showCurrentNO", 
+          },
+
+          success : function(res){
+         	 
+		  document.getElementById("currentNO").innerHTML = JSON.parse(res).currentNO
+          },
+         	 
+              
+          
+
+          error:function(xhr, ajaxOptions, thrownError){
+
+              alert(xhr.status+"\n"+thrownError);
+          }
+
+      });
+	  
+  }
+  
+  
+  window.onload = function (){
+	  setInterval(showRemainNO, 5000);
+	  setInterval(showCurrentNO, 5000);
+	  
+  }
   
   </script>
 </body>

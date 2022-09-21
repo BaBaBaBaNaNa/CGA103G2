@@ -50,7 +50,15 @@ public class QueuerServlet extends HttpServlet{
 			if("showRemainNO".equals(action)) {
 				queuer.getRemainNO();
 				try {
-					output.put("remainNO", queuer.getQueuerNO());
+					output.put("remainNO", queuer.getRemainNO());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if("showCurrentNO".equals(action)) {
+				try {
+					output.put("currentNO", queuer.showCurrentNO());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -63,7 +71,6 @@ public class QueuerServlet extends HttpServlet{
 				try {
 					output.put("currentNO", queuer.getCurrentNO());
 					output.put("nextNO", queuer.getNextNO() );
-					output.put("remainNO", queuer.getRemainNO());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

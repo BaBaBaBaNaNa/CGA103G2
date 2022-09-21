@@ -228,7 +228,7 @@ input:checked + label:after {
 	                	 
 	                	 showCurrentNO(res)
 	                	 showNextNO(res)
-	                	 showRemainNO(res)
+	                	 
 	                	 
 	                 },
 
@@ -347,10 +347,6 @@ input:checked + label:after {
 		document.getElementById("nextNO").innerHTML = JSON.parse(res).nextNO
 	}
 	
-	function showRemainNO(res){
-		document.getElementById("remainNO").innerHTML = JSON.parse(res).remainNO
-	}
-	
 	function doSeatedList(res){
 		console.log(JSON.parse(res))
 	}
@@ -387,8 +383,38 @@ input:checked + label:after {
 
 	      });
 	}
+	  function showRemainNO(){
+
+	      $.ajax({
+
+
+	          url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
+
+	          data: {
+	         	 action: "showRemainNO", 
+	          },
+
+	          success : function(res){
+	         	 
+			  document.getElementById("remainNO").innerHTML = JSON.parse(res).remainNO
+	          },
+	         	 
+	              
+	          
+
+	          error:function(xhr, ajaxOptions, thrownError){
+
+	              alert(xhr.status+"\n"+thrownError);
+	          }
+
+	      });
+		  
+	  }
 	
-	window.onload = setInterval(showTotalNO, 5000);
+	window.onload = function (){
+		setInterval(showTotalNO, 5000);
+		setInterval(showRemainNO, 5000);
+	}
 	
 	</script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->

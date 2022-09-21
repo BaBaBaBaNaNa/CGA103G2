@@ -33,18 +33,36 @@ public class QueuerRedisService {
 		// 宣告變數
 		String remainNO = "";
 		long remainNOValue = 0;
-		if(jedis.exists("currentCount")){
+		
+		if(jedis.exists("queuerList")) {
 			
-			remainNOValue = (jedis.llen("queuerList") - Integer.parseInt(jedis.get("currentCount") ));
-			remainNO = Long.toString(remainNOValue);
-		}else{
+		
+		if(jedis.exists("currentCount")) {
+			if(jedis.get("currentCount").equals("0") ) {
+				remainNOValue = jedis.llen("queuerList");
+				remainNO = Long.toString(remainNOValue);
+				
+			}else if(jedis.get("currentCount").equals(Long.toString(jedis.llen("queuerList")))|| (jedis.llen("queuerList") - Integer.parseInt(jedis.get("currentCount") )< 0) ){
+			
+				remainNO = "0";
+			}else {
+				remainNOValue = jedis.llen("queuerList") - Integer.parseInt(jedis.get("currentCount"));
+				remainNO = Long.toString(remainNOValue);
+			}
+		}
+		else {
 			remainNOValue = jedis.llen("queuerList");
 			remainNO = Long.toString(remainNOValue);
+			} 
+		}else {
+			remainNO = "0";
 		}
+		
 		
 		return remainNO;
 		
 	}
+	
 	
 	public String getQueuerNO() {
 		
@@ -134,6 +152,42 @@ public class QueuerRedisService {
 		return currentNO;
 	}
 
+	public String showCurrentNO() {
+		// 取得redis連線
+		Jedis jedis = getJedisConnection();
+		
+		// 宣告空字串存放元素
+		String currentNO = "";
+		
+		// 宣告整數索引值
+		int index = 0;
+		
+		// 如果這個記數不存在，表示取第一個候位號碼
+		if(!jedis.exists("currentCount")) {
+			
+			// 設定計數為0(索引值)
+			jedis.set("currentCount","0");
+			
+			//設定索引值
+			index = Integer.valueOf(jedis.get("currentCount"));
+			
+			// 取出排隊list中當前號碼，並存入字串變數中。
+			currentNO = jedis.lrange("queuerList", index, index).get(0);
+			
+		}else {
+			
+			//設定索引值
+			index = Integer.valueOf(jedis.get("currentCount"));
+			
+			// 取出排隊line中當前號碼，並存入字串變數中。
+			currentNO = jedis.lrange("queuerList", index, index).get(0);
+			
+		}
+		
+		jedis.close();
+		return currentNO;
+	}
+	
 	public String getNextNO() {
 		// 取得redis連線
 		Jedis jedis = getJedisConnection();
@@ -141,7 +195,7 @@ public class QueuerRedisService {
 		// 宣告空字串存放元素
 		String nextNO = "";
 				
-		// 宣告整數索引值
+		// 宣告整數索引
 		int index = 0;			
 		
 
