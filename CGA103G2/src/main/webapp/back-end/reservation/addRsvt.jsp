@@ -7,54 +7,8 @@ RsvtVO rsvtVO = (RsvtVO) request.getAttribute("rsvtVO");
 
 %>
 <%= rsvtVO == null %> -- ${rsvtVO.rsvtId} --
-<html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>資料新增 - addRsvt.jsp</title>
 
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
 
-<style>
-  table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
-</style>
-
-</head>
-<body bgcolor='white'>
-
-<table id="table-1">
-	<tr><td>
-		 <h3>資料新增 - addRsvt.jsp</h3></td><td>
-		 <h4><a href="select_page.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<h3>資料新增:</h3>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -66,8 +20,8 @@ RsvtVO rsvtVO = (RsvtVO) request.getAttribute("rsvtVO");
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="RsvtServlet" name="form1">
-<table>
+<FORM METHOD="post" ACTION="RsvtFEServlet" name="form1">
+<table class="table">
 	<tr>
 		<td>顧客姓名:</td>
 		<td><input type="TEXT" name="customerName" size="45" 
@@ -95,16 +49,6 @@ RsvtVO rsvtVO = (RsvtVO) request.getAttribute("rsvtVO");
 		<td>訂位日期:</td>
 		<td><input name="rsvtDate" id="f_date1" type="text" placeholder="請選擇日期" autoComplete="off"></td>
 	</tr>
-
-			<%-- 	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" /> --%>
-<!-- 	<tr> -->
-<!-- 		<td>部門:<font color=red><b>*</b></font></td> -->
-<!-- 		<td><select size="1" name="deptno"> -->
-<%-- 			<c:forEach var="deptVO" items="${deptSvc.all}"> --%>
-<%-- 				<option value="${deptVO.deptno}" ${(rsvtVO.deptno==deptVO.deptno)? 'selected':'' } >${deptVO.dname} --%>
-<%-- 			</c:forEach> --%>
-<!-- 		</select></td> -->
-<!-- 	</tr> -->
 
 </table>
 <br>

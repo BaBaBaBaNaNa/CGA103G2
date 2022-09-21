@@ -37,23 +37,23 @@ public class RsvtServlet extends HttpServlet {
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			String nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,20}$";
 			String customerName = req.getParameter("customerName");
-			if (customerName == null || (customerName.trim()).length() == 0) {
-				errorMsgs.add("顧客姓名: 請勿空白");
-			} else if (!customerName.trim().matches(nameReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("顧客姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到20之間");
-			}
+//			if (customerName == null || (customerName.trim()).length() == 0) {
+//				errorMsgs.add("顧客姓名: 請勿空白");
+//			} else if (!customerName.trim().matches(nameReg)) { // 以下練習正則(規)表示式(regular-expression)
+//				errorMsgs.add("顧客姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到20之間");
+//			}
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/back-end/reservation/select_page.jsp");
+						.getRequestDispatcher("/back-end/reservation/select_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
 
 			/*************************** 2.開始查詢資料 *****************************************/
 			RsvtService rsvtSvc = new RsvtService();
-			RsvtVO rsvtVO = rsvtSvc.getOneName(customerName);
+			RsvtVO rsvtVO = rsvtSvc.getCustomerName(customerName);
 			if (rsvtVO == null) {
 				errorMsgs.add("查無資料");
 			}
@@ -146,7 +146,7 @@ public class RsvtServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("rsvtVO", rsvtVO); // 資料庫取出的rsvtVO物件,存入req
-			String url = "/back-end/reservation/update_rsvt_input.jsp";
+			String url = "/back-end/reservation/reservation_edit.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_rsvt_input.jsp
 			successView.forward(req, res);
 		}
@@ -191,7 +191,7 @@ public class RsvtServlet extends HttpServlet {
 			java.sql.Date rsvtDate = null;
 			try {
 				rsvtDate = java.sql.Date.valueOf(req.getParameter("rsvtDate").trim());
-			} catch (IllegalArgumentException e) {
+			} catch (Exception e) {
 				rsvtDate = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.add("請輸入日期!");
 			}
@@ -203,6 +203,7 @@ public class RsvtServlet extends HttpServlet {
 				rsvtMealDate = null;
 			}
 			RsvtVO rsvtVO = new RsvtVO();
+			rsvtVO.setRsvtId(rsvtId);
 			rsvtVO.setCustomerName(cName);
 			rsvtVO.setCustomerPhone(cPhone);
 			rsvtVO.setRsvtNum(rsvtNum);
@@ -213,7 +214,7 @@ public class RsvtServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("rsvtVO", rsvtVO); // 含有輸入格式錯誤的rsvtVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/reservation/update_rsvt_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/reservation/reservation_edit.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -224,81 +225,8 @@ public class RsvtServlet extends HttpServlet {
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("rsvtVO", rsvtVO); // 資料庫update成功後,正確的的rsvtVO物件,存入req
-			String url = "/back-end/reservation/listOneRsvt.jsp";
+			String url = "/back-end/reservation/reservation_detail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneRsvt.jsp
-			successView.forward(req, res);
-		}
-
-		if ("insert".equals(action))
-
-		{ // 來自addRsvt.jsp的請求
-
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-
-			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-			String cName = req.getParameter("customerName");
-			String rsvtIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,20}$";
-
-			if (cName == null || cName.trim().length() == 0) {
-				errorMsgs.add("顧客姓名: 請勿空白");
-			} else if (!cName.trim().matches(rsvtIdReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("顧客姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到20之間");
-			}
-
-			String phoneReg = "^[0]{1}[9]{1}[0-9]{8}$";
-			String cPhone = req.getParameter("customerPhone");
-			if (cPhone == null || cPhone.trim().length() == 0) {
-				errorMsgs.add("顧客手機: 請勿空白");
-			} else if (!cPhone.trim().matches(phoneReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("手機請符合格式");
-			}
-
-			Integer rsvtNum = null;
-			try {
-				rsvtNum = Integer.valueOf(req.getParameter("rsvtNum").trim());
-			} catch (NumberFormatException e) {
-				rsvtNum = 0;
-				errorMsgs.add("請填寫人數");
-			}
-
-			Integer rsvtPeriod = null;
-			rsvtPeriod = Integer.valueOf(req.getParameter("rsvtPeriod").trim());
-			if(rsvtPeriod == null) {
-				errorMsgs.add("請選擇時段");				
-			}
-
-			java.sql.Date rsvtDate = null;
-			try {
-				rsvtDate = java.sql.Date.valueOf(req.getParameter("rsvtDate").trim());
-			} catch (IllegalArgumentException e) {
-				rsvtDate = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.add("請輸入日期!");
-			}
-			RsvtVO rsvtVO = new RsvtVO();
-
-			rsvtVO.setCustomerName(cName);
-			rsvtVO.setCustomerPhone(cPhone);
-			rsvtVO.setRsvtNum(rsvtNum);
-			rsvtVO.setRsvtPeriod(rsvtPeriod);
-			rsvtVO.setRsvtDate(rsvtDate);
-
-			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-				req.setAttribute("rsvtVO", rsvtVO); // 含有輸入格式錯誤的rsvtVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/reservation/addRsvt.jsp");
-				failureView.forward(req, res);
-				return;
-			}
-
-			/*************************** 2.開始新增資料 ***************************************/
-			RsvtService rsvtSvc = new RsvtService();
-			rsvtVO = rsvtSvc.addRsvt(cName, cPhone, rsvtNum, rsvtPeriod, rsvtDate);
-			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/back-end/reservation/listAllRsvt.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllRsvt.jsp
 			successView.forward(req, res);
 		}
 
@@ -317,7 +245,7 @@ public class RsvtServlet extends HttpServlet {
 			rsvtSvc.deleteRsvt(rsvtId);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url = "/back-end/reservation/listAllRsvt.jsp";
+			String url = "/back-end/reservation/reservation_detail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}

@@ -14,7 +14,7 @@ public class MemJDBCDAO implements MemDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/cga103g2?serverTimezone=Asia/Taipei";
 	String userid = "root";
-	String passwd = "root";
+	String passwd = "password";
 	private static final String INSERTSTMT = "INSERT INTO members (memname,memaccount,mempassword,memgender,memphone,mememail,memaddress,membirthday,mempermission) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 	private static final String GETALLSTMT = "SELECT MemID, memname, memaccount, mempassword, memgender, memphone, mememail, memaddress, membirthday, mempermission FROM members order by MemID";
 	private static final String GETONESTMT = "SELECT MemID, memname, memaccount, mempassword, memgender, memphone, mememail, memaddress, membirthday, mempermission FROM members  where MemID = ?";

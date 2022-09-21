@@ -13,7 +13,7 @@ public interface RsvtCtrlDAO_interface {
 	public void updateForOne(Integer id, String colName, Object value);
 
 	public RsvtCtrlVO findByPrimaryKey(Integer rsvtCtrlId);
-	public RsvtCtrlVO findByDate(String rsvtDate);
+	public List<RsvtCtrlVO> findByDate(String rsvtDate);
 
 	public List<RsvtCtrlVO> getAll();
 }

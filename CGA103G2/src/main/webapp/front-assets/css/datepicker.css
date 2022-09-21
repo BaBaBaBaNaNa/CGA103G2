@@ -21,7 +21,7 @@ input {
   color: #2C3E50;
   font-size: 14px;
   letter-spacing: 1px;
-  
+  ;
 }
 
 input:focus {
@@ -57,7 +57,7 @@ button:focus {
   border: none;
   cursor: default;
   /*Add the z-index property, so it can solve the problem of 'the dialog occlusion the datapicker'.modifed by tony he.2009-09-29 */
-/*   z-index: 1200; */
+  z-index: 1200;
 }
 
 .datepicker-dropdown {
@@ -109,11 +109,11 @@ thead tr:nth-child(3) th {
   color: white
 }
 
-/* .active { */
-/*   border-radius: 50% !important; */
-/*   background-image: linear-gradient(#dce1e4, #64B5F6) !important; */
-/*   color: #fff !important; */
-/* } */
+.active {
+  /* border-radius: 50% !important; */
+  background-image: linear-gradient(#dce1e4, #64B5F6) !important;
+  color: #fff !important;
+}
 
 .prev,
 .next,
@@ -137,9 +137,6 @@ dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-#submit_btn {
-  position: absolute;
-}
 
 #cancel {
   position: relative;
@@ -158,11 +155,6 @@ dialog::backdrop {
 
 }
 
-#myform {
-  position: relative;
-  top: 20px;
-  left: 20px;
-}
 
 /* dialog */
 dialog {
@@ -193,16 +185,15 @@ dialog {
 table.table-condensed{
   translate: 0 -20%;
 }
+table th, table td{
+  text-align: center;
+}
 /* 日期選擇時 */
-td.disabled {
+td.disabled,span.month.disabled, span.year.disabled {
   cursor: not-allowed !important;
   color: lightgray !important;
 }
 
 td.disabled:hover {
   background-image: none !important;
-}
-
-.datepicker datepicker-dropdown dropdown-menu datepicker-orient-left datepicker-orient-bottom{
-    z-index: 99999 !important;
 }

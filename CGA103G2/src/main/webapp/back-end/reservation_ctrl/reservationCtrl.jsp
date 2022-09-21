@@ -10,12 +10,17 @@ RsvtCtrlService rsvtCtrlSvc = new RsvtCtrlService();
 List<RsvtCtrlVO> list = rsvtCtrlSvc.getAll();
 pageContext.setAttribute("list", list);
 %>
-<style>
-.table th,.table th{
-	text-align: center;
-	background-color: white;
-}
-</style>
+<table class="table">
+	<tr>
+		<td>
+			<h4>
+				<a href="select_page.jsp"><img src="images/back1.gif"
+					width="100" height="32" border="0">回首頁</a>
+			</h4>
+		</td>
+	</tr>
+</table>
+
 <table class="table">
 	<tr>
 		<th>訂位控制編號</th>
@@ -44,7 +49,7 @@ pageContext.setAttribute("list", list);
 			<td>
 				<FORM METHOD="post" ACTION="RsvtCtrlServlet"
 					style="margin-bottom: 0px;">
-					<input type="submit" value="修改" class="input_btn"> <input type="hidden"
+					<input type="submit" value="修改"> <input type="hidden"
 						name="rsvtCtrlId" value="${rsvtCtrlVO.rsvtCtrlId}"> <input
 						type="hidden" name="action" value="getOne_For_Update">
 				</FORM>
@@ -52,7 +57,7 @@ pageContext.setAttribute("list", list);
 			<td>
 				<FORM METHOD="post" ACTION="RsvtCtrlServlet"
 					style="margin-bottom: 0px;">
-					<input type="submit" value="刪除" class="input_btn"> <input type="hidden"
+					<input type="submit" value="刪除"> <input type="hidden"
 						name="rsvtCtrlId" value="${rsvtCtrlVO.rsvtCtrlId}"> <input
 						type="hidden" name="action" value="delete">
 				</FORM>

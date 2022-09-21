@@ -1,5 +1,6 @@
 	<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	
+	
 	<!-- ----- ----- ----- 最左邊的 選擇列 start ----- ----- ----- -->
 	<aside id="ms-side-nav" class="side-nav fixed ms-aside-scrollable ms-aside-left">
 		<!-- Logo -->
@@ -54,7 +55,6 @@
 			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#reservation" aria-expanded="false" aria-controls="reservation"><span><i class="fas fa-file-reservation fs-16"></i>訂位管理</span></a>
 				<ul id="reservation" class="collapse" aria-labelledby="reservation" data-parent="#side-nav-accordion">
 					<li><a href="${pageContext.request.contextPath}/back-end/reservation/reservation_detail.jsp">查看訂位</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/reservation/reservation_edit.jsp">修改訂位</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 訂位 end ----- ----- ----- -->
 
@@ -89,7 +89,13 @@
 					<li><a href="${pageContext.request.contextPath}/back-end/customer/customer_list.jsp">顧客列表</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 顧客 end ----- ----- ----- -->
-
+			<!-- ----- ----- ----- 訂位控制 start ----- ----- ----- -->
+			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#reservationCtrl" aria-expanded="false" aria-controls="reservationCtrl"><span><i class="fas fa-file-reservation fs-16"></i>訂位控制</span></a>
+				<ul id="reservationCtrl" class="collapse" aria-labelledby="reservationCtrl" data-parent="#side-nav-accordion">
+					<li><a href="${pageContext.request.contextPath}/back-end/reservation_ctrl/reservationCtrl_detail.jsp">查看訂位控制</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/reservation_ctrl/reservationCtrl_add.jsp">新增訂位控制</a></li>
+				</ul></li>
+			<!-- ----- ----- ----- 訂位控制 end ----- ----- ----- -->
 			<!-- ----- ----- ----- 空白頁面 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#nothing1" aria-expanded="false" aria-controls="nothing1"><span><i class="fas fa-file-invoice fs-16"></i>空白頁面</span></a>
 				<ul id="nothing1" class="collapse" aria-labelledby="nothing1" data-parent="#side-nav-accordion">
@@ -99,3 +105,4 @@
 		</ul>
 	</aside>
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
+	
