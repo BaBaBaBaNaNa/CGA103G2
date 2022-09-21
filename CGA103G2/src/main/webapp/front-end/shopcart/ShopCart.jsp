@@ -67,7 +67,7 @@
 
 		<section class="about section-padding bg-white">
 			<hr>
-			<form METHOD="post" ACTION="ShopCartServlet.do" name="form1">
+<!-- 			<form METHOD="post" ACTION="ShopCartServlet.do" name="form1"> -->
 				<div class="modal-fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<!-- 						<div class="modal-dialog modal-dialog-centered modal-xl"> -->
 					<div class="modal-dialog modal-lg" role="document">
@@ -89,13 +89,13 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.href='../../front-end/shopcart/ShopCartMenu.jsp'">回到菜單</button>
 								<input type="hidden" name="action" value="insert">
-								<input class="btn btn-primary" type="submit" value="送出訂單">
+								<input id="submit2" class="btn btn-primary" type="submit" value="送出訂單">
 <!-- 								<button type="button" class="btn btn-primary" onclick="window.location.href='../../front-end/shopcart/ShopCart.jsp'">送出訂單</button> -->
 							</div>
 						</div>
 					</div>
 				</div>
-			</form>
+<!-- 			</form> -->
 			<hr>
 		</section>
 		<!-- ----- ----- ----- 中間內容 end ----- ----- ----- -->

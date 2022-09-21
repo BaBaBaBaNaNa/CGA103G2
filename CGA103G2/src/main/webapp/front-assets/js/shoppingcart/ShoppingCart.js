@@ -19,7 +19,9 @@ var shoppingCart = (function() {
 	// 從session中讀取購物車
 	function loadCart() {
 		cart = JSON.parse(sessionStorage.getItem('shoppingCart'));
+		console.log(cart);
 	}
+	//如果購物車不是空的時候取得購物車東西
 	if (sessionStorage.getItem("shoppingCart") != null) {
 		loadCart();
 	}
@@ -202,6 +204,27 @@ $('.show-cart').on("change", ".item-count", function(event) {
 	shoppingCart.setCountForItem(name, count);
 	displayCart();
 });
+
+var MyPoint = "/front-end/shopcart/ShopCartAddSuccess.jsp";
+var host = window.location.host;
+var path = window.location.pathname;
+var webCtx = path.substring(0, path.indexOf('/', 1));
+var endPointURL = "http://" + host + webCtx + MyPoint;
+
+// 當要把購物車送出產生訂單時
+$('#submit2').on("click",  function(event) {
+	console.log(cart);
+	fetch('ShopCartServlet.do', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+		cart
+      }),
+    })
+    .then(resp => window.location.href='ShopCartAddSuccess.jsp')
+      ;
+});
+
 
 // 執行顯示購物車
 displayCart();

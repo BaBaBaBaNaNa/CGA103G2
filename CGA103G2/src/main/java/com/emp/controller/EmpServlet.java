@@ -347,7 +347,15 @@ public class EmpServlet extends HttpServlet {
 				/***************************1.將輸入資料轉為Map**********************************/ 
 				//採用Map<String,String[]> getParameterMap()的方法 
 				//注意:an immutable java.util.Map 
-				Map<String, String[]> map = req.getParameterMap();
+			HttpSession session = req.getSession();
+			Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+			
+			// 以下的 if 區塊只對第一次執行時有效
+			if (req.getParameter("whichPage") == null){
+				Map<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
+				session.setAttribute("map",map1);
+				map = map1;
+			} 
 				
 				/***************************2.開始複合查詢***************************************/
 				EmpService empSvc = new EmpService();
