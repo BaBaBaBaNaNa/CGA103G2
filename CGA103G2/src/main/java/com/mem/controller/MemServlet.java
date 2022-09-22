@@ -146,6 +146,11 @@ public class MemServlet extends HttpServlet {
 			if (memAddress == null || memAddress.trim().length() == 0) {
 				errorMsgs.add("地址請勿空白");
 			}
+			
+			String county = req.getParameter("county");
+			String district = req.getParameter("district");
+			System.out.println(county);
+			System.out.println(district);
 
 			java.sql.Date memBirthday = null;
 			try {
@@ -173,6 +178,7 @@ public class MemServlet extends HttpServlet {
 				req.setAttribute("memVO", memVO); // 含有輸入格式錯誤的empVO物件,也存入req
 				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/member/memberAdd.jsp");
 				failureView.forward(req, res);
+				
 				return;
 			}
 			/*************************** 2.開始新增資料 ***************************************/
