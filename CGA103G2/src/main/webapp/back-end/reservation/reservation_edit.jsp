@@ -174,11 +174,9 @@ margin: 0 auto;
 							<h6 class="sub-title my-3">訂位人數</h6>
 							<div>
 								<div class="input-group">
-									<input type="text" class="form-control" name="rsvtNum"
-										value="<%=rsvtVO.getRsvtNum()%>">
-									<div class="input-group-append bg-custom b-0">
-										<span class="input-group-text"></span>
-									</div>
+									<input type="range" class="form-control" name="rsvtNum"
+										value="<%=rsvtVO.getRsvtNum()%>" max="" onmousemove="getRsvtNumVal()" onchange="getRsvtNumVal()">
+									<span id="numVal"></span>
 								</div>
 								<!-- input-group -->
 							</div>
@@ -238,8 +236,9 @@ margin: 0 auto;
 		var dp1 = document.getElementById('dp1');
 		var period = document.getElementById('period');
 		const arr = [];
-		const url = '/CGA103G2/back-end/reservation_ctrl/Date';
-			fetch(url,{
+		const periodUrl = '/CGA103G2/back-end/reservation_ctrl/Period';
+		const dateUrl = '/CGA103G2/back-end/reservation_ctrl/Date';
+			fetch(dateUrl,{
 			headers : { 
 	    	    'Content-Type': 'application/json',
 	    	    'Accept': 'application/json'
@@ -256,7 +255,15 @@ margin: 0 auto;
 				}
 			})
 		console.log(arr);
-	var disabledDates = arr;
+		var numVal = document.getElementById('numVal');
+		var num = document.querySelector('input[name="rsvtNum"]'); 
+		numVal.textContent = num.value;
+		function getRsvtNumVal(){
+			numVal.textContent = num.value;
+		}
+		// num.max 
+		var disabledDates = arr;
+		
 	$(function() {
 		$("#dp1").datepicker({
 			dateFormat: 'yy-mm-dd',
@@ -281,8 +288,7 @@ margin: 0 auto;
 		});
 	});
 	function checkPeriod(){
-		const url = '/CGA103G2/back-end/reservation_ctrl/Period';
-		fetch(url,{
+		fetch(periodUrl,{
 			method: 'post',
 			headers: {
 				'Content-Type': 'application/json'
@@ -293,7 +299,6 @@ margin: 0 auto;
 		})
 		.then(res => res.json())
 		.then(periodList => {
-			console.log(periodList);
 			period.textContent = "";
 			if(periodList.length != 0){
 				period.textContent = "";
@@ -307,7 +312,7 @@ margin: 0 auto;
 							option.textContent = '中午';
 							break;
 						}
-						case '0' :{
+						case '1' :{
 							option.textContent = '晚上';
 							break;
 						}

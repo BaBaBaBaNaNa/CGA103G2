@@ -108,7 +108,13 @@ line-height:37px;
 			<%@ include file="../../back-end/tool/Upicon.file"%>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-
+	<c:if test="${not empty errorMsgs}">
+				<ul>
+					<c:forEach var="message" items="${errorMsgs}">
+						<li style="color:red">${message}</li>
+					</c:forEach>
+				</ul>
+	</c:if>
 	<table class="table" id="myTable">
 		<tr>
 			<th>訂位編號</th>
@@ -123,7 +129,7 @@ line-height:37px;
 			<th>用餐日期</th>
 
 			<th><FORM METHOD="post" ACTION="RsvtServlet" style="margin-bottom: 0px;" id="search_form">
-			<label for="cName">搜尋：</label><input type="text" name="customerName" id="cName" autoComplete="off"> 
+			<label for="cName">搜尋：</label><input type="text" name="customerName" id="cName" autoComplete="off" placeholder="請輸入姓名"> 
 				<input type="hidden" name="action" value="getOne_For_CustomerName"></FORM></th>
 			<th><input type="submit" class="input_btn" value="送出" id="search_btn"></th>
 		</tr>
