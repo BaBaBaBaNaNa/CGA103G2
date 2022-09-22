@@ -221,7 +221,7 @@ input:checked + label:after {
 	                 url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
 
 	                 data: {
-	                	 action:  "getNextNO", 
+	                	 action:  "doNextNO", 
 	                 },
 
 	                 success : function(res){
@@ -412,8 +412,8 @@ input:checked + label:after {
 	  }
 	
 	window.onload = function (){
-		setInterval(showTotalNO, 5000);
-		setInterval(showRemainNO, 5000);
+		setInterval(showTotalNO, 1000);
+		setInterval(showRemainNO, 1000);
 	}
 	
 	</script>
