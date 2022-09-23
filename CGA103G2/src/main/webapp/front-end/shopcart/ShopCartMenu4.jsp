@@ -185,7 +185,6 @@
 									<div class="row">
 										<c:forEach var="MealsVO" items="${list}"
 											begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-											<h3></h3>
 											<c:if test="${MealsVO.mealsCategoryID  ==  MealsCategoryVO.mealsCategoryId}">
 												<c:if test="${MealsVO.mealsControl==1}">
 													<div class="col">
@@ -193,19 +192,22 @@
 															<img class="card-img-top" alt="Card image cap"
 																src="<%=request.getContextPath()%>/meals/DBGifReader?mealsID=${MealsVO.mealsID}"
 																width="100px">
+																<div class="card-block">
 															<h4 class="card-title">${MealsVO.mealsName}</h4>
 															<p class="card-text">${MealsVO.mealsPrice}</p>
-															<a data-name="${MealsVO.mealsName}"
+															<a  data-id="${MealsVO.mealsID}" 
+																data-name="${MealsVO.mealsName}"
 																data-price="${MealsVO.mealsPrice}"
 																data-info="${MealsVO.mealsInfo}" class="Info">查看詳情</a>
 															<a href="#" 
-															
+															data-id="${MealsVO.mealsID}" 
 															data-name="${MealsVO.mealsName}"
 																data-price="${MealsVO.mealsPrice}"
 																class="add-to-cart btn btn-primary">加入購物車</a>
 														</div>
 													</div>
-												</c:if>
+												</div>
+											</c:if>
 											</c:if>
 										</c:forEach>
 									</div>
@@ -457,9 +459,9 @@
 					console.log(info);
 					swal.fire({
 					 title: name,
-		                html: "價錢:" + price + "<p></p>" + info,
+		                html: "價錢:" + price + "<p></p>" + info ,
 		                text: 'Modal with a custom image.',
-		                imageUrl: 'https://unsplash.it/400/200',
+		                imageUrl: '/CGA103G2//meals/DBGifReader?mealsID='+id,
 		                imageWidth: 400,
 		                imageHeight: 200,
 		                imageAlt: 'Custom image',
