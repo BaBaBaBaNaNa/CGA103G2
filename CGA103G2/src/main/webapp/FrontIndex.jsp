@@ -45,118 +45,20 @@
                     <div class="col-lg-5 col-12 m-auto">
                         <div class="heroText">
 
-                            <h1 class="text-white mb-lg-5 mb-3">Delicious Steaks</h1>
+                            <h1 class="text-white mb-lg-5 mb-3">義鄉人</h1>
 
                             <div class="c-reviews my-3 d-flex flex-wrap align-items-center">
-                                <div class="d-flex flex-wrap align-items-center">
-                                    <h4 class="text-white mb-0 me-3">4.4/5</h4>
-
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                    </div>
-                                </div>
-
-                                <p class="text-white w-100">From <strong>1,206+</strong> Customer Reviews</p>
+                                <p class="text-white w-100"> <strong>義式餐酒館</strong></p>
+                                <p class="text-white w-100"> <strong>since. 2022</strong></p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-7 col-12">
-                        <div id="carouselExampleCaptions" class="carousel carousel-fade hero-carousel slide"
-                            data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="carousel-image-wrap">
-                                        <img src="front-assets/images/slide/jay-wennington-N_Y88TWmGwA-unsplash.jpg"
-                                            class="img-fluid carousel-image" alt="">
-                                    </div>
-
-                                    <div class="carousel-caption">
-                                        <span class="text-white">
-                                            <i class="bi-geo-alt me-2"></i>
-                                            Manhattan, New York
-                                        </span>
-
-                                        <h4 class="hero-text">Fine Dining Restaurant</h4>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <div class="carousel-image-wrap">
-                                        <img src="front-assets/images/slide/jason-leung-O67LZfeyYBk-unsplash.jpg"
-                                            class="img-fluid carousel-image" alt="">
-                                    </div>
-
-                                    <div class="carousel-caption">
-                                        <div class="d-flex align-items-center">
-                                            <h4 class="hero-text">Steak</h4>
-
-                                            <span class="price-tag ms-4"><small>$</small>26.50</span>
-                                        </div>
-
-                                        <div class="d-flex flex-wrap align-items-center">
-                                            <h5 class="reviews-text mb-0 me-3">3.8/5</h5>
-
-                                            <div class="reviews-stars">
-                                                <i class="bi-star-fill reviews-icon"></i>
-                                                <i class="bi-star-fill reviews-icon"></i>
-                                                <i class="bi-star-fill reviews-icon"></i>
-                                                <i class="bi-star reviews-icon"></i>
-                                                <i class="bi-star reviews-icon"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <div class="carousel-image-wrap">
-                                        <img src="front-assets/images/slide/ivan-torres-MQUqbmszGGM-unsplash.jpg"
-                                            class="img-fluid carousel-image" alt="">
-                                    </div>
-
-                                    <div class="carousel-caption">
-                                        <div class="d-flex align-items-center">
-                                            <h4 class="hero-text">Sausage Pasta</h4>
-
-                                            <span class="price-tag ms-4"><small>$</small>18.25</span>
-                                        </div>
-
-                                        <div class="d-flex flex-wrap align-items-center">
-                                            <h5 class="reviews-text mb-0 me-3">4.2/5</h5>
-
-                                            <div class="reviews-stars">
-                                                <i class="bi-star-fill reviews-icon"></i>
-                                                <i class="bi-star-fill reviews-icon"></i>
-                                                <i class="bi-star-fill reviews-icon"></i>
-                                                <i class="bi-star-fill reviews-icon"></i>
-                                                <i class="bi-star reviews-icon"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <button class="carousel-control-prev" type="button"
-                                data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-
-                            <button class="carousel-control-next" type="button"
-                                data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
+                    
 
                 </div>
             </div>
-
+			<br><br><br><br><br><br><br><br><br><br>
             <div class="video-wrap">
                 <video autoplay="" loop="" muted="" class="custom-video" poster="">
                     <source src="front-assets/video/production_ID_3769033.mp4" type="video/mp4">
@@ -173,59 +75,7 @@
     <!-- ----- ----- ----- 頁面 中間內容 end ----- ----- ----- -->
 
     <!-- ----- ----- ----- 頁面 底部 start ----- ----- ----- -->
-    <footer class="site-footer section-padding">
-
-        <div class="container">
-
-            <div class="row">
-
-                <div class="col-12">
-                    <h4 class="text-white mb-4 me-5">義式餐酒館</h4>
-                </div>
-
-                <div class="col-lg-4 col-md-7 col-xs-12 tooplate-mt30">
-                    <h6 class="text-white mb-lg-4 mb-3">Location</h6>
-
-                    <p>緯育 中壢Java班 CGA_103 第二組</p>
-
-                    <a href="https://goo.gl/maps/wcmDpTGaAHn3eWPd7" class="custom-btn btn btn-dark mt-2">Directions</a>
-                </div>
-
-                <div class="col-lg-4 col-md-5 col-xs-12 tooplate-mt30">
-                    <h6 class="text-white mb-lg-4 mb-3">Opening Hours</h6>
-
-                    <p class="mb-2">Monday - Friday</p>
-
-                    <p>17:00 PM - 03:00 AM</p>
-
-                    <p>Tel: <a href="tel: 03-425-1108" class="tel-link">03-425-1108</a></p>
-                </div>
-
-                <div class="col-lg-4 col-md-6 col-xs-12 tooplate-mt30">
-                    <h6 class="text-white mb-lg-4 mb-3">Social</h6>
-
-                    <ul class="social-icon">
-                        <li><a href="#" class="social-icon-link bi-facebook"></a></li>
-
-                        <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-                        <li><a href="https://twitter.com/search?q=tooplate.com&src=typed_query&f=live" target="_blank"
-                                class="social-icon-link bi-twitter"></a></li>
-
-                        <li><a href="#" class="social-icon-link bi-youtube"></a></li>
-                    </ul>
-
-                    <p class="copyright-text tooplate-mt60">Copyright © 2022 中壢Java班 CGA_103 緯育 第二組 Co., Ltd.
-                        <br>Design: <a rel="nofollow" href="" target="_blank">2022 中壢Java班 CGA_103 緯育 第二組</a>
-                    </p>
-
-                </div>
-
-            </div><!-- row ending -->
-
-        </div><!-- container ending -->
-
-    </footer>
+	<%@ include file="front-end/tool/PageFooter.file"%>
     <!-- ----- ----- ----- 頁面 底部 end ----- ----- ----- -->
 
     <!-- ----- ----- ----- 跳出預先訂位頁面 start ----- ----- ----- -->

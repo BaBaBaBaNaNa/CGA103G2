@@ -90,6 +90,7 @@ public class EmpServlet extends HttpServlet {
 				return;// 程式中斷
 			}
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+			HttpSession session = req.getSession();
 			req.setAttribute("empVO", empVO); // 資料庫取出的empVO物件,存入req
 			String url = "/back-end/employee/empDetailOne.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); 
@@ -209,6 +210,7 @@ public class EmpServlet extends HttpServlet {
 			EmpService empSvc = new EmpService();
 			EmpVO empVO = empSvc.getOneEmp(empID);
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+			HttpSession session = req.getSession();
 			String param = 	"?empID="  +empVO.getEmpID()+
 				       						"&empName="  +empVO.getEmpName()+
 				       						"&empAccount="  +empVO.getEmpAccount()+
@@ -309,6 +311,7 @@ public class EmpServlet extends HttpServlet {
 			EmpService empSvc = new EmpService();
 			empVO = empSvc.updateEmp(empID, empName, empAccount, empPassword, empPermission, empPhone, empAddress, jobID, empHiredate);
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+			HttpSession session = req.getSession();
 			req.setAttribute("empVO", empVO); // 資料庫update成功後,正確的的empVO物件,存入req
 			String url = "/back-end/employee/empEditSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
@@ -420,6 +423,7 @@ public class EmpServlet extends HttpServlet {
 				return;// 程式中斷
 			}
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+			HttpSession session = req.getSession();
 			req.setAttribute("empVO", empVO); // 資料庫取出的empVO物件,存入req
 			String url = "/back-end/employee/empDetailOwn.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); 

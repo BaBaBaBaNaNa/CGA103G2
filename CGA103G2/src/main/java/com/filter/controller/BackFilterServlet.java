@@ -23,9 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 //			urlPatterns = {"/back-end/*"}
 //)
 public class BackFilterServlet extends HttpFilter implements Filter {
-//@WebFilter(filterName = "letgo",
-//						urlPatterns = {"/back-end/*","/front-end/*"}
-//)
+	
 //定義一個存放放行資源路徑的陣列
 	private static String[] paths;
 

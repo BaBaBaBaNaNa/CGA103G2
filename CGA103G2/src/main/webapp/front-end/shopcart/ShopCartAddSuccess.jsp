@@ -59,8 +59,31 @@
 		<!-- ----- ----- ----- 中間上面 end ----- ----- ----- -->
 
 		<!-- ----- ----- ----- 中間內容 start ----- ----- ----- -->
-		新增訂單成功!
-	
+
+		<section class="about section-padding bg-white">
+		<p style="font-size:30px; text-align: center;">新增訂單成功</p>
+			<hr>
+				<div class="modal-fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">訂單詳情</h5>
+							</div>
+							<div class="modal-body">
+								<table class="show-cart table">
+
+								</table>
+								<div>
+									總金額: $<span class="total-cart"></span>
+								</div>
+							</div>
+							<div class="modal-footer">
+							</div>
+						</div>
+					</div>
+				</div>
+			<hr>
+		</section>
 		<!-- ----- ----- ----- 中間內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
@@ -197,7 +220,7 @@
 	<script src="../../front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
 	<script src="../../front-assets/js/custom.js"></script>
 
-	<script src="../../front-assets/js/shoppingcart/ShoppingCart.js"></script>
+	<script src="../../front-assets/js/shoppingcart/ShoppingCartSuccess.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 
 </body>

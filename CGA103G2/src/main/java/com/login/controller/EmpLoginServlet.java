@@ -47,9 +47,10 @@ public class EmpLoginServlet extends HttpServlet {
 		admin.setEmpPassword(empPassword);
 		EmpLoginDAO dao = new EmpLoginDAO();
 		boolean res = dao.loginAdmin(admin);
+		boolean resPer = dao.loginAdminPermission(admin);
 		// 登入驗證，如果驗證成功，則設定一個屬性名為“LoginSessionName”值為使用者名稱的session，用於BackFilterServlet驗證是否登入過
 		// 驗證的話還是會用SessionId去做驗證
-		if (res) {
+		if ((res) && (resPer)) {
 			request.getSession().setAttribute("LoginSessionName", empAccount);
 			request.getRequestDispatcher("/back-end/index/BackIndex.jsp").forward(request, response);
 			
@@ -58,11 +59,17 @@ public class EmpLoginServlet extends HttpServlet {
 			System.out.println("登入成功!");
 			
 			return;
-		} else {
+		}
+		else if(!(res)){
 			request.setAttribute("errorMessage", "帳號或者密碼錯誤");
 			request.getRequestDispatcher("/BackLogin.jsp").forward(request, response);
 			return;
 //			response.sendRedirect("BackLogin.jsp");
+		}
+		else if(!(resPer)) {
+			request.setAttribute("errorMessage", "帳號已停權,詳情請洽管理員");
+			request.getRequestDispatcher("/BackLogin.jsp").forward(request, response);
+			return;
 		}
 	}
 }

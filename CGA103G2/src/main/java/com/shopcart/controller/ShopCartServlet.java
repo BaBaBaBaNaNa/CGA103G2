@@ -124,28 +124,6 @@ public class ShopCartServlet extends HttpServlet {
 			// 新增訂單
 			ShopCartService shopcartSvc = new ShopCartService();
 			shopcartSvc.addInsideOrder(ordersType, ordersStatus, ordersBuildDate,PriceArrayList,NameArrayList,CountArrayList);
-
-			// 新增訂單明細
-			try {
-				for (int i = 0; i < jArray.length(); i++) {
-					// 東西丟到 jObject 取得每項的key value
-					JSONObject jObject;
-					jObject = new JSONObject(jArray.get(i).toString());
-					
-//					shopcartSvc.addInsideOrder(ordersType, ordersStatus, ordersBuildDate,jObject.get("price"), jObject.get("name"), jObject.get("count"));
-//					shopcartSvc.addInsideOrderDetails(jObject.get("price"), jObject.get("name"), jObject.get("count"));
-					// 測試東西
-//					System.out.println(jObject);
-					System.out.println("price:" + jObject.get("price"));
-					System.out.println("name:" + jObject.get("name"));
-					System.out.println("count:" + jObject.get("count"));
-					System.out.println("==========");
-				}
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			req.setAttribute("shopcartVO", shopcartVO); // 資料庫update成功後,正確的的empVO物件,存入req
 			String url = "/front-end/shopcart/ShopCartAddSuccess.jsp";

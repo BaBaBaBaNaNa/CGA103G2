@@ -78,7 +78,7 @@ public class ShopCartDAO implements ShopCartDAOInterface {
 				
 				pstmt2 = con.prepareStatement(InsertInsideDetailStmt);
 				//ordersID
-				pstmt2.setInt(1,1);
+				pstmt2.setInt(1,Integer.parseInt(nextOrdersID));
 				//mealsID
 				pstmt2.setInt(2,1);
 				//orddetailsMealsQuantity
