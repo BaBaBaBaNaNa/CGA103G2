@@ -9,6 +9,8 @@ import javax.servlet.http.*;
 
 import com.emp.model.EmpDAO;
 import com.emp.model.EmpVO;
+import com.job.model.JobService;
+import com.job.model.JobVO;
 import com.mealscateory.model.*;
 
 
@@ -33,7 +35,7 @@ public class MealsCategoryServlet extends HttpServlet{
 			HttpSession session = req.getSession();
 			session.setAttribute("list", list); // 資料庫取出的list物件,存入session
 			// Send the Success view
-			String url = "/back-end/mealscategory/listAllMC.jsp";
+			String url = "/back-end/mealscategory/listAllPicture.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			return;
@@ -88,15 +90,13 @@ public class MealsCategoryServlet extends HttpServlet{
 				
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("mealsCategoryVO", mealsCategoryVO); //資料庫取出的empVO物件,存入req
-				String url = "/back-end/mealscategory/listOneMealsCategory.jsp";
+				String url = "/back-end/mealscategory/MealsCategoryOne.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 				successView.forward(req, res);
 		}
 		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
 
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
+			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 				/***************************1.接收請求參數 ****************************************/
@@ -116,10 +116,7 @@ public class MealsCategoryServlet extends HttpServlet{
 		}
 		
 		if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
-			System.out.println(1234);
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
+			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
@@ -130,51 +127,54 @@ public class MealsCategoryServlet extends HttpServlet{
 			
 			String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{0,10}$";
 			if (MealsCategory == null || MealsCategory.trim().length() == 0) {
-				errorMsgs.add("員工姓名: 請勿空白");
+				errorMsgs.put("MealsCategory: ","請勿空白");
 			} else if (!MealsCategory.trim().matches(enameReg)) { //以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("員工姓名: 只能是中、英文字母、數字和_ , 且長度必需在0到10之間");
+				errorMsgs.put("MealsCategory"," 只能是中、英文字母、數字和_ , 且長度必需在0到10之間");
 			}
-
-
+			MealsCategoryVO mealsCategoryVO = new MealsCategoryVO();
+			mealsCategoryVO.setMealsCategoryId(MealsCategoryId);
+			mealsCategoryVO.setMealsCategory(MealsCategory);
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/mealscategory/update_mealsCategory_input.jsp");
+				req.setAttribute("mealsCategoryVO", mealsCategoryVO);
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/mealscategory/update_mealsCategory_input.jsp");
 				failureView.forward(req, res);
 				return; //程式中斷
 			}
 			/***************************2.開始修改資料 *****************************************/
 			MealsCategoryService MealsCategorySvc = new MealsCategoryService();
-			MealsCategoryVO mealsCategoryVO = MealsCategorySvc.updateMealsCategory(MealsCategoryId, MealsCategory);
+			 mealsCategoryVO = MealsCategorySvc.updateMealsCategory(MealsCategoryId, MealsCategory);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view)*************/
 			req.setAttribute("mealsCategoryVO", mealsCategoryVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url = "/back-end/mealscategory/listOneMealsCategory.jsp";
+			String url = "/back-end/mealscategory/mealsCatefgoryEditSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
 		
 		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
+			Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-			Integer MealsCategoryId = Integer.valueOf(req.getParameter("MealsCategoryId").trim());
-			
 			String MealsCategory = req.getParameter("MealsCategory");
 			String enameReg = "^[(\u4e00-\u9fa5)]{0,10}$";
+			
+			MealsCategoryService MealsCategorySvc = new MealsCategoryService();
+			MealsCategoryVO mealsCategoryVO = MealsCategorySvc.getMealsCategoryCheck(MealsCategory); 
+			
+			
+			
 			if (MealsCategory == null || MealsCategory.trim().length() == 0) {
-				errorMsgs.add("xxxx");
+				errorMsgs.put("MealsCategory","菜系請勿空白");
 			} else if (!MealsCategory.trim().matches(enameReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("yyyyy");
+				errorMsgs.put("MealsCategory","菜系只能是中文 且長度需在0~10");
+			}else if (mealsCategoryVO !=null) {
+				errorMsgs.put("MealsCategory", "菜系名稱重複");
 			}
-			System.out.println(MealsCategoryId);
 			System.out.println(MealsCategory);
-			MealsCategoryVO mealsCategoryVO = new MealsCategoryVO();
-			mealsCategoryVO.setMealsCategoryId(MealsCategoryId);
+			mealsCategoryVO = new MealsCategoryVO();
 			mealsCategoryVO.setMealsCategory(MealsCategory);
 
 
@@ -182,16 +182,17 @@ public class MealsCategoryServlet extends HttpServlet{
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("mealsCategoryVO", mealsCategoryVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/mealscategory/addMealsCategory.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/mealscategory/mealsCategoryAdd.jsp");
 				failureView.forward(req, res);
 				return;
 			}
-
+			MealsCategorySvc = new MealsCategoryService();
+			mealsCategoryVO = MealsCategorySvc.addMealsCategory(MealsCategory);
 			/*************************** 2.開始新增資料***************************************/
-			MealsCategoryService MealsCategorySvc = new MealsCategoryService();
-			MealsCategorySvc.addMealsCategory(MealsCategoryId, MealsCategory);
+			req.setAttribute("mealsCategoryVO", mealsCategoryVO);
+			MealsCategorySvc.addMealsCategory(MealsCategory);
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/back-end/mealscategory/listAllMC.jsp";
+			String url = "/back-end/mealscategory/mealsCategoryAddSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 		}
@@ -210,7 +211,7 @@ public class MealsCategoryServlet extends HttpServlet{
 			MealsCategorySvc.deleteMealsCategory(MealsCategoryId);
 			
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/back-end/mealscategory/listAllMC.jsp";
+			String url = "/back-end/mealscategory/mealsCategoryDeleteSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);//  刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}

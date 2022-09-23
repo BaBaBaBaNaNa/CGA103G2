@@ -66,6 +66,16 @@ h2{
 	<div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"></div>
 
 	<!-- ----- ----- ----- 最左邊的 選擇列 start ----- ----- ----- -->
+	<%@ include file="../../back-end/tool/LeftSideBar.file"%>
+	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
+
+	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
+	<main class="body-content">
+		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
+		<%@ include file="../../back-end/tool/UpSideBar.file"%>
+		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
+
+		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb pl-0">
 				<li class="breadcrumb-item"><a href="../../back-end/index/BackIndex.jsp"><i
@@ -74,16 +84,6 @@ h2{
 				<li class="breadcrumb-item active" aria-current="page">職務修改成功</li>
 			</ol>
 		</nav>
-	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
-
-	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
-	<main class="body-content"padding-right: 0 px;>
-		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
-		<%@ include file="../../back-end/tool/UpSideBar.file"%>
-		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
-
-		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
-		<%@ include file="../../back-end/tool/Upicon.file"%>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->

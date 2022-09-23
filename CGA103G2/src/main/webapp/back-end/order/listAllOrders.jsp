@@ -266,8 +266,8 @@
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 <table id="table-1">
 	<tr><td>
-		 <h3>所有訂單資料 - listAllOrders.jsp</h3>
-		 <h4><a href="order_details.jsp">回首頁</a></h4>
+		 <h3>所有訂單資料 </h3>
+		 <h4><a href="order_details.jsp">返回訂單查詢</a></h4>
 	</td></tr>
 </table>
 
@@ -278,14 +278,14 @@
 		<th>櫃台員工編號</th>
 		<th>外送員工編號</th>
 		<th>桌子編號</th>
-		<th>訂單種類(外帶 外送 內用)</th>
+		<th>訂單種類</th>
 		<th>訂單總金額</th>
-		<th>訂單狀態(完成, 未完成, 退回)</th>
+		<th>訂單狀態</th>
 		<th>取餐地點</th>
 		<th>成立訂單日</th>
 		<th>預計製作日</th>
+		<th>訂單明細</th>
 		<th>修改</th>
-<!-- 		<th>刪除</th> -->
 	</tr>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="ordersVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
@@ -296,12 +296,29 @@
 			<td>${ordersVO.empCounterID}</td> 
 			<td>${ordersVO.empDeliveryID}</td>
 			<td>${ordersVO.seatID}</td>
-			<td>${ordersVO.ordersType}</td>
+			<td>
+				<c:if test="${ordersVO.ordersType == 0}">外帶</c:if>
+				<c:if test="${ordersVO.ordersType == 1}">外送</c:if>
+				<c:if test="${ordersVO.ordersType == 2}">內用</c:if>
+			</td>
 			<td>${ordersVO.ordersAmount}</td>
-			<td>${ordersVO.ordersStatus}</td>
+			<td>
+			   <c:if test="${ordersVO.ordersStatus == 0}">完成</c:if>
+    	       <c:if test="${ordersVO.ordersStatus == 1}">未完成</c:if>
+    	       <c:if test="${ordersVO.ordersStatus == 2}">退回</c:if>
+    	    </td>
 			<td>${ordersVO.ordersDestination}</td>
 			<td>${ordersVO.ordersBuildDate}</td> 
 			<td>${ordersVO.ordersMakeDate}</td>
+			
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/orddetails/orddetails.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="訂單明細" >
+			     <input type="hidden" value="${ordersVO.ordersID}" name="orderDetailId">
+			     <input type="hidden" name="action"	value="getOne_For_Display"></FORM>
+			     
+			</td>
+			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/order/orders.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">

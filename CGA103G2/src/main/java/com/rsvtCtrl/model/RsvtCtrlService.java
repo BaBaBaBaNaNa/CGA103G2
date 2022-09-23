@@ -11,10 +11,9 @@ public class RsvtCtrlService {
 		dao = new RsvtCtrlDAOImpl();
 	}
 
-	public RsvtCtrlVO addRsvtCtrl(Integer rsvtCtrlId,Integer rsvtCtrlOpen, Date rsvtCtrlDate, Integer rsvtCtrlPeriod, Integer rsvtCtrlMax) {
+	public RsvtCtrlVO addRsvtCtrl(Integer rsvtCtrlOpen, Date rsvtCtrlDate, Integer rsvtCtrlPeriod, Integer rsvtCtrlMax) {
 
 		RsvtCtrlVO rsvt = new RsvtCtrlVO();
-		rsvt.setRsvtCtrlId(rsvtCtrlId);
 		rsvt.setRsvtCtrlOpen(rsvtCtrlOpen);;
 		rsvt.setRsvtCtrlDate(rsvtCtrlDate);
 		rsvt.setRsvtCtrlPeriod(rsvtCtrlPeriod);
@@ -25,17 +24,15 @@ public class RsvtCtrlService {
 		return rsvt;
 	}
 
-	public RsvtCtrlVO updateRsvtCtrl(Integer tbtId, Integer rsvtCtrlOpen, Date rsvtCtrlDate, Integer rsvtCtrlPeriod,
-			Integer rsvtCtrlMax, Integer rsvtCtrlNumber, Integer rsvtCtrlId) {
+	public RsvtCtrlVO updateRsvtCtrl(Integer rsvtCtrlOpen,
+			Integer rsvtCtrlMax, Integer rsvtCtrlNum,Integer rsvtCtrlId) {
 
 		RsvtCtrlVO rsvt = new RsvtCtrlVO();
-		rsvt.setTableTypeId(tbtId);
+		rsvt.setTableTypeId(1);
 		rsvt.setRsvtCtrlOpen(rsvtCtrlOpen);
-		rsvt.setRsvtCtrlDate(rsvtCtrlDate);
-		rsvt.setRsvtCtrlPeriod(rsvtCtrlPeriod);
 		rsvt.setRsvtCtrlMax(rsvtCtrlMax);
-		rsvt.setRsvtCtrlNumber(rsvtCtrlNumber);
 		rsvt.setRsvtCtrlId(rsvtCtrlId);
+		rsvt.setRsvtCtrlNumber(rsvtCtrlNum);
 		dao.update(rsvt);
 
 		return rsvt;
@@ -49,7 +46,7 @@ public class RsvtCtrlService {
 		return dao.findByPrimaryKey(rsvtCtrlId);
 	}
 	
-	public RsvtCtrlVO getOneDate(String rsvtCtrlDate) {
+	public List<RsvtCtrlVO> getOneDate(String rsvtCtrlDate) {
 		return dao.findByDate(rsvtCtrlDate);
 	}
 
@@ -57,14 +54,4 @@ public class RsvtCtrlService {
 		return dao.getAll();
 	}
 	
-	public static void main(String[] args) {
-		RsvtCtrlService rsvtCtrlSvc = new RsvtCtrlService();
-		List<RsvtCtrlVO> list = rsvtCtrlSvc.getAll();
-		List<String> dateList = new ArrayList<>();
-		for (RsvtCtrlVO all : list) {
-			if (all.getRsvtCtrlOpen() == 1) {
-				dateList.add(all.getRsvtCtrlDate().toString());
-			}
-		}
-	}
 }

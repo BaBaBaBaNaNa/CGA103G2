@@ -50,8 +50,13 @@ public class OrddetailsService {
 		dao.delete(orddetailsID);
 	}
 	
-	public OrddetailsVO getOneOrddetails(Integer orddetailsID) {
-		return dao.findByPrimaryKey(orddetailsID);
+	public OrddetailsVO getOneOrddetails1(Integer orddetailsID) {
+		return dao.findByPrimaryKey1(orddetailsID);
+	}
+	
+	public List<OrddetailsVO> getOneOrddetails(Integer orddetailsID) {
+		List<OrddetailsVO> vo = dao.findByPrimaryKey(orddetailsID);
+		return vo;
 	}
 	
 	public List<OrddetailsVO> getAll(){

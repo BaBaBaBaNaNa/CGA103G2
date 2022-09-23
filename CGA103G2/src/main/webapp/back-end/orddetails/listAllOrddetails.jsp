@@ -1,3 +1,4 @@
+<%@page import="com.meals.model.MealsVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
@@ -7,6 +8,13 @@
 <% OrddetailsService OrddetailsSvc = new OrddetailsService();
     List<OrddetailsVO> list = OrddetailsSvc.getAll();
     pageContext.setAttribute("list",list);
+%>
+<%
+OrddetailsVO orddetailsVO = (OrddetailsVO) request.getAttribute("orddetailsVO"); 
+%>
+<%
+MealsVO mealsVO = (MealsVO) request.getAttribute("mealsVO"); 
+System.out.println(mealsVO);
 %>
 <!DOCTYPE html>
 <html lang="zh-tw">
@@ -366,14 +374,15 @@
 				<li class="breadcrumb-item"><a href="#"><i
 						class="material-icons">home</i>首頁</a></li>
 				<li class="breadcrumb-item"><a href="#">訂單管理</a></li>
-				<li class="breadcrumb-item active" aria-current="page">查看訂單</li>
+				<li class="breadcrumb-item active" aria-current="page">訂單明細</li>
 			</ol>
 		</nav>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
+<jsp:useBean id="mealsSvc" scope="page" class="com.meals.model.MealsService" />
 <table id="table-1">
 	<tr><td>
-		 <h3>所有訂單明細資料 - listAllOrddetails.jsp</h3>
+		 <h3>所有訂單明細資料 </h3>
 		 <h4><a href="select_page.jsp">返回訂單明細查詢</a></h4>
 	</td></tr>
 </table>
@@ -386,10 +395,9 @@
 		<th>餐點編號</th>
 		<th>餐點數量</th>
 		<th>餐點總金額</th>
-		<th>製作狀態(外帶 外送 內用)</th>
+		<th>製作狀態</th>
 		<th>送餐狀態</th>
 		<th>修改</th>
-<!-- 		<th>刪除</th> -->
 	</tr>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="orddetailsVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
@@ -397,16 +405,16 @@
 		<tr>
 			<td>${orddetailsVO.orddetailsID}</td>
 			<td>${orddetailsVO.ordersID}</td>
-			<td>${orddetailsVO.mealsID}</td> 
+			<td>${orddetailsVO.mealsVO.mealsName}</td>
 			<td>${orddetailsVO.orddetailsMealsQuantity}</td>
 			<td>${orddetailsVO.orddetailsMealsAmount}</td>
-			<td>${orddetailsVO.orddetailsMealsStatus}</td>
-			<td>${orddetailsVO.orddetailsDeliverStatus}</td>
+			<td>${orddetailsVO.orddetailsMealsStatus == 0 ?"已製作":"未製作"}</td>
+			<td>${orddetailsVO.orddetailsDeliverStatus == 0 ?"已送餐":"未送餐"}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/orddetails/orddetails.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="orddetailsID"  value="${orddetailsVO.orddetailsID}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			     <input type="hidden" name="action"	value="xxx"></FORM>
 			</td>
 		</tr>
 	</c:forEach>

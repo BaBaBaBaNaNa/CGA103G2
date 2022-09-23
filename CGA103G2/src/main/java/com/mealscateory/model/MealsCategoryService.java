@@ -3,6 +3,7 @@ package com.mealscateory.model;
 import java.util.List;
 import java.util.Set;
 
+import com.job.model.JobVO;
 import com.meals.model.MealsVO;
 
 
@@ -14,11 +15,10 @@ public class MealsCategoryService {
 		dao = new MealsCategoryDAO();
 	}
 
-	public MealsCategoryVO addMealsCategory(Integer mealsCategoryID ,String mealsCategory) {
+	public MealsCategoryVO addMealsCategory(String mealsCategory) {
 
 		MealsCategoryVO mealsCategoryVO = new MealsCategoryVO();
 
-		mealsCategoryVO.setMealsCategoryId(mealsCategoryID);
 		mealsCategoryVO.setMealsCategory(mealsCategory);
 		
 		dao.insert(mealsCategoryVO);
@@ -54,5 +54,11 @@ public class MealsCategoryService {
 	 public Set<MealsVO> getMealsByMealsCategoryID(Integer mealsCategoryID){
 		 return dao.getMealsByMealsCategoryID(mealsCategoryID);
 	 }
+	 
+	 
+	public MealsCategoryVO getMealsCategoryCheck(String mealsCategory) {
+			return dao.checkRepeatMealsCategoryName(mealsCategory);
+		}
+	 
 
 }

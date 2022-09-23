@@ -1,7 +1,7 @@
 package com.rsvtCtrl.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 import com.rsvtCtrl.model.RsvtCtrlService;
 import com.rsvtCtrl.model.RsvtCtrlVO;
 
@@ -85,7 +84,7 @@ public class RsvtCtrlServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("rsvtCtrlVO", rsvtCtrlVO); // 資料庫取出的rsvtCtrlVO物件,存入req
-			String url = "/back-end/reservation_ctrl/update_rsvtCtrl_input.jsp";
+			String url = "/back-end/reservation_ctrl/reservationCtrl_edit.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_rsvtCtrl_input.jsp
 			successView.forward(req, res);
 		}
@@ -105,62 +104,51 @@ public class RsvtCtrlServlet extends HttpServlet {
 				errorMsgs.add("桌型: 請勿為空");
 			}
 			Integer rsvtCtrlOpen = Integer.valueOf(req.getParameter("rsvtCtrlOpen").trim());
-			if (rsvtCtrlOpen == null) {
-				errorMsgs.add("開放狀態: 請勿為空");
-			}
-			java.sql.Date rsvtCtrlDate = null;
-			try {
-				rsvtCtrlDate = java.sql.Date.valueOf(req.getParameter("rsvtCtrlDate").trim());
-			} catch (IllegalArgumentException e) {
-				rsvtCtrlDate = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.add("請輸入日期!");
-			}
-
-			Integer rsvtCtrlPeriod = null;
-			rsvtCtrlPeriod = Integer.valueOf(req.getParameter("rsvtCtrlPeriod").trim());
-			if (rsvtCtrlPeriod > 1 || rsvtCtrlPeriod < 0 || rsvtCtrlPeriod == null) {
-				errorMsgs.add("請設定時段！");
-			}
 			Integer rsvtCtrlMax = null;
-			rsvtCtrlMax = Integer.valueOf(req.getParameter("rsvtCtrlMax").trim());
-			if (rsvtCtrlMax == null || rsvtCtrlMax == 0) {
-				errorMsgs.add("請設定上限！");
+			Integer rsvtCtrlPeriod = Integer.valueOf(req.getParameter("rsvtCtrlPeriod").trim());
+			Integer rsvtCtrlNum =  null;
+			try {
+				rsvtCtrlNum = Integer.valueOf(req.getParameter("rsvtCtrlNum").trim());
+			} catch (Exception e) {
+				errorMsgs.add("請輸入人數");
 			}
+			Date date = null;
+			try {
+				date = Date.valueOf(req.getParameter("rsvtCtrlDate"));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+				rsvtCtrlMax = Integer.valueOf(req.getParameter("rsvtCtrlMax").trim());
 
-			Integer rsvtCtrlNum = null;
-			rsvtCtrlNum = Integer.valueOf(req.getParameter("rsvtCtrlNum").trim());
-			if (rsvtCtrlNum == null) {
-				errorMsgs.add("已預訂桌數不可為空");
+			} catch (Exception e) {
+				errorMsgs.add("當日上限請勿為空或非數字字元！");
+				
 			}
 			// 當預訂桌數達到上限 訂位設成不開放
-			if (rsvtCtrlMax == rsvtCtrlNum) {
-				rsvtCtrlOpen = 1;
-			}
 			RsvtCtrlVO rsvtCtrlVO = new RsvtCtrlVO();
+			rsvtCtrlVO.setRsvtCtrlDate(date);
 			rsvtCtrlVO.setRsvtCtrlId(rsvtCtrlId);
 			rsvtCtrlVO.setTableTypeId(tbtId);
 			rsvtCtrlVO.setRsvtCtrlOpen(rsvtCtrlOpen);
 			rsvtCtrlVO.setRsvtCtrlPeriod(rsvtCtrlPeriod);
-			rsvtCtrlVO.setRsvtCtrlDate(rsvtCtrlDate);
 			rsvtCtrlVO.setRsvtCtrlMax(rsvtCtrlMax);
-			rsvtCtrlVO.setRsvtCtrlNumber(rsvtCtrlNum);
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("rsvtCtrlVO", rsvtCtrlVO); // 含有輸入格式錯誤的rsvtCtrlVO物件,也存入req
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/reservation_ctrl/update_rsvtCtrl_input.jsp");
+						.getRequestDispatcher("/back-end/reservation_ctrl/reservationCtrl_edit.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
 
 			/*************************** 2.開始修改資料 *****************************************/
 			RsvtCtrlService rsvtCtrlSvc = new RsvtCtrlService();
-			rsvtCtrlVO = rsvtCtrlSvc.updateRsvtCtrl(tbtId, rsvtCtrlOpen, rsvtCtrlDate, rsvtCtrlPeriod, rsvtCtrlMax,
-					rsvtCtrlNum, rsvtCtrlId);
+			rsvtCtrlVO = rsvtCtrlSvc.updateRsvtCtrl(rsvtCtrlOpen, rsvtCtrlMax, rsvtCtrlNum ,rsvtCtrlId);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("rsvtCtrlVO", rsvtCtrlVO); // 資料庫update成功後,正確的的rsvtCtrlVO物件,存入req
-			String url = "/back-end/reservation_ctrl/listOneRsvtCtrl.jsp";
+//			req.setAttribute("rsvtCtrlVO", rsvtCtrlVO); // 資料庫update成功後,正確的的rsvtCtrlVO物件,存入req
+			String url = "/back-end/reservation_ctrl/reservationCtrl_detail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneRsvt.jsp
 			successView.forward(req, res);
 		}
@@ -172,12 +160,6 @@ public class RsvtCtrlServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			Integer rsvtCtrlId = null;
-			try {
-				rsvtCtrlId = Integer.valueOf(req.getParameter("rsvtCtrlId").trim());
-			} catch (Exception e) {
-				errorMsgs.add("請輸入編號!");
-			}
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			Integer rsvtCtrlOpen = Integer.valueOf(req.getParameter("rsvtCtrlOpen").trim());
 
@@ -202,38 +184,37 @@ public class RsvtCtrlServlet extends HttpServlet {
 			try {
 				rsvtCtrlMax = Integer.valueOf(req.getParameter("rsvtCtrlMax").trim());
 				if (rsvtCtrlMax == 0) {
-					errorMsgs.add("請設定上限！");
+					errorMsgs.add("人數不可為0！");
 				}
 			} catch (Exception e) {
-				errorMsgs.add("請設定上限！");
+				errorMsgs.add("請設定人數！");
 			}
 
 			RsvtCtrlVO rsvtCtrlVO = new RsvtCtrlVO();
-			rsvtCtrlVO.setRsvtCtrlId(rsvtCtrlId);
 			rsvtCtrlVO.setRsvtCtrlOpen(rsvtCtrlOpen);
 			rsvtCtrlVO.setRsvtCtrlPeriod(rsvtCtrlPeriod);
 			rsvtCtrlVO.setRsvtCtrlDate(rsvtCtrlDate);
 			rsvtCtrlVO.setRsvtCtrlMax(rsvtCtrlMax);
 			RsvtCtrlService rsvtCtrlSvc = new RsvtCtrlService();
-			try {
-				if (rsvtCtrlPeriod == rsvtCtrlSvc.getOneDate(rsvtCtrlDate.toString()).getRsvtCtrlPeriod()) {
-					errorMsgs.add("此時段已被設定");
-				}
-			} catch (Exception ignore) {
-			}
+//			try {
+//				if (rsvtCtrlPeriod == rsvtCtrlSvc.getOneDate(rsvtCtrlDate.toString()).getRsvtCtrlPeriod()) {
+//					errorMsgs.add("此時段已被設定");
+//				}
+//			} catch (Exception ignore) {
+//			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("rsvtCtrlVO", rsvtCtrlVO); // 含有輸入格式錯誤的rsvtCtrlVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/reservation_ctrl/addRsvtCtrl.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/reservation_ctrl/reservationCtrl_add.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
 			/*************************** 2.開始新增資料 *****************************************/
-			rsvtCtrlVO = rsvtCtrlSvc.addRsvtCtrl(rsvtCtrlId, rsvtCtrlOpen, rsvtCtrlDate, rsvtCtrlPeriod, rsvtCtrlMax);
+			rsvtCtrlVO = rsvtCtrlSvc.addRsvtCtrl(rsvtCtrlOpen, rsvtCtrlDate, rsvtCtrlPeriod, rsvtCtrlMax);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("rsvtCtrlVO", rsvtCtrlVO); // 資料庫update成功後,正確的的rsvtCtrlVO物件,存入req
-			String url = "/back-end/reservation_ctrl/listOneRsvtCtrl.jsp";
+			String url = "/back-end/reservation_ctrl/reservationCtrl_detail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneRsvt.jsp
 			successView.forward(req, res);
 		}
@@ -253,7 +234,7 @@ public class RsvtCtrlServlet extends HttpServlet {
 			rsvtCtrlSvc.deleteRsvtCtrl(rsvtCtrlId);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url = "/back-end/reservation_ctrl/listAllRsvt.jsp";
+			String url = "/back-end/reservation_ctrl/reservationCtrl_detail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}

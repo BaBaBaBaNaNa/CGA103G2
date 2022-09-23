@@ -269,5 +269,63 @@ public class MealsDAO implements MealsDAO_interface {
 		}
 		return list;
 	}
-
+	 public List<MealsVO> getAll(Map<String, String[]> map){
+		 List<MealsVO> list = new ArrayList<MealsVO>();
+		 MealsVO mealsVO = null;
+		
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+		
+			try {
+				
+				con = ds.getConnection();
+				String finalSQL = "select * from meals "
+			          + MealsCompositeQuery.get_WhereCondition(map)
+			          + "order by mealsCategoryID";
+				pstmt = con.prepareStatement(finalSQL);
+				System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+				rs = pstmt.executeQuery();
+		
+				while (rs.next()) {
+					mealsVO = new MealsVO();
+					mealsVO.setMealsID(rs.getInt("mealsID"));
+					mealsVO.setMealsCategoryID(rs.getInt("mealsCategoryID"));
+					mealsVO.setMealsName(rs.getString("mealsName"));
+					mealsVO.setMealsPrice(rs.getInt("mealsPrice"));
+					mealsVO.setMealsInfo(rs.getString("mealsInfo"));
+//					mealsVO.setMealsPicture(rs.getBytes("mealsPicture"));
+					mealsVO.setMealsControl(rs.getInt("mealsControl"));
+					list.add(mealsVO); // Store the row in the List
+				}
+		
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
+	 }
 }

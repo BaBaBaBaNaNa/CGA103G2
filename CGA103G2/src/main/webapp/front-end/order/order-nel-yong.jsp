@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.orders.model.*"%>
+<%@ page import="java.sql.*"%>
 
+<%
+    OrdersService ordersSvc = new OrdersService();
+    List<OrdersVO> list = ordersSvc.getAll();
+    pageContext.setAttribute("list",list);
+%>
 
 <!doctype html>
 <html lang="zh-tw">
@@ -36,6 +43,22 @@
 
 <link href="../../front-assets/css/navbar.css" rel="stylesheet">
 
+<style>
+  table {
+	width: 100%;
+	background-color: #f0f0fa;
+	margin-top: 5px;
+	margin-bottom: 5px;
+  }
+  table, th, td {
+    border: 1px solid #CCCCFF;
+  }
+  th, td {
+    padding: 5px;
+    text-align: center;
+  }
+</style>
+
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -56,71 +79,46 @@
 				<div class="row">
 
 					<div class="col-lg-6 col-12 mb-2">
-						<ol>
-							<li class="breadcrumb-item"><a
-								href="../../front-end/order/order.jsp">訂單查詢</a></li>
-							<li class="breadcrumb-item active"><a
-								href="../../front-end/order/order-nel-yong.jsp"
-								class="custom-btn btn btn-danger mt-3 ms-3">內用</a></li>
-						</ol>
-
-						<nav aria-label="breadcrumb">
-							<ol class="breadcrumb pl-0">
-								<li class="breadcrumb-item"><a
-									href="../../back-end/backstage/Back_index.jsp"><i
-										class="material-icons">home</i>首頁</a></li>
-								<li class="breadcrumb-item"><a href="#">訂單管理</a></li>
-								<li class="breadcrumb-item active" aria-current="page">查看訂單</li>
-							</ol>
-						</nav>
+							<h4><a href="../../front-end/order/order.jsp">訂單查詢</a>
+							<a class="mb-3 ">內用</a>
+							</h4>
 					</div>
-					
-					<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-			<font style="color: red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
+	
+<table>
+	<tr>
+		<th>訂單編號</th>
+		<th>會員編號</th>
+		<th>桌子編號</th>
+		<th>訂單總金額</th>
+		<th>訂單狀態</th>
+		<th>成立訂單日</th>
+	</tr>
+	<c:forEach var="ordersVO" items="${list}">
+	<c:if test="${ordersVO.ordersType == 2}">
+		
+		<tr>
+			<td>${ordersVO.ordersID}</td>
+			<td>${ordersVO.memID}</td>
+			<td>${ordersVO.seatID}</td>
+			<td>${ordersVO.ordersAmount}</td>
+			<td>
+			   <c:if test="${ordersVO.ordersStatus == 0}">完成</c:if>
+    	       <c:if test="${ordersVO.ordersStatus == 1}">未完成</c:if>
+    	       <c:if test="${ordersVO.ordersStatus == 2}">退回</c:if>
+    	    </td>
+			<td>${ordersVO.ordersBuildDate}</td> 
+			<td>
+				 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/orddetails/orddetails.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="明細">
+			     <input type="hidden" value="${ordersVO.ordersID}" name="orderDetailId">
+			     <input type="hidden" name="action"	value="getOne_For_Display2"></FORM>
+			</td>
+		</tr>
 		</c:if>
+	</c:forEach>
+</table>
 
-		<ul>
 
-
-			<li>
-				<FORM METHOD="post" ACTION="orders.do">
-					<b>選擇訂單編號 (如:1):</b> <input type="text" name="ordersID"> <input
-						type="hidden" name="action" value="getOne_For_Display"> <input
-						type="submit" value="送出">
-				</FORM>
-			</li>
-
-			<jsp:useBean id="ordersSvc" scope="page"
-				class="com.orders.model.OrdersService" />
-
-			<li>
-				<FORM METHOD="post" ACTION="orders.do">
-					<b>選擇會員編號:</b> <select size="1" name="ordersID">
-						<c:forEach var="ordersVO" items="${ordersSvc.all}">
-							<option value="${ordersVO.ordersID}">${ordersVO.memID}
-						</c:forEach>
-					</select> <input type="hidden" name="action" value="getOne_For_Display">
-					<input type="submit" value="送出">
-				</FORM>
-			</li>
-
-			<li>
-				<FORM METHOD="post" ACTION="orders.do">
-					<b>選擇桌位編號:</b> <select size="1" name=ordersID>
-						<c:forEach var="ordersVO" items="${ordersSvc.all}">
-							<option value="${ordersVO.ordersID}">${ordersVO.seatID}
-						</c:forEach>
-					</select> <input type="hidden" name="action" value="getOne_For_Display">
-					<input type="submit" value="送出">
-				</FORM>
-			</li>
-		</ul>
 
 				</div>
 			</div>

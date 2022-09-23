@@ -90,6 +90,7 @@ public class EmpServlet extends HttpServlet {
 				return;// 程式中斷
 			}
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+			HttpSession session = req.getSession();
 			req.setAttribute("empVO", empVO); // 資料庫取出的empVO物件,存入req
 			String url = "/back-end/employee/empDetailOne.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); 
@@ -209,6 +210,7 @@ public class EmpServlet extends HttpServlet {
 			EmpService empSvc = new EmpService();
 			EmpVO empVO = empSvc.getOneEmp(empID);
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+			HttpSession session = req.getSession();
 			String param = 	"?empID="  +empVO.getEmpID()+
 				       						"&empName="  +empVO.getEmpName()+
 				       						"&empAccount="  +empVO.getEmpAccount()+
@@ -309,6 +311,7 @@ public class EmpServlet extends HttpServlet {
 			EmpService empSvc = new EmpService();
 			empVO = empSvc.updateEmp(empID, empName, empAccount, empPassword, empPermission, empPhone, empAddress, jobID, empHiredate);
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+			HttpSession session = req.getSession();
 			req.setAttribute("empVO", empVO); // 資料庫update成功後,正確的的empVO物件,存入req
 			String url = "/back-end/employee/empEditSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
@@ -347,7 +350,15 @@ public class EmpServlet extends HttpServlet {
 				/***************************1.將輸入資料轉為Map**********************************/ 
 				//採用Map<String,String[]> getParameterMap()的方法 
 				//注意:an immutable java.util.Map 
-				Map<String, String[]> map = req.getParameterMap();
+			HttpSession session = req.getSession();
+			Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+			
+			// 以下的 if 區塊只對第一次執行時有效
+			if (req.getParameter("whichPage") == null){
+				Map<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
+				session.setAttribute("map",map1);
+				map = map1;
+			} 
 				
 				/***************************2.開始複合查詢***************************************/
 				EmpService empSvc = new EmpService();
@@ -412,6 +423,7 @@ public class EmpServlet extends HttpServlet {
 				return;// 程式中斷
 			}
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+			HttpSession session = req.getSession();
 			req.setAttribute("empVO", empVO); // 資料庫取出的empVO物件,存入req
 			String url = "/back-end/employee/empDetailOwn.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); 

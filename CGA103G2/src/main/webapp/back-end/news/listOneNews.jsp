@@ -389,8 +389,8 @@ NewsVO newsVO = (NewsVO) request.getAttribute("newsVO"); //OrdersServlet.java(Co
 		<td><%=newsVO.getNewsTitle()%></td>
 		<td><%=newsVO.getNewsInformation()%></td>
 		<td><%=newsVO.getNewsDate()%></td>
-		<td><%=newsVO.getNewsControl()%></td>
-		<td><img src="<%=request.getContextPath()%>/news/DBGifReader4?newsID=<%=newsVO.getNewsID()%>" width="100px"></td>
+		<td>${newsVO.newsControl== 0 ?"上架中":"下架中"}</td>
+		<td><img src="<%=request.getContextPath()%>/back-end/news/DBGifReader4?newsID=<%=newsVO.getNewsID()%>" width="100px"></td>
 	</tr>
 </table>
 

@@ -44,6 +44,7 @@ public class BotqaService {
 	public List<BotqaVO>getAll(){
 		return dao.getAll();
 	}
-	
-	
+	public BotqaVO getkeywordNameCheck(String keywordName) {
+		return dao.checkRepeatkeywordName(keywordName);
+	}
 }

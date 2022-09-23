@@ -11,18 +11,18 @@ import javax.sql.DataSource;
 
 
 public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
-	private static final String INSERT_STMT = "INSERT INTO RESERVATIONCTRL (RSVTCTRLID,RSVTCTRLOPEN ,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX) VALUES(?,?,?,?,?);";
+	private static final String INSERT_STMT = "INSERT INTO RESERVATIONCTRL (RSVTCTRLOPEN ,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX) VALUES(?,?,?,?);";
 	private static final String GET_ALL_STMT = "SELECT RSVTCTRLID,TABLETYPEID,RSVTCTRLOPEN,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX,RSVTCTRLNUMBER FROM RESERVATIONCTRL;";
 	private static final String GET_ONE_STMT = "SELECT RSVTCTRLID,TABLETYPEID,RSVTCTRLOPEN,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX,RSVTCTRLNUMBER FROM RESERVATIONCTRL WHERE RSVTCTRLID = ?";
 	private static final String GET_DATE_STMT = "SELECT RSVTCTRLID,TABLETYPEID,RSVTCTRLOPEN,RSVTCTRLDATE,RSVTCTRLPERIOD,RSVTCTRLMAX,RSVTCTRLNUMBER FROM RESERVATIONCTRL WHERE RSVTCTRLDATE = ?";
 	private static final String DELETE_STMT = "DELETE FROM RESERVATIONCTRL WHERE RSVTCTRLID = ?";
-	private static final String UPDATE_STMT = "UPDATE RESERVATIONCTRL SET TABLETYPEID = ?,RSVTCTRLOPEN = ?,RSVTCTRLDATE = ?,RSVTCTRLPERIOD = ?,RSVTCTRLMAX = ?,RSVTCTRLNUMBER = ? WHERE RSVTCTRLID = ? ;";
+	private static final String UPDATE_STMT = "UPDATE RESERVATIONCTRL SET TABLETYPEID = ?,RSVTCTRLOPEN = ?,RSVTCTRLMAX = ?, RSVTCTRLNUMBER = ? WHERE RSVTCTRLID = ? ;";
 	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
 	private static DataSource ds = null;
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CGA103G2");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/cga103g2");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -55,11 +55,10 @@ public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
 	public void insert(RsvtCtrlVO rsvtCtrl) {
 		try (Connection conn = ds.getConnection();
 				PreparedStatement ps = conn.prepareStatement(INSERT_STMT);) {
-			ps.setInt(1, rsvtCtrl.getRsvtCtrlId());
-			ps.setInt(2, rsvtCtrl.getRsvtCtrlOpen());
-			ps.setDate(3, rsvtCtrl.getRsvtCtrlDate());
-			ps.setInt(4, rsvtCtrl.getRsvtCtrlPeriod());
-			ps.setInt(5, rsvtCtrl.getRsvtCtrlMax());
+			ps.setInt(1, rsvtCtrl.getRsvtCtrlOpen());
+			ps.setDate(2, rsvtCtrl.getRsvtCtrlDate());
+			ps.setInt(3, rsvtCtrl.getRsvtCtrlPeriod());
+			ps.setInt(4, rsvtCtrl.getRsvtCtrlMax());
 			ps.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -85,11 +84,9 @@ public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
 				PreparedStatement ps = conn.prepareStatement(UPDATE_STMT);) {
 			ps.setInt(1, rsvtCtrl.getTableTypeId());
 			ps.setInt(2, rsvtCtrl.getRsvtCtrlOpen());
-			ps.setDate(3, rsvtCtrl.getRsvtCtrlDate());
-			ps.setInt(4, rsvtCtrl.getRsvtCtrlPeriod());
-			ps.setInt(5, rsvtCtrl.getRsvtCtrlMax());
-			ps.setInt(6, rsvtCtrl.getRsvtCtrlNumber());
-			ps.setInt(7, rsvtCtrl.getRsvtCtrlId());
+			ps.setInt(3, rsvtCtrl.getRsvtCtrlMax());
+			ps.setInt(4, rsvtCtrl.getRsvtCtrlNumber());
+			ps.setInt(5, rsvtCtrl.getRsvtCtrlId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -160,11 +157,12 @@ public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
 		return null;
 	}
 
-	public RsvtCtrlVO findByDate(String rsvtCtrlDate) {
+	public List<RsvtCtrlVO> findByDate(String rsvtCtrlDate) {
 		try (Connection conn = ds.getConnection();
 				PreparedStatement ps = conn.prepareStatement(GET_DATE_STMT)) {
 			ps.setString(1, rsvtCtrlDate);
 			ResultSet rs = ps.executeQuery();
+			List<RsvtCtrlVO> list = new ArrayList<>();
 			while (rs.next()) {
 				RsvtCtrlVO rsvtCtrl = new RsvtCtrlVO();
 				rsvtCtrl.setRsvtCtrlId(rs.getInt("rsvtctrlid"));
@@ -174,9 +172,10 @@ public class RsvtCtrlDAOImpl implements RsvtCtrlDAO_interface {
 				rsvtCtrl.setRsvtCtrlPeriod(rs.getInt("rsvtctrlperiod"));
 				rsvtCtrl.setRsvtCtrlMax(rs.getInt("rsvtctrlmax"));
 				rsvtCtrl.setRsvtCtrlNumber(rs.getInt("rsvtctrlnumber"));
-				return rsvtCtrl;
+				list.add(rsvtCtrl);
 			}
 			rs.close();
+			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

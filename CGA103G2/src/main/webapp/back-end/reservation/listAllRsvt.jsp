@@ -1,130 +1,80 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ page import="java.util.*"%>
-<%@ page import="com.rsvt.model.*"%>
-<%@ page import="java.text.SimpleDateFormat" %>>
+<!DOCTYPE html>
+<html lang="zh-tw">
 
-<%-- ¶π≠∂Ωm≤ﬂ±ƒ•Œ EL ™∫ºg™k®˙≠» --%>
-
-<%
-RsvtService rsvtSvc = new RsvtService();
-List<RsvtVO> list = rsvtSvc.getAll();
-pageContext.setAttribute("list", list);
-SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); // §È¥¡ÆÊ¶°¬‡¥´
-String mdString = "•º•Œ¿\";
-%>
-
-
-<html>
 <head>
-<title>©“¶≥≠q¶Ï∏ÍÆ∆ - listAllRsvt.jsp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Áæ©ÈÑâ‰∫∫-Áæ©ÂºèÈ§êÈÖíÈ§®-ÁÆ°ÁêÜ‰∏≠ÂøÉ</title>
+<!-- ----- ----- ----- CSS&FrontË®≠ÂÆö start ----- ----- ----- -->
+<!-- Iconic Fonts -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
-
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
-
-<style>
-table {
-	width: 100%;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-table, th, td {
-	border: 1px solid #CCCCFF;
-}
-
-th, td {
-	padding: 5px;
-	text-align: center;
-}
-</style>
-
+<link rel="stylesheet" href="../../back-assets/vendors/iconic-fonts/flat-icons/flaticon.css">
+<link rel="stylesheet" href="../../back-assets/vendors/iconic-fonts/cryptocoins/cryptocoins.css">
+<link rel="stylesheet" href="../../back-assets/vendors/iconic-fonts/cryptocoins/cryptocoins-colors.css">
+<!-- Bootstrap core CSS -->
+<link href="../../back-assets/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery UI -->
+<link href="../../back-assets/css/jquery-ui.min.css" rel="stylesheet">
+<!-- Page Specific CSS (Slick Slider.css) -->
+<link href="../../back-assets/css/slick.css" rel="stylesheet">
+<link href="../../back-assets/css/datatables.min.css" rel="stylesheet">
+<!-- Costic styles -->
+<link href="../../back-assets/css/style.css" rel="stylesheet">
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
+<!-- ----- ----- ----- CSS&FrontË®≠ÂÆö end ----- ----- ----- -->
 </head>
-<body bgcolor='white'>
 
-	<h4>¶π≠∂Ωm≤ﬂ±ƒ•Œ EL ™∫ºg™k®˙≠»:</h4>
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>©“¶≥≠q¶Ï∏ÍÆ∆ - listAllRsvt.jsp</h3>
-				<h4>
-					<a href="select_page.jsp"><img src="images/back1.gif"
-						width="100" height="32" border="0">¶^≠∫≠∂</a>
-				</h4>
-			</td>
-		</tr>
-	</table>
+<body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
+	<!-- ----- ----- ----- ÈÄ≤ÂÖ•Á∂≤Á´ôÁöÑËÆÄÂèñÂúàÂúà start ----- ----- ----- -->
+	<%@ include file="../../back-end/tool/ReadingCircle.file"%>
+	<!-- ----- ----- ----- ÈÄ≤ÂÖ•Á∂≤Á´ôÁöÑËÆÄÂèñÂúàÂúà end ----- ----- ----- -->
+	
+	<div class="ms-aside-overlay ms-overlay-left ms-toggler" data-target="#ms-side-nav" data-toggle="slideLeft"></div>
+	<div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"></div>
 
-	<table>
-		<tr>
-			<th>≠q¶ÏΩs∏π</th>
-			<th>∑|≠˚Ωs∏π</th>
-			<th>Æ‡¶ÏΩs∏π</th>
-			<th>≈U´»©m¶W</th>
-			<th>≈U´»πq∏‹</th>
-			<th>≠q¶Ï§Hº∆</th>
-			<th>Æ…¨q</th>
-			<th>§JÆy™¨∫A</th>
-			<th>≠q¶Ï§È¥¡</th>
-			<th>•Œ¿\§È¥¡</th>
-		</tr>
-		<%@ include file="page1.file"%>
-		<c:forEach var="rsvtVO" items="${list}" begin="<%=pageIndex%>"
-			end="<%=pageIndex+rowsPerPage-1%>">
+	<!-- ----- ----- ----- ÊúÄÂ∑¶ÈÇäÁöÑ ÈÅ∏ÊìáÂàó start ----- ----- ----- -->
+	<%@ include file="../../back-end/tool/LeftSideBar.file"%>
+	<!-- ----- ----- ----- ÊúÄÂ∑¶ÈÇäÁöÑ ÈÅ∏ÊìáÂàó end ----- ----- ----- -->
+	
+	<!-- ----- ----- ----- ‰∏≠Èñì start ----- ----- ----- -->
+	<main class="body-content"padding-right: 0 px;>
+		<!-- ----- ----- -----   ‰∏≠Èñì‰∏äÈù¢Bar start ----- ----- ----- -->
+			<%@ include file="../../back-end/tool/UpSideBar.file"%>
+		<!-- ----- ----- -----   ‰∏≠Èñì‰∏äÈù¢Bar end ----- ----- ----- -->
+		
+		<!-- ----- ----- -----   ‰∏≠ÈñìÁõÆÈåÑÊ¢ù start ----- ----- ----- -->
+			<%@ include file="../../back-end/tool/Upicon.file"%>
+		<!-- ----- ----- -----   ‰∏≠ÈñìÁõÆÈåÑÊ¢ù end ----- ----- ----- -->
+		<!-- ----- ----- -----   ‰∏≠Èñì‰∏ãÈù¢ÂÖßÂÆπ start ----- ----- ----- -->
+		
+		<!-- ----- ----- -----   ‰∏≠Èñì‰∏ãÈù¢ÂÖßÂÆπ end ----- ----- ----- -->
+	</main>
+	<!-- ----- ----- ----- ‰∏≠Èñì end ----- ----- ----- -->
 
-			<tr>
-				<td>${rsvtVO.rsvtId}</td>
-				<td>${rsvtVO.memId}</td>
-				<td>${rsvtVO.tableTypeId}</td>
-				<td>${rsvtVO.customerName}</td>
-				<td>${rsvtVO.customerPhone}</td>
-				<td>${rsvtVO.rsvtNum}</td>
-				<td>${rsvtVO.rsvtPeriod == 0 ? "§§§»" : "±ﬂ§W"}</td>
-				<td>${rsvtVO.rsvtToSeat == 1 ? "•º§JÆy" : "§w§JÆy"}</td>
-				<td>${rsvtVO.rsvtDate}</td>
-				<td><fmt:formatDate value="${rsvtVO.rsvtMealDate == null ? '' : rsvtVO.rsvtMealDate}" type="both"/></td>
-				
-				<td>
-					<FORM METHOD="post"
-						ACTION="RsvtServlet"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="≠◊ßÔ"> <input type="hidden"
-							name="rsvtId" value="${rsvtVO.rsvtId}"> <input
-							type="hidden" name="action" value="getOne_For_Update">
-					</FORM>
-				</td>
-				<td>
-					<FORM METHOD="post"
-						ACTION="RsvtServlet"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="ßR∞£"> <input type="hidden"
-							name="rsvtId" value="${rsvtVO.rsvtId}"> <input
-							type="hidden" name="action" value="delete">
-					</FORM>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
-	<%@ include file="page2.file"%>
-
+	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
+	<!-- Global Required Scripts Start -->
+	<script src="../../back-assets/js/jquery-3.3.1.min.js"></script>
+	<script src="../../back-assets/js/popper.min.js"></script>
+	<script src="../../back-assets/js/bootstrap.min.js"></script>
+	<script src="../../back-assets/js/perfect-scrollbar.js"></script>
+	<script src="../../back-assets/js/jquery-ui.min.js"></script>
+	<!-- Global Required Scripts End -->
+	<!-- Page Specific Scripts Start -->
+	<script src="../../back-assets/js/d3.v3.min.js"></script>
+	<script src="../../back-assets/js/topojson.v1.min.js"></script>
+	<script src="../../back-assets/js/datatables.min.js"></script>
+	<script src="../../back-assets/js/data-tables.js"></script>
+	<!-- Page Specific Scripts Finish -->
+	<!-- Costic core JavaScript -->
+	<script src="../../back-assets/js/framework.js"></script>
+	<!-- Settings -->
+	<script src="../../back-assets/js/settings.js"></script>
+	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 </body>
+
 </html>

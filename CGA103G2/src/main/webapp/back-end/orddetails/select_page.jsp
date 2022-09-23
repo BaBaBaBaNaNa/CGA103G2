@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 
 <!DOCTYPE html>
@@ -37,7 +39,7 @@
 <style>
 table#table-1 {
 	width: 570px;
-	background-color: #CCCCFF;
+	background-color: #F0F0FA;
 	margin-top: 5px;
 	margin-bottom: 10px;
 	border: 3px ridge Gray;
@@ -57,7 +59,6 @@ h4 {
 	display: inline;
 }
 </style>
-
 </head>
 
 <body
@@ -241,8 +242,8 @@ h4 {
 
 			<!-- ----- ----- ----- 空白頁面 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#listAllNews" aria-expanded="false"
-				aria-controls="listAllNews"><span><i
+				data-toggle="collapse" data-target="#listAllNews"
+				aria-expanded="false" aria-controls="listAllNews"><span><i
 						class="fas fa-file-invoice fs-16"></i>最新消息</span></a>
 				<ul id="listAllNews" class="collapse" aria-labelledby="listAllNews"
 					data-parent="#side-nav-accordion">
@@ -357,64 +358,84 @@ h4 {
 		</nav>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-<h3>資料查詢:</h3>
-	
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-	    <c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-
-<ul>
-  <li><a href='listAllOrddetails.jsp'>List</a> all Orddetails.  <br><br></li>
-  
-  
-  <li>
-    <FORM METHOD="post" ACTION="orddetails.do" >
-        <b>訂單明細編號 (如:1):</b>
-        <input type="text" name="orddetailsID">
-        <input type="hidden" name="action" value="getOne_For_Display">
-        <input type="submit" value="送出">
-    </FORM>
-  </li>
-
-  <jsp:useBean id="orddetailsSvc" scope="page" class="com.orddetails.model.OrddetailsService"/>
-   
-  <li>
-     <FORM METHOD="post" ACTION="orddetails.do" >
-       <b>訂單編號:</b>
-       <select size="1" name="orddetailsID">
-         <c:forEach var="orddetailsVO" items="${orddetailsSvc.all}" > 
-          <option value="${orddetailsVO.orddetailsID}">${orddetailsVO.ordersID}
-         </c:forEach>   
-       </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
-       <input type="submit" value="送出">
-    </FORM>
-  </li>
-  
-</ul>
 
 
-<h3>訂單明細管理</h3>
+		<%-- 錯誤表列 --%>
+		<c:if test="${not empty errorMsgs}">
+			<font style="color: red">請修正以下錯誤:</font>
+			<ul>
+				<c:forEach var="message" items="${errorMsgs}">
+					<li style="color: red">${message}</li>
+				</c:forEach>
+			</ul>
+		</c:if>
 
-<ul>
-  <li><a href='addOrddetails.jsp'>Add</a> a new Orddetails.</li>
-</ul>
+		<jsp:useBean id="orddetailsSvc" scope="page"
+			class="com.orddetails.model.OrddetailsService" />
+		<table id="table-1">
+			<tr>
+				<th>
+					<h3>
+						<a href='listAllOrddetails.jsp'>查詢訂單明細</a>
+					</h3>
+				</th>
+			</tr>
 
+<!-- 			<li> -->
+<!-- 				<FORM METHOD="post" ACTION="orddetails.do"> -->
+<!-- 					<b>選擇明細編號:</b> <select size="1" name="orddetailsID"> -->
+<%-- 						<c:forEach var="orddetailsVO" items="${orddetailsSvc.all}"> --%>
+<%-- 							<option value="${orddetailsVO.orddetailsID}">${orddetailsVO.ordersID} --%>
+<%-- 						</c:forEach> --%>
+<!-- 					</select> <input type="hidden" name="action" value="getOne_For_Display"> -->
+<!-- 					<input type="submit" value="送出"> -->
+<!-- 				</FORM> -->
+<!-- 			</li> -->
 
+			<!-- 				<b>訂單明細編號:</b> -->
+			<!-- 				<select size="1" name="orddetailsID"> -->
+			<!-- 					<option value="1"> -->
+			<%-- 						<c:forEach var="orddetailsVO" items="${orddetailsSvc.all}"> --%>
+			<%-- 							<option value="${orddetailsVO.orddetailsID}">${orddetailsVO.ordersID} --%>
+			<%-- 						</c:forEach> --%>
+			<!-- 				</select> -->
+			<!-- 				<br> -->
 
+			<tr>
+				<!-- 					<th> -->
+				<!-- 						<FORM METHOD="post" ACTION="orddetails.do"> -->
+				<!-- 							<b>訂單明細編號:</b>  -->
+				<!-- 							<input type="text" name="orddetailsID"> -->
+				<!-- 							<input type="hidden" name="action" value="getOne_For_Display"> -->
+				<!-- 							<input type="submit" value="送出"> -->
+				<!-- 						</FORM> -->
+				<!-- 					</th> -->
+			</tr>
+<!-- 			<tbody> -->
+<!-- 				<tr> -->
+<!-- 					<td> -->
+<!-- 						<FORM METHOD="post" ACTION="orddetails.do"> -->
+<!-- 							<b>訂單編號:</b> <select size="1" name="orddetailsID"> -->
+<%-- 								<c:forEach var="orddetailsVO" items="${orddetailsSvc.all}"> --%>
+<%-- 									<option value="${orddetailsVO.orddetailsID}">${orddetailsVO.ordersID} --%>
+<%-- 								</c:forEach> --%>
+<!-- 							</select> <input type="hidden" name="action" value="getOne_For_Display"> -->
+<!-- 							<input type="submit" value="送出"> -->
+<!-- 						</FORM> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
+<!-- 			</tbody> -->
+			<tfoot>
+				<tr>
+					<th><a href='addOrddetails.jsp'>新增訂單明細</a></th>
+
+				</tr>
+			</tfoot>
+		</table>
 
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
-
-	
-
 	<!-- SCRIPTS -->
 	<!-- Global Required Scripts Start -->
 	<script src="../../back-assets/js/jquery-3.3.1.min.js"></script>

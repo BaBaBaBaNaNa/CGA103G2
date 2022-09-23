@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-OrddetailsVO orddetailsVO = (OrddetailsVO) request.getAttribute("orddetailsVO"); //OrdersServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+OrddetailsVO orddetailsVO = (OrddetailsVO) request.getAttribute("orddetailsVO");
 %>
 
 <!DOCTYPE html>
@@ -375,10 +375,9 @@ th, td {
 		<table id="table-1">
 			<tr>
 				<td>
-					<h3>訂單資料修改 - update_orddetails_input.jsp</h3>
+					<h3>訂單資料修改</h3>
 					<h4>
-						<a href="select_page.jsp"><img src="images/back1.gif"
-							width="100" height="32" border="0">回首頁</a>
+						<a href="select_page.jsp">回首頁</a>
 					</h4>
 				</td>
 			</tr>
@@ -399,29 +398,26 @@ th, td {
 		<FORM METHOD="post" ACTION="orddetails.do" name="form1">
 			<table>
 				<tr>
-					<td>訂單明細編號:<font color=red><b>*</b></font></td>
+					<td>訂單明細編號:<font color=red><b></b></font></td>
 					<td><%=orddetailsVO.getOrddetailsID()%></td>
 				</tr>
-
 				<tr>
-					<td>訂單編號:</td>
-					<td><input type="TEXT" name="ordersID" size="45"
-						value="<%=orddetailsVO.getOrdersID()%>" /></td>
+					<td>訂單編號:<font color=red><b></b></font></td>
+					<td><%=orddetailsVO.getOrdersID()%></td>
+				</tr>
+				<jsp:useBean id="mealsSvc" scope="page"
+					class="com.meals.model.MealsService" />
+				<tr>
+					<td>餐點名稱:<font color=red><b></b></font></td>
+					<td>${orddetailsVO.mealsVO.mealsName}</td>
 				</tr>
 				<tr>
-					<td>餐點編號:</td>
-					<td><input type="TEXT" name="mealsID" size="45"
-						value="<%=orddetailsVO.getMealsID()%>" /></td>
+					<td>餐點數量:<font color=red><b></b></font></td>
+					<td><%=orddetailsVO.getOrddetailsMealsQuantity()%></td>
 				</tr>
 				<tr>
-					<td>餐點數量:</td>
-					<td><input type="TEXT" name="orddetailsMealsQuantity"
-						size="45" value="<%=orddetailsVO.getOrddetailsMealsQuantity()%>" /></td>
-				</tr>
-				<tr>
-					<td>餐點總金額:</td>
-					<td><input type="TEXT" name="orddetailsMealsAmount" size="45"
-						value="<%=orddetailsVO.getOrddetailsMealsAmount()%>" /></td>
+					<td>餐點總金額:<font color=red><b></b></font></td>
+					<td><%=orddetailsVO.getOrddetailsMealsAmount()%></td>
 				</tr>
 				<tr>
 					<td>製作狀態(0:已製作 , 1:未製作 ):</td>
@@ -435,8 +431,8 @@ th, td {
 					<td>送餐狀態(0:已製作 , 1:未製作 ):</td>
 					<td><select name="orddetailsDeliverStatus"
 						id="orddetailsDeliverStatus">
-							<option value="0">已製作</option>
-							<option value="1">未製作</option>
+							<option value="0">已送餐</option>
+							<option value="1">未送餐</option>
 					</select></td>
 				</tr>
 
@@ -444,6 +440,10 @@ th, td {
 			</table>
 			<br> <input type="hidden" name="action" value="update">
 			<input type="hidden" name="orddetailsID"value="<%=orddetailsVO.getOrddetailsID()%>"> 
+			<input type="hidden" name="ordersID"value="<%=orddetailsVO.getOrdersID()%>"> 
+			<input type="hidden" name="mealsID"value="<%=orddetailsVO.getMealsID()%>"> 
+			<input type="hidden" name="orddetailsMealsQuantity"value="<%=orddetailsVO.getOrddetailsMealsQuantity()%>"> 
+			<input type="hidden" name="orddetailsMealsAmount"value="<%=orddetailsVO.getOrddetailsMealsAmount()%>"> 
 			<input type="submit" value="送出修改">
 		</FORM>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->

@@ -102,14 +102,24 @@ form div div {
 			<jsp:useBean id="mealsSvc" scope="page"
 				class="com.meals.model.MealsService" />
 
-			<tr>
-				<td><label for="mealsCategoryID">部門:</label></td>
-				<td><select id="mealsCategoryID" name="mealsCategoryID">
-						<c:forEach var="mealsVO" items="${mealsSvc.all}">
-							<option value="${mealsVO.mealsCategoryID}"
-								${(mealsVO.mealsCategoryID==mealsVO.mealsCategoryID)? 'selected':'' }>${mealsVO.mealsCategoryID}
+<!-- 			<tr> -->
+<!-- 				<td><label for="mealsCategoryID">部門:</label></td> -->
+<!-- 				<td><select id="mealsCategoryID" name="mealsCategoryID"> -->
+<%-- 						<c:forEach var="mealsVO" items="${mealsSvc.all}"> --%>
+<%-- 							<option value="${mealsVO.mealsCategoryID}" --%>
+<%-- 								${(mealsVO.mealsCategoryID==mealsVO.mealsCategoryID)? 'selected':'' }>${mealsVO.mealsCategoryID} --%>
+<%-- 						</c:forEach> --%>
+<!-- 				</select></td> -->
+<!-- 			<tr> -->
+			  <jsp:useBean id="MealscategorySvc" scope="page" class="com.mealscateory.model.MealsCategoryService" />
+				<tr>
+					<td>部門:<font color=red><b>*</b></font></td>
+					<td><select size="1" name="mealsCategoryID">
+						<c:forEach var="MealsCategoryVO" items="${MealscategorySvc.all}">
+							<option value="${MealsCategoryVO.mealsCategoryId}" ${(mealsVO.mealsCategoryID==MealsCategoryVO.mealsCategoryId)? 'selected':'' } >${MealsCategoryVO.mealsCategory}
 						</c:forEach>
-				</select></td>
+					</select></td>
+				</tr>
 			<tr>
 			<tr>
 				<td>種類名稱:</td>
@@ -136,15 +146,22 @@ form div div {
 				
 					<div id="blob_holder"></div>
 			</div>
-			
-			<tr>
-				<td><select id="mealsControl" name="mealsControl">
-						<c:forEach var="mealsVO" items="${mealsSvc.all}">
-							<option value="${mealsVO.mealsControl}"
-								${(mealsVO.mealsControl==mealsVO.mealsControl)? 'selected':'' }>${mealsVO.mealsControl}
-						</c:forEach>
-				</select></td>
-			</tr>
+		<tr>
+		
+			<td>控制:</td>
+			<td><input type="radio" value="0" name="mealsControl"/>下架
+			<input type="radio" value="1" name="mealsControl"/>上架</td>
+		</tr>
+		
+<!-- 			<tr> -->
+<!-- 				<td><label for="mealsControl">控制:</label></td> -->
+<!-- 				<td><select id="mealsControl" name="mealsControl"> -->
+<%-- 						<c:forEach var="mealsVO" items="${mealsSvc.all}"> --%>
+<%-- 							<option value="${mealsVO.mealsControl}" --%>
+<%-- 								${(mealsVO.mealsControl==mealsVO.mealsControl)? 'selected':'' }>${mealsVO.mealsControl} --%>
+<%-- 						</c:forEach> --%>
+<!-- 				</select></td> -->
+<!-- 			</tr> -->
 
 		</table>
 		<br> <input type="hidden" name="action" value="insert"> <input

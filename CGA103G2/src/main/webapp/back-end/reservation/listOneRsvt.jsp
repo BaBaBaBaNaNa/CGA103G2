@@ -1,87 +1,215 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%@ page import="java.util.*"%>
 <%@ page import="com.rsvt.model.*"%>
-<%@ page import="java.text.SimpleDateFormat" %>>
-<%-- ¦¹­¶¼È½m²ß±Ä¥Î Script ªº¼gªk¨ú­È --%>
+<%@ page import="java.text.SimpleDateFormat" %>
+
+<%-- æ­¤é ç·´ç¿’æ¡ç”¨ EL çš„å¯«æ³•å–å€¼ --%>
 
 <%
-RsvtVO rsvtVO = (RsvtVO) request.getAttribute("rsvtVO"); //RsvtServlet.java(Concroller), ¦s¤JreqªºrsvtVOª«¥ó
-SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); // ¤é´Á®æ¦¡Âà´«
+RsvtService rsvtSvc = new RsvtService();
+// List<RsvtVO> list = rsvtSvc.getAll();
+
+ArrayList list = (ArrayList) request.getAttribute("rsvtVO"); 
+pageContext.setAttribute("list", list);
+SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); // æ—¥æœŸæ ¼å¼è½‰æ›
 %>
+<!DOCTYPE html>
+<html lang="zh-tw">
 
-<html>
 <head>
-<title>­q¦ì¸ê®Æ - listOneRsvt.jsp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ç¾©é„‰äºº-ç¾©å¼é¤é…’é¤¨-ç®¡ç†ä¸­å¿ƒ</title>
+<!-- ----- ----- ----- CSS&Frontè¨­å®š start ----- ----- ----- -->
+<!-- Iconic Fonts -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<link rel="stylesheet" href="../../back-assets/vendors/iconic-fonts/flat-icons/flaticon.css">
+<link rel="stylesheet" href="../../back-assets/vendors/iconic-fonts/cryptocoins/cryptocoins.css">
+<link rel="stylesheet" href="../../back-assets/vendors/iconic-fonts/cryptocoins/cryptocoins-colors.css">
+<!-- Bootstrap core CSS -->
+<link href="../../back-assets/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery UI -->
+<link href="../../back-assets/css/jquery-ui.min.css" rel="stylesheet">
+<!-- Page Specific CSS (Slick Slider.css) -->
+<link href="../../back-assets/css/slick.css" rel="stylesheet">
+<link href="../../back-assets/css/datatables.min.css" rel="stylesheet">
+<!-- Costic styles -->
+<link href="../../back-assets/css/style.css" rel="stylesheet">
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
+<!-- ----- ----- ----- CSS&Frontè¨­å®š end ----- ----- ----- -->
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 100%;
+.table th,.table td{
+	text-align: center;
 	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
+}
+.table tr:nth-child(even) td{
+	background-color: aliceblue;
+}
+.table tr th,td{
+line-height:37px;
+}
+.input_btn {
+	border-radius: 10px;
+	background-color:white;
+	border:1px solid aliceblue !important;
+	border: none;
+	width: 50px;
+	height: 50px;
+}
+
+#cName:focus{
+	background-color:aliceblue !important;
+	border: 0;
+	outline: none;
+}
+#cName{
+	border: 1px solid aliceblue;
+	outline: none;
+}
+.input_btn:active {
+	box-shadow: inset -1px -1px 1px 1 red;
+}
+
+.input_btn:hover {
+	cursor: pointer;
+	background-image: linear-gradient(90deg, #F0F8FF 0%, #9DD3DF 100%);
+	color: #fff;
+	box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.3);
+	/*   width: 100px;
+  height: 100px; */
+/* 	transform: scale(1.5); */
+}
 </style>
-
 </head>
-<body bgcolor='white'>
 
-<h4>¦¹­¶¼È½m²ß±Ä¥Î Script ªº¼gªk¨ú­È:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>­q¦ì¸ê®Æ - ListOneRsvt.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">¦^­º­¶</a></h4>
-	</td></tr>
-</table>
+<body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
+	<!-- ----- ----- ----- é€²å…¥ç¶²ç«™çš„è®€å–åœˆåœˆ start ----- ----- ----- -->
+	<%@ include file="../../back-end/tool/ReadingCircle.file"%>
+	<!-- ----- ----- ----- é€²å…¥ç¶²ç«™çš„è®€å–åœˆåœˆ end ----- ----- ----- -->
+	
+	<div class="ms-aside-overlay ms-overlay-left ms-toggler" data-target="#ms-side-nav" data-toggle="slideLeft"></div>
+	<div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"></div>
 
-<table>
-	<tr>
-		<th>­q¦ì½s¸¹</th>
-		<th>·|­û½s¸¹</th>
-		<th>®à¦ì½s¸¹</th>
-		<th>ÅU«È©m¦W</th>
-		<th>ÅU«È¹q¸Ü</th>
-		<th>­q¦ì¤H¼Æ</th>
-		<th>®É¬q</th>
-		<th>¤J®yª¬ºA</th>
-		<th>­q¦ì¤é´Á</th>
-		<th>¥ÎÀ\¤é´Á</th>
-	</tr>
-	<tr>
-		<td><%=rsvtVO.getRsvtId()%></td>
-		<td><%=rsvtVO.getMemId()%></td>
-		<td><%=rsvtVO.getTableTypeId()%></td>
-		<td><%=rsvtVO.getCustomerName()%></td>
-		<td><%=rsvtVO.getCustomerPhone()%></td>
-		<td><%=rsvtVO.getRsvtNum()%></td>
-		<td><%=rsvtVO.getRsvtPeriod() == 0 ? "¤¤¤È" : "±ß¤W"%></td>
-		<td><%=rsvtVO.getRsvtToSeat() == 1 ? "¥¼¤J®y" : "¤w¤J®y"%></td>
-		<td><%=rsvtVO.getRsvtDate()%></td>
-		<td><%=rsvtVO.getRsvtMealDate() == null ? "©|¥¼¥ÎÀ\" : sdFormat.format(rsvtVO.getRsvtMealDate()) %></td>
-	</tr>
-</table>
+	<!-- ----- ----- ----- æœ€å·¦é‚Šçš„ é¸æ“‡åˆ— start ----- ----- ----- -->
+	<%@ include file="../../back-end/tool/LeftSideBar.file"%>
+	<!-- ----- ----- ----- æœ€å·¦é‚Šçš„ é¸æ“‡åˆ— end ----- ----- ----- -->
 
+	<!-- ----- ----- ----- ä¸­é–“ start ----- ----- ----- -->
+	<main class="body-content" style="padding-right: 0 px;">
+		<!-- ----- ----- -----   ä¸­é–“ä¸Šé¢Bar start ----- ----- ----- -->
+			<%@ include file="../../back-end/tool/UpSideBar.file"%>
+		<!-- ----- ----- -----   ä¸­é–“ä¸Šé¢Bar end ----- ----- ----- -->
+		
+		<!-- ----- ----- -----   ä¸­é–“ç›®éŒ„æ¢ start ----- ----- ----- -->
+			<%@ include file="../../back-end/tool/Upicon.file"%>
+		<!-- ----- ----- -----   ä¸­é–“ç›®éŒ„æ¢ end ----- ----- ----- -->
+		<!-- ----- ----- -----   ä¸­é–“ä¸‹é¢å…§å®¹ start ----- ----- ----- -->
+
+	<table class="table" id="myTable">
+		<tr>
+			<th>è¨‚ä½ç·¨è™Ÿ</th>
+			<th>æœƒå“¡ç·¨è™Ÿ</th>
+			<th>æ¡Œä½ç·¨è™Ÿ</th>
+			<th>é¡§å®¢å§“å</th>
+			<th>é¡§å®¢é›»è©±</th>
+			<th>è¨‚ä½äººæ•¸</th>
+			<th>æ™‚æ®µ</th>
+			<th>å…¥åº§ç‹€æ…‹</th>
+			<th>è¨‚ä½æ—¥æœŸ</th>
+			<th>ç”¨é¤æ—¥æœŸ</th>
+
+			<th><FORM METHOD="post" ACTION="RsvtServlet" style="margin-bottom: 0px;" id="search_form">
+			<label for="cName">æœå°‹ï¼š</label><input type="text" name="customerName" id="cName" autoComplete="off"> 
+				<input type="hidden" name="action" value="getOne_For_CustomerName"></FORM></th>
+			<th><input type="submit" class="input_btn" value="é€å‡º" id="search_btn"></th>
+		</tr>
+		<%@ include file="page1.file"%>
+		<c:forEach var="rsvtVO" items="${list}" begin="<%=pageIndex%>"
+			end="<%=pageIndex+rowsPerPage-1%>">
+<!-- 					<FORM METHOD="post" ACTION="RsvtServlet" > -->
+					
+<!-- 			<input type="hidden" name="action" value="update"> <input -->
+<!-- 				type="hidden" name="rsvtId" value="" id=""> -->
+<!-- 				<input type="submit" value="é€å‡ºä¿®æ”¹"> -->
+<!-- 			</FORM> -->
+			<tr>
+				<td>${rsvtVO.rsvtId}</td>
+				<td>${rsvtVO.memId}</td>
+				<td>${rsvtVO.tableTypeId}</td>
+				<td >${rsvtVO.customerName}</td>
+				<td >${rsvtVO.customerPhone}</td>
+				<td >${rsvtVO.rsvtNum}</td>
+				<td >${rsvtVO.rsvtPeriod == 0 ? "ä¸­åˆ" : "æ™šä¸Š"}</td>
+				<td >${rsvtVO.rsvtToSeat == 1 ? "æœªå…¥åº§" : "å·²å…¥åº§"}</td>
+				<td >${rsvtVO.rsvtDate}</td>
+				<td><fmt:formatDate value="${rsvtVO.rsvtMealDate == null ? '' : rsvtVO.rsvtMealDate}" type="both"/></td>
+				
+				<td>
+					<FORM METHOD="post" ACTION="RsvtServlet"
+						style="margin-bottom: 0px;">
+						<input type="submit" value="ä¿®æ”¹" class="input_btn"> 
+						<input type="hidden" name="rsvtId" value="${rsvtVO.rsvtId}">
+						<input type="hidden" name="action" value="getOne_For_Update">
+					</FORM>
+				</td>
+
+				<td>
+					<FORM METHOD="post"
+						ACTION="RsvtServlet"
+						style="margin-bottom: 0px;">
+						<input type="submit" value="åˆªé™¤" class="input_btn"> 
+						<input type="hidden" name="rsvtId" value="${rsvtVO.rsvtId}"> 
+						<input type="hidden" name="action" value="delete">
+					</FORM>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
+	<%@ include file="page2.file"%>
+		<!-- ----- ----- -----   ä¸­é–“ä¸‹é¢å…§å®¹ end ----- ----- ----- -->
+	</main>
+	<!-- ----- ----- ----- ä¸­é–“ end ----- ----- ----- -->
+	<script>
+	let search_btn = document.getElementById('search_btn');
+	let search_form = document.getElementById('search_form');
+	search_btn.addEventListener('click',() =>{
+		search_form.submit();
+	})
+	
+	</script>
+	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+	<script src="../../back-assets/js/bootstrap-datepicker.js"></script>
+	<script src="../../back-assets/js/bootstrap-datepicker.zh-TW.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+	<!-- Global Required Scripts Start -->
+	<script src="../../back-assets/js/jquery-3.3.1.min.js"></script>
+	<script src="../../back-assets/js/popper.min.js"></script>
+	<script src="../../back-assets/js/bootstrap.min.js"></script>
+	<script src="../../back-assets/js/perfect-scrollbar.js"></script>
+	<script src="../../back-assets/js/jquery-ui.min.js"></script>
+	<!-- Global Required Scripts End -->
+	<!-- Page Specific Scripts Start -->
+	<script src="../../back-assets/js/d3.v3.min.js"></script>
+	<script src="../../back-assets/js/topojson.v1.min.js"></script>
+	<script src="../../back-assets/js/datatables.min.js"></script>
+	<script src="../../back-assets/js/data-tables.js"></script>
+	<!-- Page Specific Scripts Finish -->
+	<!-- Costic core JavaScript -->
+	<script src="../../back-assets/js/framework.js"></script>
+	<!-- Settings -->
+	<script src="../../back-assets/js/settings.js"></script>
+	<script src="../../back-assets/js/rsvtDatepicker.js"></script>
+	<script>
+	</script>
+	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 </body>
+
 </html>

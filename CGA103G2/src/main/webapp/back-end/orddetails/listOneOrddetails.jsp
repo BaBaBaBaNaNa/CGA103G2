@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="com.orddetails.model.OrddetailsVO"%>
 <%@ page import="java.sql.*"%>
 
-<%-- 此頁暫練習採用 Script 的寫法取值 --%>
-
 <%
-OrddetailsVO orddetailsVO = (OrddetailsVO) request.getAttribute("orddetailsVO"); //OrdersServlet.java(Concroller), 存入req的ordersVO物件
+ArrayList list = (ArrayList) request.getAttribute("orddetailsVO"); 
+pageContext.setAttribute("list", list);
 %>
 
 <!DOCTYPE html>
@@ -100,9 +101,9 @@ th, td {
 	</div>
 	<!-- Overlays -->
 	<div class="ms-aside-overlay ms-overlay-left ms-toggler"
-		data-target="#ms-side-nav" data-toggle="slideLeft"></div>
+		data-tar="#ms-side-nav" data-toggle="slideLeft"></div>
 	<div class="ms-aside-overlay ms-overlay-right ms-toggler"
-		data-target="#ms-recent-activity" data-toggle="slideRight"></div>
+		data-tar="#ms-recent-activity" data-toggle="slideRight"></div>
 	<!-- Sidebar Navigation Left -->
 
 	<!-- ----- ----- ----- 最左邊的 選擇列 start ----- ----- ----- -->
@@ -125,7 +126,7 @@ th, td {
 
 			<!-- ----- ----- ----- 員工 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#employee" aria-expanded="false"
+				data-toggle="collapse" data-tar="#employee" aria-expanded="false"
 				aria-controls="employee"><span><i
 						class="fas fa-file-employee fs-16"></i>員工管理</span></a>
 				<ul id="employee" class="collapse" aria-labelledby="employee"
@@ -139,7 +140,7 @@ th, td {
 
 			<!-- ----- ----- ----- 會員 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#member" aria-expanded="false"
+				data-toggle="collapse" data-tar="#member" aria-expanded="false"
 				aria-controls="member"><span><i
 						class="fas fa-file-member fs-16"></i>會員管理</span></a>
 				<ul id="member" class="collapse" aria-labelledby="member"
@@ -155,7 +156,7 @@ th, td {
 
 			<!-- ----- ----- ----- 菜單 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#product" aria-expanded="false"
+				data-toggle="collapse" data-tar="#product" aria-expanded="false"
 				aria-controls="product"><span><i
 						class="fa fa-archive fs-16"></i>總菜單</span></a>
 				<ul id="product" class="collapse" aria-labelledby="product"
@@ -175,7 +176,7 @@ th, td {
 
 			<!-- ----- ----- ----- 訂單 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#orders" aria-expanded="false"
+				data-toggle="collapse" data-tar="#orders" aria-expanded="false"
 				aria-controls="orders"><span><i
 						class="fas fa-file-orders fs-16"></i>訂單管理</span></a>
 				<ul id="orders" class="collapse" aria-labelledby="orders"
@@ -189,7 +190,7 @@ th, td {
 
 			<!-- ----- ----- ----- 訂位 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#reservation"
+				data-toggle="collapse" data-tar="#reservation"
 				aria-expanded="false" aria-controls="reservation"><span><i
 						class="fas fa-file-reservation fs-16"></i>訂位管理</span></a>
 				<ul id="reservation" class="collapse" aria-labelledby="reservation"
@@ -203,7 +204,7 @@ th, td {
 
 			<!-- ----- ----- ----- 候位 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#waiting" aria-expanded="false"
+				data-toggle="collapse" data-tar="#waiting" aria-expanded="false"
 				aria-controls="waiting"><span><i
 						class="fas fa-file-waiting fs-16"></i>候位管理</span></a>
 				<ul id="waiting" class="collapse" aria-labelledby="waiting"
@@ -215,7 +216,7 @@ th, td {
 
 			<!-- ----- ----- ----- 桌位 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#restaurant_table"
+				data-toggle="collapse" data-tar="#restaurant_table"
 				aria-expanded="false" aria-controls="restaurant_table"><span><i
 						class="fas fa-file-member fs-16"></i>桌位管理</span></a>
 				<ul id="restaurant_table" class="collapse"
@@ -232,7 +233,7 @@ th, td {
 
 			<!-- ----- ----- ----- 明細 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#invoice" aria-expanded="false"
+				data-toggle="collapse" data-tar="#invoice" aria-expanded="false"
 				aria-controls="invoice"><span><i
 						class="fas fa-file-invoice fs-16"></i>顧客消費明細</span></a>
 				<ul id="invoice" class="collapse" aria-labelledby="invoice"
@@ -246,7 +247,7 @@ th, td {
 
 			<!-- ----- ----- ----- 顧客 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#customer" aria-expanded="false"
+				data-toggle="collapse" data-tar="#customer" aria-expanded="false"
 				aria-controls="customer"><span><i
 						class="fas fa-user-friends fs-16"></i>顧客回應</span></a>
 				<ul id="customer" class="collapse" aria-labelledby="customer"
@@ -260,7 +261,7 @@ th, td {
 
 			<!-- ----- ----- ----- 空白頁面 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#nothing1" aria-expanded="false"
+				data-toggle="collapse" data-tar="#nothing1" aria-expanded="false"
 				aria-controls="nothing1"><span><i
 						class="fas fa-file-invoice fs-16"></i>空白頁面</span></a>
 				<ul id="nothing1" class="collapse" aria-labelledby="nothing1"
@@ -278,7 +279,7 @@ th, td {
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
 		<nav class="navbar ms-navbar">
 			<div class="ms-aside-toggler ms-toggler pl-0"
-				data-target="#ms-side-nav" data-toggle="slideLeft">
+				data-tar="#ms-side-nav" data-toggle="slideLeft">
 				<span class="ms-toggler-bar bg-primary"></span><span
 					class="ms-toggler-bar bg-primary"></span><span
 					class="ms-toggler-bar bg-primary"></span>
@@ -358,7 +359,7 @@ th, td {
 					</ul></li>
 			</ul>
 			<div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler"
-				data-toggle="slideDown" data-target="#ms-nav-options">
+				data-toggle="slideDown" data-tar="#ms-nav-options">
 				<span class="ms-toggler-bar bg-primary"></span><span
 					class="ms-toggler-bar bg-primary"></span><span
 					class="ms-toggler-bar bg-primary"></span>
@@ -378,8 +379,8 @@ th, td {
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 <table id="table-1">
 	<tr><td>
-		 <h3>訂單資料 - ListOneOrddetails.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h3>訂單明細</h3>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/order/listAllOrders.jsp">返回訂單列表</a></h4>
 	</td></tr>
 </table>
 
@@ -392,18 +393,27 @@ th, td {
 		<th>餐點總金額</th>
 		<th>製作狀態</th>
 		<th>送餐狀態</th>
+		<th>修改</th>
 	</tr>
+	
+	<c:forEach var="orddetailsVO" items="${list}" >
 	<tr>
-		<td><%=orddetailsVO.getOrddetailsID()%></td>
-		<td><%=orddetailsVO.getOrdersID()%></td>
-		<td><%=orddetailsVO.getMealsID()%></td>
-		<td><%=orddetailsVO.getOrddetailsMealsQuantity()%></td>
-		<td><%=orddetailsVO.getOrddetailsMealsAmount()%></td>
-		<td><%=orddetailsVO.getOrddetailsMealsStatus()%></td>
-		<td><%=orddetailsVO.getOrddetailsDeliverStatus()%></td>
+		<td>${orddetailsVO.orddetailsID}</td>
+		<td>${orddetailsVO.ordersID}</td>
+		<td>${orddetailsVO.mealsVO.mealsName}</td>
+		<td>${orddetailsVO.orddetailsMealsQuantity}</td>
+		<td>${orddetailsVO.orddetailsMealsAmount}</td>
+		<td>${orddetailsVO.orddetailsMealsStatus == 0 ?"已製作":"未製作"}</td>
+		<td>${orddetailsVO.orddetailsDeliverStatus == 0 ?"已送餐":"未送餐"}</td>
+		<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/orddetails/orddetails.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="修改">
+			     <input type="hidden" name="orddetailsID"  value="${orddetailsVO.orddetailsID}">
+			     <input type="hidden" name="action"	value="xxx"></FORM>
+			</td>
 	</tr>
+	</c:forEach>
 </table>
-
 
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
