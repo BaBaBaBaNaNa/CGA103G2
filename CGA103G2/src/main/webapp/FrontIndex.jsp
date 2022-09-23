@@ -26,6 +26,8 @@
     <link href="front-assets/css/tooplate-crispy-kitchen.css" rel="stylesheet">
 
     <link href="front-assets/css/navbar.css" rel="stylesheet">
+    
+    <link href="front-assets/css/datepicker.css" rel="stylesheet">
     <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -78,51 +80,52 @@
 	<%@ include file="front-end/tool/PageFooter.file"%>
     <!-- ----- ----- ----- 頁面 底部 end ----- ----- ----- -->
 
-    <!-- ----- ----- ----- 跳出預先訂位頁面 start ----- ----- ----- -->
-    <div class="modal fade" id="BookingModal" tabindex="-1" aria-labelledby="BookingModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="mb-0">預先訂位</h3>
+			<!-- ----- ----- ----- 跳出預先訂位頁面 start ----- ----- ----- -->
+			<div class="modal fade" id="BookingModal" tabindex="-1" aria-labelledby="BookingModal" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-xl">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3 class="mb-0">預先訂位</h3>
 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
 
-                <div class="modal-body d-flex flex-column justify-content-center">
-                    <div class="booking">
+						<div class="modal-body d-flex flex-column justify-content-center">
+							<div class="booking">
+								<!-- 	訂位Form在此 -->
+								<form class="booking-form row" role="form" action="RsvtFEServlet" method="post"
+									id="rsvt_form">
+									<div class="col-lg-6 col-12">
+										<label for="name" class="form-label">您的名字</label>
+										<input type="text" name="customerName" id="name" class="form-control"
+											placeholder="請輸入姓名" pattern="[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,20}" required>
+									</div>
 
-                        <form class="booking-form row" role="form" action="#" method="post">
-                            <div class="col-lg-6 col-12">
-                                <label for="name" class="form-label">您的名字</label>
-
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Your Name"
-                                    required>
-                            </div>
-
-                            <div class="col-lg-6 col-12">
+									<!-- <div class="col-lg-6 col-12">
                                 <label for="email" class="form-label">Email</label>
 
                                 <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control"
                                     placeholder="your@email.com" required>
-                            </div>
+                            </div> -->
 
-                            <div class="col-lg-6 col-12">
-                                <label for="phone" class="form-label">電話號碼</label>
+									<div class="col-lg-6 col-12">
+										<label for="phone" class="form-label">電話號碼</label> <input type="telephone"
+											name="customerPhone" id="phone" pattern="[0]{1}[9]{1}[0-9]{8}"
+											class="form-control" placeholder="請輸入手機" required>
+									</div>
 
-                                <input type="telephone" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                    class="form-control" placeholder="123-456-7890">
-                            </div>
+									<div class="col-lg-6 col-12">
+										<label for="people" class="form-label">訂位人數</label> <input type="text"
+											name="rsvtNum" id="people" class="form-control" placeholder="請輸入人數"
+											autocomplete="off" pattern="\d{1,2}" maxlength="2" required>
+									</div>
 
-                            <div class="col-lg-6 col-12">
-                                <label for="people" class="form-label">訂位人數</label>
 									<div class="col-lg-6 col-12">
 										<label for="date" class="form-label">日期</label> <input type="text" id="dp1"
 											class="datepicker mr-2 form-control" placeholder="選擇日期" name="rsvtDate"
 											autocomplete="off" onchange="checkPeriod()"><span style="display: none">*</span>
 									</div>
-                                <input type="text" name="people" id="people" class="form-control"
-                                    placeholder="12 persons">
-                            </div>
+
 									<div class="col-lg-6 col-12">
 										<label for="period" class="form-label">時段</label> <select
 											class="form-select form-control" name="rsvtPeriod" id="period" required>
@@ -130,62 +133,33 @@
 										</select>
 									</div>
 									<div class="col-lg-6 col-12"></div>
-                            <div class="col-lg-6 col-12">
-                                <label for="date" class="form-label">日期</label>
 
-                                <input type="date" name="date" id="date" value="" class="form-control">
-                            </div>
-
-                            <div class="col-lg-6 col-12">
-                                <label for="time" class="form-label">時間</label>
-
-                                <select class="form-select form-control" name="time" id="time">
-                                    <option value="5" selected>5:00 PM</option>
-                                    <option value="6">18:00 PM</option>
-                                    <option value="7">19:00 PM</option>
-                                    <option value="8">20:00 PM</option>
-                                    <option value="10">21:00 PM</option>
-                                    <option value="11">22:00 PM</option>
-                                    <option value="12">23:00 PM</option>
-                                    <option value="13">00:00 AM</option>
-                                </select>
-                            </div>
-
-                            <div class="col-12">
+									<!-- <div class="col-12">
                                 <label for="message" class="form-label">其他需求:</label>
 
                                 <textarea class="form-control" rows="4" id="message" name="message"
                                     placeholder=""></textarea>
-                            </div>
+                            </div> -->
 
-                            <div class="col-lg-4 col-12 ms-auto">
-                                <button type="submit" class="form-control">送出</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer"></div>
+									<div class="col-lg-4 col-12 ms-auto">
+										<input type="hidden" name="action" value="insert">
+
 										<button type="submit" class="form-control" id="sub_btn">送出</button>
 									</div>
 								</form>
 							</div>
 						</div>
-            </div>
 
-        </div>
-    </div>
-    <!-- ----- ----- ----- 跳出預先訂位頁面 end ----- ----- ----- -->
+						<div class="modal-footer"></div>
+
+					</div>
+
+				</div>
+			</div>
+			<!-- ----- ----- ----- 跳出預先訂位頁面 end ----- ----- ----- -->
 
     <!-- ----- ----- ----- js start ----- ----- ----- -->
     
-    <script src="front-assets/js/jquery.min.js"></script>
-    <script src="front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
-    <script src="front-assets/js/custom.js"></script>
-
-    <!-- ----- ----- ----- js end ----- ----- ----- -->
-</body>
-
-</html>
 			<script src="front-assets/js/jquery.min.js"></script>
 			<script src="front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
 			<script src="front-assets/js/custom.js"></script>
@@ -279,6 +253,7 @@
 				}
 			</script>
 			<!-- ----- ----- ----- js end ----- ----- ----- -->
-	</body>
 
-	</html>
+</body>
+
+</html>
