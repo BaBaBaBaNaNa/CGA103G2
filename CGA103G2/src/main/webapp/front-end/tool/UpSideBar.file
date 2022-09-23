@@ -47,7 +47,22 @@
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/front-end/member/members.jsp">會員中心</a>
                     </li>
+                    
+                    				<li class="nav-link"><a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="text-disabled" style="text-decoration:underline; color:red; background-color: white;">會員 : <%= request.getSession().getAttribute("LoginSessionName") %></span></a>
+					<ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
 
+						<li class="dropdown-divider"></li>
+						<li class="ms-dropdown-list">
+							<a class="media fs-14 p-2" href="${pageContext.request.contextPath}/front-end/member/MemServlet.do?action=getMemPersonalData"><span><i class="flaticon-user mr-2"></i>個人基本資料</span></a>
+							
+  </li>
+						<li class="dropdown-divider"></li>
+						<li class="dropdown-menu-footer"><a class="media fs-14 p-2" href="${pageContext.request.contextPath}/MemLogoutServlet.do"><span><i class="flaticon-shut-down mr-2"></i>登出/Logout</span></a></li>
+					</ul></li>
+			</ul>
+			<div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler" data-toggle="slideDown" data-target="#ms-nav-options">
+				<span class="ms-toggler-bar bg-primary"></span><span class="ms-toggler-bar bg-primary"></span><span class="ms-toggler-bar bg-primary"></span>
+				
                 </ul>
             </div>
 

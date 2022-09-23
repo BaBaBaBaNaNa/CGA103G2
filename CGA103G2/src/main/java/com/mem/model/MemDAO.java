@@ -34,11 +34,11 @@ private static final String GETALLSTMT = "SELECT memID, memname, memaccount, mem
 private static final String GETONESTMT = "SELECT memID, memname, memaccount, mempassword, memgender, memphone, mememail, memaddress, membirthday, mempermission FROM members  where memID = ?";
 private static final String DELETE = "DELETE FROM members where memID = ?";
 private static final String UPDATE = "UPDATE members set memname=?, memaccount=?, mempassword=?, memgender=?, memphone=?, mememail=?, memaddress=?, membirthday=?, mempermission=? where memID = ?";
-
+private static final String GetOwnSTMT= "SELECT * FROM members where memAccount = ?";
 
 
 @Override
-public boolean loginAdmin(MemLoginVO admin) {
+public boolean loginAdmin(MemVO admin) {
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	
@@ -402,5 +402,78 @@ public static void main(String[] args) {
 	}
 }
 
+
+
+
+@Override
+public boolean loginAdmin(MemLoginVO admin) {
+	// TODO Auto-generated method stub
+	return false;
 }
+
+
+
+
+//----- ----- ----- 查找 db Employee 個人資料 start ----- ----- -----
+@Override
+public MemVO findByMemAccount(String memAccount) {
+
+	MemVO memVO = null;
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+
+	try {
+		con = ds.getConnection();
+		pstmt = con.prepareStatement(GetOwnSTMT);
+		
+		pstmt.setString(1, memAccount);
+		
+		rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			memVO = new MemVO();
+
+			memVO.setMemID(rs.getInt("memID"));
+			memVO.setMemName(rs.getString("memName"));
+			memVO.setMemAccount(rs.getString("memAccount"));
+			memVO.setMemPassword(rs.getString("memPassword"));
+		
+			memVO.setMemPhone(rs.getString("memPhone"));
+			memVO.setMemAddress(rs.getString("memAddress"));
+			memVO.setMemEmail(rs.getString("memEmail"));
+			
+			memVO.setMemBirthday( rs.getDate("memBirthday"));
+		}
+	} catch (SQLException se) {
+		throw new RuntimeException("A database error occured. " + se.getMessage());
+	} finally {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	return memVO;
+}
+//----- ----- ----- 查找 db Employee 個人資料 end ----- ----- -----
+}
+
+
 
