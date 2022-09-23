@@ -18,21 +18,29 @@ import com.rsvtCtrl.model.RsvtCtrlVO;
 @WebServlet("/back-end/reservation_ctrl/Period")
 public class CheckPeriod extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-	System.out.println("fetch");
+//	System.out.println("fetch");
 	Gson gson = new Gson();
     JsonObject jsonObject = gson.fromJson(req.getReader(), JsonObject.class);
     String date = jsonObject.get("rsvtCtrlDate").toString().replace("\"", "");
-    System.out.println(date);
+    Integer num = 0;
+    try {
+        num = Integer.valueOf(jsonObject.get("rsvtNum").toString().replace("\"", ""));
+	} catch (Exception ignore) {
+	}
+//    System.out.println(date);
         List<RsvtCtrlVO> list = new RsvtCtrlService().getOneDate(date);
-        System.out.println(list);
+        System.out.println(list.size());
         List<Integer> Period = new ArrayList<>();
-        if(list != null) {
+        if(list.size() != 0) {
       	  for(RsvtCtrlVO obj : list) {
+      		  System.out.println(obj.getRsvtCtrlPeriod());
       		  if(obj.getRsvtCtrlOpen() == 0){
       			  Period.add(obj.getRsvtCtrlPeriod());
-      		  }
+      			  Period.add(num + obj.getRsvtCtrlMax() - obj.getRsvtCtrlNumber());
+      			  }
       	  }
         }
+        System.out.println(Period.size());
 		res.getWriter().append(gson.toJson(Period));
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

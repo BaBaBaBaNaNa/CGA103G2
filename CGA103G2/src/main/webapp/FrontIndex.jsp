@@ -115,11 +115,21 @@
 
                             <div class="col-lg-6 col-12">
                                 <label for="people" class="form-label">訂位人數</label>
-
+									<div class="col-lg-6 col-12">
+										<label for="date" class="form-label">日期</label> <input type="text" id="dp1"
+											class="datepicker mr-2 form-control" placeholder="選擇日期" name="rsvtDate"
+											autocomplete="off" onchange="checkPeriod()"><span style="display: none">*</span>
+									</div>
                                 <input type="text" name="people" id="people" class="form-control"
                                     placeholder="12 persons">
                             </div>
-
+									<div class="col-lg-6 col-12">
+										<label for="period" class="form-label">時段</label> <select
+											class="form-select form-control" name="rsvtPeriod" id="period" required>
+											<option selected disabled>請選擇時段</option>
+										</select>
+									</div>
+									<div class="col-lg-6 col-12"></div>
                             <div class="col-lg-6 col-12">
                                 <label for="date" class="form-label">日期</label>
 
@@ -154,9 +164,12 @@
                         </form>
                     </div>
                 </div>
-
                 <div class="modal-footer"></div>
-
+										<button type="submit" class="form-control" id="sub_btn">送出</button>
+									</div>
+								</form>
+							</div>
+						</div>
             </div>
 
         </div>
@@ -173,3 +186,99 @@
 </body>
 
 </html>
+			<script src="front-assets/js/jquery.min.js"></script>
+			<script src="front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
+			<script src="front-assets/js/custom.js"></script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+			<script src="front-assets/js/bootstrap-datepicker.zh-TW.min.js"></script>
+
+			<script>
+				var dp1 = document.getElementById('dp1');
+				var period = document.getElementById('period');
+				const dateUrl = '/CGA103G2/back-end/reservation_ctrl/Date';
+				const periodUrl = '/CGA103G2/back-end/reservation_ctrl/Period';
+				const arr = [];
+				fetch(dateUrl,{
+					headers: {
+						'Content-Type': 'application/json'
+					},
+				})
+				.then(res => res.json())
+					.then(list => {
+						console.log(list);
+						for(let key of list){
+							arr.push(key);
+						}
+					})
+							console.log(arr);
+			
+				var disabledDates = arr;
+				$('.datepicker').datepicker({
+					autoclose: true, // 選擇後自動關閉日期選擇器
+					language: 'zh-TW', // 語言切換 中文
+					format: 'yyyy-mm-dd', // 日期格式
+					todayHighlight: true, // 高亮"當天日期"
+					toggleActive: true, // 	點擊選擇，再次點擊取消
+					startDate: new Date(), //開放初始日期 ex=> 
+					// endDate:new Date(),
+					// clearBtn: true, //顯示清除按鈕
+					daysOfWeekDisabled: [3], //每周隱藏的第幾天  0為周日6為星期六
+					datesDisabled: arr
+				});
+				function checkPeriod(){
+					fetch(periodUrl,{
+						method: 'post',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({
+							rsvtCtrlDate : dp1.value,
+						})
+					})
+					.then(res => res.json())
+					.then(periodList => {
+						console.log(periodList);
+						period.textContent = "";
+						if(periodList.length != 0){
+							period.textContent = "";
+							const plsSelect = document.createElement('option');
+							plsSelect.textContent = "請選擇時段";
+							plsSelect.selected = true;
+							plsSelect.disabled = true;
+							period.append(plsSelect);
+							let n = 0;
+							for(let i = 0; i < periodList.length; i++){
+								if(i == n){
+									const option = document.createElement('option');
+									option.value = periodList[i];
+									switch (periodList[i]){
+										case 0 :{
+											option.textContent = '中午';
+											break;
+										}
+										case 1 :{
+											option.textContent = '晚上';
+											break;
+										}
+										default :{
+											option.textContent = '未有時段';
+										}
+									}
+									period.append(option);
+
+								}
+							}
+						}else{
+							const option = document.createElement('option');
+							option.textContent = '未有時段';
+							period.append(option);
+						}
+					})
+				}
+			</script>
+			<!-- ----- ----- ----- js end ----- ----- ----- -->
+	</body>
+
+	</html>
