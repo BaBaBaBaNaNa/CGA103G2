@@ -292,8 +292,44 @@
 	<script type="text/javascript">
   
   function showQueuerNO(res){
-	  document.getElementById("queuerNO").innerHTML = JSON.parse(res).queuerNO
+		
+	  
+      	  localStorage.setItem('today', showToday())
+      	  localStorage.setItem('period', timePeriod())
+	      localStorage.setItem('queuerNO', JSON.parse(res).queuerNO)
+		  
+		  document.getElementById("queuerNO").innerHTML = localStorage.getItem('queuerNO')
+	
   }
+  function showFirstQueuerNO(){
+	  document.getElementById("queuerNO").innerHTML = localStorage.getItem('queuerNO')
+  }
+  function showToday(){
+      let date = new Date();
+      date = new Date();
+      today = new Date();
+      yy=date.getFullYear();
+  	  mm=date.getMonth()+1;
+  	  dd=date.getDate();
+  	  
+  	  today =  yy+"/"+mm+"/"+dd;
+      return today;
+  }
+  function timePeriod(){
+      Today = new Date();
+      time = Today.getHours();
+      period = "";
+
+      if(time < 17){
+          period = '中午';
+      }else{
+          period = '晚上';
+      }
+
+      return period;
+  }
+  
+  
   function showRemainNO(){
 
       $.ajax({
@@ -345,6 +381,8 @@
 		}
 
 		window.onload = function() {
+			
+			showFirstQueuerNO()
 			setInterval(showRemainNO, 1000);
 			setInterval(showCurrentNO, 1000);
 

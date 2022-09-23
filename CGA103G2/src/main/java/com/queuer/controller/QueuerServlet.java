@@ -64,6 +64,22 @@ public class QueuerServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		// 後台 顯示最近入座號碼
+		if("showSeatedList".equals(action)) {
+			try {
+				output.put("seatedList", queuer.showSeatedList());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// 後台 顯示最近過號號碼
+		if("showOverList".equals(action)) {
+			try {
+				output.put("overList", queuer.showOverList());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		// 後台下一號按鈕
 		if("doNextNO".equals(action)) {
 			queuer.doNextNO();
