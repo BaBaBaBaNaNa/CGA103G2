@@ -31,9 +31,10 @@
 
 <link href="../../front-assets/css/tooplate-crispy-kitchen.css" rel="stylesheet">
 
-<!-- <link href="../../front-assets/css/navbar.css" rel="stylesheet"> -->
+<link href="../../front-assets/css/datepicker.css" rel="stylesheet">
 
 <!-- <link href="../../front-assets/css/shoppingcart/ShoppingCart.css" rel="stylesheet"> -->
+
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 <style>
 .show-cart li {
@@ -95,9 +96,10 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.href='${pageContext.request.contextPath}/back-end/meals/MealsServlet.do?action=getAll1'">回到菜單</button>
-								<input type="hidden" name="action" value="insert">
-								<input id="submit2" class="btn btn-primary" type="submit" value="送出訂單">
-<!-- 								<button type="button" class="btn btn-primary" onclick="window.location.href='../../front-end/shopcart/ShopCart.jsp'">送出訂單</button> -->
+<!-- 								<input type="hidden" name="action" value="insert"> -->
+<!-- 								<input type="submit" class="btn btn-primary" id="submit2" value="送出訂單" style="background-color: #0d6efd;"> -->
+<!-- 								<button type="button" class="btn btn-primary" id="submit2"onclick="window.location.href='../../front-end/shopcart/ShopCart.jsp'">送出訂單</button> -->
+								<button type="button" class="btn btn-primary" id="submit2">送出訂單</button>
 							</div>
 						</div>
 					</div>
@@ -169,71 +171,7 @@
 	<!-- ----- ----- ----- 底部 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 跳出預先訂位頁面 start ----- ----- ----- -->
-	<div class="modal fade" id="BookingModal" tabindex="-1" aria-labelledby="BookingModal" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-xl">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="mb-0">預先訂位</h3>
-
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-
-				<div class="modal-body d-flex flex-column justify-content-center">
-					<div class="booking">
-
-						<form class="booking-form row" role="form" action="#" method="post">
-							<div class="col-lg-6 col-12">
-								<label for="name" class="form-label">您的名字</label> <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" required>
-							</div>
-
-							<div class="col-lg-6 col-12">
-								<label for="email" class="form-label">Email</label> <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="your@email.com" required>
-							</div>
-
-							<div class="col-lg-6 col-12">
-								<label for="phone" class="form-label">電話號碼</label> <input type="telephone" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" placeholder="123-456-7890">
-							</div>
-
-							<div class="col-lg-6 col-12">
-								<label for="people" class="form-label">訂位人數</label> <input type="text" name="people" id="people" class="form-control" placeholder="12 persons">
-							</div>
-
-							<div class="col-lg-6 col-12">
-								<label for="date" class="form-label">日期</label> <input type="date" name="date" id="date" value="" class="form-control">
-							</div>
-
-							<div class="col-lg-6 col-12">
-								<label for="time" class="form-label">時間</label> <select class="form-select form-control" name="time" id="time">
-									<option value="5" selected>5:00 PM</option>
-									<option value="6">18:00 PM</option>
-									<option value="7">19:00 PM</option>
-									<option value="8">20:00 PM</option>
-									<option value="10">21:00 PM</option>
-									<option value="11">22:00 PM</option>
-									<option value="12">23:00 PM</option>
-									<option value="13">00:00 AM</option>
-								</select>
-							</div>
-
-							<div class="col-12">
-								<label for="message" class="form-label">其他需求:</label>
-
-								<textarea class="form-control" rows="4" id="message" name="message" placeholder=""></textarea>
-							</div>
-
-							<div class="col-lg-4 col-12 ms-auto">
-								<button type="submit" class="form-control">送出</button>
-							</div>
-						</form>
-					</div>
-				</div>
-
-				<div class="modal-footer"></div>
-
-			</div>
-
-		</div>
-	</div>
+		<%@ include file="../../front-end/tool/RsvtButton.file"%>
 	<!-- ----- ----- ----- 跳出預先訂位頁面 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
@@ -242,6 +180,95 @@
 	<script src="../../front-assets/js/custom.js"></script>
 
 	<script src="../../front-assets/js/shoppingcart/ShoppingCart.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+			<script src="<%=request.getContextPath()%>/front-assets/js/bootstrap-datepicker.zh-TW.min.js"></script>
+
+			<script>
+				var dp1 = document.getElementById('dp1');
+				var period = document.getElementById('period');
+				const dateUrl = '/CGA103G2/back-end/reservation_ctrl/Date';
+				const periodUrl = '/CGA103G2/back-end/reservation_ctrl/Period';
+				const arr = [];
+				fetch(dateUrl,{
+					headers: {
+						'Content-Type': 'application/json'
+					},
+				})
+				.then(res => res.json())
+					.then(list => {
+						console.log(list);
+						for(let key of list){
+							arr.push(key);
+						}
+					})
+							console.log(arr);
+			
+				var disabledDates = arr;
+				$('.datepicker').datepicker({
+					autoclose: true, // 選擇後自動關閉日期選擇器
+					language: 'zh-TW', // 語言切換 中文
+					format: 'yyyy-mm-dd', // 日期格式
+					todayHighlight: true, // 高亮"當天日期"
+					toggleActive: true, // 	點擊選擇，再次點擊取消
+					startDate: new Date(), //開放初始日期 ex=> 
+					// endDate:new Date(),
+					// clearBtn: true, //顯示清除按鈕
+					daysOfWeekDisabled: [3], //每周隱藏的第幾天  0為周日6為星期六
+					datesDisabled: arr
+				});
+				function checkPeriod(){
+					fetch(periodUrl,{
+						method: 'post',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({
+							rsvtCtrlDate : dp1.value,
+						})
+					})
+					.then(res => res.json())
+					.then(periodList => {
+						console.log(periodList);
+						period.textContent = "";
+						if(periodList.length != 0){
+							period.textContent = "";
+							const plsSelect = document.createElement('option');
+							plsSelect.textContent = "請選擇時段";
+							plsSelect.selected = true;
+							plsSelect.disabled = true;
+							period.append(plsSelect);
+							let n = 0;
+							for(let i = 0; i < periodList.length; i++){
+								if(i == n){
+									const option = document.createElement('option');
+									option.value = periodList[i];
+									switch (periodList[i]){
+										case 0 :{
+											option.textContent = '中午';
+											break;
+										}
+										case 1 :{
+											option.textContent = '晚上';
+											break;
+										}
+										default :{
+											option.textContent = '未有時段';
+										}
+									}
+									period.append(option);
+
+								}
+							}
+						}else{
+							const option = document.createElement('option');
+							option.textContent = '未有時段';
+							period.append(option);
+						}
+					})
+				}
+			</script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 
 </body>

@@ -215,8 +215,9 @@ function viewType(){
     	$("#orderType").text("內用訂單");
     }
     
-    //重置
-    sessionStorage.setItem('Type', JSON.stringify("999")); 
+    //成立訂單重置
+    sessionStorage.removeItem('shoppingCart');
+    sessionStorage.removeItem('Type');
 //    console.log(JSON.parse(sessionStorage.getItem('Type')));
 }
 

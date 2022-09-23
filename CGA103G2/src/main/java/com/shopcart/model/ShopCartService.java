@@ -18,6 +18,7 @@ public class ShopCartService {
 	// ----- ----- ----- 購物車新增訂單 start ----- ----- -----
 	//新增內用訂單
 	public ShopCartVO addInsideOrder(
+			int memID,
 			int ordersType,
 			int ordersStatus,
 			String ordersDestination,
@@ -28,7 +29,8 @@ public class ShopCartService {
 			ArrayList idArrayList
 			) {
 		ShopCartVO shopcartVO = new ShopCartVO();
-
+		
+		shopcartVO.setMemID(memID);
 		shopcartVO.setOrdersStatus(ordersStatus);
 		shopcartVO.setOrdersType(ordersType);
 		shopcartVO.setOrdersDestination(ordersDestination);

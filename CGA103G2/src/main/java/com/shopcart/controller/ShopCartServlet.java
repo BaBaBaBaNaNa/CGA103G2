@@ -39,10 +39,9 @@ public class ShopCartServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		action = "insertInside";
 
-		// ----- ----- ----- insertInside start ----- ----- -----
-		if ("insertInside".equals(action)) {
+		HttpSession session = req.getSession();
+
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
@@ -81,6 +80,11 @@ public class ShopCartServlet extends HttpServlet {
 			
 			JSONArray jArray = null;
 			
+			Integer memID = 1;
+			if(!(session.getAttribute("memID") == null)) {
+				memID = (Integer)session.getAttribute("memID");
+			}
+			System.out.println("memID" + memID);
 			ArrayList PriceArrayList = new ArrayList();
 			ArrayList NameArrayList = new ArrayList();
 			ArrayList CountArrayList = new ArrayList();
@@ -132,13 +136,11 @@ public class ShopCartServlet extends HttpServlet {
 			/*************************** 2.開始新增資料 ***************************************/
 			// 新增訂單
 			ShopCartService shopcartSvc = new ShopCartService();
-			shopcartSvc.addInsideOrder(Integer.parseInt(getorderType),ordersStatus,ordersDestination, ordersBuildDate,PriceArrayList,NameArrayList,CountArrayList,idArrayList);
+			shopcartSvc.addInsideOrder(memID,Integer.parseInt(getorderType),ordersStatus,ordersDestination, ordersBuildDate,PriceArrayList,NameArrayList,CountArrayList,idArrayList);
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			req.setAttribute("shopcartVO", shopcartVO); // 資料庫update成功後,正確的的empVO物件,存入req
 			String url = "/front-end/shopcart/ShopCartAddSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 		}
-		// ----- ----- ----- insertInside end ----- ----- -----
-	}
 }

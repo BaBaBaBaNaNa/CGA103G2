@@ -25,13 +25,9 @@
 
     <link href="<%=request.getContextPath()%>/front-assets/css/tooplate-crispy-kitchen.css" rel="stylesheet">
 
-<<<<<<< HEAD
-    <link href="front-assets/css/navbar.css" rel="stylesheet">
-    
-    <link href="front-assets/css/datepicker.css" rel="stylesheet">
-=======
     <link href="<%=request.getContextPath()%>/front-assets/css/navbar.css" rel="stylesheet">
->>>>>>> refs/heads/Hui
+    
+    <link href="<%=request.getContextPath()%>/front-assets/css/datepicker.css" rel="stylesheet">
     <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -67,7 +63,7 @@
 			<br><br><br><br><br><br><br><br><br><br>
             <div class="video-wrap">
                 <video autoplay="" loop="" muted="" class="custom-video" poster="">
-                    <source src="front-assets/video/production_ID_3769033.mp4" type="video/mp4">
+                    <source src="<%=request.getContextPath()%>/front-assets/video/production_ID_3769033.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
@@ -164,16 +160,12 @@
 
     <!-- ----- ----- ----- js start ----- ----- ----- -->
     
-			<script src="front-assets/js/jquery.min.js"></script>
-			<script src="front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
-			<script src="front-assets/js/custom.js"></script>
-			<script
-				src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
-			<script src="front-assets/js/bootstrap-datepicker.zh-TW.min.js"></script>
     		<script src="<%=request.getContextPath()%>/front-assets/js/jquery.min.js"></script>
     		<script src="<%=request.getContextPath()%>/front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
     		<script src="<%=request.getContextPath()%>/front-assets/js/custom.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+			<script src="<%=request.getContextPath()%>/front-assets/js/bootstrap-datepicker.zh-TW.min.js"></script>
 
 			<script>
 				var dp1 = document.getElementById('dp1');
