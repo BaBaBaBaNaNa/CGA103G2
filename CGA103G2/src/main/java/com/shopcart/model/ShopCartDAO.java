@@ -31,7 +31,7 @@ public class ShopCartDAO implements ShopCartDAOInterface {
 	// ----- ----- ----- 購物車新增訂單 start ----- ----- -----
 	//新增內用訂單
 	@Override
-	public void insertInsideOrders(ShopCartVO shopcartVO , ArrayList PriceArrayList, ArrayList NameArrayList, ArrayList CountArrayList) {
+	public void insertInsideOrders(ShopCartVO shopcartVO , ArrayList PriceArrayList, ArrayList NameArrayList, ArrayList CountArrayList ,ArrayList NameidArrayList) {
 		Connection con = null;
 		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
