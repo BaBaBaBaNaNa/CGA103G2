@@ -91,6 +91,16 @@
 		<url-pattern>/back-end/news/news.do</url-pattern>
 <!-- 		<url-pattern>/news/news.do</url-pattern> -->
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>QueuerServlet</servlet-name>
+		<servlet-class>com.queuer.controller.QueuerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QueuerServlet</servlet-name>
+		<url-pattern>/back-end/queuer/QueuerServlet.do</url-pattern>
+		<url-pattern>/front-end/queuer/QueuerServlet.do</url-pattern>
+		<url-pattern>/queuer/QueuerServlet.do</url-pattern>
+	</servlet-mapping>
 	
 <!-- 	<filter> -->
 <!-- 	    <filter-name>setCharacterEncoding</filter-name> -->
