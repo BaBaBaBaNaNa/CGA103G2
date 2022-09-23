@@ -14,6 +14,5 @@ public interface RsvtCtrlDAO_interface {
 
 	public RsvtCtrlVO findByPrimaryKey(Integer rsvtCtrlId);
 	public List<RsvtCtrlVO> findByDate(String rsvtDate);
-
 	public List<RsvtCtrlVO> getAll();
 }

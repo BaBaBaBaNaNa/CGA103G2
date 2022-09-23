@@ -35,13 +35,7 @@ public class RsvtServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-			String nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,20}$";
 			String customerName = req.getParameter("customerName");
-//			if (customerName == null || (customerName.trim()).length() == 0) {
-//				errorMsgs.add("顧客姓名: 請勿空白");
-//			} else if (!customerName.trim().matches(nameReg)) { // 以下練習正則(規)表示式(regular-expression)
-//				errorMsgs.add("顧客姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到20之間");
-//			}
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
@@ -53,13 +47,13 @@ public class RsvtServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 *****************************************/
 			RsvtService rsvtSvc = new RsvtService();
-			RsvtVO rsvtVO = rsvtSvc.getCustomerName(customerName);
-			if (rsvtVO == null) {
+			List<RsvtVO> rsvtVO = rsvtSvc.getCustomerName(customerName);
+			if (rsvtVO.size() == 0) {
 				errorMsgs.add("查無資料");
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/reservation/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/reservation/reservation_detail.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}

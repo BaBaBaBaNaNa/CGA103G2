@@ -53,7 +53,7 @@ public class RsvtService {
 		return dao.getAll();
 	}
 
-	public RsvtVO getCustomerName(String customerName) {
+	public List<RsvtVO> getCustomerName(String customerName) {
 		return dao.findByCustomerName(customerName);
 	}
 }

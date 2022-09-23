@@ -155,6 +155,18 @@ RsvtCtrlVO rsvtCtrlVO = (RsvtCtrlVO) request.getAttribute("rsvtCtrlVO"); //EmpSe
 								<!-- input-group -->
 							</div>
 						</div>
+						<div class="form-group mb-0">
+							<h6 class="sub-title my-3">當日已訂位:</h6>
+							<div>
+								<div class="input-group">
+									<p class="text-muted mb-4 font-14"></p>
+									<input type="text" class="form-control" name="rsvtCtrlNum"
+										value="<%=rsvtCtrlVO.getRsvtCtrlNumber()%>">
+									<div class="input-group-append bg-custom b-0"></div>
+								</div>
+								<!-- input-group -->
+							</div>
+						</div>
 					</div>
 					<input type="hidden" name="action" value="update"> 
 					<input type="hidden" name="rsvtCtrlId" value="<%=rsvtCtrlVO.getRsvtCtrlId()%>">

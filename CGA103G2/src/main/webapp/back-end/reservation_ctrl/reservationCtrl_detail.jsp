@@ -131,7 +131,6 @@ line-height:37px;
 <table class="table">
 	<tr>
 		<th>訂位控制編號</th>
-		<th>桌型編號</th>
 		<th>訂位控制開放</th>
 		<th>訂位控制日期</th>
 		<th>訂位控制時段</th>
@@ -146,7 +145,6 @@ line-height:37px;
 
 		<tr>
 			<td>${rsvtCtrlVO.rsvtCtrlId}</td>
-			<td>${rsvtCtrlVO.tableTypeId}</td>
 			<td>${rsvtCtrlVO.rsvtCtrlOpen == 0 ? "開放" : "不開放"}</td>
 			<td>${rsvtCtrlVO.rsvtCtrlDate}</td>
 			<td>${rsvtCtrlVO.rsvtCtrlOpen == 0 ? "中午" : "晚上"}</td>

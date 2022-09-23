@@ -8,7 +8,7 @@ public interface RsvtDAO_interface {
 		public void update(RsvtVO rsvt);
 		public void delete(Integer rsvtId);
 		public RsvtVO findByPrimaryKey(Integer rsvtId);
-        public RsvtVO findByCustomerName(String customerName);
+        public List<RsvtVO> findByCustomerName(String customerName);
 
         public List<RsvtVO> getAll();
 
