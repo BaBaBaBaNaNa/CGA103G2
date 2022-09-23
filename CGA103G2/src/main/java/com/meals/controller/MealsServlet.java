@@ -33,7 +33,7 @@ public class MealsServlet extends HttpServlet{
 			HttpSession session = req.getSession();
 			session.setAttribute("list", list); // 資料庫取出的list物件,存入session
 			// Send the Success view
-			String url = "/front-end/shopcart/ShopCartMenu2.jsp";
+			String url = "/front-end/shopcart/ShopCartMenu4.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			return;

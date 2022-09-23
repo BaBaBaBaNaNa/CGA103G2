@@ -10,10 +10,6 @@
 <%-- 	class="com.meals.model.MealsService" /> --%>
 <%-- <jsp:useBean id="list" scope="session" type="java.util.List<MealsVO>" /> --%>
 
-
-
-
-
 <%
 	MealsCategoryService mealsCategorySvc = new MealsCategoryService();
 	List<MealsCategoryVO> list1 = mealsCategorySvc.getAll();
@@ -22,7 +18,6 @@
 	MealsService mealsSvc = new MealsService();
 	List<MealsVO> list = mealsSvc.getAll();
 	pageContext.setAttribute("list",list);
-	
 	
 %>
 
@@ -96,8 +91,8 @@
     padding-bottom: 1.5rem;
     display: flex;
     align-content: center;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+/*      align-items: center;  */
 }
 
 </style>
@@ -125,25 +120,20 @@
 					<h6>美味餐點</h6>
 					<p>選擇你想吃的食物</p>
 				</div>
-				<c:forEach var="MealsCategoryVO" items="${list1}"
-											begin="<%=pageIndex +1%>" end="<%=pageIndex+rowsPerPage-1%>">
-										<h4 class="card-title">${MealsCategoryVO.mealsCategoryId}</h4>	
-										<h4 class="card-title">${MealsCategoryVO.mealsCategory}</h4>	
-				</c:forEach>
+				
 				<div class="ms-panel-body p-0">
 					<ul class="nav nav-tabs nav-justified has-gap px-4 pt-4"
 						role="tablist">
 						<li role="presentation" class="fs-12"><a href="#btc"
 							aria-controls="btc" class="active show" role="tab"
 							data-toggle="tab">沙拉 </a></li>
-						<li role="presentation" class="fs-12"><a href="#xrp"
-							aria-controls="xrp" role="tab" data-toggle="tab">前菜</a></li>
-						<li role="presentation" class="fs-12"><a href="#ltc"
-							aria-controls="ltc" role="tab" data-toggle="tab">主餐</a></li>
-						<li role="presentation" class="fs-12"><a href="#eth"
-							aria-controls="eth" role="tab" data-toggle="tab">甜點</a></li>
-						<li role="presentation" class="fs-12"><a href="#zec"
-							aria-controls="zec" role="tab" data-toggle="tab">飲料</a></li>
+					<c:forEach var="MealsCategoryVO" items="${list1}"
+											begin="<%=pageIndex +1%>" end="<%=pageIndex+rowsPerPage-1%>">
+<%-- 										<h4 class="card-title">${MealsCategoryVO.mealsCategoryId}</h4>	 --%>
+<%-- 										<h4 class="card-title">${MealsCategoryVO.mealsCategory}</h4> --%>
+										<li role="presentation" class="fs-12"><a href="#${MealsCategoryVO.mealsCategory}"
+							aria-controls="${MealsCategoryVO.mealsCategory}" role="tab" data-toggle="tab">${MealsCategoryVO.mealsCategory}</a></li>
+					</c:forEach>
 					</ul>
 					<div class="tab-content">
 						<!--                             --------------沙拉------------------- -->
@@ -183,14 +173,20 @@
 							</div>
 						</div>
 						<!--                             --------------前菜------------------- -->
-						<div role="tabpanel" class="tab-pane fade" id="xrp">
+						
+						
+<!-- 						-----------測試------>
+						<c:forEach var="MealsCategoryVO" items="${list1}"
+											begin="<%=pageIndex +1%>" end="<%=pageIndex+rowsPerPage-1%>">
+										<div role="tabpanel" class="tab-pane fade" id="${MealsCategoryVO.mealsCategory}">
 
 							<div class="table-responsive">
 								<div class="container">
 									<div class="row">
 										<c:forEach var="MealsVO" items="${list}"
 											begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-											<c:if test="${MealsVO.mealsCategoryID ==2}">
+											<h3></h3>
+											<c:if test="${MealsVO.mealsCategoryID  ==  MealsCategoryVO.mealsCategoryId}">
 												<c:if test="${MealsVO.mealsControl==1}">
 													<div class="col">
 														<div class="card" style="width: 20rem;">
@@ -219,94 +215,18 @@
 						</div>
 					
 											
+						</c:forEach>
+						
+						
+											
 						<!--         --------------主餐------------------- -->
-						<div role="tabpanel" class="tab-pane fade" id="ltc">
-							<div class="table-responsive">
-								<div class="container">
-									<div class="row">
-										<c:forEach var="MealsVO" items="${list}"
-											begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-											<c:if test="${MealsVO.mealsCategoryID ==3}">
-												<c:if test="${MealsVO.mealsControl==1}">
-													<div class="col">
-														<div class="card" style="width: 20rem;">
-															<img class="card-img-top" alt="Card image cap"
-																src="<%=request.getContextPath()%>/meals/DBGifReader?mealsID=${MealsVO.mealsID}"
-																width="100px">
-															<h4 class="card-title">${MealsVO.mealsName}</h4>
-															<p class="card-text">價錢:${MealsVO.mealsPrice}</p>
-															<a href="#"
-																data-id= "${MealsVO.mealsID}"
-																data-name="${MealsVO.mealsName}"
-																data-price="${MealsVO.mealsPrice}"
-																class="add-to-cart btn btn-primary">加入購物車</a>
-														</div>
-													</div>
-												</c:if>
-											</c:if>
-										</c:forEach>
-									</div>
-								</div>
-							</div>
-						</div>
+						
 						<!--                             --------------甜點------------------- -->
-						<div role="tabpanel" class="tab-pane fade" id="eth">
-							<div class="table-responsive">
-								<div class="container">
-									<div class="row">
-										<c:forEach var="MealsVO" items="${list}"
-											begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-											<c:if test="${MealsVO.mealsCategoryID ==4}">
-												<c:if test="${MealsVO.mealsControl==1}">
-													<div class="col">
-														<div class="card" style="width: 20rem;">
-															<img class="card-img-top" alt="Card image cap"
-																src="<%=request.getContextPath()%>/meals/DBGifReader?mealsID=${MealsVO.mealsID}"
-																width="100px">
-															<h4 class="card-title">${MealsVO.mealsName}</h4>
-															<p class="card-text">${MealsVO.mealsPrice}</p>
-															<a href="#" data-name="${MealsVO.mealsName}"
-																data-price="${MealsVO.mealsPrice}"
-																class="add-to-cart btn btn-primary">加入購物車</a>
-														</div>
-													</div>
-												</c:if>
-											</c:if>
-										</c:forEach>
-									</div>
-								</div>
-							</div>
-						</div>
+						
 						<!--                             --------------飲料------------------- -->
 
 						
-						<div role="tabpanel" class="tab-pane fade" id="zec">
-							<div class="table-responsive">
-								<div class="container">
-									<div class="row">
-										<c:forEach var="MealsVO" items="${list}"
-											begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-											<c:if test="${MealsVO.mealsCategoryID ==5}">
-												<c:if test="${MealsVO.mealsControl==1}">
-													<div class="col">
-														<div class="card" style="width: 20rem;">
-															<img class="card-img-top" alt="Card image cap"
-																src="<%=request.getContextPath()%>/meals/DBGifReader?mealsID=${MealsVO.mealsID}"
-																width="100px">
-															<h4 class="card-title">${MealsVO.mealsName}</h4>
-															<p class="card-text">${MealsVO.mealsPrice}</p>
-															<a href="#" data-name="${MealsVO.mealsName}"
-																data-price="${MealsVO.mealsPrice}"
-																class="add-to-cart btn btn-primary">加入購物車</a>
-														</div>
-													</div>
-												</c:if>
-											</c:if>
-										</c:forEach>
-									</div>
-								</div>
-							</div>
-						</div>
+					
 					</div>
 				</div>
 			</div>

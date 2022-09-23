@@ -116,6 +116,7 @@
     padding: 1rem 5.75rem;
     border-radius: 0.25rem;
     border: 1px solid transparent;
+    margin-bottom: 10px;
 }
 
 .accordion.has-gap .card-header {
