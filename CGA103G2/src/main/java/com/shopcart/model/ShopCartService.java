@@ -23,7 +23,8 @@ public class ShopCartService {
 			Timestamp ordersBuildDate,
 			ArrayList PriceArrayList,
 			ArrayList NameArrayList,
-			ArrayList CountArrayList
+			ArrayList CountArrayList,
+			ArrayList NameidArrayList
 			) {
 		ShopCartVO shopcartVO = new ShopCartVO();
 
@@ -31,7 +32,7 @@ public class ShopCartService {
 		shopcartVO.setOrdersType(ordersType);
 		shopcartVO.setOrdersBuildDate(ordersBuildDate);
 
-		dao.insertInsideOrders(shopcartVO , PriceArrayList , NameArrayList , CountArrayList);
+		dao.insertInsideOrders(shopcartVO , PriceArrayList , NameArrayList , CountArrayList  , NameidArrayList);
 
 		return shopcartVO;
 	}
