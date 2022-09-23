@@ -5,7 +5,6 @@
 <%@page import="com.orddetails.model.OrddetailsVO"%>
 <%@ page import="java.sql.*"%>
 
-
 <%
 ArrayList list = (ArrayList) request.getAttribute("orddetailsVO"); 
 pageContext.setAttribute("list", list);

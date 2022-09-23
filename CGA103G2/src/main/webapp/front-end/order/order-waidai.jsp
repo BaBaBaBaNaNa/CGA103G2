@@ -8,11 +8,6 @@
     OrdersService ordersSvc = new OrdersService();
     List<OrdersVO> list = ordersSvc.getAll();
     pageContext.setAttribute("list",list);
-    session.setAttribute("list2", list);
-%>
-<%
-ArrayList list2 = (ArrayList) request.getAttribute("orddetailsVO");
-
 %>
 
 <!doctype html>
@@ -109,17 +104,12 @@ ArrayList list2 = (ArrayList) request.getAttribute("orddetailsVO");
 			<td>${ordersVO.ordersBuildDate}</td> 
 			<td>${ordersVO.ordersMakeDate}</td>
 			<td>
-				 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/order/order-details-waidai.jsp" style="margin-bottom: 0px;">
+				 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/orddetails/orddetails.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="明細">
 			     <input type="hidden" value="${ordersVO.ordersID}" name="orderDetailId">
-			     <input type="hidden" name="action"	value="getOne_For_Display"></FORM>
+			     <input type="hidden" name="action"	value="getOne_For_Display2"></FORM>
 			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/orddetails/orddetails.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="訂單明細" >
-			     <input type="hidden" value="${ordersVO.ordersID}" name="orderDetailId">
-			     <input type="hidden" name="action"	value="getOne_For_Display"></FORM>
-			</td>
+		
 		</tr>
 			</c:if>
 	</c:forEach>

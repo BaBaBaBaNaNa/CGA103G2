@@ -6,7 +6,10 @@
 <%@ page import="java.sql.*"%>
 <%@page import="java.util.ArrayList"%>
 
-
+<%
+ArrayList list = (ArrayList) request.getAttribute("orddetailsVO");
+pageContext.setAttribute("list", list);
+%>
 
 <!doctype html>
 <html lang="zh-tw">
@@ -94,7 +97,7 @@ th, td {
 							<th>送餐狀態</th>
 						</tr>	
 
-						<c:forEach var="orddetailsVO" items="${list2}">
+						<c:forEach var="orddetailsVO" items="${list}">
 							<tr>
 								<td>${orddetailsVO.mealsVO.mealsName}</td>
 								<td>${orddetailsVO.orddetailsMealsQuantity}</td>
