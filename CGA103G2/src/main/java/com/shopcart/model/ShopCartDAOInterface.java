@@ -6,5 +6,5 @@ import java.util.*;
 import com.login.model.EmpLoginVO;
 
 public interface ShopCartDAOInterface {
-    public void insertInsideOrders(ShopCartVO shopcart , ArrayList PriceArrayList, ArrayList NameArrayList, ArrayList CountArrayList);
+    public void insertInsideOrders(ShopCartVO shopcart , ArrayList PriceArrayList, ArrayList NameArrayList, ArrayList CountArrayList,ArrayList NameidArrayList);
 }
