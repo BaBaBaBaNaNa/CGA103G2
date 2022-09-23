@@ -24,7 +24,9 @@ public class EmpLoginDAO implements EmpLoginDAO_interface {
 		}
 	}
 	
-	private static final String LOGIN_STMT = "SELECT empAccount,empPassword from Employee where empAccount = ? and empPassword = ?";
+	private static final String LOGIN_STMT = "SELECT empAccount,empPassword,empPermission from Employee where empAccount = ? and empPassword = ?";
+	
+	private static final String LOGIN_STMT2 = "SELECT empAccount,empPassword,empPermission from Employee where empAccount = ? and empPassword = ? and empPermission = 0";
 	
 	@Override
 	public boolean loginAdmin(EmpLoginVO admin) {
@@ -40,6 +42,36 @@ public class EmpLoginDAO implements EmpLoginDAO_interface {
 			pstmt.setString(2, admin.getEmpPassword());
 
 			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				res = 1;
+			}
+			pstmt.close();
+			rs.close();
+			if (res == 1) {
+				return true;
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean loginAdminPermission(EmpLoginVO admin) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		int res = 0;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(LOGIN_STMT2);
+			
+			pstmt.setString(1, admin.getEmpAccount());
+			pstmt.setString(2, admin.getEmpPassword());
+
+			ResultSet rs = pstmt.executeQuery();
+			
 			if (rs.next()) {
 				res = 1;
 			}
