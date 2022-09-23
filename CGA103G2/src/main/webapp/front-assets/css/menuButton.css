@@ -1,0 +1,209 @@
+.ms-panel-header {
+    position: relative;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.ms-panel-header.header-mini {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.ms-panel-header p {
+    font-size: 13px;
+    margin: 0.25rem 0 0 0;
+}
+
+.ms-panel-header h6 {
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.ms-panel-header .btn {
+    margin-top: 0;
+}
+
+.ms-identifier-widget .ms-panel-header h6,
+.ms-identifier-widget .ms-panel-body p,
+.ms-identifier-widget .ms-panel-body i {
+    color: #fff;
+}
+
+.ms-panel-header .nav.btn-group {
+    flex-wrap: nowrap;
+}
+
+.ms-panel-header .d-flex:first-child {
+    flex-direction: column;
+}
+
+.ms-panel-header .d-flex:first-child .btn,
+.ms-wizard-pill.ms-form-wizard ul[role="tablist"] li,
+.style1-wizard.ms-form-wizard ul[role="tablist"] li {
+    margin-top: 1.5rem;
+}
+
+.ms-panel-header .d-flex:first-child .ms-graph-metrics.nav li {
+    flex: 0 0 auto;
+}
+
+.ms-identifier-widget .ms-panel-body p {
+    margin: 3rem 0;
+}
+
+.ms-identifier-widget .ms-panel-body i::before {
+    margin-top: 2rem;
+    display: block;
+    font-size: 3rem;
+}
+
+.ms-identifier-widget .ms-panel-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ms-chat-conversations .ms-panel-body {
+    max-height: 100vh;
+}
+
+.ms-email-panel .ms-panel-body {
+    display: flex;
+}
+
+.ms-email-panel .ms-panel-body {
+    flex-direction: column;
+}
+
+.ms-panel-body .description {
+    padding-bottom: 30px;
+}
+
+.ms-panel-body,
+.ms-panel-footer {
+    position: relative;
+    padding: 1.5rem;
+}
+
+.nav-tabs.left-tabs+.tab-content {
+    float: right;
+}
+
+.nav-tabs.right-tabs+.tab-content {
+    float: left;
+}
+
+.nav-tabs.left-tabs+.tab-content,
+.nav-tabs.right-tabs+.tab-content {
+    width: calc(100% - 120px);
+}
+
+.ms-text-success,
+.ms-text-success:hover,
+.ms-text-success:focus {
+    color: #5cb85c;
+}
+
+.ms-crypto-widget .table {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+}
+
+.ms-crypto-widget .nav-tabs.has-gap li a {
+/*     margin-right: 0; */
+/*     display: flex; */
+    padding: 1rem 5.75rem;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+}
+
+.accordion.has-gap .card-header {
+    border-radius: 3px 3px;
+}
+
+.accordion.has-gap .card:first-of-type,
+.accordion.has-gap .card:not(:first-of-type):not(:last-of-type) {
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.accordion.has-gap .card {
+    margin-bottom: 1rem;
+}
+
+.breadcrumb.breadcrumb-arrow.has-gap li {
+    margin-right: 10px;
+}
+
+.breadcrumb.breadcrumb-arrow:not(.has-gap) li:not(:first-child)::after,
+.breadcrumb.breadcrumb-arrow:not(.has-gap) li:not(:first-child)::before {
+    display: none;
+}
+
+.breadcrumb.breadcrumb-arrow:not(.has-gap) li:last-child::after {
+    display: block;
+}
+
+.pagination.has-gap .page-item .page-link {
+    margin-right: 0.425rem;
+}
+
+.nav-tabs.has-gap li a {
+    margin-right: 15px;
+}
+
+.nav-tabs.has-gap li:last-child a {
+    margin-right: 0;
+}
+
+.body-content {
+    position: relative;
+    background: #f0f0fa;
+    -webkit-transition: padding 0.3s;
+    transition: padding 0.3s;
+    min-height: 100vh;
+}
+
+.ms-widget.ms-has-new-msg .msg-count {
+    top: -7px;
+    right: 9px;
+    left: auto;
+}
+
+.ms-widget.ms-chat-conversations .ms-panel-footer {
+    padding: 0;
+}
+
+.ms-card.ms-widget {
+    border-radius: 0px;
+}
+
+.ms-widget .ms-chat-header {
+    display: flex;
+}
+
+.ms-widget .ms-chat-header .ms-chat-user-info {
+    display: none;
+}
+
+body {
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+.nav-tabs li a.active {
+    color: #fff;
+    background-color: #ff0018;
+}
+
+.nav-tabs li a {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    background: #e4e3e8;
+    color: #34334a;
+}

@@ -144,11 +144,13 @@ var shoppingCart = (function() {
 // 增加物品
 $('.add-to-cart').click(function(event) {
 	event.preventDefault();
+	var id = $(this).data('id');
 	var name = $(this).data('name');
 	var price = Number($(this).data('price'));
 	shoppingCart.addItemToCart(name, price, 1,nameid);
 	displayCart();
 });
+
 
 // 清除物品
 $('.clear-cart').click(function() {
@@ -170,7 +172,7 @@ function displayCart() {
 			+ "<td><button class='delete-item btn btn-danger' data-name=" + cartArray[i].name + ">X</button></td>"
 			+ " = "
 			+ "<td>" + cartArray[i].total + "</td>"
-			+ "</tr>";
+			+ "</tr>"
 	}
 	$('.show-cart').html(output);
 	$('.total-cart').html(shoppingCart.totalCart());
@@ -232,3 +234,7 @@ $('#submit2').on("click",  function(event) {
 });
 // 執行顯示購物車
 displayCart();
+
+
+
+

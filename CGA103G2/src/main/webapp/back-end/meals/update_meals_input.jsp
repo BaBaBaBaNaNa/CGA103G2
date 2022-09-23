@@ -84,10 +84,12 @@
 			</div>
 			 <div>
 			<label for="mealsControl">菜色控制:</label>
-			<input id ="mealsControl" name="mealsControl" type="text" value="${param.mealsControl}" onclick="hideContent('mealsControl.errors');" />
+			<input id ="mealsControl" name="mealsControl" type="radio" value="0" onclick="hideContent('mealsControl.errors');" />
+				下架
+				<input id ="mealsControl" name="mealsControl" type="radio" value="1" onclick="hideContent('mealsControl.errors');" />
+				上架
 			<span  id ="mealsControl.errors" class="error">${errorMsgs.mealsControl}</span>
 			</div>
-			
 			<div>
 				<div></div>
 				<input  type="hidden" name="action" value="update">

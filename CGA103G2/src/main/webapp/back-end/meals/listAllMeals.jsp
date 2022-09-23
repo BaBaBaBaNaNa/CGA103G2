@@ -69,12 +69,19 @@
 		<tr>
             <%-- <td>${s.count}</td> --%>
 			<td>${mealsVO.mealsID}</td>
-			<td>${mealsVO.mealsCategoryID}</td>
+<%-- 			<td>${mealsVO.mealsCategoryID}</td> --%>
+			<td>${mealsVO.mealsCategoryID}-[${mealsVO.mealsCategoryVO.mealsCategory}]</td>
 			<td>${mealsVO.mealsName}</td>
 			<td>${mealsVO.mealsPrice}</td>
 			<td>${mealsVO.mealsInfo}</td>
 			<td><img src="<%=request.getContextPath()%>/meals/DBGifReader?mealsID=${mealsVO.mealsID}" width="100px"></td> 
-			<td>${mealsVO.mealsControl}</td>
+			<td>${mealsVO.mealsControl==0?'下架':'上架'}</td>
+<%-- 			<td>(if(${mealsVO.mealsControl == 0}){ --%>
+<!-- 				上架 -->
+<!-- 			}else{ -->
+<!-- 			下架 -->
+<!-- 			})</td> -->
+
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/meals/Meals.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">

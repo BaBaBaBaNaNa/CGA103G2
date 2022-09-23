@@ -7,6 +7,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.job.model.JobVO;
 
 import java.sql.*;
 
@@ -27,7 +28,7 @@ public class BotqaDAO implements BotqaDAO_interface{
 	private static final String DELETE = "DELETE FROM botqa where keywordID = ?";
 	private static final String UPDATE = "UPDATE botqa set  keywordName =?, keywordContext =? where keywordID = ?";
 
-	
+	private static final String CheckRepeatkeywordName= "SELECT keywordName FROM botqa where keywordName = ?";
 	
 	@Override
 	public void insert(BotqaVO botqaVO) {
@@ -257,4 +258,53 @@ public class BotqaDAO implements BotqaDAO_interface{
 		return list;
 	}
 
+	@Override
+	public BotqaVO checkRepeatkeywordName(String keywordName) {
+		BotqaVO botqaVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(CheckRepeatkeywordName);
+			
+			pstmt.setString(1, keywordName);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				// empVo 也稱為 Domain objects
+				botqaVO = new BotqaVO();
+
+				botqaVO.setKeywordName(rs.getString("keywordName"));
+
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return botqaVO;
+	}
 }

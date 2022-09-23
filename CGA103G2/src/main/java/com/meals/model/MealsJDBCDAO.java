@@ -299,6 +299,11 @@ public class MealsJDBCDAO implements MealsDAO_interface {
 		}
 		return list;
 	}
+	 public List<MealsVO> getAll(Map<String, String[]> map){
+		 List<MealsVO> list = new ArrayList<MealsVO>();
+		return list;
+	 }
+	
 	  
     static byte[] bytes;
 	public static void main(String[] args)throws Exception {
@@ -348,7 +353,8 @@ public class MealsJDBCDAO implements MealsDAO_interface {
 	        }finally{
 	            bais.close();
 	        }
-	    } 
+	    }
+	    
 	  
 	}
 
