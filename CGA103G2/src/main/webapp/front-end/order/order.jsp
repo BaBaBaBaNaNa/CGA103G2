@@ -58,15 +58,6 @@
 
                         <a href="../../front-end/order/order-nel-yong.jsp" class="custom-btn btn btn-danger mt-3 ms-3">內用</a>
 
-                        <a href="" class="custom-btn btn btn-danger mt-3 ms-3">訂位</a>
-                    </div>
-
-                    <div class="col-lg-6 col-12">
-
-                        <p><strong>緯育 中壢Java班 CGA_103 第二組 </strong> 加油.</p>
-
-                        <p>會員的登入區</p>
-
                     </div>
 
                 </div>

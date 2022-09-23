@@ -56,4 +56,10 @@ public class MealsVO implements java.io.Serializable{
 		com.mealscateory.model.MealsCategoryVO mealsCategoryVO =mealsCategorySvc.getOneMealsCategory(mealsCategoryID);
 		return mealsCategoryVO;
     }
+	
+	@Override
+	public String toString() {
+		return "MealsVO [mealsID=" + mealsID + ", mealsName=" + mealsName +  "]";
+	}
+
 }

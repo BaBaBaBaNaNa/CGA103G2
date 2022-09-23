@@ -354,7 +354,12 @@ public class MealsJDBCDAO implements MealsDAO_interface {
 	            bais.close();
 	        }
 	    }
-	    
-	  
+
+		@Override
+		public List<MealsVO> getAll(Map<String, String[]> map) {
+			// TODO Auto-generated method stub
+			return null;
+		} 
+
 	}
 

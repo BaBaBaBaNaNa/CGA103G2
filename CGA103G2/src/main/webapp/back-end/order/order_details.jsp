@@ -371,7 +371,7 @@ h4 {
 		</c:if>
 
 		<ul>
-			<li style="margin-left: 10px"><a href='listAllOrders.jsp'>List</a> all Orders. <br>
+			<li style="margin-left: 10px"><a href='listAllOrders.jsp'>查看訂單</a><br>
 			<br></li>
 
 
@@ -409,12 +409,6 @@ h4 {
 			</li>
 		</ul>
 
-
-		<h3>訂單管理</h3>
-
-		<ul>
-			<li style="margin-left: 10px"><a href='addOrders.jsp'>Add</a> a new Orders.</li>
-		</ul>
 
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>

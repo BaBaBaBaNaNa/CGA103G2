@@ -380,7 +380,7 @@ th, td {
 		<table id="table-1">
 			<tr>
 				<td>
-					<h3>訂單明細新增 - addOrddetails</h3>
+					<h3>訂單明細新增 </h3>
 				</td>
 				<td>
 					<h4>
@@ -415,10 +415,16 @@ th, td {
 					<td><input type="TEXT" name="ordersID" size="45"
 						value="<%=(orddetailsVO == null) ? "" : orddetailsVO.getOrdersID()%>" /></td>
 				</tr>
+				<jsp:useBean id="mealsSvc" scope="page" class="com.meals.model.MealsService" />
 				<tr>
-					<td>餐點編號:</td>
-					<td><input type="TEXT" name="mealsID" size="45"
-						value="<%=(orddetailsVO == null) ? "" : orddetailsVO.getMealsID()%>" /></td>
+					<td>餐點:</td>
+					<td>
+					<select size="1" name="mealsID" >
+						<c:forEach var="mealsVO" items="${mealsSvc.all}">
+							<option value="${mealsVO.mealsID}" ${(param.mealsID==mealsVO.mealsID)?'selected':'' }>${mealsVO.mealsName}
+						</c:forEach>
+					</select>
+					</td>
 				</tr>
 				<tr>
 					<td>餐點數量:</td>
