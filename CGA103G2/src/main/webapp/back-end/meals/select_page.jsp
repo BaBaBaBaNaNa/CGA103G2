@@ -94,17 +94,17 @@
   <li>   
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/meals/Meals.do" name="form1" enctype="multipart/form-data">
         <b><font color=blue>萬用複合查詢:</font></b> <br>
-        <b>輸入員工編號:</b>
+        <b>輸入菜名編號:</b>
         <input type="text" name="mealsID" value="1"><br>
            
-       <b>輸入員工姓名:</b>
-       <input type="text" name="mealsName" value="mealsName"><br>
+       <b>輸入菜名:</b>
+       <input type="text" name="mealsName" value="松露薯條"><br>
        
 <!--        <b>輸入員工職位:</b> -->
 <!--        <input type="text" name="job" value="PRESIDENT"><br> -->
     
        <b>選擇部門:</b>
-       <select size="1" name="mealsCategoryId" >
+       <select size="1" name="mealsCategoryID" >
           <option value="">
          <c:forEach var="MealsCategoryVO" items="${MealscategorySvc.all}" > 
           <option value="${MealsCategoryVO.mealsCategoryId}">${MealsCategoryVO.mealsCategory}

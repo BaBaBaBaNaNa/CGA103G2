@@ -1,11 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.mealscateory.model.*"%>
-<%@ page import="com.mealscategory.controller.MealsCategoryServlet"%>
+<%@ page import="java.util.*,com.meals.model.MealsVO"%>
 
 <%
-MealsCategoryVO mealsCategoryVO =(MealsCategoryVO)request.getAttribute("mealsCategoryVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+MealsVO mealsVO = (MealsVO) request.getAttribute("mealsVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
 
 <!DOCTYPE html>
@@ -34,7 +32,7 @@ MealsCategoryVO mealsCategoryVO =(MealsCategoryVO)request.getAttribute("mealsCat
 <link href="../../back-assets/css/style.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.ico">
-<!-- empStyle -->
+
 <link href="../../back-assets/css/empStyle.css" rel="stylesheet">
 
 <link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
@@ -54,7 +52,7 @@ MealsCategoryVO mealsCategoryVO =(MealsCategoryVO)request.getAttribute("mealsCat
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
-	<main class="body-content">
+	<main class="body-content"padding-right: 0 px;>
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
 		<%@ include file="../../back-end/tool/UpSideBar.file"%>
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
@@ -64,30 +62,17 @@ MealsCategoryVO mealsCategoryVO =(MealsCategoryVO)request.getAttribute("mealsCat
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<div class="ms-auth-form">
-			<form METHOD="post" ACTION="MealsCategory.do" name="form1">
-				<h3>修改職位名稱</h3>
-				<div class="form-row">
-					<div class="col-md-12 ">
-						<label>職位編號</label>
-						<div class="input-group">
-							<input type="text" name="MealsCategoryId" value="${param.mealsCategoryId}" class="form-control" readonly="readonly">
-							
-						</div>
-					</div>
-					<div class="col-md-12 ">
-						<label>職位名稱</label>
-						<p>${errorMsgs.MealsCategory}</p>
-						<div class="input-group">
-							<input type="text" name="MealsCategory" value="${param.MealsCategory}" class="form-control" placeholder="請輸入職稱">
-						</div>
-					</div>
-				</div>
-				<input type="hidden" name="action" value="update">
-				<input type="hidden" name="mealsCategoryId" value="${param.mealsCategoryId}">
-				<input class="btn btn-primary mt-4 d-block w-100" type="submit" value="送出修改">
-			</form>
-		</div>
+		<h2	> 新增成功!</h2>
+		<table>
+			<tr>
+				<th>職位 : </th>
+				<th>職位 : </th>
+			</tr>
+			<tr>
+				<td>${mealsVO.mealsCategoryID}</td>
+				<td>${mealsVO.mealsName}</td>
+			</tr>
+		</table>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
@@ -114,4 +99,3 @@ MealsCategoryVO mealsCategoryVO =(MealsCategoryVO)request.getAttribute("mealsCat
 </body>
 
 </html>
-

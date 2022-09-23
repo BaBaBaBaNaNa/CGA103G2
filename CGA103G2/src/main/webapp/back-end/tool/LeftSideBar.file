@@ -38,8 +38,11 @@
 					<li><a href="${pageContext.request.contextPath}/back-end/product/product_grid.jsp">菜單網格</a></li>
 					<li><a href="${pageContext.request.contextPath}/back-end/product/product_add.jsp">加入菜樣</a></li>
 					<li><a href="${pageContext.request.contextPath}/back-end/product/product_detail.jsp">產品細節</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/mealscategory/nothing1.jsp">查詢目前菜系</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/mealscategory/MealsCategoryServlet.do?action=getAll">查看員工資料</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/meals/MealsServlet.do?action=getAll">查詢目前菜色</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/meals/mealsAdd.jsp">新增菜色</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/mealscategory/nothing1.jsp">查詢目前菜系1</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/mealscategory/MealsCategoryServlet.do?action=getAll">查看目前菜系</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/mealscategory/mealsCategoryAdd.jsp">新增菜系</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 菜單 end ----- ----- ----- -->
 
@@ -90,6 +93,13 @@
 				</ul></li>
 			<!-- ----- ----- ----- 顧客 end ----- ----- ----- -->
 
+			<!-- ----- ----- ----- 空白頁面 start ----- ----- ----- -->
+			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#customerService" aria-expanded="false" aria-controls="customerService"><span><i class="fas fa-file-invoice fs-16"></i>客服管理</span></a>
+				<ul id="customerService" class="collapse" aria-labelledby="customerService" data-parent="#side-nav-accordion">
+					<li><a href="${pageContext.request.contextPath}/back-end/botqa/BotqaServlet.do?action=getAll"">查看機器人回復</a></li>
+					<li><a href="${pageContext.request.contextPath}/back-end/botqa/botqaAdd.jsp">新增機器人回復</a></li>
+				</ul></li>
+			<!-- ----- ----- ----- 空白頁面 end ----- ----- ----- -->
 			<!-- ----- ----- ----- 空白頁面 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#nothing1" aria-expanded="false" aria-controls="nothing1"><span><i class="fas fa-file-invoice fs-16"></i>空白頁面</span></a>
 				<ul id="nothing1" class="collapse" aria-labelledby="nothing1" data-parent="#side-nav-accordion">

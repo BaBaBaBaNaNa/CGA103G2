@@ -1,5 +1,7 @@
 package com.mealscateory.model;
 import java.util.*;
+
+import com.job.model.JobVO;
 import com.meals.model.*;
 
 public interface MealsCategory_interface {
@@ -12,5 +14,7 @@ public interface MealsCategory_interface {
     public List<MealsCategoryVO> getAll(Map<String, String[]> map); 
     
     public Set<MealsVO> getMealsByMealsCategoryID(Integer mealsCategoryID);
+    
+    public MealsCategoryVO checkRepeatMealsCategoryName(String mealsCategory);
 
 }

@@ -16,15 +16,11 @@ public class DBGifReaderController extends HttpServlet {
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
-			System.out.println("1234");
 			Integer mealsID = Integer.valueOf(req.getParameter("mealsID"));
 			MealsService mealsSvc = new MealsService();
-			System.out.println("12345");
 			out.write(mealsSvc.getOneMeals(mealsID).getMealsPicture());
-			System.out.println("123");
 		} catch (Exception e) {
-			System.out.println("catch");
-			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/nopic.jpg");
+			InputStream in = getServletContext().getResourceAsStream("/back-end/resources/NoData/nopic.jpg");
 			byte[] buf = new byte[in.available()];
 			in.read(buf);
 			out.write(buf);

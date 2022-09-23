@@ -54,50 +54,52 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>所有員工資料 - listAllEmp.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/meals/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 
 
 <table>
 	<tr>
-		<th>員工編號</th>
-		<th>員工姓名</th>
-		<th>職位</th>
-		<th>雇用日期</th>
-		<th>薪水</th>
-		<th>獎金</th>
-		<th>部門</th>
+		<th>菜色編號</th>
+		<th>mealsCategoryID</th>
+		<th>菜色名稱</th>
+		<th>價錢</th>
+		<th>說明</th>
+		<th>照片</th>
+		<th>控制</th>
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
 	<%@ include file="pages/page1_ByCompositeQuery.file" %>
-	<c:forEach var="empVO" items="${listMeals_ByCompositeQuery}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		<tr align='center' valign='middle' ${(empVO.empno==param.empno) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
-			<td>${empVO.empno}</td>
-			<td>${empVO.ename}</td>
-			<td>${empVO.job}</td>
-			<td>${empVO.hiredate}</td>
-			<td>${empVO.sal}</td>
-			<td>${empVO.comm}</td>			
-			<td><c:forEach var="deptVO" items="${deptSvc.all}">
-                    <c:if test="${empVO.deptno==deptVO.deptno}">
-	                    ${deptVO.deptno}【${deptVO.dname} - ${deptVO.loc}】
+	<c:forEach var="mealsVO" items="${listMeals_ByCompositeQuery}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+		<tr align='center' valign='middle' ${(mealsVO.mealsCategoryID==param.mealsCategoryID) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
+			<td>${mealsVO.mealsID}</td>
+<%-- 			<td>${mealsVO.mealsCategoryID}</td> --%>
+			<td><c:forEach var="mealsCategoryVO" items="${MealsCategorySvc.all}">
+                    <c:if test="${mealsVO.mealsCategoryID==mealsCategoryVO.mealsCategoryId}">
+	                    ${mealsCategoryVO.mealsCategoryId}【${mealsCategoryVO.mealsCategory}】
                     </c:if>
                 </c:forEach>
 			</td>
+			<td>${mealsVO.mealsName}</td>
+			<td>${mealsVO.mealsPrice}</td>
+			<td>${mealsVO.mealsInfo}</td>
+			<td><img src="<%=request.getContextPath()%>/meals/DBGifReader?mealsID=${mealsVO.mealsID}" width="100px"></td> 
+<%-- 			<td>${mealsVO.mealsControl}</td>		 --%>
+		    <td>${mealsVO.mealsControl==0?'下架':'上架'}</td>
 						<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/meals/Meals.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改"> 
-			     <input type="hidden" name="empno"      value="${empVO.empno}">
+			     <input type="hidden" name="mealsID"      value="${mealsVO.mealsID}">
 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
 			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
 			     <input type="hidden" name="action"	    value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/meals/Meals.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
-			     <input type="hidden" name="empno"      value="${empVO.empno}">
+			     <input type="hidden" name="mealsID"      value="${mealsVO.mealsID}">
 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
 			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
 			     <input type="hidden" name="action"     value="delete"></FORM>

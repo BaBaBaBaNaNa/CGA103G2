@@ -1,11 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.mealscateory.model.*"%>
-<%@ page import="com.mealscategory.controller.MealsCategoryServlet"%>
+<%@ page import="java.util.*,com.botqa.model.BotqaVO"%>
 
 <%
-MealsCategoryVO mealsCategoryVO =(MealsCategoryVO)request.getAttribute("mealsCategoryVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+BotqaVO botqaVO = (BotqaVO) request.getAttribute("botqaVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
 
 <!DOCTYPE html>
@@ -65,26 +63,32 @@ MealsCategoryVO mealsCategoryVO =(MealsCategoryVO)request.getAttribute("mealsCat
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 		<div class="ms-auth-form">
-			<form METHOD="post" ACTION="MealsCategory.do" name="form1">
+			<form METHOD="post" ACTION="BotqaServlet.do" name="form1">
 				<h3>修改職位名稱</h3>
 				<div class="form-row">
 					<div class="col-md-12 ">
-						<label>職位編號</label>
+						<label>機器人回應編號</label>
 						<div class="input-group">
-							<input type="text" name="MealsCategoryId" value="${param.mealsCategoryId}" class="form-control" readonly="readonly">
-							
+							<input type="text" name="keywordID" value="${param.keywordID}" class="form-control" readonly="readonly">
 						</div>
 					</div>
 					<div class="col-md-12 ">
-						<label>職位名稱</label>
-						<p>${errorMsgs.MealsCategory}</p>
+						<label>回應名稱</label>
+						<p>${errorMsgs.keywordName}</p>
 						<div class="input-group">
-							<input type="text" name="MealsCategory" value="${param.MealsCategory}" class="form-control" placeholder="請輸入職稱">
+							<input type="text" name="keywordName" value="${param.keywordName}" class="form-control" placeholder="請輸入職稱">
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<label>回應內容</label>
+						<p>${errorMsgs.keywordContext}</p>
+						<div class="input-group">
+							<input type="text" name="keywordContext" value="${param.keywordContext}" class="form-control" placeholder="請輸入職稱">
 						</div>
 					</div>
 				</div>
 				<input type="hidden" name="action" value="update">
-				<input type="hidden" name="mealsCategoryId" value="${param.mealsCategoryId}">
+				<input type="hidden" name="keywordID" value="${param.keywordID}">
 				<input class="btn btn-primary mt-4 d-block w-100" type="submit" value="送出修改">
 			</form>
 		</div>
@@ -114,4 +118,3 @@ MealsCategoryVO mealsCategoryVO =(MealsCategoryVO)request.getAttribute("mealsCat
 </body>
 
 </html>
-

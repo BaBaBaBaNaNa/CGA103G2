@@ -44,6 +44,23 @@
   height: 200px;
   align-self: center;
 }
+.Info{
+float:right;
+ color: #fff;
+    background-color: #0d6efd;
+	    padding: 0.375rem 0.75rem;
+	    border-radius: 0.25rem;
+	    border: 1px solid transparent;
+}
+span{
+float:left;
+ color: #fff;
+    background-color: #0d6efd;
+	    padding: 0.375rem 0.75rem;
+	    border-radius: 0.25rem;
+	    border: 1px solid transparent;
+
+}
 </style>
 </head>
 
@@ -83,6 +100,7 @@
 							<div class="card-block">
 								<h4 class="card-title">Orange</h4>
 								<p class="card-text">Price: $20</p>
+								<a class="Info">123</a>
 								<a href="#" data-name="Orange" data-price="20" class="add-to-cart btn btn-primary">加入購物車</a>
 							</div>
 						</div>
@@ -91,7 +109,9 @@
 						<div class="card" style="width: 20rem;">
 							<img class="card-img-top" src="http://images.all-free-download.com/images/graphicthumb/vector_illustration_of_ripe_bananas_567893.jpg" alt="Card image cap">
 							<div class="card-block">
+							
 								<h4 class="card-title">Banana</h4>
+								<span >123</span>
 								<p class="card-text">Price: $15</p>
 								<a href="#" data-name="Banana" data-price="15" class="add-to-cart btn btn-primary">加入購物車</a>
 							</div>
