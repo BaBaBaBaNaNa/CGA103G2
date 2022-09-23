@@ -108,8 +108,10 @@
     	    </td>
 			<td>${ordersVO.ordersBuildDate}</td> 
 			<td>
-				 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/order/order-details.jsp" style="margin-bottom: 0px;">
-			     <input type="submit" value="明細"></FORM>
+				 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/orddetails/orddetails.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="明細">
+			     <input type="hidden" value="${ordersVO.ordersID}" name="orderDetailId">
+			     <input type="hidden" name="action"	value="getOne_For_Display2"></FORM>
 			</td>
 		</tr>
 		</c:if>

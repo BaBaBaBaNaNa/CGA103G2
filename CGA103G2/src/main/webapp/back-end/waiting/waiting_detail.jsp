@@ -172,6 +172,12 @@ input:checked + label:after {
 										<div class="carousel-inner">
 										總組數：
 										<span id="totalNO">0</span>
+										<div class="carousel-inner">
+										最近5組已入座號碼：
+										<span id="seatedList">0</span>
+										<div class="carousel-inner">
+										最近5組已過號號碼：
+										<span id="overList">0</span>
 										</div>
 
 									</div>
@@ -221,7 +227,7 @@ input:checked + label:after {
 	                 url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
 
 	                 data: {
-	                	 action:  "getNextNO", 
+	                	 action:  "doNextNO", 
 	                 },
 
 	                 success : function(res){
@@ -292,7 +298,8 @@ input:checked + label:after {
 	        });
 	        
 	        $("#openOrCloseBtn").click(function(){
-
+					localStorage.clear()	
+	        	
 	            $.ajax({
 
 
@@ -340,17 +347,28 @@ input:checked + label:after {
 	
 	<script type="text/javascript">
 	function showCurrentNO(res){
-		document.getElementById("currentNO").innerHTML = JSON.parse(res).currentNO
+		localStorage.setItem('currentNO', JSON.parse(res).currentNO)
+		document.getElementById("currentNO").innerHTML = localStorage.getItem('currentNO')
+	}
+	
+	function showFirstCurrentNO(){
+		document.getElementById("currentNO").innerHTML = localStorage.getItem('currentNO')
 	}
 	
 	function showNextNO(res){
-		document.getElementById("nextNO").innerHTML = JSON.parse(res).nextNO
+		localStorage.setItem('nextNO', JSON.parse(res).nextNO)
+		document.getElementById("nextNO").innerHTML = localStorage.getItem('nextNO')
+	}
+
+	function showFirstNextNO(){
+		document.getElementById("nextNO").innerHTML = localStorage.getItem('nextNO')
+	}
+	
+	function doOverList(res){
+		console.log(JSON.parse(res))
 	}
 	
 	function doSeatedList(res){
-		console.log(JSON.parse(res))
-	}
-	function doOverList(res){
 		console.log(JSON.parse(res))
 	}
 	</script>
@@ -410,10 +428,68 @@ input:checked + label:after {
 	      });
 		  
 	  }
-	
+	  function showSeatedList(){
+
+	      $.ajax({
+
+
+	          url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
+
+	          data: {
+	         	 action: "showSeatedList", 
+	          },
+
+	          success : function(res){
+			  document.getElementById("seatedList").innerHTML = JSON.parse(res).seatedList
+	          },
+	         	 
+	              
+	          
+
+	          error:function(xhr, ajaxOptions, thrownError){
+
+	              alert(xhr.status+"\n"+thrownError);
+	          }
+
+	      });
+		  
+	  }
+	  
+	  function showOverList(){
+
+	      $.ajax({
+
+
+	          url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
+
+	          data: {
+	         	 action: "showOverList", 
+	          },
+
+	          success : function(res){
+	         	 
+			  document.getElementById("overList").innerHTML = JSON.parse(res).overList
+	          },
+	         	 
+	              
+	          
+
+	          error:function(xhr, ajaxOptions, thrownError){
+
+	              alert(xhr.status+"\n"+thrownError);
+	          }
+
+	      });
+		  
+	  }
+	  
 	window.onload = function (){
-		setInterval(showTotalNO, 5000);
-		setInterval(showRemainNO, 5000);
+		showFirstCurrentNO()
+		showFirstNextNO()
+		setInterval(showTotalNO, 1000);
+		setInterval(showRemainNO, 1000);
+		setInterval(showSeatedList, 1000);
+		setInterval(showOverList, 1000);
 	}
 	
 	</script>

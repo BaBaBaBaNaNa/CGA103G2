@@ -354,7 +354,6 @@ public class MealsJDBCDAO implements MealsDAO_interface {
 	            bais.close();
 	        }
 	    }
-	    
-	  
+
 	}
 

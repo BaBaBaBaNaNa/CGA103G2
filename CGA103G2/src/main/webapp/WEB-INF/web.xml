@@ -25,9 +25,22 @@
 		<servlet-name>MemServlet</servlet-name>
 		<url-pattern>/back-end/member/mem.do</url-pattern>
 		<url-pattern>/front-end/member/mem.do</url-pattern>
+		<url-pattern>/back-end/member/MemServlet.do</url-pattern>
+		<url-pattern>/front-end/member/MemServlet.do</url-pattern>
 		<url-pattern>/member/mem.do</url-pattern>
 	</servlet-mapping>
 	<!-- 會員 stop -->
+	<!-- 會員登入 start -->
+		<servlet>
+		<servlet-name>MemLoginServlet</servlet-name>
+		<servlet-class>com.mem.controller.MemLoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemLoginServlet</servlet-name>
+		<url-pattern>/front-end/member/MemLoginServlet.do</url-pattern>
+<!-- 		<url-pattern>/MemLoginServlet.do</url-pattern> -->
+	</servlet-mapping>
+	<!-- 會員登入 stop -->
 	<servlet>
 		<servlet-name>MealsCategoryServlet</servlet-name>
 		<servlet-class>com.mealscategory.controller.MealsCategoryServlet</servlet-class>
@@ -90,6 +103,16 @@
 		<servlet-name>NewsServlet</servlet-name>
 		<url-pattern>/back-end/news/news.do</url-pattern>
 <!-- 		<url-pattern>/news/news.do</url-pattern> -->
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>QueuerServlet</servlet-name>
+		<servlet-class>com.queuer.controller.QueuerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QueuerServlet</servlet-name>
+		<url-pattern>/back-end/queuer/QueuerServlet.do</url-pattern>
+		<url-pattern>/front-end/queuer/QueuerServlet.do</url-pattern>
+		<url-pattern>/queuer/QueuerServlet.do</url-pattern>
 	</servlet-mapping>
 	
 <!-- 	<filter> -->

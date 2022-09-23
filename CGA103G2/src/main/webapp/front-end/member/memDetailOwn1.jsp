@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>義鄉人 - 義式餐酒館 - 消息 - 緯育 中壢Java班 CGA_103 第二組</title>
+<title>義鄉人 - 義式餐酒館 - 會員中心 - 緯育 中壢Java班 CGA_103 第二組</title>
 
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
 
@@ -37,6 +37,7 @@
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
+
 <body>
 	<!-- ----- ----- ----- 最上面 選擇列 start ----- ----- ----- -->
 	<%@ include file="../../front-end/tool/UpSideBar.file"%>
@@ -49,91 +50,103 @@
 		<!-- ----- ----- ----- 中間上面 end ----- ----- ----- -->
 
 		<!-- ----- ----- ----- 中間內容 start ----- ----- ----- -->
+		<!-- 		<form name="myform" action="MemLoginServlet.do" method="POST"> -->
+
+		<!-- 			<div id="wrapper"> -->
+		<!-- 				<div id="wrappertop"></div> -->
+
+		<!-- 				<div id="wrappermiddle"> -->
+		<!-- 					<h2>義鄉人 會員登入系統</h2> -->
+
+		<!-- 					<div id="username_input"> -->
+
+		<!-- 						<div id="username_inputleft"></div> -->
+
+		<!-- 						<div id="username_inputmiddle"> -->
+		<!-- 							<input type="text" name="memAccount" id="url" value="會員帳號"> -->
+		<!-- 						</div> -->
+
+		<!-- 						<div id="username_inputright"></div> -->
+
+		<!-- 					</div> -->
+
+		<!-- 					<div id="password_input"> -->
+
+		<!-- 						<div id="password_inputleft"></div> -->
+
+		<!-- 						<div id="password_inputmiddle"> -->
+		<!-- 							<input type="password" name="memPassword" id="url" -->
+		<!-- 								value="Password"> -->
+		<!-- 						</div> -->
+
+		<!-- 						<div id="password_inputright"></div> -->
+
+		<!-- 					</div> -->
+		<!-- 					<div id="submit"> -->
+		<!-- 						<input type="submit" id="submit1" value="Sign In"> -->
+
+		<!-- 					</div> -->
+		<!-- 				</div> -->
+
+		<!-- 				<div id="wrapperbottom"></div> -->
+		<!-- 			</div> -->
+		<!-- 		</form> -->
+		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
+		<h2>&emsp;${memVO.memName}&emsp;個人訊息</h2>
+		<table class="dataTable table-striped thead-primary"
+			style="width: 80%">
+			<table>
+			<tr>
+
+				<th style="width: 10%;"><br>會員編號</th>
+				<td style="width: 30%; text-align: left;">&emsp;&emsp;&emsp;${memVO.memID}</td>
+				<!-- 照片未完成 -->
+				<!-- 						<th style="width: 40% ;">員工照片</th> -->
+			</tr>
+			<tr>
+				<th style="width: 10%;"><br>會員姓名</th>
+				<td style="width: 10%; text-align: left;">&emsp;&emsp;&emsp;${memVO.memName}</td>
+								
+			</tr>
+			<tr>
+				<th style="width: 10%;"><br>帳號</th>
+				<td style="width: 30%; text-align: left;">&emsp;&emsp;&emsp;${memVO.memAccount}</td>
+			</tr>
+
+
+			<tr>
+				<th style="width: 10%;"><br>電話</th>
+				<td style="text-align: ;" colspan="2">&emsp;&emsp;&emsp;${memVO.memPhone}</td>
+			</tr>
+			<tr>
+				<th style="width: 10%;"><br>地址</th>
+				<td style="text-align: left;" colspan="2">&emsp;&emsp;&emsp;${memVO.memAddress}</td>
+			</tr>
+			<tr>
+				<th style="width: 10%;"><br>信箱</th>
+				<td style="text-align: left;" colspan="2">&emsp;&emsp;&emsp;${memVO.memEmail}</td>
+			</tr>
+			<tr>
+				<th style="width: 10%;"><br>生日</th>
+				<td style="text-align: left;" colspan="2">&emsp;&emsp;&emsp;${memVO.memBirthday}</td>
+			</tr>
+			</table>
+			<tr>
+				<td colspan="3">
+					<FORM METHOD="post"
+						ACTION="${pageContext.request.contextPath}/front-end/member/MemServlet.do"
+						style="margin-bottom: 0px;">
+						&emsp;&emsp;&emsp; <input type="submit" value="修改"
+							class="btn btn-primary mt-4 d-block"
+							style="width: 50%; margin: 0 auto;"> <input type="hidden"
+							name="memID" value="${memVO.memID}"> <input type="hidden"
+							name="action" value="getOne_For_Update_mem">
+					</FORM>
+				</td>
+			</tr>
+		</table>
+		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
-	<!-- ----- ----- ----- 中間上面 start ----- ----- ----- -->
-	<!-- <header class="site-header site-menu-header">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-10 col-12 mx-auto">
-                        <h1 class="text-white">最新消息</h1>
-
-                        <strong class="text-white">餐廳最新消息</strong>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="overlay"></div>
-        </header> -->
-	<header></header>
-	<!-- ----- ----- ----- 中間上面 end ----- ----- ----- -->
-	<!-- ----- ----- ----- 中間內容 start ----- ----- ----- -->
-	<section class="news section-padding bg-white">
-		<div class="container">
-			<div class="row">
-				<div class="col-12" style="text-align:center;">
-				<h2 class="mb-lg-5 mb-4">目前候位號碼</h2>
-				<h1><span id="currentNO"></span></h1>
-				</div>
-				<div class="col-lg-6 col-md-6 col-12">
-					<div class="news-thumb mb-4">
-
-
-						<div class="news-text-info news-text-info-large"></div>
-					</div>
-				</div>
-
-				<div class="col-lg-6 col-md-6 col-12">
-					<div class="news-thumb mb-4">
-
-						<div class="news-text-info news-text-info-large"></div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section>
-
-	<section class="news section-padding">
-		<div class="container">
-			<div class="row">
-
-				<div class="col-lg-6 col-md-6 col-12" style="text-align:center;">
-					<h3>您的候位號碼</h3>
-					<span id="queuerNO"></span>
-				</div>
-				<div class="col-lg-6 col-md-6 col-12" style="text-align:center;">
-					<h3>
-						目前仍有<span id="remainNO"></span>組
-					</h3>
-
-				</div>
-
-				<div class="col-12" style="text-align:center;margin-top:100px;">
-					<button type="button" id="queueInListBtn" onclick="queueInListBtn">我要候位</button>
-						<div class="news-text-info"></div>
-				</div>
-
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="news-thumb mb-4">
-
-						<div class="news-text-info"></div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="news-thumb mb-4">
-
-						<div class="news-text-info"></div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section>
-	<!-- ----- ----- ----- 中間內容 end ----- ----- ----- -->
-	<main></main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 底部 start ----- ----- ----- -->
@@ -169,7 +182,7 @@
 				</div>
 
 				<div class="col-lg-4 col-md-6 col-xs-12 tooplate-mt30">
-					<h6 class="text-white mb-lg-4 mb-3">Social</h6>
+					<h6 class="text-white mb-lg-4 mb-3">社群</h6>
 
 					<ul class="social-icon">
 						<li><a href="#" class="social-icon-link bi-facebook"></a></li>
@@ -201,7 +214,6 @@
 	<!-- ----- ----- ----- 底部 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 跳出預先訂位頁面 start ----- ----- ----- -->
-	<!-- Modal -->
 	<div class="modal fade" id="BookingModal" tabindex="-1"
 		aria-labelledby="BookingModal" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-xl">
@@ -288,139 +300,7 @@
 	<script src="../../front-assets/js/jquery.min.js"></script>
 	<script src="../../front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
 	<script src="../../front-assets/js/custom.js"></script>
-
-	<script type="text/javascript">
-  
-  function showQueuerNO(res){
-		
-	  
-      	  localStorage.setItem('today', showToday())
-      	  localStorage.setItem('period', timePeriod())
-	      localStorage.setItem('queuerNO', JSON.parse(res).queuerNO)
-		  
-		  document.getElementById("queuerNO").innerHTML = localStorage.getItem('queuerNO')
-	
-  }
-  function showFirstQueuerNO(){
-	  document.getElementById("queuerNO").innerHTML = localStorage.getItem('queuerNO')
-  }
-  function showToday(){
-      let date = new Date();
-      date = new Date();
-      today = new Date();
-      yy=date.getFullYear();
-  	  mm=date.getMonth()+1;
-  	  dd=date.getDate();
-  	  
-  	  today =  yy+"/"+mm+"/"+dd;
-      return today;
-  }
-  function timePeriod(){
-      Today = new Date();
-      time = Today.getHours();
-      period = "";
-
-      if(time < 17){
-          period = '中午';
-      }else{
-          period = '晚上';
-      }
-
-      return period;
-  }
-  
-  
-  function showRemainNO(){
-
-      $.ajax({
-
-
-          url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
-
-          data: {
-         	 action: "showRemainNO", 
-          },
-
-          success : function(res){
-         	 
-		  document.getElementById("remainNO").innerHTML = JSON.parse(res).remainNO
-          },
-         	 
-
-          error:function(xhr, ajaxOptions, thrownError){
-
-              alert(xhr.status+"\n"+thrownError);
-          }
-
-      });
-	  
-  }
-  
-  function showCurrentNO(){
-      $.ajax({
-
-
-          url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",
-
-				data : {
-					action : "showCurrentNO",
-				},
-
-				success : function(res) {
-
-					document.getElementById("currentNO").innerHTML = JSON.parse(res).currentNO
-				},
-
-				error : function(xhr, ajaxOptions, thrownError) {
-
-					alert(xhr.status + "\n" + thrownError);
-				}
-
-			});
-
-		}
-
-		window.onload = function() {
-			
-			showFirstQueuerNO()
-			setInterval(showRemainNO, 1000);
-			setInterval(showCurrentNO, 1000);
-
-		}
-	</script>
-		<script type="text/javascript">
-    
-    $(document).ready(function(){
-    	 
-        $("#queueInListBtn").click(function(){
-
-            $.ajax({
-
-                 url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
-
-                 data: {
-                	 action: "queueInList", 
-                 },
-
-                 success : function(res){
-                	 
-                	 showQueuerNO(res)
-                 },
-                 
-
-                 error:function(xhr, ajaxOptions, thrownError){
-
-                     alert(xhr.status+"\n"+thrownError);
-                 }
-
-             });
-
-        });
-
-     });  
-
- </script>
-	
+	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 </body>
 
 </html>

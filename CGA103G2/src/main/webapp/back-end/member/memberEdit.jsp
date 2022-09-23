@@ -107,6 +107,15 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 						value="<%=memVO.getMemPassword()%>" required /></td>
 				</tr>
 				<tr>
+					<td>會員性別</td>
+					<td>
+					<select name="memGender">
+					<option value="0" <%=memVO.getMemGender() == 0 ? "selected": ""%>>男生</option>
+					<option value="1" <%=memVO.getMemGender() == 1 ? "selected": ""%>>女生</option>
+					</select>
+					</td>
+				</tr>
+				<tr>
 					<td>權限</td>
 					<td><input type="text" name="memPermission"
 						value="<%=memVO.getMemPermission()%>" required /></td>

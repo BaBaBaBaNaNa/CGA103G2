@@ -278,14 +278,14 @@
 		<th>櫃台員工編號</th>
 		<th>外送員工編號</th>
 		<th>桌子編號</th>
-		<th>訂單種類(外帶 外送 內用)</th>
+		<th>訂單種類</th>
 		<th>訂單總金額</th>
-		<th>訂單狀態(完成, 未完成, 退回)</th>
+		<th>訂單狀態</th>
 		<th>取餐地點</th>
 		<th>成立訂單日</th>
 		<th>預計製作日</th>
+		<th>訂單明細</th>
 		<th>修改</th>
-<!-- 		<th>刪除</th> -->
 	</tr>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="ordersVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
@@ -310,6 +310,15 @@
 			<td>${ordersVO.ordersDestination}</td>
 			<td>${ordersVO.ordersBuildDate}</td> 
 			<td>${ordersVO.ordersMakeDate}</td>
+			
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/orddetails/orddetails.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="訂單明細" >
+			     <input type="hidden" value="${ordersVO.ordersID}" name="orderDetailId">
+			     <input type="hidden" name="action"	value="getOne_For_Display"></FORM>
+			     
+			</td>
+			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/order/orders.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">

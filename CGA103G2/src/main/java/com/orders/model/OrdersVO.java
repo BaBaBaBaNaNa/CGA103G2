@@ -3,6 +3,8 @@ package com.orders.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+
+
 public class OrdersVO implements Serializable{
 	private Integer ordersID; 
 	private Integer memID;
@@ -82,6 +84,9 @@ public class OrdersVO implements Serializable{
 		this.ordersMakeDate = ordersMakeDate;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "OrdersVO [ordersID=" + ordersID  +  "]";
+	}
 	
 }

@@ -19,15 +19,19 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <link href="front-assets/bootstrap_css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/front-assets/bootstrap_css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="front-assets/bootstrap_css/bootstrap-icons.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/front-assets/bootstrap_css/bootstrap-icons.css" rel="stylesheet">
 
-    <link href="front-assets/css/tooplate-crispy-kitchen.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/front-assets/css/tooplate-crispy-kitchen.css" rel="stylesheet">
 
+<<<<<<< HEAD
     <link href="front-assets/css/navbar.css" rel="stylesheet">
     
     <link href="front-assets/css/datepicker.css" rel="stylesheet">
+=======
+    <link href="<%=request.getContextPath()%>/front-assets/css/navbar.css" rel="stylesheet">
+>>>>>>> refs/heads/Hui
     <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -167,6 +171,9 @@
 				src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
 			<script src="front-assets/js/bootstrap-datepicker.zh-TW.min.js"></script>
+    		<script src="<%=request.getContextPath()%>/front-assets/js/jquery.min.js"></script>
+    		<script src="<%=request.getContextPath()%>/front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
+    		<script src="<%=request.getContextPath()%>/front-assets/js/custom.js"></script>
 
 			<script>
 				var dp1 = document.getElementById('dp1');

@@ -64,24 +64,24 @@
             <div class="container">
                 <div class="row">
 
-                    <h2 class="mb-lg-5 mb-4">最近更新資訊</h2>
+<!--                     <h2 class="mb-lg-5 mb-4">最近更新資訊</h2> -->
 
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="news-thumb mb-4">
-                            <a href="../../front-end/news/news-detail.jsp">
-                                <img src="../../front-assets/images/news/pablo-merchan-montes-Orz90t6o0e4-unsplash.jpg"
-                                    class="img-fluid news-image" alt="">
-                            </a>
+<!--                     <div class="col-lg-6 col-md-6 col-12"> -->
+<!--                         <div class="news-thumb mb-4"> -->
+<!--                             <a href="../../front-end/news/news-detail.jsp"> -->
+<!--                                 <img src="../../front-assets/images/news/pablo-merchan-montes-Orz90t6o0e4-unsplash.jpg" -->
+<!--                                     class="img-fluid news-image" alt=""> -->
+<!--                             </a> -->
 
-                            <div class="news-text-info news-text-info-large">
-                                <span class="category-tag bg-danger">Featured</span>
+<!--                             <div class="news-text-info news-text-info-large"> -->
+<!--                                 <span class="category-tag bg-danger">Featured</span> -->
 
-                                <h5 class="news-title mt-2">
-                                    <a href="../../front-end/news/news-detail.jsp" class="news-title-link">甚麼是義大利麵</a>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
+<!--                                 <h5 class="news-title mt-2"> -->
+<!--                                     <a href="../../front-end/news/news-detail.jsp" class="news-title-link">甚麼是義大利麵</a> -->
+<!--                                 </h5> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
 
             </div>
       
@@ -106,6 +106,7 @@
 	                </div>
 	            </div>
 	        </div>
+	        <hr>
         </c:if>
         </c:forEach>
     </div>

@@ -2,6 +2,7 @@ package com.mem.model;
 
 import java.util.List;
 
+
 public class MemService {
 
 	private MemDAO_interface dao;
@@ -86,5 +87,8 @@ public class MemService {
 
 	public List<MemVO> getAll() {
 		return dao.getAll();
+	}
+	public MemVO getOwnMem(String memAccount) {
+		return dao.findByMemAccount(memAccount);
 	}
 }
