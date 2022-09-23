@@ -83,7 +83,7 @@
 				<th style="width: 5% ;">編號</th>
 				<th style="width: 20% ;">職務<br>名稱</th>
 				<th style="width: 5% ;">修改</th>
-				<th style="width: 5% ;">刪除</th>
+				<th style="width: 5% ; display: none ;">刪除</th>
 			</tr>
 			<div style="text-align: center;">
 			<%@ include file="../../back-end/tool/page1.file"%>
@@ -97,9 +97,10 @@
 							<input type="submit" value="修改"> <input type="hidden" name="jobID" value="${jobVO.jobID}"> <input type="hidden" name="action" value="getOne_For_Update">
 						</FORM>
 					</td>
-					<td>
+					<td style="display: none ;">
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/job/JobServlet.do" style="margin-bottom: 0px;">
-							<input type="submit" value="刪除" disabled="disabled">
+<!-- 							        "submit" -->
+							<input type="hidden" value="刪除" disabled="disabled">
 							<input type="hidden" name="jobID" value="${jobVO.jobID}">
 							<input type="hidden" name="action" value="delete">
 						</FORM>

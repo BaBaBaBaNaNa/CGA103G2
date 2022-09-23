@@ -90,12 +90,12 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
   			<div style= "margin:0 auto;">
   			<div>
   		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/employee/EmpServlet.do" name="form1">
-        	<b><font color=blue>萬用複合查詢:</font></b> <br>
+        	<b><font color=blue>複合查詢:</font></b> <br>
         	<b>輸入員工編號:</b>
-        	<input type="text" name="empID" value="1"><br>
+        	<input type="text" name="empID"><br>
            
        		<b>輸入員工姓名:</b>
-      		<input type="text" name="empName" value="周杰倫"><br>
+      		<input type="text" name="empName"><br>
        
        		<b>輸入員工職位:</b>
        		<select size="1" name="jobID" >
@@ -127,7 +127,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 				<th style="width: 10% ;">員工<br>職位</th>
 				<th style="width: 10% ;">員工<br>入職日期</th>
 				<th style="width: 5% ;">修改</th>
-				<th style="width: 5% ;">刪除</th>
+				<th style="width: 5% ; display: none">刪除</th>
 			</tr>
 			<div style="text-align: center">
 			<%@ include file="../../back-end/tool/page1.file"%>
@@ -149,10 +149,11 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 							<input type="submit" value="修改"> <input type="hidden" name="empID" value="${empVO.empID}"> <input type="hidden" name="action" value="getOne_For_Update">
 						</FORM>
 					</td>
-					<td style="width: 5% ; height:100px">
+					<td style="width: 5% ; height:100px ; display: none">
 						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;">
-							<input type="submit" value="刪除" disabled="disabled">
-							<input type="hidden" name="empID" value="${empVO.empID}">
+<!-- 							        "submit" -->
+							<input type="hidden" value="刪除" disabled="disabled">
+							<input type="hidden" name="empID" value="${empVO.empID}" >
 							<input type="hidden" name="action" value="delete">
 						</FORM>
 					</td>
