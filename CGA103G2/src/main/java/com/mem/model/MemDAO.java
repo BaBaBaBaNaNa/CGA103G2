@@ -332,7 +332,7 @@ public List<MemVO> getAll() {
 
 public static void main(String[] args) {
 
-	MemJDBCDAO dao = new MemJDBCDAO();
+//	MemJDBCDAO dao = new MemJDBCDAO();
 	// 新增  done
 //	MemVO memVO1 = new MemVO();
 //	memVO1.setMemID(12);
@@ -386,20 +386,20 @@ public static void main(String[] args) {
 	
 	
 	// 多筆查詢  done
-	List<MemVO> list = dao.getAll();
-	for (MemVO aMem : list) {
-		System.out.print(aMem.getMemID() + ",");
-		System.out.print(aMem.getMemName() + ",");
-		System.out.print(aMem.getMemAccount() + ",");
-		System.out.print(aMem.getMemPassword() + ",");
-		System.out.print(aMem.getMemPermission() + ",");
-		System.out.print(aMem.getMemPhone() + ",");
-		System.out.println(aMem.getMemAddress() + ",");
-		System.out.println(aMem.getMemEmail() + ",");
-		System.out.println(aMem.getMemBirthday()+ ",");
-		System.out.println(aMem.getMemPermission()+ ",");
-		System.out.println("---------------------");
-	}
+//	List<MemVO> list = dao.getAll();
+//	for (MemVO aMem : list) {
+//		System.out.print(aMem.getMemID() + ",");
+//		System.out.print(aMem.getMemName() + ",");
+//		System.out.print(aMem.getMemAccount() + ",");
+//		System.out.print(aMem.getMemPassword() + ",");
+//		System.out.print(aMem.getMemPermission() + ",");
+//		System.out.print(aMem.getMemPhone() + ",");
+//		System.out.println(aMem.getMemAddress() + ",");
+//		System.out.println(aMem.getMemEmail() + ",");
+//		System.out.println(aMem.getMemBirthday()+ ",");
+//		System.out.println(aMem.getMemPermission()+ ",");
+//		System.out.println("---------------------");
+//	}
 }
 
 

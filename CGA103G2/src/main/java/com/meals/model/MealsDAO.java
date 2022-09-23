@@ -328,11 +328,4 @@ public class MealsDAO implements MealsDAO_interface {
 			}
 			return list;
 	 }
-
-	@Override
-	public List<MealsVO> getAll(Map<String, String[]> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
