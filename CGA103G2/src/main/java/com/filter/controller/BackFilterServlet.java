@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 /****************************************
  * 限制 "/back-end/*" 底下的頁面
  ****************************************/
-//@WebFilter(	filterName = "BackFilterServlet",
-//			servletNames = {"/BackFilterServlet"},
-//			urlPatterns = {"/back-end/*"}
-//)
+@WebFilter(	filterName = "BackFilterServlet",
+			servletNames = {"/BackFilterServlet"},
+			urlPatterns = {"/back-end/*"}
+)
 public class BackFilterServlet extends HttpFilter implements Filter {
 
 	public BackFilterServlet() {

@@ -90,12 +90,12 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
   			<div style= "margin:0 auto;">
   			<div>
   		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/employee/EmpServlet.do" name="form1">
-        	<b><font color=blue>複合查詢:</font></b> <br>
+        	<b><font color=blue>多項選擇查詢:</font></b> <br>
         	<b>輸入員工編號:</b>
-        	<input type="text" name="empID"><br>
+        	<input type="text" name="empID">
            
        		<b>輸入員工姓名:</b>
-      		<input type="text" name="empName"><br>
+      		<input type="text" name="empName">	
        
        		<b>輸入員工職位:</b>
        		<select size="1" name="jobID" >
@@ -103,7 +103,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
          		<c:forEach var="jobVO" items="${jobSvc.all}" > 
           			<option value="${jobVO.jobID}">${jobVO.jobName}
          		</c:forEach>   
-       		</select><br>
+       		</select>
            
        		<b>雇用日期:</b>
 	   		<input name="empHiredate" id="f_date1" type="text">

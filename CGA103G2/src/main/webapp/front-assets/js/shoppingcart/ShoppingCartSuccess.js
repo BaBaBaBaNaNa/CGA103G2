@@ -5,7 +5,7 @@ var shoppingCart = (function() {
 	cart = [];
 
 	// 建構子 品項名 價格 數量
-	function Item(name, price, count) {
+	function Item(name, price, count, nameid) {
 		this.name = name;
 		this.price = price;
 		this.count = count;
