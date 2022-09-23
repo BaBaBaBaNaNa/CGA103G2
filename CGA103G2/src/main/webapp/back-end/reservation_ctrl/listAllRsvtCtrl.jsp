@@ -1,120 +1,63 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ page import="java.util.*"%>
 <%@ page import="com.rsvtCtrl.model.*"%>
-
-<%-- ¦¹­¶½m²ß±Ä¥Î EL ªº¼gªk¨ú­È --%>
 
 <%
 RsvtCtrlService rsvtCtrlSvc = new RsvtCtrlService();
 List<RsvtCtrlVO> list = rsvtCtrlSvc.getAll();
 pageContext.setAttribute("list", list);
 %>
-
-
-<html>
-<head>
-<title>©Ò¦³¸ê®Æ - listAllRsvtCtrl.jsp</title>
-
 <style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
+.table th,.table th{
 	text-align: center;
-}
-
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
-
-<style>
-table {
-	width: 100%;
 	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-table, th, td {
-	border: 1px solid #CCCCFF;
-}
-
-th, td {
-	padding: 5px;
-	text-align: center;
 }
 </style>
+<table class="table">
+	<tr>
+		<th>è¨‚ä½æ§åˆ¶ç·¨è™Ÿ</th>
+		<th>æ¡Œå‹ç·¨è™Ÿ</th>
+		<th>è¨‚ä½æ§åˆ¶é–‹æ”¾</th>
+		<th>è¨‚ä½æ§åˆ¶æ—¥æœŸ</th>
+		<th>è¨‚ä½æ§åˆ¶æ™‚æ®µ</th>
+		<th>æ¡Œå­ä¸Šé™</th>
+		<th>å·²é è¨‚æ¡Œæ•¸</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<%@ include file="page1.file"%>
+	<c:forEach var="rsvtCtrlVO" items="${list}" begin="<%=pageIndex%>"
+		end="<%=pageIndex+rowsPerPage-1%>">
 
-</head>
-<body bgcolor='white'>
-
-	<h4>¦¹­¶½m²ß±Ä¥Î EL ªº¼gªk¨ú­È:</h4>
-	<table id="table-1">
 		<tr>
+			<td>${rsvtCtrlVO.rsvtCtrlId}</td>
+			<td>${rsvtCtrlVO.tableTypeId}</td>
+			<td>${rsvtCtrlVO.rsvtCtrlOpen == 0 ? "é–‹æ”¾" : "ä¸é–‹æ”¾"}</td>
+			<td>${rsvtCtrlVO.rsvtCtrlDate}</td>
+			<td>${rsvtCtrlVO.rsvtCtrlOpen == 0 ? "ä¸­åˆ" : "æ™šä¸Š"}</td>
+			<td>${rsvtCtrlVO.rsvtCtrlMax}</td>
+			<td>${rsvtCtrlVO.rsvtCtrlNumber}</td>
+
 			<td>
-				<h3>©Ò¦³­q¦ì¸ê®Æ - listAllRsvtCtrl.jsp</h3>
-				<h4>
-					<a href="select_page.jsp"><img src="images/back1.gif"
-						width="100" height="32" border="0">¦^­º­¶</a>
-				</h4>
+				<FORM METHOD="post" ACTION="RsvtCtrlServlet"
+					style="margin-bottom: 0px;">
+					<input type="submit" value="ä¿®æ”¹" class="input_btn"> <input type="hidden"
+						name="rsvtCtrlId" value="${rsvtCtrlVO.rsvtCtrlId}"> <input
+						type="hidden" name="action" value="getOne_For_Update">
+				</FORM>
+			</td>
+			<td>
+				<FORM METHOD="post" ACTION="RsvtCtrlServlet"
+					style="margin-bottom: 0px;">
+					<input type="submit" value="åˆªé™¤" class="input_btn"> <input type="hidden"
+						name="rsvtCtrlId" value="${rsvtCtrlVO.rsvtCtrlId}"> <input
+						type="hidden" name="action" value="delete">
+				</FORM>
 			</td>
 		</tr>
-	</table>
-
-	<table>
-		<tr>
-			<th>­q¦ì±±¨î½s¸¹</th>
-			<th>®à«¬½s¸¹</th>
-			<th>­q¦ì±±¨î¶}©ñ</th>
-			<th>­q¦ì±±¨î¤é´Á</th>
-			<th>­q¦ì±±¨î®É¬q</th>
-			<th>®à¤l¤W­­</th>
-			<th>¤w¹w­q®à¼Æ</th>
-		</tr>
-		<%@ include file="page1.file"%>
-		<c:forEach var="rsvtCtrlVO" items="${list}" begin="<%=pageIndex%>"
-			end="<%=pageIndex+rowsPerPage-1%>">
-
-			<tr>
-				<td>${rsvtCtrlVO.rsvtCtrlId}</td>
-				<td>${rsvtCtrlVO.tableTypeId}</td>
-				<td>${rsvtCtrlVO.rsvtCtrlOpen == 0 ? "¶}©ñ" : "¤£¶}©ñ"}</td>
-				<td>${rsvtCtrlVO.rsvtCtrlDate}</td>
-				<td>${rsvtCtrlVO.rsvtCtrlOpen == 0 ? "¤¤¤È" : "±ß¤W"}</td>
-				<td>${rsvtCtrlVO.rsvtCtrlMax}</td>
-				<td>${rsvtCtrlVO.rsvtCtrlNumber}</td>
-				
-				<td>
-					<FORM METHOD="post"
-						ACTION="RsvtCtrlServlet"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="­×§ï"> <input type="hidden"
-							name="rsvtCtrlId" value="${rsvtCtrlVO.rsvtCtrlId}"> <input
-							type="hidden" name="action" value="getOne_For_Update">
-					</FORM>
-				</td>
-				<td>
-					<FORM METHOD="post"
-						ACTION="RsvtCtrlServlet"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="§R°£"> <input type="hidden"
-							name="rsvtCtrlId" value="${rsvtCtrlVO.rsvtCtrlId}"> <input
-							type="hidden" name="action" value="delete">
-					</FORM>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
-	<%@ include file="page2.file"%>
-
-</body>
-</html>
+	</c:forEach>
+</table>
+<%@ include file="page2.file"%>

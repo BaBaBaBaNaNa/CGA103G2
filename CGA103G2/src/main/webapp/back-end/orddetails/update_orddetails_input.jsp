@@ -435,17 +435,16 @@ th, td {
 					<td>送餐狀態(0:已製作 , 1:未製作 ):</td>
 					<td><select name="orddetailsDeliverStatus"
 						id="orddetailsDeliverStatus">
-							<option value="0">已製作</option>
-							<option value="1">未製作</option>
+							<option value="0">已送餐</option>
+							<option value="1">未送餐</option>
 					</select></td>
 				</tr>
 
 
 			</table>
 			<br> <input type="hidden" name="action" value="update">
-			<input type="hidden" name="orddetailsID"
-				value="<%=orddetailsVO.getOrddetailsID()%>"> <input
-				type="submit" value="送出修改">
+			<input type="hidden" name="orddetailsID"value="<%=orddetailsVO.getOrddetailsID()%>"> 
+			<input type="submit" value="送出修改">
 		</FORM>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>

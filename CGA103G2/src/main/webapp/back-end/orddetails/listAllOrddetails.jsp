@@ -253,17 +253,17 @@
 				</ul></li>
 			<!-- ----- ----- ----- 顧客 end ----- ----- ----- -->
 
-			<!-- ----- ----- ----- 空白頁面 start ----- ----- ----- -->
+			<!-- ----- ----- ----- 最新消息 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#nothing1" aria-expanded="false"
-				aria-controls="nothing1"><span><i
-						class="fas fa-file-invoice fs-16"></i>空白頁面</span></a>
-				<ul id="nothing1" class="collapse" aria-labelledby="nothing1"
+				data-toggle="collapse" data-target="#listAllNews" aria-expanded="false"
+				aria-controls="listAllNews"><span><i
+						class="fas fa-file-invoice fs-16"></i>最新消息</span></a>
+				<ul id="listAllNews" class="collapse" aria-labelledby="listAllNews"
 					data-parent="#side-nav-accordion">
 					<li><a
-						href="${pageContext.request.contextPath}/back-end/nothing/nothing1.jsp">nothing1</a></li>
+						href="${pageContext.request.contextPath}/back-end/news/listAllNews.jsp">最新消息後台</a></li>
 				</ul></li>
-			<!-- ----- ----- ----- 空白頁面 end ----- ----- ----- -->
+			<!-- ----- ----- ----- 最新消息 end ----- ----- ----- -->
 		</ul>
 	</aside>
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
@@ -366,15 +366,15 @@
 				<li class="breadcrumb-item"><a href="#"><i
 						class="material-icons">home</i>首頁</a></li>
 				<li class="breadcrumb-item"><a href="#">訂單管理</a></li>
-				<li class="breadcrumb-item active" aria-current="page">查看訂單</li>
+				<li class="breadcrumb-item active" aria-current="page">訂單明細</li>
 			</ol>
 		</nav>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 <table id="table-1">
 	<tr><td>
-		 <h3>所有訂單明細資料 - listAllOrddetails.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h3>所有訂單明細資料 </h3>
+		 <h4><a href="select_page.jsp">返回訂單明細查詢</a></h4>
 	</td></tr>
 </table>
 
@@ -400,20 +400,14 @@
 			<td>${orddetailsVO.mealsID}</td> 
 			<td>${orddetailsVO.orddetailsMealsQuantity}</td>
 			<td>${orddetailsVO.orddetailsMealsAmount}</td>
-			<td>${orddetailsVO.orddetailsMealsStatus}</td>
-			<td>${orddetailsVO.orddetailsDeliverStatus}</td>
+			<td>${orddetailsVO.orddetailsMealsStatus == 0 ?"已製作":"未製作"}</td>
+			<td>${orddetailsVO.orddetailsDeliverStatus == 0 ?"已送餐":"未送餐"}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/orddetails/orddetails.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="orddetailsID"  value="${orddetailsVO.orddetailsID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
-<!-- 			<td> -->
-<%-- 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Orders/orders.do" style="margin-bottom: 0px;"> --%>
-<!-- 			     <input type="submit" value="刪除"> -->
-<%-- 			     <input type="hidden" name="ordersID"  value="${orddetailsVO.ordersID}"> --%>
-<!-- 			     <input type="hidden" name="action" value="delete"></FORM> -->
-<!-- 			</td> -->
 		</tr>
 	</c:forEach>
 </table>

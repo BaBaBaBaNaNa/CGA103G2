@@ -15,14 +15,13 @@ public class RsvtDAOImpl implements RsvtDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT RSVTID,MEMID,TABLETYPEID,CUSTOMERNAME,CUSTOMERPHONE,RSVTNUM,RSVTPERIOD,RSVTTOSEAT,RSVTDATE,RSVTMEALDATE FROM RESERVATION WHERE RSVTID = ?";
 	private static final String DELETE_STMT = "DELETE FROM RESERVATION WHERE RSVTID = ?";
 	private static final String UPDATE_STMT = "UPDATE RESERVATION SET CUSTOMERNAME = ?,CUSTOMERPHONE = ?,RSVTNUM=?,RSVTPERIOD=?,RSVTTOSEAT = ?,RSVTDATE = ?,RSVTMEALDATE= ? WHERE RSVTID = ?";
-	private static final String GET_NAME_STMT = "SELECT RSVTID,MEMID,TABLETYPEID,CUSTOMERNAME,CUSTOMERPHONE,RSVTNUM,RSVTPERIOD,RSVTTOSEAT,RSVTDATE,RSVTMEALDATE FROM RESERVATION WHERE CUSTOMERNAME = ?";
 	
 	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
 	private static DataSource ds = null;
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CGA103G2");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/cga103g2");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -129,10 +128,10 @@ public class RsvtDAOImpl implements RsvtDAO_interface {
 	}
 
 	@Override
-	public RsvtVO findByCustomerName(String customerName) {
+	public RsvtVO findByCustomerName(String Name) {
+		String GET_NAME_STMT = "SELECT RSVTID,MEMID,TABLETYPEID,CUSTOMERNAME,CUSTOMERPHONE,RSVTNUM,RSVTPERIOD,RSVTTOSEAT,RSVTDATE,RSVTMEALDATE FROM RESERVATION WHERE CUSTOMERNAME LIKE '%" + Name + "%'";
 		try (Connection conn = ds.getConnection();
 				PreparedStatement ps = conn.prepareStatement(GET_NAME_STMT)) {
-			ps.setString(1, customerName);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				RsvtVO rsvt = new RsvtVO();

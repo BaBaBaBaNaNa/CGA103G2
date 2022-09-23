@@ -58,6 +58,40 @@
 		<url-pattern>/botqa/Botqa.do</url-pattern>
 	</servlet-mapping>
 	
+	<!-- OrdersServlet 開始-->
+	<servlet>
+		<servlet-name>OrdersServlet</servlet-name>
+		<servlet-class>com.orders.controller.OrdersServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrdersServlet</servlet-name>
+		<url-pattern>/back-end/order/orders.do</url-pattern>
+	</servlet-mapping>
+	<!-- OrdersServlet 結束-->
+
+<!-- OrddetailsServlet 開始-->
+	<servlet>
+		<servlet-name>OrddetailsServlet</servlet-name>
+		<servlet-class>com.orddetails.controller.OrddetailsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrddetailsServlet</servlet-name>
+		<url-pattern>/back-end/orddetails/orddetails.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- OrddetailsServlet 結束-->
+
+	<!-- NewsServlet 開始-->
+	<servlet>
+		<servlet-name>NewsServlet</servlet-name>
+		<servlet-class>com.news.controller.NewsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewsServlet</servlet-name>
+		<url-pattern>/back-end/news/news.do</url-pattern>
+<!-- 		<url-pattern>/news/news.do</url-pattern> -->
+	</servlet-mapping>
+	
 <!-- 	<filter> -->
 <!-- 	    <filter-name>setCharacterEncoding</filter-name> -->
 <!-- 	    <filter-class>filters.SetCharacterEncodingFilter</filter-class> -->

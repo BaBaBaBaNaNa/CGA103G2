@@ -1,226 +1,120 @@
 package com.queuer.controller;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.queuer.model.QueuerService;
-import com.queuer.model.QueuerVO;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import com.queuer.model.QueuerRedisService;
+
+import redis.clients.jedis.Jedis;
 
 public class QueuerServlet extends HttpServlet{
+		
+	private static final long serialVersionUID = 1L;
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		doPost(req, res);
 	}
-
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 
-		req.setCharacterEncoding("UTF-8");
-		String action = req.getParameter("action");
-		
-		
-		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
-
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-
-				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String str = req.getParameter("queuerNo");
-				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("請輸入候位號碼");
-				}
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/queuer/select_page.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
+			req.setCharacterEncoding("UTF-8");
+			String action = req.getParameter("action");
+			QueuerRedisService queuer = new QueuerRedisService();
+			PrintWriter out = res.getWriter();
+			Jedis jedis = new Jedis("localhost",6379);
+			JSONObject output = new JSONObject();
+			
+			// 前台action
+			
+			// 前台我要候位按鈕功能
+			if( "queueInList".equals(action)) {
+				queuer.queueInList();
 				
-				Integer queuerNo = null;
+//			res.setContentType("application/json");
 				try {
-					queuerNo = Integer.valueOf(str);
+					output.put("queuerNO", queuer.getQueuerNO());
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			// 顯示剩餘組數
+			if("showRemainNO".equals(action)) {
+				queuer.getRemainNO();
+				try {
+					output.put("remainNO", queuer.getRemainNO());
 				} catch (Exception e) {
-					errorMsgs.add("候位號碼格式不正確");
+					e.printStackTrace();
 				}
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/queuer/select_page.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
+			}
+			
+			if("showCurrentNO".equals(action)) {
+				try {
+					output.put("currentNO", queuer.showCurrentNO());
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				
-				/***************************2.開始查詢資料*****************************************/
-				 QueuerService queuerSvc = new QueuerService();
-				 QueuerVO queuerVO = queuerSvc.getOneQueuer(queuerNo);
-				if (queuerVO == null) {
-					errorMsgs.add("查無資料");
+			}
+			
+			// 後台action
+			
+			// 後台按鈕下一號 顯示當前號碼 顯示下一號 剩餘組數的功能
+			if("getNextNO".equals(action)) {
+				try {
+					output.put("currentNO", queuer.getCurrentNO());
+					output.put("nextNO", queuer.getNextNO() );
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/queuer/select_page.jsp");
-					failureView.forward(req, res);
-			return;//程式中斷
+			}
+			
+			if("showTotalNO".equals(action)) {
+				try {
+					output.put("totalNO", queuer.getTotalNO());
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				
-				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("queuerVO", queuerVO); // 資料庫取出的queuerVO物件,存入req
-				String url = "/queuer/listOneQueuer.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneQueuer.jsp
-				successView.forward(req, res);
-		}
-		
-		
-		if ("getOne_For_Update".equals(action)) { // 來自listAllQueuer.jsp的請求
-
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
+			}
 			
-				/***************************1.接收請求參數****************************************/
-				Integer queuerID = Integer.valueOf(req.getParameter("queuerID"));
-				System.out.println(queuerID);			
-
-				/***************************2.開始查詢資料****************************************/
-				QueuerService queuerSvc = new QueuerService();
-				QueuerVO queuerVO = queuerSvc.getOneQueuer(queuerID);
-				/***************************3.查詢完成,準備轉交(Send the Success view)************/
-				req.setAttribute("queuerVO", queuerVO);         // 資料庫取出的empVO物件,存入req
-				String url = "/queuer/update_queuer_input.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
-				successView.forward(req, res);
-		}
-		
-		
-		if ("update".equals(action)) { // 來自update_queuer_input.jsp的請求
-			
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-		
-				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				Integer queuerID = Integer.valueOf(req.getParameter("queuerID").trim());
-				
-				String queuerName = req.getParameter("queuerName");
-				String queuerNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
-				if (queuerName == null || queuerName.trim().length() == 0) {
-					errorMsgs.add("候位姓名: 請勿空白");
-				} else if(!queuerName.trim().matches(queuerNameReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("候位姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
-	            }
-				
-				String queuerPhone = req.getParameter("queuerPhone").trim();
-				if (queuerPhone == null || queuerPhone.trim().length() == 0) {
-					errorMsgs.add("電話請勿空白");
-				}	
-				
-
-				Integer queuerStatus = Integer.valueOf(req.getParameter("queuerStatus").trim());
-
-
-
-
-				QueuerVO queuerVO = new QueuerVO();
-				queuerVO.setQueuerID(queuerID);
-				queuerVO.setQueuerName(queuerName);
-				queuerVO.setQueuerStatus(queuerStatus);
-				queuerVO.setQueuerPhone(queuerPhone);
-//				queuerVO.setQueuerNo(queuerID);
-				
-				
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("queuerVO", queuerVO); // 含有輸入格式錯誤的queuerVO物件,也存入req
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/queuer/update_queuer_input.jsp");
-					failureView.forward(req, res);
-					return; //程式中斷
+			if("doSeatedList".equals(action)) {
+				queuer.doSeatedList();
+				try {
+					output.put("seatedNO", "success");
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				
-				/***************************2.開始修改資料*****************************************/
-				QueuerService queuerSvc = new QueuerService();
-				queuerSvc.updateQueuer(queuerStatus, queuerID);
-				
-				/***************************3.修改完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("queuerVO", queuerVO); // 資料庫update成功後,正確的的queuerVO物件,存入req
-				String url = "/queuer/listOneQueuer.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneQueuer.jsp
-				successView.forward(req, res);
-		}
-
-        if ("insert".equals(action)) { // 來自addQueuer.jsp的請求  
+			}
 			
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-
-				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
+			if("doOverList".equals(action)) {
+				queuer.doOverList();
+				try {
+					output.put("overNO", "success");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 			
-			Integer queuerID = Integer.valueOf(req.getParameter("queuerID").trim());
+			if("openOrClose".equals(action)) {
+				queuer.closeShop();
+				try {
+					output.put("closeShop", "success");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 			
-			String queuerName = req.getParameter("queuerName");
-							String queuerNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
-							if (queuerName == null || queuerName.trim().length() == 0) {
-								errorMsgs.add("候位姓名: 請勿空白");
-							} else if(!queuerName.trim().matches(queuerNameReg)) { //以下練習正則(規)表示式(regular-expression)
-								errorMsgs.add("候位姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
-				            }
-							
-			String queuerPhone = req.getParameter("queuerPhone").trim();
-							if (queuerPhone == null || queuerPhone.trim().length() == 0) {
-								errorMsgs.add("電話請勿空白");
-							}	
-							
-
-			Integer queuerStatus = Integer.valueOf(req.getParameter("queuerStatus").trim());
-
-
-			Integer waitingID = Integer.valueOf(req.getParameter("waitingID").trim());
-
-
-			Integer queuerNo = Integer.valueOf(req.getParameter("queuerNo").trim());
-							QueuerVO queuerVO = new QueuerVO();
-							queuerVO.setQueuerID(queuerID);
-							queuerVO.setWaitingID(waitingID);
-							queuerVO.setQueuerStatus(queuerStatus);
-							queuerVO.setQueuerPhone(queuerPhone);
-							queuerVO.setQueuerNo(queuerNo);
-							
-							
-							// Send the use back to the form, if there were errors
-							if (!errorMsgs.isEmpty()) {
-			req.setAttribute("queuerVO", queuerVO); // 含有輸入格式錯誤的queuerVO物件,也存入req
-								RequestDispatcher failureView = req
-										.getRequestDispatcher("/queuer/update_queuer_input.jsp");
-								failureView.forward(req, res);
-								return; //程式中斷
-							}
-
-
-				
-				/***************************2.開始新增資料***************************************/
-							QueuerService queuerSvc = new QueuerService();
-							queuerVO = queuerSvc.addQueuer(queuerNameReg, queuerPhone);
-				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/emp/listAllQueuer.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
-				successView.forward(req, res);				
-		}
-		
-		
-		
+			out.write(output.toString());
+			out.flush();
+			out.close();
+			jedis.close();
+			
 	}
 }

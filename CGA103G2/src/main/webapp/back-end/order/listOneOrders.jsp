@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.orders.model.*"%>
 <%@ page import="java.sql.*"%>
 
@@ -377,10 +377,9 @@ th, td {
 		<table id="table-1">
 			<tr>
 				<td>
-					<h3>訂單資料 - ListOneOrders.jsp</h3>
+					<h3>訂單資料</h3>
 					<h4>
-						<a href="order_details.jsp"><img src="images/back1.gif"
-							width="100" height="32" border="0">回首頁</a>
+						<a href="order_details.jsp">回首頁</a>
 					</h4>
 				</td>
 			</tr>
@@ -406,9 +405,17 @@ th, td {
 				<td><%=ordersVO.getEmpCounterID()%></td>
 				<td><%=ordersVO.getEmpDeliveryID()%></td>
 				<td><%=ordersVO.getSeatID()%></td>
-				<td><%=ordersVO.getOrdersType()%></td>
+				<td>
+					<c:if test="${ordersVO.ordersType == 0}">外帶</c:if>
+					<c:if test="${ordersVO.ordersType == 1}">外送</c:if>
+					<c:if test="${ordersVO.ordersType == 2}">內用</c:if>
+				</td>
 				<td><%=ordersVO.getOrdersAmount()%></td>
-				<td><%=ordersVO.getOrdersStatus()%></td>
+				<td>
+					<c:if test="${ordersVO.ordersStatus == 0}">完成</c:if>
+    	   			<c:if test="${ordersVO.ordersStatus == 1}">未完成</c:if>
+    	   	  		<c:if test="${ordersVO.ordersStatus == 2}">退回</c:if>
+    	   		</td>
 				<td><%=ordersVO.getOrdersDestination()%></td>
 				<td><%=ordersVO.getOrdersBuildDate()%></td>
 				<td><%=ordersVO.getOrdersMakeDate()%></td>

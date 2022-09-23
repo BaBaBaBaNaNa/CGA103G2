@@ -5,10 +5,11 @@ var shoppingCart = (function() {
 	cart = [];
 
 	// 建構子 品項名 價格 數量
-	function Item(name, price, count) {
+	function Item(name, price, count , id) {
 		this.name = name;
 		this.price = price;
 		this.count = count;
+		this.id = id;
 	}
 
 	// 儲存購物車在session
@@ -19,7 +20,9 @@ var shoppingCart = (function() {
 	// 從session中讀取購物車
 	function loadCart() {
 		cart = JSON.parse(sessionStorage.getItem('shoppingCart'));
+		console.log(cart);
 	}
+	//如果購物車不是空的時候取得購物車東西
 	if (sessionStorage.getItem("shoppingCart") != null) {
 		loadCart();
 	}
@@ -31,7 +34,7 @@ var shoppingCart = (function() {
 	var obj = {};
 
 	// 增加物品數量
-	obj.addItemToCart = function(name, price, count) {
+	obj.addItemToCart = function(name, price, count , id) {
 		for (var item in cart) {
 			if (cart[item].name === name) {
 				cart[item].count++;
@@ -39,7 +42,7 @@ var shoppingCart = (function() {
 				return;
 			}
 		}
-		var item = new Item(name, price, count);
+		var item = new Item(name, price, count , id);
 		cart.push(item);
 		saveCart();
 	}
@@ -143,7 +146,8 @@ $('.add-to-cart').click(function(event) {
 	event.preventDefault();
 	var name = $(this).data('name');
 	var price = Number($(this).data('price'));
-	shoppingCart.addItemToCart(name, price, 1);
+	var id = $(this).data('id');
+	shoppingCart.addItemToCart(name, price, 1,id);
 	displayCart();
 });
 
@@ -204,6 +208,30 @@ $('.show-cart').on("change", ".item-count", function(event) {
 	displayCart();
 });
 
+var MyPoint = "/front-end/shopcart/ShopCartAddSuccess.jsp";
+var host = window.location.host;
+var path = window.location.pathname;
+var webCtx = path.substring(0, path.indexOf('/', 1));
+var endPointURL = "http://" + host + webCtx + MyPoint;
+
+// 當要把購物車送出產生訂單時
+$('#submit2').on("click",  function(event) {
+	console.log(cart);
+	if(JSON.stringify(cart) === '{}' || JSON.stringify(cart) === '' || JSON.stringify(cart) === '[]'){
+//		console.log("請至少點一份餐點");
+		alert("請至少點一份餐點");
+	}
+	else{
+	  fetch('ShopCartServlet.do', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+		cart
+      }),
+    })
+    .then(resp => window.location.href='ShopCartAddSuccess.jsp');
+	}
+});
 // 執行顯示購物車
 displayCart();
 

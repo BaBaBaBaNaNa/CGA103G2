@@ -5,6 +5,8 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import com.meals.model.*;
+import com.news.model.NewsService;
+
 
 @WebServlet("/meals/DBGifReader")
 public class DBGifReaderController extends HttpServlet {
@@ -25,7 +27,6 @@ public class DBGifReaderController extends HttpServlet {
 			in.read(buf);
 			out.write(buf);
 			in.close();
-
 		}
 	}
 

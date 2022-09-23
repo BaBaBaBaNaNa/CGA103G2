@@ -1,7 +1,10 @@
 package com.queuer.model;
 
+import javax.servlet.annotation.WebServlet;
+
 import redis.clients.jedis.Jedis;
 
+@WebServlet
 public class QueuerRedisFuction {
 	
 	public static void main(String[] args) {

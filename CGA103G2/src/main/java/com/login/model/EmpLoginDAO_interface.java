@@ -5,4 +5,6 @@ import com.login.model.EmpLoginVO;
 
 public interface EmpLoginDAO_interface {
 	public boolean loginAdmin (EmpLoginVO admin);
+	
+	public boolean loginAdminPermission(EmpLoginVO admin);
 }

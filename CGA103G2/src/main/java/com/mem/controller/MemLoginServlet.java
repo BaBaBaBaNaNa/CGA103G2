@@ -53,7 +53,7 @@ public class MemLoginServlet extends HttpServlet {
 			request.getRequestDispatcher("/FrontIndex.jsp").forward(request, response);
 		} else {
 			request.setAttribute("errorMessage", "wrong");
-			request.getRequestDispatcher("/members.jsp").forward(request, response);
+			request.getRequestDispatcher("/front-end/member/members.jsp").forward(request, response);
 //				request.getSession().setAttribute("error", "賬號或者密碼錯誤");
 //				response.sendRedirect("login.jsp");
 		}

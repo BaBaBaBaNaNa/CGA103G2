@@ -507,10 +507,10 @@ try {
 	ordersMakeDate = new Timestamp(System.currentTimeMillis());
 }
 %>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.js"></script>
 <script
-	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+	src="<%=request.getContextPath()%>/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 
 <style>
