@@ -65,10 +65,12 @@ public class RsvtForwardEndServlet extends HttpServlet{
 				}
 
 				Integer rsvtPeriod = null;
-				rsvtPeriod = Integer.valueOf(req.getParameter("rsvtPeriod").trim());
-				if(rsvtPeriod == null) {
+				try {
+					rsvtPeriod = Integer.valueOf(req.getParameter("rsvtPeriod").trim());
+				} catch (Exception e) {
 					errorMsgs.add("請選擇時段");				
 				}
+				
 
 				java.sql.Date rsvtDate = null;
 				try {
@@ -96,12 +98,15 @@ public class RsvtForwardEndServlet extends HttpServlet{
 				/*************************** 2.開始新增資料 ***************************************/
 				RsvtService rsvtSvc = new RsvtService();
 				rsvtVO = rsvtSvc.addRsvt(cName, cPhone, rsvtNum, rsvtPeriod, rsvtDate);
-				RsvtCtrlDAOImpl dao = new RsvtCtrlDAOImpl();
 				// 判斷人數
 				List<RsvtCtrlVO> list = new RsvtCtrlService().getOneDate(rsvtDate.toString());
-				for(RsvtCtrlVO vo : list) {
-					if(vo.getRsvtCtrlPeriod() == rsvtPeriod) {
-						dao.updateForOne(vo.getRsvtCtrlId(), "rsvtCtrlNum", vo.getRsvtCtrlNumber() + rsvtNum);
+				RsvtCtrlService rcSvc = new RsvtCtrlService();
+				for(RsvtCtrlVO obj : list) {
+					if(obj.getRsvtCtrlPeriod() == rsvtPeriod) {
+						rcSvc.updateRsvtCtrl(obj.getRsvtCtrlOpen(), obj.getRsvtCtrlMax(), obj.getRsvtCtrlNumber() + rsvtNum, obj.getRsvtCtrlId() );
+					}
+					if(obj.getRsvtCtrlMax() <= (obj.getRsvtCtrlNumber() + rsvtNum)) {
+						rcSvc.updateRsvtCtrl(1, obj.getRsvtCtrlMax(), obj.getRsvtCtrlNumber() + rsvtNum, obj.getRsvtCtrlId());
 					}
 				}
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/

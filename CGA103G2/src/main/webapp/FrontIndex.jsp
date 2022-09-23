@@ -283,15 +283,13 @@
 									<div class="col-lg-6 col-12">
 										<label for="date" class="form-label">日期</label> <input type="text" id="dp1"
 											class="datepicker mr-2 form-control" placeholder="選擇日期" name="rsvtDate"
-											autocomplete="off"><span style="display: none">*</span>
+											autocomplete="off" onchange="checkPeriod()"><span style="display: none">*</span>
 									</div>
 
 									<div class="col-lg-6 col-12">
 										<label for="period" class="form-label">時段</label> <select
-											class="form-select form-control" name="rsvtPeriod" id="period">
+											class="form-select form-control" name="rsvtPeriod" id="period" required>
 											<option selected disabled>請選擇時段</option>
-											<option value="0">中午</option>
-											<option value="1">晚上</option>
 										</select>
 									</div>
 									<div class="col-lg-6 col-12"></div>
@@ -306,7 +304,7 @@
 									<div class="col-lg-4 col-12 ms-auto">
 										<input type="hidden" name="action" value="insert">
 
-										<button type="button" class="form-control" id="sub_btn">送出</button>
+										<button type="submit" class="form-control" id="sub_btn">送出</button>
 									</div>
 								</form>
 							</div>
@@ -331,6 +329,26 @@
 			<script src="front-assets/js/bootstrap-datepicker.zh-TW.min.js"></script>
 
 			<script>
+				var dp1 = document.getElementById('dp1');
+				var period = document.getElementById('period');
+				const dateUrl = '/CGA103G2/back-end/reservation_ctrl/Date';
+				const periodUrl = '/CGA103G2/back-end/reservation_ctrl/Period';
+				const arr = [];
+				fetch(dateUrl,{
+					headers: {
+						'Content-Type': 'application/json'
+					},
+				})
+				.then(res => res.json())
+					.then(list => {
+						console.log(list);
+						for(let key of list){
+							arr.push(key);
+						}
+					})
+							console.log(arr);
+			
+				var disabledDates = arr;
 				$('.datepicker').datepicker({
 					autoclose: true, // 選擇後自動關閉日期選擇器
 					language: 'zh-TW', // 語言切換 中文
@@ -341,27 +359,58 @@
 					// endDate:new Date(),
 					// clearBtn: true, //顯示清除按鈕
 					daysOfWeekDisabled: [3], //每周隱藏的第幾天  0為周日6為星期六
-					datesDisabled: [ // 特殊日期禁用
-						'2022/10/10', '2022.09.09', '2022.09.10', '2022.09.11'],
+					datesDisabled: arr
 				});
-				document.getElementById('sub_btn').addEventListener('click', () => {
-					const name = document.getElementById('name');
-					const phone = document.getElementById('phone');
-					const people = document.getElementById('people');
-					const date = document.getElementById('dp1');
-					const period = document.getElementById('period');
-					console.log(name.value);
-					console.log(phone.value);
-					console.log(people.value);
-					console.log(date.value);
-					console.log(period.value);
-					let msg = `以下為您的訂位資訊：\n姓名：${name.value}\n手機：${phone.value}\n人數：${people.value}人\n訂位日期：${date.value}\n`;
-					if (confirm('確認送出?')) {
-						$('#rsvt_form').submit();
-						alert('送出成功')
-					}
-				})
+				function checkPeriod(){
+					fetch(periodUrl,{
+						method: 'post',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({
+							rsvtCtrlDate : dp1.value,
+						})
+					})
+					.then(res => res.json())
+					.then(periodList => {
+						console.log(periodList);
+						period.textContent = "";
+						if(periodList.length != 0){
+							period.textContent = "";
+							const plsSelect = document.createElement('option');
+							plsSelect.textContent = "請選擇時段";
+							plsSelect.selected = true;
+							plsSelect.disabled = true;
+							period.append(plsSelect);
+							let n = 0;
+							for(let i = 0; i < periodList.length; i++){
+								if(i == n){
+									const option = document.createElement('option');
+									option.value = periodList[i];
+									switch (periodList[i]){
+										case 0 :{
+											option.textContent = '中午';
+											break;
+										}
+										case 1 :{
+											option.textContent = '晚上';
+											break;
+										}
+										default :{
+											option.textContent = '未有時段';
+										}
+									}
+									period.append(option);
 
+								}
+							}
+						}else{
+							const option = document.createElement('option');
+							option.textContent = '未有時段';
+							period.append(option);
+						}
+					})
+				}
 			</script>
 			<!-- ----- ----- ----- js end ----- ----- ----- -->
 	</body>

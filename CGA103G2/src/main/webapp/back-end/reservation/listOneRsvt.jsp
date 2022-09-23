@@ -12,7 +12,7 @@
 RsvtService rsvtSvc = new RsvtService();
 // List<RsvtVO> list = rsvtSvc.getAll();
 
-ArrayList list = (ArrayList) request.getAttribute("rsvtVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+ArrayList list = (ArrayList) request.getAttribute("rsvtVO"); 
 pageContext.setAttribute("list", list);
 SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); // 日期格式轉換
 %>
