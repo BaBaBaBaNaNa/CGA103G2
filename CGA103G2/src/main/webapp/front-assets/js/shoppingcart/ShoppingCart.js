@@ -214,17 +214,20 @@ var endPointURL = "http://" + host + webCtx + MyPoint;
 // 當要把購物車送出產生訂單時
 $('#submit2').on("click",  function(event) {
 	console.log(cart);
-	fetch('ShopCartServlet.do', {
+	if(JSON.stringify(cart) === '{}' || JSON.stringify(cart) === '' || JSON.stringify(cart) === '[]'){
+//		console.log("請至少點一份餐點");
+		alert("請至少點一份餐點");
+	}
+	else{
+	  fetch('ShopCartServlet.do', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
 		cart
       }),
     })
-    .then(resp => window.location.href='ShopCartAddSuccess.jsp')
-      ;
+    .then(resp => window.location.href='ShopCartAddSuccess.jsp');
+	}
 });
-
-
 // 執行顯示購物車
 displayCart();

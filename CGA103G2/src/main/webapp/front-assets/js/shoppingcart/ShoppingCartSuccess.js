@@ -162,10 +162,10 @@ function displayCart() {
 	for (var i in cartArray) {
 		output += "<tr>"
 			+ "<td>" + cartArray[i].name + "</td>"
-			+ "<td>(" + cartArray[i].price + ")</td>"
+			+ "<td>單價 : " + cartArray[i].price + "</td>"
 			+ "<td>總計 " + cartArray[i].count + " 份</td>"
 			+ "<input type='number' class='item-count form-control' data-name='" + cartArray[i].name + "' value='" + cartArray[i].count + "'>"
-			+ "<td>$" + cartArray[i].total + "</td>"
+			+ "<td>小計 : $" + cartArray[i].total + "</td>"
 			+ "</tr>";
 	}
 	$('.show-cart').html(output);

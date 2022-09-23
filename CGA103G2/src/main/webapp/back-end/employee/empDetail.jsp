@@ -112,7 +112,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
         	<input type="hidden" name="action" value="getEmpListCompositeQuery">
         	</div>
      	</FORM>
-     	</div>
+     	</div> 
      	</div>
   		<hr>
 		<table class = "dataTable table-striped thead-primary" style="width: 95%">

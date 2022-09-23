@@ -1,0 +1,51 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <footer class="site-footer section-padding">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-12">
+                	<h4 class="text-white mb-4 me-5">異鄉人</h4>
+                    <h4 class="text-white mb-4 me-5">義式餐酒館</h4>
+                </div>
+
+                <div class="col-lg-4 col-md-7 col-xs-12 tooplate-mt30">
+                    <h6 class="text-white mb-lg-4 mb-3">地址</h6>
+
+                    <p>桃園市中壢區復興路46號9樓</p>
+
+                    <a href="https://goo.gl/maps/wcmDpTGaAHn3eWPd7" class="custom-btn btn btn-dark mt-2">Google Map</a>
+                </div>
+
+                <div class="col-lg-4 col-md-5 col-xs-12 tooplate-mt30">
+                    <h6 class="text-white mb-lg-4 mb-3">營業時間</h6>
+
+                    <p class="mb-2">Tuesday - Sunday</p>
+
+                    <p>11:00 PM - 14:00 PM</p>
+                    <p>17:00 PM - 23:00 PM</p>
+
+                    <p>Tel: <a href="tel: 03 - 425 - 1108" class="tel-link">03-425-1108</a></p>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-xs-12 tooplate-mt30">
+                    <h6 class="text-white mb-lg-4 mb-3">社群</h6>
+
+                    <ul class="social-icon">
+                        <li><a href="https://www.tibame.com/" class="social-icon-link bi-facebook"></a></li>
+                        <li><a href="https://www.tibame.com/" class="social-icon-link bi-instagram"></a></li>
+                        <li><a href="https://www.tibame.com/" target="_blank" class="social-icon-link bi-twitter"></a></li>
+                        <li><a href="https://www.tibame.com/" class="social-icon-link bi-youtube"></a></li>
+                    </ul>
+                    <p class="copyright-text tooplate-mt60">Copyright © <br> 2022 緯育 中壢Java班 CGA103 第二組
+                        <br>Design: <a rel="nofollow" href="" target="_blank">2022 緯育 中壢Java班 CGA103 第二組</a>
+                    </p>
+
+                </div>
+
+            </div><!-- row ending -->
+
+        </div><!-- container ending -->
+
+    </footer>
