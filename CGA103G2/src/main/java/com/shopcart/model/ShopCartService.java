@@ -20,6 +20,7 @@ public class ShopCartService {
 	public ShopCartVO addInsideOrder(
 			int ordersType,
 			int ordersStatus,
+			String ordersDestination,
 			Timestamp ordersBuildDate,
 			ArrayList PriceArrayList,
 			ArrayList NameArrayList,
@@ -30,8 +31,9 @@ public class ShopCartService {
 
 		shopcartVO.setOrdersStatus(ordersStatus);
 		shopcartVO.setOrdersType(ordersType);
+		shopcartVO.setOrdersDestination(ordersDestination);
 		shopcartVO.setOrdersBuildDate(ordersBuildDate);
-
+		
 		dao.insertInsideOrders(shopcartVO , PriceArrayList , NameArrayList , CountArrayList  , idArrayList);
 
 		return shopcartVO;

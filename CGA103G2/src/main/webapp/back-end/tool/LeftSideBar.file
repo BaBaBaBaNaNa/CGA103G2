@@ -31,14 +31,15 @@
 				</ul></li>
 			<!-- ----- ----- ----- 會員 end ----- ----- ----- -->
 
+			<!-- 有些不使用 -->
 			<!-- ----- ----- ----- 菜單 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#product" aria-expanded="false" aria-controls="product"><span><i class="fa fa-archive fs-16"></i>總菜單</span></a>
 				<ul id="product" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
-					<li><a href="${pageContext.request.contextPath}/back-end/product/product_cata.jsp">菜單目錄</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/product/product_list.jsp">菜單列表</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/product/product_grid.jsp">菜單網格</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/product/product_add.jsp">加入菜樣</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/product/product_detail.jsp">產品細節</a></li>
+					<!-- <li><a href="${pageContext.request.contextPath}/back-end/product/product_cata.jsp">菜單目錄</a></li> -->
+					<!-- <li><a href="${pageContext.request.contextPath}/back-end/product/product_list.jsp">菜單列表</a></li> -->
+					<!-- <li><a href="${pageContext.request.contextPath}/back-end/product/product_grid.jsp">菜單網格</a></li> -->
+					<!-- <li><a href="${pageContext.request.contextPath}/back-end/product/product_add.jsp">加入菜樣</a></li> -->
+					<!-- <li><a href="${pageContext.request.contextPath}/back-end/product/product_detail.jsp">產品細節</a></li> -->
 					<li><a href="${pageContext.request.contextPath}/back-end/meals/MealsServlet.do?action=getAll">查詢目前菜色</a></li>
 					<li><a href="${pageContext.request.contextPath}/back-end/meals/mealsAdd.jsp">新增菜色</a></li>
 					<li><a href="${pageContext.request.contextPath}/back-end/mealscategory/nothing1.jsp">查詢目前菜系1</a></li>
@@ -67,31 +68,35 @@
 					<li><a href="${pageContext.request.contextPath}/back-end/waiting/waiting_detail.jsp">查看候位</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 候位 end ----- ----- ----- -->
-
+			
+			<!-- 不使用 -->
 			<!-- ----- ----- ----- 桌位 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#restaurant_table" aria-expanded="false" aria-controls="restaurant_table"><span><i class="fas fa-file-member fs-16"></i>桌位管理</span></a>
-				<ul id="restaurant_table" class="collapse" aria-labelledby="restaurant_table" data-parent="#side-nav-accordion">
-					<li><a href="${pageContext.request.contextPath}/back-end/restaurant_table/restaurant_table_detail.jsp">查看桌位</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/restaurant_table/restaurant_table_add.jsp">新增桌位</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/restaurant_table/restaurant_table_edit.jsp">修改桌位</a></li>
-				</ul></li>
+			<!-- <li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#restaurant_table" aria-expanded="false" aria-controls="restaurant_table"><span><i class="fas fa-file-member fs-16"></i>桌位管理</span></a> -->
+			<!-- 	<ul id="restaurant_table" class="collapse" aria-labelledby="restaurant_table" data-parent="#side-nav-accordion"> -->
+			<!-- 		<li><a href="${pageContext.request.contextPath}/back-end/restaurant_table/restaurant_table_detail.jsp">查看桌位</a></li> -->
+			<!-- 		<li><a href="${pageContext.request.contextPath}/back-end/restaurant_table/restaurant_table_add.jsp">新增桌位</a></li> -->
+			<!-- 		<li><a href="${pageContext.request.contextPath}/back-end/restaurant_table/restaurant_table_edit.jsp">修改桌位</a></li> -->
+			<!-- 	</ul></li> -->
 			<!-- ----- ----- ----- 桌位 end ----- ----- ----- -->
 
+			<!-- 不使用 -->
 			<!-- ----- ----- ----- 明細 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#invoice" aria-expanded="false" aria-controls="invoice"><span><i class="fas fa-file-invoice fs-16"></i>顧客消費明細</span></a>
-				<ul id="invoice" class="collapse" aria-labelledby="invoice" data-parent="#side-nav-accordion">
-					<li><a href="${pageContext.request.contextPath}/back-end/invoice/invoice_detail.jsp">消費明細</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/invoice/invoice_list.jsp">明細列表</a></li>
-				</ul></li>
+			<!-- <li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#invoice" aria-expanded="false" aria-controls="invoice"><span><i class="fas fa-file-invoice fs-16"></i>顧客消費明細</span></a> -->
+			<!-- 	<ul id="invoice" class="collapse" aria-labelledby="invoice" data-parent="#side-nav-accordion"> -->
+			<!-- 		<li><a href="${pageContext.request.contextPath}/back-end/invoice/invoice_detail.jsp">消費明細</a></li> -->
+			<!-- 		<li><a href="${pageContext.request.contextPath}/back-end/invoice/invoice_list.jsp">明細列表</a></li> -->
+			<!-- 	</ul></li> -->
 			<!-- ----- ----- ----- 明細 end ----- ----- ----- -->
 
+			<!-- 不使用 -->
 			<!-- ----- ----- ----- 顧客 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#customer" aria-expanded="false" aria-controls="customer"><span><i class="fas fa-user-friends fs-16"></i>顧客回應</span></a>
-				<ul id="customer" class="collapse" aria-labelledby="customer" data-parent="#side-nav-accordion">
-					<li><a href="${pageContext.request.contextPath}/back-end/customer/customer_review.jsp">顧客回應</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/customer/customer_list.jsp">顧客列表</a></li>
-				</ul></li>
+			<!-- <li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#customer" aria-expanded="false" aria-controls="customer"><span><i class="fas fa-user-friends fs-16"></i>顧客回應</span></a> -->
+			<!-- 	<ul id="customer" class="collapse" aria-labelledby="customer" data-parent="#side-nav-accordion"> -->
+			<!-- 		<li><a href="${pageContext.request.contextPath}/back-end/customer/customer_review.jsp">顧客回應</a></li> -->
+			<!-- 		<li><a href="${pageContext.request.contextPath}/back-end/customer/customer_list.jsp">顧客列表</a></li> -->
+			<!-- 	</ul></li> -->
 			<!-- ----- ----- ----- 顧客 end ----- ----- ----- -->
+			
 			<!-- ----- ----- ----- 訂位控制 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#reservationCtrl" aria-expanded="false" aria-controls="reservationCtrl"><span><i class="fas fa-file-reservation fs-16"></i>訂位控制</span></a>
 				<ul id="reservationCtrl" class="collapse" aria-labelledby="reservationCtrl" data-parent="#side-nav-accordion">
@@ -99,19 +104,14 @@
 					<li><a href="${pageContext.request.contextPath}/back-end/reservation_ctrl/reservationCtrl_add.jsp">新增訂位控制</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 訂位控制 end ----- ----- ----- -->
-			<!-- ----- ----- ----- 空白頁面 start ----- ----- ----- -->
+			
+			<!-- ----- ----- ----- 客服管理 start ----- ----- ----- -->
 			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#customerService" aria-expanded="false" aria-controls="customerService"><span><i class="fas fa-file-invoice fs-16"></i>客服管理</span></a>
 				<ul id="customerService" class="collapse" aria-labelledby="customerService" data-parent="#side-nav-accordion">
 					<li><a href="${pageContext.request.contextPath}/back-end/botqa/BotqaServlet.do?action=getAll"">查看機器人回復</a></li>
 					<li><a href="${pageContext.request.contextPath}/back-end/botqa/botqaAdd.jsp">新增機器人回復</a></li>
 				</ul></li>
-			<!-- ----- ----- ----- 空白頁面 end ----- ----- ----- -->
-			<!-- ----- ----- ----- 空白頁面 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron" data-toggle="collapse" data-target="#nothing1" aria-expanded="false" aria-controls="nothing1"><span><i class="fas fa-file-invoice fs-16"></i>空白頁面</span></a>
-				<ul id="nothing1" class="collapse" aria-labelledby="nothing1" data-parent="#side-nav-accordion">
-					<li><a href="${pageContext.request.contextPath}/back-end/nothing/nothing1.jsp">nothing1</a></li>
-				</ul></li>
-			<!-- ----- ----- ----- 空白頁面 end ----- ----- ----- -->
+			<!-- ----- ----- ----- 客服管理 end ----- ----- ----- -->
 		</ul>
 	</aside>
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->

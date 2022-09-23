@@ -50,6 +50,7 @@
 	align-self: center;
 }
 </style>
+
 </head>
 
 <body>
@@ -74,9 +75,15 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">購物車</h5>
-								<!-- 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-								<!-- 								<span aria-hidden="true">&times;</span> -->
-								<!-- 							</button> -->
+								<br>
+								<div id="checkboxGroup">
+									<ul>
+										<li style="text-align:right"><input type="checkbox" class="checkbox" value="0"/>外帶</li>
+										<li style="text-align:right"><input type="checkbox" class="checkbox" value="1"/>外送</li>
+										<li style="text-align:right"><input type="checkbox" class="checkbox" value="2"/>內用</li>
+									</ul>
+									輸入外送地址<input style="width:300px" type="text" name="aa" id="ordtext1" disabled="disabled">
+								</div>
 							</div>
 							<div class="modal-body">
 								<table class="show-cart table">

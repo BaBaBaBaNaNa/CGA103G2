@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*,com.shopcart.controller.ShopCartServlet"%>
+<%@ page import="com.shopcart.model.*"%>
 
 <!doctype html>
 <html lang="zh-tw">
@@ -34,15 +37,17 @@
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 <style>
 .show-cart li {
-  display: flex;
+	display: flex;
 }
+
 .card {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
+
 .card-img-top {
-  width: 200px;
-  height: 200px;
-  align-self: center;
+	width: 200px;
+	height: 200px;
+	align-self: center;
 }
 </style>
 </head>
@@ -61,14 +66,17 @@
 		<!-- ----- ----- ----- 中間內容 start ----- ----- ----- -->
 
 		<section class="about section-padding bg-white">
-		<p style="font-size:30px; text-align: center;">新增訂單成功</p>
 			<hr>
+<!-- 			<form METHOD="post" ACTION="ShopCartServlet.do" name="form1"> -->
 				<div class="modal-fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<!-- 						<div class="modal-dialog modal-dialog-centered modal-xl"> -->
 					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">訂單詳情</h5>
-								<span id="orderType" class=name></span>
+								<h5 class="modal-title" id="exampleModalLabel">購物車</h5>
+								<!-- 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+								<!-- 								<span aria-hidden="true">&times;</span> -->
+								<!-- 							</button> -->
 							</div>
 							<div class="modal-body">
 								<table class="show-cart table">
@@ -79,10 +87,15 @@
 								</div>
 							</div>
 							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.href='${pageContext.request.contextPath}/back-end/meals/MealsServlet.do?action=getAll1'">回到菜單</button>
+								<input type="hidden" name="action" value="insert">
+								<input id="submit2" class="btn btn-primary" type="submit" value="送出訂單">
+<!-- 								<button type="button" class="btn btn-primary" onclick="window.location.href='../../front-end/shopcart/ShopCart.jsp'">送出訂單</button> -->
 							</div>
 						</div>
 					</div>
 				</div>
+<!-- 			</form> -->
 			<hr>
 		</section>
 		<!-- ----- ----- ----- 中間內容 end ----- ----- ----- -->
@@ -221,7 +234,7 @@
 	<script src="../../front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
 	<script src="../../front-assets/js/custom.js"></script>
 
-	<script src="../../front-assets/js/shoppingcart/ShoppingCartSuccess.js"></script>
+	<script src="../../front-assets/js/shoppingcart/ShoppingCart.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 
 </body>
