@@ -12,7 +12,7 @@
 RsvtService rsvtSvc = new RsvtService();
 // List<RsvtVO> list = rsvtSvc.getAll();
 
-ArrayList list = (ArrayList) request.getAttribute("rsvtVO"); 
+List list = (ArrayList) request.getAttribute("rsvtVO"); 
 pageContext.setAttribute("list", list);
 SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); // 日期格式轉換
 %>

@@ -36,7 +36,7 @@ public class CheckPeriod extends HttpServlet{
       		  System.out.println(obj.getRsvtCtrlPeriod());
       		  if(obj.getRsvtCtrlOpen() == 0){
       			  Period.add(obj.getRsvtCtrlPeriod());
-      			  Period.add(num + obj.getRsvtCtrlMax() - obj.getRsvtCtrlNumber());
+      			  Period.add(obj.getRsvtCtrlMax() - obj.getRsvtCtrlNumber());
       			  }
       	  }
         }
