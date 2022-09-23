@@ -91,4 +91,14 @@ public class MemService {
 	public MemVO getOwnMem(String memAccount) {
 		return dao.findByMemAccount(memAccount);
 	}
+	
+	public MemVO updatePassword(String mem_password,Integer mem_no) {
+		
+		MemVO memVO = new MemVO();
+		memVO.setMem_pwd(mem_password);
+		memVO.setMem_no(mem_no);
+		
+		dao.upatePassword(memVO);
+		return memVO;
+	}
 }
