@@ -31,7 +31,7 @@ public class ShopCartDAO implements ShopCartDAOInterface {
 	// ----- ----- ----- 購物車新增訂單 start ----- ----- -----
 	//新增內用訂單
 	@Override
-	public void insertInsideOrders(ShopCartVO shopcartVO , ArrayList PriceArrayList, ArrayList NameArrayList, ArrayList CountArrayList ,ArrayList NameidArrayList) {
+	public void insertInsideOrders(ShopCartVO shopcartVO , ArrayList PriceArrayList, ArrayList NameArrayList, ArrayList CountArrayList ,ArrayList idArrayList) {
 		Connection con = null;
 		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
@@ -70,21 +70,22 @@ public class ShopCartDAO implements ShopCartDAOInterface {
 				System.out.println(PriceArrayList.get(i));
 				System.out.println(NameArrayList.get(i));
 				System.out.println(CountArrayList.get(i));
+				System.out.println(idArrayList.get(i));
 				System.out.println("==========");
 				
 				int P1 = (Integer)(PriceArrayList.get(i));
 				int C1 = (Integer)(CountArrayList.get(i));
-				int p3 = (Integer)(PriceArrayList.get(i));
+				int id1 = (Integer)(idArrayList.get(i));
 				
 				pstmt2 = con.prepareStatement(InsertInsideDetailStmt);
 				//ordersID
 				pstmt2.setInt(1,Integer.parseInt(nextOrdersID));
 				//mealsID
-				pstmt2.setInt(2,1);
+				pstmt2.setInt(2,id1);
 				//orddetailsMealsQuantity
 				pstmt2.setInt(3,C1);
 				//orddetailsMealsAmount
-				pstmt2.setInt(4,P1);
+				pstmt2.setInt(4,P1 * C1);
 				//orddetailsMealsStatus 0:已製作 , 1:未製作
 				pstmt2.setInt(5,1); 
 				//orddetailsDeliverStatus 0:已送餐 , 1:未送餐

@@ -5,11 +5,11 @@ var shoppingCart = (function() {
 	cart = [];
 
 	// 建構子 品項名 價格 數量
-	function Item(name, price, count , nameid) {
+	function Item(name, price, count , id) {
 		this.name = name;
 		this.price = price;
 		this.count = count;
-		this.nameid = nameid;
+		this.id = id;
 	}
 
 	// 儲存購物車在session
@@ -34,7 +34,7 @@ var shoppingCart = (function() {
 	var obj = {};
 
 	// 增加物品數量
-	obj.addItemToCart = function(name, price, count , nameid) {
+	obj.addItemToCart = function(name, price, count , id) {
 		for (var item in cart) {
 			if (cart[item].name === name) {
 				cart[item].count++;
@@ -42,7 +42,7 @@ var shoppingCart = (function() {
 				return;
 			}
 		}
-		var item = new Item(name, price, count , nameid);
+		var item = new Item(name, price, count , id);
 		cart.push(item);
 		saveCart();
 	}
@@ -144,10 +144,10 @@ var shoppingCart = (function() {
 // 增加物品
 $('.add-to-cart').click(function(event) {
 	event.preventDefault();
-	var id = $(this).data('id');
 	var name = $(this).data('name');
 	var price = Number($(this).data('price'));
-	shoppingCart.addItemToCart(name, price, 1,nameid);
+	var id = $(this).data('id');
+	shoppingCart.addItemToCart(name, price, 1,id);
 	displayCart();
 });
 

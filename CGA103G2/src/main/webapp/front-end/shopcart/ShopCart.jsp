@@ -87,7 +87,7 @@
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.href='../../front-end/shopcart/ShopCartMenu.jsp'">回到菜單</button>
+								<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.href='${pageContext.request.contextPath}/back-end/meals/MealsServlet.do?action=getAll1'">回到菜單</button>
 								<input type="hidden" name="action" value="insert">
 								<input id="submit2" class="btn btn-primary" type="submit" value="送出訂單">
 <!-- 								<button type="button" class="btn btn-primary" onclick="window.location.href='../../front-end/shopcart/ShopCart.jsp'">送出訂單</button> -->

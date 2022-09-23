@@ -83,7 +83,7 @@ public class ShopCartServlet extends HttpServlet {
 			ArrayList PriceArrayList = new ArrayList();
 			ArrayList NameArrayList = new ArrayList();
 			ArrayList CountArrayList = new ArrayList();
-			ArrayList NameidArrayList = new ArrayList();
+			ArrayList idArrayList = new ArrayList();
 			try {
 				// cart丟到 jArray 處理
 				jArray = new JSONArray(Jsonobject.get("cart").toString());
@@ -104,7 +104,7 @@ public class ShopCartServlet extends HttpServlet {
 					PriceArrayList.add(jObject.get("price"));
 					NameArrayList.add(jObject.get("name"));
 					CountArrayList.add(jObject.get("count"));
-					NameidArrayList.add(jObject.get("nameid"));
+					idArrayList.add(jObject.get("id"));
 					// 測試東西
 //					System.out.println(PriceArrayList);
 //					System.out.println(NameArrayList);
@@ -124,7 +124,7 @@ public class ShopCartServlet extends HttpServlet {
 			/*************************** 2.開始新增資料 ***************************************/
 			// 新增訂單
 			ShopCartService shopcartSvc = new ShopCartService();
-			shopcartSvc.addInsideOrder(ordersType, ordersStatus, ordersBuildDate,PriceArrayList,NameArrayList,CountArrayList,NameidArrayList);
+			shopcartSvc.addInsideOrder(ordersType, ordersStatus, ordersBuildDate,PriceArrayList,NameArrayList,CountArrayList,idArrayList);
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			req.setAttribute("shopcartVO", shopcartVO); // 資料庫update成功後,正確的的empVO物件,存入req
 			String url = "/front-end/shopcart/ShopCartAddSuccess.jsp";
