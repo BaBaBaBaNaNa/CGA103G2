@@ -25,6 +25,8 @@
 		<servlet-name>MemServlet</servlet-name>
 		<url-pattern>/back-end/member/mem.do</url-pattern>
 		<url-pattern>/front-end/member/mem.do</url-pattern>
+		<url-pattern>/back-end/member/MemServlet.do</url-pattern>
+		<url-pattern>/front-end/member/MemServlet.do</url-pattern>
 		<url-pattern>/member/mem.do</url-pattern>
 	</servlet-mapping>
 	<!-- 會員 stop -->
@@ -35,8 +37,8 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MemLoginServlet</servlet-name>
-		<url-pattern>/MemLoginServlet</url-pattern>
 		<url-pattern>/front-end/member/MemLoginServlet.do</url-pattern>
+<!-- 		<url-pattern>/MemLoginServlet.do</url-pattern> -->
 	</servlet-mapping>
 	<!-- 會員登入 stop -->
 	<servlet>

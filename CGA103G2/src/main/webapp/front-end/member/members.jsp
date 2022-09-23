@@ -23,16 +23,16 @@
 	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
 	rel="stylesheet">
 
-<link href="../../front-assets/bootstrap_css/bootstrap.min.css"
+<link href="<%=request.getContextPath()%>/front-assets/bootstrap_css/bootstrap.min.css"
 	rel="stylesheet">
 
-<link href="../../front-assets/bootstrap_css/bootstrap-icons.css"
+<link href="<%=request.getContextPath()%>/front-assets/bootstrap_css/bootstrap-icons.css"
 	rel="stylesheet">
 
-<link href="../../front-assets/css/tooplate-crispy-kitchen.css"
+<link href="<%=request.getContextPath()%>/front-assets/css/tooplate-crispy-kitchen.css"
 	rel="stylesheet">
 
-<link href="../../front-assets/css/navbar.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>front-assets/css/navbar.css" rel="stylesheet">
 
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
@@ -125,17 +125,23 @@
 							</div>
 						</div>
 
-<!-- 						<div class="col-lg-6 col-12"> -->
+						<!-- 						<div class="col-lg-6 col-12"> -->
 
-							<div id="submit">
-								<input type="submit" id="submit1" value="Sign In"
-									onclick="return checkForm()"> 
-<!-- 									<input type="submit" -->
-<!-- 									id="submit2" value="Sign In"> -->
-							</div>
+						<div id="submit">
+							<input type="submit" id="submit1" value="Sign In"
+								onclick="return checkForm()">
+							<!-- 									<input type="submit" -->
+							<!-- 									id="submit2" value="Sign In"> -->
 						</div>
-
+						<div id="submit">
+							<input type="submit" id="submit1" value="Sign Up"
+								onclick="return checkForm()">
+							<!-- 									<input type="submit" -->
+							<!-- 									id="submit2" value="Sign In"> -->
+						</div>
 					</div>
+
+				</div>
 				</div>
 			</section>
 		</form>

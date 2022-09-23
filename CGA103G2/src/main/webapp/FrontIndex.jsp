@@ -19,13 +19,13 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <link href="front-assets/bootstrap_css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/front-assets/bootstrap_css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="front-assets/bootstrap_css/bootstrap-icons.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/front-assets/bootstrap_css/bootstrap-icons.css" rel="stylesheet">
 
-    <link href="front-assets/css/tooplate-crispy-kitchen.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/front-assets/css/tooplate-crispy-kitchen.css" rel="stylesheet">
 
-    <link href="front-assets/css/navbar.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/front-assets/css/navbar.css" rel="stylesheet">
     <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -315,9 +315,9 @@
 
     <!-- ----- ----- ----- js start ----- ----- ----- -->
     
-    <script src="front-assets/js/jquery.min.js"></script>
-    <script src="front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
-    <script src="front-assets/js/custom.js"></script>
+    <script src="<%=request.getContextPath()%>/front-assets/js/jquery.min.js"></script>
+    <script src="<%=request.getContextPath()%>/front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
+    <script src="<%=request.getContextPath()%>/front-assets/js/custom.js"></script>
 
     <!-- ----- ----- ----- js end ----- ----- ----- -->
 </body>
