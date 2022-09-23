@@ -505,7 +505,7 @@
 					var name = $(this).data('name');
 					var price = Number($(this).data('price'));
 			        var info = ($(this).data('info'));
-			        
+			        var id = ($(this).data('id'));
 					console.log(name);
 					console.log(info);
 					swal.fire({

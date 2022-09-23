@@ -141,7 +141,6 @@ var shoppingCart = (function() {
 // 增加物品
 $('.add-to-cart').click(function(event) {
 	event.preventDefault();
-	var id = $(this).data('id');
 	var name = $(this).data('name');
 	var price = Number($(this).data('price'));
 	shoppingCart.addItemToCart(name, price, 1);
