@@ -284,6 +284,7 @@
 		<th>取餐地點</th>
 		<th>成立訂單日</th>
 		<th>預計製作日</th>
+		<th>訂單明細</th>
 		<th>修改</th>
 <!-- 		<th>刪除</th> -->
 	</tr>
@@ -310,6 +311,15 @@
 			<td>${ordersVO.ordersDestination}</td>
 			<td>${ordersVO.ordersBuildDate}</td> 
 			<td>${ordersVO.ordersMakeDate}</td>
+			
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/orddetails/orddetails.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="訂單明細" >
+			     <input type="hidden" value="${ordersVO.ordersID}" name="orderDetailId">
+			     <input type="hidden" name="action"	value="getOne_For_Display"></FORM>
+			     
+			</td>
+			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/order/orders.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">

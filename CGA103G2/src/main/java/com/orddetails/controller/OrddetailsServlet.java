@@ -26,6 +26,7 @@ public class OrddetailsServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException,IOException{
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		
 
 		if ("getOne_For_Display".equals(action)) {
 			
@@ -33,8 +34,8 @@ public class OrddetailsServlet extends HttpServlet{
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			/*************************** 1接收請求參數 - 輸入格式的錯誤處理 **********************/
-			
-			String str = req.getParameter("orddetailsID");
+			System.out.println("d;lk;lfdkg;lfdkg;lfd");
+			String str = req.getParameter("orderDetailId");
 			if (str == null || (str.trim()).length()== 0) {
 				errorMsgs.add("請輸入訂單編號");
 			}
@@ -57,9 +58,9 @@ public class OrddetailsServlet extends HttpServlet{
 				return;
 			}
 			/******** 2.開始查詢資料 *************/
-
 			OrddetailsService orddetailsSvc = new OrddetailsService();
-			OrddetailsVO orddetailsVO = orddetailsSvc.getOneOrddetails(orddetailsID);
+			List<OrddetailsVO> orddetailsVO = orddetailsSvc.getOneOrddetails(orddetailsID);
+			System.out.println(orddetailsVO);
 			if (orddetailsVO == null) {
 				errorMsgs.add("查無資料");
 			}
@@ -77,17 +78,29 @@ public class OrddetailsServlet extends HttpServlet{
 			successView.forward(req, res);
 		}
 		
-		if ("getOne_For_Update".equals(action)) {
+//		if ("getOne_For_Update".equals(action)) {
+//			List<String> errorMsgs = new LinkedList<String>();
+//
+//			req.setAttribute("errorMsgs", errorMsgs);
+//			/*********** 1接收請求參數 **************/
+//			Integer orddetailsID = Integer.valueOf(req.getParameter("orddetailsID"));
+//
+//			/********** 2.開始查詢資料***********/
+//			OrddetailsService orddetailsSvc = new OrddetailsService();
+//			List<OrddetailsVO> orddetailsVO = orddetailsSvc.getOneOrddetails(orddetailsID);
+//			/********** 3.查詢完成,準備轉交 **********/
+//			req.setAttribute("orddetailsVO", orddetailsVO);
+//			String url = "/back-end/orddetails/update_orddetails_input.jsp";
+//			RequestDispatcher successView = req.getRequestDispatcher(url);
+//			successView.forward(req, res);
+//		}
+		
+		if ("xxx".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
-
 			req.setAttribute("errorMsgs", errorMsgs);
-			/*********** 1接收請求參數 **************/
 			Integer orddetailsID = Integer.valueOf(req.getParameter("orddetailsID"));
-
-			/********** 2.開始查詢資料***********/
 			OrddetailsService orddetailsSvc = new OrddetailsService();
-			OrddetailsVO orddetailsVO = orddetailsSvc.getOneOrddetails(orddetailsID);
-			/********** 3.查詢完成,準備轉交 **********/
+			OrddetailsVO orddetailsVO = orddetailsSvc.getOneOrddetails1(orddetailsID);
 			req.setAttribute("orddetailsVO", orddetailsVO);
 			String url = "/back-end/orddetails/update_orddetails_input.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -105,32 +118,13 @@ public class OrddetailsServlet extends HttpServlet{
 			
 			Integer orddetailsID = Integer.valueOf(req.getParameter("orddetailsID").trim());
 			
-			Integer ordersID = null;
-			try {
-				ordersID = Integer.valueOf(req.getParameter("ordersID").trim());
-			} catch (NumberFormatException e) {
-				errorMsgs.add("請勿留白");
-			}
+			Integer ordersID = Integer.valueOf(req.getParameter("ordersID").trim());
 			
-			Integer mealsID = null;
-			try {
-				mealsID = Integer.valueOf(req.getParameter("mealsID").trim());
-			} catch (NumberFormatException e) {
-				errorMsgs.add("請勿留白");
-			}
-			Integer orddetailsMealsQuantity = null;
-			try {
-				orddetailsMealsQuantity = Integer.valueOf(req.getParameter("orddetailsMealsQuantity").trim());
-			} catch (NumberFormatException e) {
-				errorMsgs.add("請勿留白");
-			}
+			Integer mealsID = Integer.valueOf(req.getParameter("mealsID").trim());
 			
-			Integer orddetailsMealsAmount = null;
-			try {
-				orddetailsMealsAmount = Integer.valueOf(req.getParameter("orddetailsMealsAmount").trim());
-			} catch (NumberFormatException e) {
-				errorMsgs.add("請勿留白");
-			}
+			Integer orddetailsMealsQuantity = Integer.valueOf(req.getParameter("orddetailsMealsQuantity").trim());
+			
+			Integer orddetailsMealsAmount = Integer.valueOf(req.getParameter("orddetailsMealsAmount").trim());
 			
 			Integer orddetailsMealsStatus = null;
 			try {
@@ -167,7 +161,7 @@ public class OrddetailsServlet extends HttpServlet{
 					 orddetailsDeliverStatus);
 			/**************** 3.修改完成準備移交數據 *********************/
 			req.setAttribute("orddetailsVO", orddetailsVO);
-			String url =  "/back-end/orddetails/listOneOrddetails.jsp";
+			String url =  "/back-end/orddetails/listOneAllDetails.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}

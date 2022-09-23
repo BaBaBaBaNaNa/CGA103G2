@@ -29,6 +29,10 @@ public class OrddetailsDAO implements OrddetailsDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT orddetailsID, ordersID, mealsID, orddetailsMealsQuantity,"
 			+ "orddetailsMealsAmount, orddetailsMealsStatus, orddetailsDeliverStatus "
 			+ "FROM orddetails where orddetailsID = ?";
+	
+	private static final String GET_ONES_STMT = "SELECT orddetailsID, ordersID, mealsID, orddetailsMealsQuantity,"
+			+ "orddetailsMealsAmount, orddetailsMealsStatus, orddetailsDeliverStatus "
+			+ "FROM orddetails where ordersID = ?";
 
 	private static final String DELETE = "DELETE FROM orddetails where orddetailsID = ?";
 
@@ -160,7 +164,7 @@ public class OrddetailsDAO implements OrddetailsDAO_interface {
 	}
 
 	@Override
-	public OrddetailsVO findByPrimaryKey(Integer orddetailsID) {
+	public OrddetailsVO findByPrimaryKey1(Integer orddetailsID) {
 
 		OrddetailsVO orddetailsVO = null;
 		Connection con = null;
@@ -216,6 +220,64 @@ public class OrddetailsDAO implements OrddetailsDAO_interface {
 			}
 		}
 		return orddetailsVO;
+	}
+	
+	@Override
+	public List<OrddetailsVO> findByPrimaryKey(Integer ordersID) {
+
+		OrddetailsVO orddetailsVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONES_STMT);
+
+			pstmt.setInt(1, ordersID);
+
+			rs = pstmt.executeQuery();
+			List<OrddetailsVO> list = new ArrayList<>();
+			while (rs.next()) {
+				orddetailsVO = new OrddetailsVO();
+				orddetailsVO.setOrddetailsID(rs.getInt("orddetailsID"));
+				orddetailsVO.setOrdersID(rs.getInt("ordersID"));
+				orddetailsVO.setMealsID(rs.getInt("mealsID"));
+				orddetailsVO.setOrddetailsMealsQuantity(rs.getInt("orddetailsMealsQuantity"));
+				orddetailsVO.setOrddetailsMealsAmount(rs.getInt("orddetailsMealsAmount"));
+				orddetailsVO.setOrddetailsMealsStatus(rs.getInt("orddetailsMealsStatus"));
+				orddetailsVO.setOrddetailsDeliverStatus(rs.getInt("orddetailsDeliverStatus"));
+				list.add(orddetailsVO);
+			}
+			return list;
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
 	}
 
 	@Override

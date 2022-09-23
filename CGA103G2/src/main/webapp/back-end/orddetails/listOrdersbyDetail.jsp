@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@page import="com.orddetails.model.OrddetailsVO"%>
-<%@page import="java.sql.Timestamp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.sql.*"%>
+
+<%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-OrddetailsVO orddetailsVO = (OrddetailsVO) request.getAttribute("orddetailsVO");
+OrddetailsVO orddetailsVO = (OrddetailsVO) request.getAttribute("orddetailsVO"); //OrdersServlet.java(Concroller), 存入req的ordersVO物件
 %>
 
 <!DOCTYPE html>
@@ -61,20 +61,22 @@ h4 {
 
 <style>
 table {
-	width: 570px;
+	width: 100%;
 	background-color: #f0f0fa;
-	margin-top: 1px;
-	margin-bottom: 1px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 table, th, td {
-	border: 0px solid #CCCCFF;
+	border: 1px solid #CCCCFF;
 }
 
 th, td {
-	padding: 1px;
+	padding: 5px;
+	text-align: center;
 }
 </style>
+
 </head>
 
 <body
@@ -180,6 +182,8 @@ th, td {
 					data-parent="#side-nav-accordion">
 					<li><a
 						href="${pageContext.request.contextPath}/back-end/order/order_details.jsp">查看訂單</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/back-end/orddetails/select_page.jsp">查看訂單明細</a></li>
 				</ul></li>
 			<!-- ----- ----- ----- 訂單 end ----- ----- ----- -->
 
@@ -366,89 +370,47 @@ th, td {
 			<ol class="breadcrumb pl-0">
 				<li class="breadcrumb-item"><a href="#"><i
 						class="material-icons">home</i>首頁</a></li>
-				<li class="breadcrumb-item"><a href="order_details.jsp">訂單管理</a></li>
+				<li class="breadcrumb-item"><a href="#">訂單管理</a></li>
 				<li class="breadcrumb-item active" aria-current="page">查看訂單</li>
 			</ol>
 		</nav>
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<table id="table-1">
-			<tr>
-				<td>
-					<h3>訂單資料修改</h3>
-					<h4>
-						<a href="select_page.jsp">回首頁</a>
-					</h4>
-				</td>
-			</tr>
-		</table>
+<table id="table-1">
+	<tr><td>
+		 <h3>訂單明細</h3>
+		 <h4><a href="select_page.jsp">回首頁</a></h4>
+	</td></tr>
+</table>
 
-		<h3>資料修改:</h3>
+<table>
+	<tr>
+		<th>訂單明細編號</th>
+		<th>訂單編號</th>
+		<th>餐點編號</th>
+		<th>餐點數量</th>
+		<th>餐點總金額</th>
+		<th>製作狀態</th>
+		<th>送餐狀態</th>
+	</tr>
+	<c:forEach var="orddetailsVO" items="${listOneOrders}">
+	<tr>
+		<td><%=orddetailsVO.getOrddetailsID()%></td>
+		<td><%=orddetailsVO.getOrdersID()%></td>
+		<td>${orddetailsVO.mealsVO.mealsName}</td>
+		<td><%=orddetailsVO.getOrddetailsMealsQuantity()%></td>
+		<td><%=orddetailsVO.getOrddetailsMealsAmount()%></td>
+		<td>${orddetailsVO.orddetailsMealsStatus == 0 ?"已製作":"未製作"}</td>
+		<td>${orddetailsVO.orddetailsDeliverStatus == 0 ?"已送餐":"未送餐"}</td>
+	</tr>
+	</c:forEach>
+</table>
 
-		<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-			<font style="color: red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
-		</c:if>
-
-		<FORM METHOD="post" ACTION="orddetails.do" name="form1">
-			<table>
-				<tr>
-					<td>訂單明細編號:<font color=red><b></b></font></td>
-					<td><%=orddetailsVO.getOrddetailsID()%></td>
-				</tr>
-				<tr>
-					<td>訂單編號:<font color=red><b></b></font></td>
-					<td><%=orddetailsVO.getOrdersID()%></td>
-				</tr>
-				<jsp:useBean id="mealsSvc" scope="page"
-					class="com.meals.model.MealsService" />
-				<tr>
-					<td>餐點名稱:<font color=red><b></b></font></td>
-					<td>${orddetailsVO.mealsVO.mealsName}</td>
-				</tr>
-				<tr>
-					<td>餐點數量:<font color=red><b></b></font></td>
-					<td><%=orddetailsVO.getOrddetailsMealsQuantity()%></td>
-				</tr>
-				<tr>
-					<td>餐點總金額:<font color=red><b></b></font></td>
-					<td><%=orddetailsVO.getOrddetailsMealsAmount()%></td>
-				</tr>
-				<tr>
-					<td>製作狀態(0:已製作 , 1:未製作 ):</td>
-					<td><select name="orddetailsMealsStatus"
-						id="orddetailsMealsStatus">
-							<option value="0">已製作</option>
-							<option value="1">未製作</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>送餐狀態(0:已製作 , 1:未製作 ):</td>
-					<td><select name="orddetailsDeliverStatus"
-						id="orddetailsDeliverStatus">
-							<option value="0">已送餐</option>
-							<option value="1">未送餐</option>
-					</select></td>
-				</tr>
-
-
-			</table>
-			<br> <input type="hidden" name="action" value="update">
-			<input type="hidden" name="orddetailsID"value="<%=orddetailsVO.getOrddetailsID()%>"> 
-			<input type="hidden" name="ordersID"value="<%=orddetailsVO.getOrdersID()%>"> 
-			<input type="hidden" name="mealsID"value="<%=orddetailsVO.getMealsID()%>"> 
-			<input type="hidden" name="orddetailsMealsQuantity"value="<%=orddetailsVO.getOrddetailsMealsQuantity()%>"> 
-			<input type="hidden" name="orddetailsMealsAmount"value="<%=orddetailsVO.getOrddetailsMealsAmount()%>"> 
-			<input type="submit" value="送出修改">
-		</FORM>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
+
+	
 
 	<!-- SCRIPTS -->
 	<!-- Global Required Scripts Start -->
@@ -469,31 +431,5 @@ th, td {
 	<!-- Settings -->
 	<script src="../../back-assets/js/settings.js"></script>
 </body>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script
-	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
-<style>
-.xdsoft_datetimepicker .xdsoft_datepicker {
-	width: 300px; /* width:  300px; */
-}
-
-.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-	height: 151px; /* height:  151px; */
-}
-</style>
-
-<script>
-
-document.getElementById('orddetailsMealsStatus').onchange = () => {
-	console.log(this);
-}
-document.getElementById('orddetailsDeliverStatus').onchange = () => {
-	console.log(this);
-}
-
-
-</script>
 </html>
