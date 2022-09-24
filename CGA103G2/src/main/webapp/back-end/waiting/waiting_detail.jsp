@@ -29,63 +29,11 @@
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 
 <style type="text/css">
-	input[type=checkbox]{
-	height: 0;
-	width: 0;
-	visibility: hidden;
-}
 
-label {
-	cursor: pointer;
-	width: 40px;
-	height: 20px;
-	background: grey;
-	display: block;
-	border-radius: 20px;
-	position: relative;
+#manageArea {
+	border : 1px solid
+	color : red;
 }
-
-label:after {
-	content: '';
-	position: absolute;
-	top: 1px;
-	left: 1px;
-	width: 18px;
-	height: 18px;
-	background: #fff;
-	border-radius: 18px;
-	transition: 0.3s;
-}
-
-.switch-txt::before,
-.switch-txt::after {
-  display: block;
-  color: #fff;
-  font-weight: bold;
-  box-sizing: border-box;
-}
-.switch-txt::before {
-  content: attr(turnOn);
-  color: #fff;
-}
-.switch-txt::after {
-  content: attr(turnOff);
-  color: #ccc;
-}
-
-input:checked + label {
-	background: #6f42c1;;
-}
-
-label:active:after {
-	width: 26px;
-}
-
-input:checked + label:after {
-	left: calc(100% - 1px);
-	transform: translateX(-100%);
-}
-
 </style>
 </head>
 
@@ -114,7 +62,7 @@ input:checked + label:after {
 		
 
 		<div class="ms-content-wrapper">
-		<button id="openOrCloseBtn" onclick="openOrCloseBtn">開/關</button>
+		<button type="button" class="btn btn-danger" id="openOrCloseBtn" onclick="openOrCloseBtn">清空候位</button>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="alert alert-success" role="hidden" style="display:none">
@@ -123,17 +71,17 @@ input:checked + label:after {
 				<div class="col-xl-6 col-md-12">
 					<div class="ms-panel ms-panel-fh">
 						<div class="ms-panel-header">
-							<h6>日期與時間</h6>
+							<h2>今日日期</h2>
 						</div>
 						<div class="ms-panel-body">
 							<form class="needs-validation clearfix" novalidate>
 								<div class="form-row">
-									候位日期：
-									<span id="today"></span>
+									<h3>候位日期：</h3>
+									<h3><span id="today"></span></h3>
 								</div>
 								<div class="form-row">
-									候位時段：
-									<span id="timePeriod"></span>
+									<h3>候位時段：</h3>
+									<h3><span id="timePeriod"></span></h3>
 								</div>
 									
 									
@@ -146,38 +94,43 @@ input:checked + label:after {
 						<div class="col-md-12">
 							<div class="ms-panel">
 								<div class="ms-panel-header">
-									<h6>Second Area</h6>
+									<h2>候位管理</h2>
 								</div>
 								<div class="ms-panel-body">
-									<div id="imagesSlider" class="ms-image-slider carousel slide" data-ride="carousel">
-										<div class="carousel-inner">
-										當前編號：
-										<span id="currentNO">0</span>
-										</div>
+								
+									<div id="imagesSlider" class="ms-image-slider carousel slide" data-ride="carousel" >
+
 										<div>
-										<button type="button" id="getNextNOBtn" onclick="getNextNOBtn">下一號</button>
-										<button type="button" id="doSeatedListBtn" onclick="doSeatedListBtn">入座</button>
-										<button type="button" id="doOverListBtn" onclick="doOverListBtn">過號</button>
+										<button type="button" class="btn btn-danger" id="getNextNOBtn" onclick="getNextNOBtn">下一號</button>
+										<button type="button" class="btn btn-danger" id="doSeatedListBtn" onclick="doSeatedListBtn" disabled="disabled">入座</button>
+										<button type="button" class="btn btn-danger" id="doOverListBtn" onclick="doOverListBtn" disabled="disabled">過號</button>
+										</div>
+										<br>
+										<div style="border-color:#BEBEBE;border-style:solid;border-width:3px;padding:5px;">
+										<div class="carousel-inner" >
+										<h5>當前編號：</h5>
+										<h5><span id="currentNO">0</span></h5>
+										</div>
+										<div class="carousel-inner" >
+										<h5>下一號：</h5>
+										<h5><span id="nextNO">0</span></h5>
 										</div>
 
-										<div class="carousel-inner">
-										下一號：
-										<span id="nextNO">0</span>
+										<div class="carousel-inner" >
+										<h5>剩餘組數：</h5>
+										<h5><span id="remainNO">0</span></h5>
 										</div>
-
+										<div class="carousel-inner" >
+										<h5>總組數：</h5>
+										<h5><span id="totalNO">0</span></h5>
 										<div class="carousel-inner">
-										剩餘組數：
-										<span id="remainNO">0</span>
+										<h5>最近5組已入座號碼：</h5>
+										<h5><span id="seatedList">0</span></h5>
+										<div class="carousel-inner" >
+										<h5>最近5組已過號號碼：</h5>
+										<h5><span id="overList">0</span></h5>
 										</div>
-										<div class="carousel-inner">
-										總組數：
-										<span id="totalNO">0</span>
-										<div class="carousel-inner">
-										最近5組已入座號碼：
-										<span id="seatedList">0</span>
-										<div class="carousel-inner">
-										最近5組已過號號碼：
-										<span id="overList">0</span>
+										
 										</div>
 
 									</div>
@@ -219,6 +172,9 @@ input:checked + label:after {
 			
 	        $("#getNextNOBtn").click(function(){
 	        	
+	    		$("#doSeatedListBtn").attr("disabled", false);
+	    		$("#doOverListBtn").attr("disabled", false);
+	    		$("#getNextNOBtn").attr("disabled", true);
 	        	
 
 	            $.ajax({
@@ -249,7 +205,9 @@ input:checked + label:after {
 	    	 
 	        $("#doSeatedListBtn").click(function(){
 	        	
-	        	
+	    		$("#getNextNOBtn").attr("disabled", false);
+	    		$("#doSeatedListBtn").attr("disabled", true);
+	    		$("#doOverListBtn").attr("disabled", true);
 
 	            $.ajax({
 
@@ -274,6 +232,10 @@ input:checked + label:after {
 	        });
 	        
 	        $("#doOverListBtn").click(function(){
+	        	
+	    		$("#getNextNOBtn").attr("disabled", false);
+	    		$("#doSeatedListBtn").attr("disabled", true);
+	    		$("#doOverListBtn").attr("disabled", true);
 
 	            $.ajax({
 
@@ -299,7 +261,7 @@ input:checked + label:after {
 	        
 	        $("#openOrCloseBtn").click(function(){
 					localStorage.clear()	
-	        	
+	        		window.location.reload()
 	            $.ajax({
 
 
@@ -493,6 +455,9 @@ input:checked + label:after {
 	}
 	
 	</script>
+	
+
+	
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 </body>
 

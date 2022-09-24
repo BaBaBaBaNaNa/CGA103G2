@@ -101,7 +101,7 @@
 
 				<div class="col-lg-6 col-md-6 col-12" style="text-align:center;">
 					<h3>您的候位號碼</h3>
-					<span id="queuerNO"></span>
+					<h3><span id="queuerNO"></span></h3>
 				</div>
 				<div class="col-lg-6 col-md-6 col-12" style="text-align:center;">
 					<h3>
@@ -111,7 +111,7 @@
 				</div>
 
 				<div class="col-12" style="text-align:center;margin-top:100px;">
-					<button type="button" id="queueInListBtn" onclick="queueInListBtn">我要候位</button>
+					<button type="button" class="btn btn-danger" id="queueInListBtn" onclick="queueInListBtn">我要候位</button>
 						<div class="news-text-info"></div>
 				</div>
 
