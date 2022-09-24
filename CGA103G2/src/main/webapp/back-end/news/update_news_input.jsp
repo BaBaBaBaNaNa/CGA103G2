@@ -378,10 +378,9 @@ th, td {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>訂單資料修改 - update_news_input.jsp</h3>
+				<h3>最新消息修改</h3>
 				<h4>
-					<a href="listAllNews.jsp"><img src="images/back.png"
-						width="100" height="100" border="0">回首頁</a>
+					<a href="listAllNews.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>

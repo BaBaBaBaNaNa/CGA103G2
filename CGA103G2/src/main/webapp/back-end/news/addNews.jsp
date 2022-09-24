@@ -43,7 +43,7 @@ NewsVO newsVO = (NewsVO) request.getAttribute("newsVO");
 
 <style>
 table#table-1 {
-	background-color: #f0f0fa;
+	background-color: #CCCCFF;
 	border: 2px solid black;
 	text-align: center;
 }
@@ -439,7 +439,7 @@ from, table, div{
 			</table>
 
 			<br> <input type="hidden" name="action" value="insert">
-			<input class="btn btn-primary mt-3 d-block" type="submit" value="送出新增">
+			<input  type="submit" value="送出新增">
 		</FORM>
 
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->

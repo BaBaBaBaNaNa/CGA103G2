@@ -375,7 +375,7 @@ th, td {
 		<table id="table-1">
 			<tr>
 				<td>
-					<h3>訂單資料修改 - update_orders_input.jsp</h3>
+					<h3>訂單資料修改 </h3>
 					<h4>
 						<a href="order_details.jsp">回首頁</a>
 					</h4>
@@ -398,42 +398,37 @@ th, td {
 		<FORM METHOD="post" ACTION="orders.do" name="form1">
 			<table>
 				<tr>
-					<td>訂單編號:<font color=red><b>*</b></font></td>
+					<td>訂單編號:</td>
 					<td><%=ordersVO.getOrdersID()%></td>
 				</tr>
 
 				<tr>
-					<td>會員_編號:</td>
-					<td><input type="TEXT" name="memID" size="45"
-						value="<%=ordersVO.getMemID()%>" /></td>
+				<td>會員編號:</td>
+					<td><%=ordersVO.getMemID()%></td>
 				</tr>
 				<tr>
 					<td>櫃台員工_編號:</td>
-					<td><input type="TEXT" name="empCounterID" size="45"
-						value="<%=ordersVO.getEmpCounterID()%>" /></td>
+					<td><%=ordersVO.getEmpCounterID()%></td>
 				</tr>
 				<tr>
 					<td>外送員工_編號:</td>
-					<td><input type="TEXT" name="empDeliveryID" size="45"
-						value="<%=ordersVO.getEmpDeliveryID()%>" /></td>
+					<td><%=ordersVO.getEmpDeliveryID()%></td>
 				</tr>
 				<tr>
 					<td>桌子_編號:</td>
-					<td><input type="TEXT" name="seatID" size="45"
-						value="<%=ordersVO.getSeatID()%>" /></td>
+					<td><%=ordersVO.getSeatID()%></td>
 				</tr>
 				<tr>
 					<td>訂單_種類(外帶 外送 內用):</td>
-					<td><select name="ordersType" id="ordersType">
+					<td name="ordersType" id="ordersType">
 							<option value="0">外帶</option>
 							<option value="1">外送</option>
 							<option value="2">內用</option>
-					</select></td>
+					</td>
 				</tr>
 				<tr>
 					<td>訂單_總金額:</td>
-					<td><input type="TEXT" name="ordersAmount" size="45"
-						value="<%=ordersVO.getOrdersAmount()%>" /></td>
+					<td><%=ordersVO.getOrdersAmount()%></td>
 				</tr>
 				<tr>
 					<td>訂單狀態(完成, 未完成, 退回):</td>
@@ -460,9 +455,13 @@ th, td {
 
 			</table>
 			<br> <input type="hidden" name="action" value="update">
-			<input type="hidden" name="ordersID"
-				value="<%=ordersVO.getOrdersID()%>"> <input type="submit"
-				value="送出修改">
+			<input type="hidden" name="ordersID" value="<%=ordersVO.getOrdersID()%>"> 
+			<input type="hidden" name="memID" value="<%=ordersVO.getMemID()%>"> 
+			<input type="hidden" name="seatID" value="<%=ordersVO.getSeatID()%>"> 
+			<input type="hidden" name="ordersType" value="<%=ordersVO.getOrdersType()%>"> 
+			<input type="hidden" name="ordersAmount" value="<%=ordersVO.getOrdersAmount()%>"> 
+			<input type="hidden" name="ordersBuildDate" value="<%=ordersVO.getOrdersBuildDate()%>"> 
+			<input type="submit"value="送出修改">
 		</FORM>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
