@@ -39,7 +39,7 @@
 
 <body>
 	<!-- ----- ----- ----- 最上面 選擇列 start ----- ----- ----- -->
-	<%@ include file="../../front-end/tool/UpSideBar.file"%>
+	<%@ include file="../../front-end/tool/UpSideBarNoRSVT.file"%>
 	<!-- ----- ----- ----- 最上面 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
