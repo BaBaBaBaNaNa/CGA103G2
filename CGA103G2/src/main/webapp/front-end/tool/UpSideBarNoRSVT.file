@@ -65,7 +65,9 @@
 				
                 </ul>
             </div>
-
+            <div class="d-none d-lg-block">
+                <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#BookingModal" onclick="window.location.href='${pageContext.request.contextPath}/FrontIndex.jsp'">訂位</button>
+            </div>
         </div>
     </nav>
 	<!-- ----- ----- ----- 最上面 選擇列 end ----- ----- ----- -->

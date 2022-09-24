@@ -74,7 +74,6 @@
         <section class="about section-padding bg-white">
             <div class="container">
                 <div class="row">
-
                     <div class="col-lg-6 col-12 mb-2">
                         <h4 class="mb-3" ><a href="../../front-end/order/order.jsp">訂單查詢 
                         <a class="mb-3 ">外送</a>
