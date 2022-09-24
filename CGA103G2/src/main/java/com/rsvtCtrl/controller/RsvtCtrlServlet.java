@@ -106,6 +106,12 @@ public class RsvtCtrlServlet extends HttpServlet {
 			Integer rsvtCtrlOpen = Integer.valueOf(req.getParameter("rsvtCtrlOpen").trim());
 			Integer rsvtCtrlMax = null;
 			Integer rsvtCtrlPeriod = Integer.valueOf(req.getParameter("rsvtCtrlPeriod").trim());
+			Integer rsvtCtrlNum =  null;
+			try {
+				rsvtCtrlNum = Integer.valueOf(req.getParameter("rsvtCtrlNum").trim());
+			} catch (Exception e) {
+				errorMsgs.add("請輸入人數");
+			}
 			Date date = null;
 			try {
 				date = Date.valueOf(req.getParameter("rsvtCtrlDate"));
@@ -138,10 +144,10 @@ public class RsvtCtrlServlet extends HttpServlet {
 
 			/*************************** 2.開始修改資料 *****************************************/
 			RsvtCtrlService rsvtCtrlSvc = new RsvtCtrlService();
-			rsvtCtrlVO = rsvtCtrlSvc.updateRsvtCtrl(tbtId, rsvtCtrlOpen, rsvtCtrlMax, rsvtCtrlId);
+			rsvtCtrlVO = rsvtCtrlSvc.updateRsvtCtrl(rsvtCtrlOpen, rsvtCtrlMax, rsvtCtrlNum ,rsvtCtrlId);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("rsvtCtrlVO", rsvtCtrlVO); // 資料庫update成功後,正確的的rsvtCtrlVO物件,存入req
+//			req.setAttribute("rsvtCtrlVO", rsvtCtrlVO); // 資料庫update成功後,正確的的rsvtCtrlVO物件,存入req
 			String url = "/back-end/reservation_ctrl/reservationCtrl_detail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneRsvt.jsp
 			successView.forward(req, res);
@@ -178,10 +184,10 @@ public class RsvtCtrlServlet extends HttpServlet {
 			try {
 				rsvtCtrlMax = Integer.valueOf(req.getParameter("rsvtCtrlMax").trim());
 				if (rsvtCtrlMax == 0) {
-					errorMsgs.add("請設定上限！");
+					errorMsgs.add("人數不可為0！");
 				}
 			} catch (Exception e) {
-				errorMsgs.add("請設定上限！");
+				errorMsgs.add("請設定人數！");
 			}
 
 			RsvtCtrlVO rsvtCtrlVO = new RsvtCtrlVO();
@@ -199,7 +205,7 @@ public class RsvtCtrlServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("rsvtCtrlVO", rsvtCtrlVO); // 含有輸入格式錯誤的rsvtCtrlVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/reservation_ctrl/addRsvtCtrl.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/reservation_ctrl/reservationCtrl_add.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -208,7 +214,7 @@ public class RsvtCtrlServlet extends HttpServlet {
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("rsvtCtrlVO", rsvtCtrlVO); // 資料庫update成功後,正確的的rsvtCtrlVO物件,存入req
-			String url = "/back-end/reservation_ctrl/listOneRsvtCtrl.jsp";
+			String url = "/back-end/reservation_ctrl/reservationCtrl_detail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneRsvt.jsp
 			successView.forward(req, res);
 		}

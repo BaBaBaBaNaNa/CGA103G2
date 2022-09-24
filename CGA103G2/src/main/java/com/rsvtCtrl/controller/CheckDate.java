@@ -29,9 +29,9 @@ public class CheckDate extends HttpServlet{
 			if(obj.getRsvtCtrlOpen() == 1 && obj.getRsvtCtrlPeriod() == 0) {
 //				System.out.println(obj.getRsvtCtrlDate());
 				for(RsvtCtrlVO obj2 : list) {
-					if(obj.getRsvtCtrlDate().toString().equals(obj2.getRsvtCtrlDate().toString()) && obj2.getRsvtCtrlOpen() == 1 && obj2.getRsvtCtrlPeriod() != obj.getRsvtCtrlPeriod()) {
+						if(obj.getRsvtCtrlDate().toString().equals(obj2.getRsvtCtrlDate().toString()) && obj2.getRsvtCtrlOpen() == 1 && obj2.getRsvtCtrlPeriod() != obj.getRsvtCtrlPeriod()) {
 							date.add(obj2.getRsvtCtrlDate().toString());
-					}
+						}
 				}
 			}
 		}

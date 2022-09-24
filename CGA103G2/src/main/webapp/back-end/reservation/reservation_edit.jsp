@@ -12,6 +12,14 @@
 
 <%
 RsvtVO rsvtVO = (RsvtVO) request.getAttribute("rsvtVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+RsvtCtrlService rcSvc = new RsvtCtrlService();
+List<RsvtCtrlVO> rcList = rcSvc.getOneDate(rsvtVO.getRsvtDate().toString());
+Integer leave = 0 + rsvtVO.getRsvtNum();
+for(RsvtCtrlVO obj : rcList){
+	if(obj.getRsvtCtrlPeriod() == rsvtVO.getRsvtPeriod()){
+		leave = obj.getRsvtCtrlMax() - obj.getRsvtCtrlNumber() + rsvtVO.getRsvtNum();
+	}
+}
 %>
 <!DOCTYPE html>
 <html lang="zh-tw">
@@ -159,7 +167,7 @@ margin: 0 auto;
 							<div>
 								<div class="input-group">
 									<div class="input-group-append bg-custom b-0" style="width: 100%;">
-										<select name="rsvtPeriod" class="form-control" id="period">
+										<select name="rsvtPeriod" class="form-control" id="period" onchange="getPeriodLeave()">
 											<option value="0"
 												<%=rsvtVO.getRsvtPeriod() == 0 ? "selected" : ""%>>中午</option>
 											<option value="1"
@@ -174,11 +182,9 @@ margin: 0 auto;
 							<h6 class="sub-title my-3">訂位人數</h6>
 							<div>
 								<div class="input-group">
-									<input type="text" class="form-control" name="rsvtNum"
-										value="<%=rsvtVO.getRsvtNum()%>">
-									<div class="input-group-append bg-custom b-0">
-										<span class="input-group-text"></span>
-									</div>
+									<input type="range" class="form-control" name="rsvtNum"
+										value="<%=rsvtVO.getRsvtNum()%>" onmousemove="getRsvtNumVal()" onchange="getRsvtNumVal()">
+									<span id="numVal"></span>
 								</div>
 								<!-- input-group -->
 							</div>
@@ -237,26 +243,49 @@ margin: 0 auto;
 	<script>
 		var dp1 = document.getElementById('dp1');
 		var period = document.getElementById('period');
+		var numVal = document.getElementById('numVal');
+		var num = document.querySelector('input[name="rsvtNum"]'); 
 		const arr = [];
-		const url = '/CGA103G2/back-end/reservation_ctrl/Date';
-			fetch(url,{
-			headers : { 
-	    	    'Content-Type': 'application/json',
-	    	    'Accept': 'application/json'
-	    	   }
-	
-			})
-			.then(res => res.json())
-			.then(ctrlList => {
-				console.log(ctrlList);
-				for (const key in ctrlList) {
-					if (Object.hasOwnProperty.call(ctrlList, key)) {
-						arr.push(ctrlList[key]);
-					}
+		const periodUrl = '/CGA103G2/back-end/reservation_ctrl/Period';
+		const dateUrl = '/CGA103G2/back-end/reservation_ctrl/Date';
+		const periodPath = '/CGA103G2/back-end/reservation_ctrl/getPeriod';
+		num.max =  <%=leave%>;
+		fetch(dateUrl,{
+			headers: {
+				'Content-Type': 'application/json'
+			},
+		})
+		.then(res => res.json())
+			.then(list => {
+				console.log(list);
+				for(let key of list){
+					arr.push(key);
 				}
 			})
-		console.log(arr);
-	var disabledDates = arr;
+					console.log(arr);
+		
+		var disabledDates = arr;
+		numVal.textContent = num.value;
+		function getRsvtNumVal(){
+			numVal.textContent = num.value;
+		}
+	// 時段選擇後 查詢剩餘人數
+	function getPeriodLeave(){
+		fetch(periodPath,{
+			method: 'post',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				rsvtCtrlDate : dp1.value,
+				rsvtPeriod : period.value,
+			})
+		})
+		.then(res => res.json())
+			.then(leave => {
+			num.max = leave;
+			})
+	}
 	$(function() {
 		$("#dp1").datepicker({
 			dateFormat: 'yy-mm-dd',
@@ -280,44 +309,50 @@ margin: 0 auto;
 		          },
 		});
 	});
+	
+	// 日期選擇後 查詢當前時段剩餘人數
 	function checkPeriod(){
-		const url = '/CGA103G2/back-end/reservation_ctrl/Period';
-		fetch(url,{
+		fetch(periodUrl,{
 			method: 'post',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				rsvtCtrlDate : dp1.value
+				rsvtCtrlDate : dp1.value,
+				rsvtNum : num.value
 			})
 		})
 		.then(res => res.json())
 		.then(periodList => {
-			console.log(periodList);
+			console.log(periodList)
 			period.textContent = "";
 			if(periodList.length != 0){
 				period.textContent = "";
-				for (const key in periodList) {
-					console.log(periodList[key]);
-					console.log(key);
-					const option = document.createElement('option');
-					option.value = periodList[key];
-					switch (key){
-						case '0' :{
-							option.textContent = '中午';
-							break;
+				let n = 0;
+				for(let i = 0; i < periodList.length; i++){
+					if(i == n){
+						const option = document.createElement('option');
+						option.value = periodList[i];
+						switch (periodList[i]){
+							case 0 :{
+								option.textContent = '中午';
+								break;
+							}
+							case 1 :{
+								option.textContent = '晚上';
+								break;
+							}
+							default :{
+								option.textContent = '未有時段';
+							}
 						}
-						case '0' :{
-							option.textContent = '晚上';
-							break;
-						}
-						default :{
-							option.textContent = '未有時段';
-						}
+						period.append(option);
+
+					}else{
+						num.max = periodList[i];
 					}
-					period.append(option);
+					n += 2;
 				}
-// 			console.log(str);
 			}else{
 				const option = document.createElement('option');
 				option.textContent = '未有時段';
@@ -335,20 +370,6 @@ margin: 0 auto;
 			   weekHeader:"週"
 			};
 	$.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
-			
-// 	$('.datepicker').datepicker({
-//         autoclose: true, // 選擇後自動關閉日期選擇器
-//         language: 'zh-TW', // 語言切換 中文
-//         format: 'yyyy-mm-dd', // 日期格式
-//         todayHighlight: true, // 高亮"當天日期"
-//         toggleActive: true, // 	點擊選擇，再次點擊取消
-//         startDate: new Date(), //開放初始日期 ex=> 
-//         // endDate:new Date(),
-//         // clearBtn: true, //顯示清除按鈕
-//         daysOfWeekDisabled: [3],  //每周隱藏的第幾天  0為周日6為星期六
-//         datesDisabled: [ // 特殊日期禁用
-//         ],
-//     });
 	</script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 </body>

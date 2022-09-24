@@ -26,7 +26,7 @@ public class ShopCartDAO implements ShopCartDAOInterface {
 	private static final String InsertStmt2 = "INSERT INTO Orddetails ( ordersID, mealsID,orddetailsMealsQuantity,orddetailsMealsAmount,orddetailsMealsStatus,orddetailsDeliverStatus) VALUES (?,?,?,?,?,?);";
 	private static final String GetOrdersIDMAX = "SELECT max(ordersID) from orders;";
 
-	private static final String InsertInsideStmt = "INSERT INTO Orders ( ordersType,ordersStatus,ordersBuildDate) VALUES (?,?,?);";
+	private static final String InsertInsideStmt = "INSERT INTO Orders ( memID , ordersType,ordersStatus,ordersDestination,ordersBuildDate,ordersAmount) VALUES (?,?,?,?,?,?);";
 	private static final String InsertInsideDetailStmt = "INSERT INTO Orddetails ( ordersID,mealsID,orddetailsMealsQuantity,orddetailsMealsAmount,orddetailsMealsStatus,orddetailsDeliverStatus) VALUES (?,?,?,?,?,?);";
 	// ----- ----- ----- 購物車新增訂單 start ----- ----- -----
 	//新增內用訂單
@@ -46,9 +46,20 @@ public class ShopCartDAO implements ShopCartDAOInterface {
 			
 			pstmt1 = con.prepareStatement(InsertInsideStmt,Statement.RETURN_GENERATED_KEYS);
 
-			pstmt1.setInt(1, shopcartVO.getOrdersType());
-			pstmt1.setInt(2, shopcartVO.getOrdersStatus());
-			pstmt1.setTimestamp(3, shopcartVO.getOrdersBuildDate());
+			pstmt1.setInt(1,shopcartVO.getMemID());
+			pstmt1.setInt(2, shopcartVO.getOrdersType());
+			pstmt1.setInt(3, shopcartVO.getOrdersStatus());
+			pstmt1.setString(4, shopcartVO.getOrdersDestination());
+			pstmt1.setTimestamp(5, shopcartVO.getOrdersBuildDate());
+			int pAll = 0; 
+			for(int i=0;i<PriceArrayList.size();i++) {
+				int P1 = (Integer)(PriceArrayList.get(i));
+				int C1 = (Integer)(CountArrayList.get(i));
+				
+				pAll = pAll + (P1 * C1);
+			}
+			System.out.println(pAll);
+			pstmt1.setInt(6, pAll);
 
 			pstmt1.executeUpdate();
 			
@@ -58,20 +69,20 @@ public class ShopCartDAO implements ShopCartDAOInterface {
 			
 			if (rs.next()) {
 				nextOrdersID = rs.getString(1);
-				System.out.println("自增主鍵值= " + nextOrdersID +"(剛新增成功的訂單編號)");
+//				System.out.println("自增主鍵值= " + nextOrdersID +"(剛新增成功的訂單編號)");
 			} else {
-				System.out.println("未取得自增主鍵值");
+//				System.out.println("未取得自增主鍵值");
 			}
 			rs.close();
 			
 			for(int i=0;i<PriceArrayList.size();i++) {
-				System.out.println("==========");
-				System.out.println("DAO");
-				System.out.println(PriceArrayList.get(i));
-				System.out.println(NameArrayList.get(i));
-				System.out.println(CountArrayList.get(i));
-				System.out.println(idArrayList.get(i));
-				System.out.println("==========");
+//				System.out.println("==========");
+//				System.out.println("DAO");
+//				System.out.println(PriceArrayList.get(i));
+//				System.out.println(NameArrayList.get(i));
+//				System.out.println(CountArrayList.get(i));
+//				System.out.println(idArrayList.get(i));
+//				System.out.println("==========");
 				
 				int P1 = (Integer)(PriceArrayList.get(i));
 				int C1 = (Integer)(CountArrayList.get(i));
@@ -107,6 +118,13 @@ public class ShopCartDAO implements ShopCartDAOInterface {
 			if (pstmt1 != null) {
 				try {
 					pstmt1.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt2 != null) {
+				try {
+					pstmt2.close();
 				} catch (SQLException se) {
 					se.printStackTrace(System.err);
 				}

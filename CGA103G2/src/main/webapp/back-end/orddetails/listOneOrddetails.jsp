@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="com.orddetails.model.OrddetailsVO"%>
 <%@ page import="java.sql.*"%>
 
-<%-- 此頁暫練習採用 Script 的寫法取值 --%>
-
 <%
-OrddetailsVO orddetailsVO = (OrddetailsVO) request.getAttribute("orddetailsVO"); //OrdersServlet.java(Concroller), 存入req的ordersVO物件
+ArrayList list = (ArrayList) request.getAttribute("orddetailsVO"); 
+pageContext.setAttribute("list", list);
 %>
 
 <!DOCTYPE html>
@@ -81,289 +82,23 @@ th, td {
 
 <body
 	class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
-	<!-- Preloader -->
-	<div id="preloader-wrap">
-		<div class="spinner spinner-8">
-			<div class="ms-circle1 ms-child"></div>
-			<div class="ms-circle2 ms-child"></div>
-			<div class="ms-circle3 ms-child"></div>
-			<div class="ms-circle4 ms-child"></div>
-			<div class="ms-circle5 ms-child"></div>
-			<div class="ms-circle6 ms-child"></div>
-			<div class="ms-circle7 ms-child"></div>
-			<div class="ms-circle8 ms-child"></div>
-			<div class="ms-circle9 ms-child"></div>
-			<div class="ms-circle10 ms-child"></div>
-			<div class="ms-circle11 ms-child"></div>
-			<div class="ms-circle12 ms-child"></div>
-		</div>
-	</div>
-	<!-- Overlays -->
+	<!-- ----- ----- ----- 進入網站的讀取圈圈 start ----- ----- ----- -->
+	<%@ include file="../../back-end/tool/ReadingCircle.file"%>
+	<!-- ----- ----- ----- 進入網站的讀取圈圈 end ----- ----- ----- -->
 	<div class="ms-aside-overlay ms-overlay-left ms-toggler"
-		data-target="#ms-side-nav" data-toggle="slideLeft"></div>
+		data-tar="#ms-side-nav" data-toggle="slideLeft"></div>
 	<div class="ms-aside-overlay ms-overlay-right ms-toggler"
-		data-target="#ms-recent-activity" data-toggle="slideRight"></div>
+		data-tar="#ms-recent-activity" data-toggle="slideRight"></div>
 	<!-- Sidebar Navigation Left -->
 
 	<!-- ----- ----- ----- 最左邊的 選擇列 start ----- ----- ----- -->
-	<aside id="ms-side-nav"
-		class="side-nav fixed ms-aside-scrollable ms-aside-left">
-		<!-- Logo -->
-		<div class="logo-sn ms-d-block-lg">
-			<a class="pl-0 ml-0 text-center"
-				href="${pageContext.request.contextPath}/back-end/backstage/Back_index.jsp"><img
-				src="${pageContext.request.contextPath}/back-assets/img/logo/logo01.png"
-				alt="logo"></a>
-		</div>
-		<!-- Navigation -->
-		<ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
-			<!-- ----- ----- ----- 導向首頁 start ----- ----- ----- -->
-			<li class="menu-item"><a
-				href="${pageContext.request.contextPath}/back-end/backstage/Back_index.jsp"><span><i
-						class="material-icons fs-16"></i>後臺管理系統 - 首頁</span></a></li>
-			<!-- ----- ----- ----- 導向首頁 end ----- ----- ----- -->
-
-			<!-- ----- ----- ----- 員工 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#employee" aria-expanded="false"
-				aria-controls="employee"><span><i
-						class="fas fa-file-employee fs-16"></i>員工管理</span></a>
-				<ul id="employee" class="collapse" aria-labelledby="employee"
-					data-parent="#side-nav-accordion">
-					<li><a
-						href="${pageContext.request.contextPath}/EmpShowServlet">查看員工資料</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/employee/employee_add.jsp">新增員工資料</a></li>
-				</ul></li>
-			<!-- ----- ----- ----- 員工 end ----- ----- ----- -->
-
-			<!-- ----- ----- ----- 會員 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#member" aria-expanded="false"
-				aria-controls="member"><span><i
-						class="fas fa-file-member fs-16"></i>會員管理</span></a>
-				<ul id="member" class="collapse" aria-labelledby="member"
-					data-parent="#side-nav-accordion">
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/member/member_detail.jsp">查看會員資料</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/member/member_add.jsp">新增員工資料</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/member/member_edit.jsp">修改員工資料</a></li>
-				</ul></li>
-			<!-- ----- ----- ----- 會員 end ----- ----- ----- -->
-
-			<!-- ----- ----- ----- 菜單 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#product" aria-expanded="false"
-				aria-controls="product"><span><i
-						class="fa fa-archive fs-16"></i>總菜單</span></a>
-				<ul id="product" class="collapse" aria-labelledby="product"
-					data-parent="#side-nav-accordion">
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/product/product_cata.jsp">菜單目錄</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/product/product_list.jsp">菜單列表</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/product/product_grid.jsp">菜單網格</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/product/product_add.jsp">加入菜樣</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/product/product_detail.jsp">產品細節</a></li>
-				</ul></li>
-			<!-- ----- ----- ----- 菜單 end ----- ----- ----- -->
-
-			<!-- ----- ----- ----- 訂單 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#orders" aria-expanded="false"
-				aria-controls="orders"><span><i
-						class="fas fa-file-orders fs-16"></i>訂單管理</span></a>
-				<ul id="orders" class="collapse" aria-labelledby="orders"
-					data-parent="#side-nav-accordion">
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/order/order_details.jsp">查看訂單</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/orddetails/select_page.jsp">查看訂單明細</a></li>
-				</ul></li>
-			<!-- ----- ----- ----- 訂單 end ----- ----- ----- -->
-
-			<!-- ----- ----- ----- 訂位 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#reservation"
-				aria-expanded="false" aria-controls="reservation"><span><i
-						class="fas fa-file-reservation fs-16"></i>訂位管理</span></a>
-				<ul id="reservation" class="collapse" aria-labelledby="reservation"
-					data-parent="#side-nav-accordion">
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/reservation/reservation_detail.jsp">查看訂位</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/reservation/reservation_edit.jsp">修改訂位</a></li>
-				</ul></li>
-			<!-- ----- ----- ----- 訂位 end ----- ----- ----- -->
-
-			<!-- ----- ----- ----- 候位 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#waiting" aria-expanded="false"
-				aria-controls="waiting"><span><i
-						class="fas fa-file-waiting fs-16"></i>候位管理</span></a>
-				<ul id="waiting" class="collapse" aria-labelledby="waiting"
-					data-parent="#side-nav-accordion">
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/waiting/waiting_detail.jsp">查看候位</a></li>
-				</ul></li>
-			<!-- ----- ----- ----- 候位 end ----- ----- ----- -->
-
-			<!-- ----- ----- ----- 桌位 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#restaurant_table"
-				aria-expanded="false" aria-controls="restaurant_table"><span><i
-						class="fas fa-file-member fs-16"></i>桌位管理</span></a>
-				<ul id="restaurant_table" class="collapse"
-					aria-labelledby="restaurant_table"
-					data-parent="#side-nav-accordion">
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/restaurant_table/restaurant_table_detail.jsp">查看桌位</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/restaurant_table/restaurant_table_add.jsp">新增桌位</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/restaurant_table/restaurant_table_edit.jsp">修改桌位</a></li>
-				</ul></li>
-			<!-- ----- ----- ----- 桌位 end ----- ----- ----- -->
-
-			<!-- ----- ----- ----- 明細 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#invoice" aria-expanded="false"
-				aria-controls="invoice"><span><i
-						class="fas fa-file-invoice fs-16"></i>顧客消費明細</span></a>
-				<ul id="invoice" class="collapse" aria-labelledby="invoice"
-					data-parent="#side-nav-accordion">
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/invoice/invoice_detail.jsp">消費明細</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/invoice/invoice_list.jsp">明細列表</a></li>
-				</ul></li>
-			<!-- ----- ----- ----- 明細 end ----- ----- ----- -->
-
-			<!-- ----- ----- ----- 顧客 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#customer" aria-expanded="false"
-				aria-controls="customer"><span><i
-						class="fas fa-user-friends fs-16"></i>顧客回應</span></a>
-				<ul id="customer" class="collapse" aria-labelledby="customer"
-					data-parent="#side-nav-accordion">
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/customer/customer_review.jsp">顧客回應</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/customer/customer_list.jsp">顧客列表</a></li>
-				</ul></li>
-			<!-- ----- ----- ----- 顧客 end ----- ----- ----- -->
-
-			<!-- ----- ----- ----- 空白頁面 start ----- ----- ----- -->
-			<li class="menu-item"><a href="#" class="has-chevron"
-				data-toggle="collapse" data-target="#nothing1" aria-expanded="false"
-				aria-controls="nothing1"><span><i
-						class="fas fa-file-invoice fs-16"></i>空白頁面</span></a>
-				<ul id="nothing1" class="collapse" aria-labelledby="nothing1"
-					data-parent="#side-nav-accordion">
-					<li><a
-						href="${pageContext.request.contextPath}/back-end/nothing/nothing1.jsp">nothing1</a></li>
-				</ul></li>
-			<!-- ----- ----- ----- 空白頁面 end ----- ----- ----- -->
-		</ul>
-	</aside>
+	<%@ include file="../../back-end/tool/LeftSideBar.file"%>
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
 	<main class="body-content">
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
-		<nav class="navbar ms-navbar">
-			<div class="ms-aside-toggler ms-toggler pl-0"
-				data-target="#ms-side-nav" data-toggle="slideLeft">
-				<span class="ms-toggler-bar bg-primary"></span><span
-					class="ms-toggler-bar bg-primary"></span><span
-					class="ms-toggler-bar bg-primary"></span>
-			</div>
-			<div class="logo-sn logo-sm ms-d-block-sm">
-				<a class="pl-0 ml-0 text-center navbar-brand mr-0"
-					href="${pageContext.request.contextPath}/back-end/backstage/Back_index.jsp"><img
-					src="${pageContext.request.contextPath}/back-assets/img/logo/logo01.png"
-					alt="logo"></a>
-			</div>
-			<ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
-				<li class="ms-nav-item ms-search-form pb-0 py-0">
-					<form class="ms-form" method="post">
-						<div class="ms-form-group my-0 mb-0 has-icon fs-14">
-							<input type="search" class="ms-form-input" name="search"
-								placeholder="Search here..." value=""><i
-								class="flaticon-search text-disabled"></i>
-						</div>
-					</form>
-				</li>
-				<li class="ms-nav-item dropdown"><a href="#"
-					class="text-disabled ms-has-notification" id="mailDropdown"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-						class="flaticon-mail"></i></a>
-					<ul class="dropdown-menu dropdown-menu-right"
-						aria-labelledby="mailDropdown">
-						<li class="dropdown-menu-header">
-							<h6 class="dropdown-header ms-inline m-0">
-								<span class="text-disabled">信箱</span>
-							</h6> <span class="badge badge-pill badge-success">0 New</span>
-						</li>
-						<li class="dropdown-divider"></li>
-
-						<li class="dropdown-divider"></li>
-						<li class="dropdown-menu-footer text-center"><a href="">Go
-								to Inbox</a></li>
-					</ul></li>
-				<li class="ms-nav-item dropdown"><a href="#"
-					class="text-disabled ms-has-notification" id="notificationDropdown"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-						class="flaticon-bell"></i></a>
-					<ul class="dropdown-menu dropdown-menu-right"
-						aria-labelledby="notificationDropdown">
-						<li class="dropdown-menu-header">
-							<h6 class="dropdown-header ms-inline m-0">
-								<span class="text-disabled">通知</span>
-							</h6> <span class="badge badge-pill badge-info">0 New</span>
-						</li>
-						<li class="dropdown-divider"></li>
-						<li class="dropdown-menu-footer text-center"><a href="#">查看所有通知</a></li>
-					</ul></li>
-				<li class="ms-nav-item ms-nav-user dropdown"><a href="#"
-					id="userDropdown" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><img
-						class="ms-user-img ms-img-round float-right"
-						src="${pageContext.request.contextPath}/back-assets/img/costic/customer-6.jpg"
-						alt="people"></a>
-					<ul class="dropdown-menu dropdown-menu-right user-dropdown"
-						aria-labelledby="userDropdown">
-						<li class="dropdown-menu-header">
-							<h6 class="dropdown-header ms-inline m-0">
-								<span class="text-disabled">Welcome, 員工姓名</span>
-							</h6>
-						</li>
-						<li class="dropdown-divider"></li>
-						<li class="ms-dropdown-list"><a class="media fs-14 p-2"
-							href=""><span><i class="flaticon-user mr-2"></i>個人基本資料</span></a><a
-							class="media fs-14 p-2" href=""><span><i
-									class="flaticon-mail mr-2"></i>信箱</span><span
-								class="badge badge-pill badge-info">3</span></a><a
-							class="media fs-14 p-2" href=""><span><i
-									class="flaticon-gear mr-2"></i>帳號設定</span></a></li>
-						<li class="dropdown-divider"></li>
-						<li class="dropdown-menu-footer"><a class="media fs-14 p-2"
-							href="${pageContext.request.contextPath}/back-end/prebuilt-pages/default-login.html"><span><i
-									class="flaticon-shut-down mr-2"></i>Logout</span></a></li>
-					</ul></li>
-			</ul>
-			<div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler"
-				data-toggle="slideDown" data-target="#ms-nav-options">
-				<span class="ms-toggler-bar bg-primary"></span><span
-					class="ms-toggler-bar bg-primary"></span><span
-					class="ms-toggler-bar bg-primary"></span>
-			</div>
-		</nav>
+		<%@ include file="../../back-end/tool/UpSideBar.file"%>
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
 		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
 		<nav aria-label="breadcrumb">
@@ -378,8 +113,8 @@ th, td {
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 <table id="table-1">
 	<tr><td>
-		 <h3>訂單資料 - ListOneOrddetails.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h3>訂單明細</h3>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/order/listAllOrders.jsp">返回訂單列表</a></h4>
 	</td></tr>
 </table>
 
@@ -392,18 +127,27 @@ th, td {
 		<th>餐點總金額</th>
 		<th>製作狀態</th>
 		<th>送餐狀態</th>
+		<th>修改</th>
 	</tr>
+	
+	<c:forEach var="orddetailsVO" items="${list}" >
 	<tr>
-		<td><%=orddetailsVO.getOrddetailsID()%></td>
-		<td><%=orddetailsVO.getOrdersID()%></td>
-		<td><%=orddetailsVO.getMealsID()%></td>
-		<td><%=orddetailsVO.getOrddetailsMealsQuantity()%></td>
-		<td><%=orddetailsVO.getOrddetailsMealsAmount()%></td>
+		<td>${orddetailsVO.orddetailsID}</td>
+		<td>${orddetailsVO.ordersID}</td>
+		<td>${orddetailsVO.mealsVO.mealsName}</td>
+		<td>${orddetailsVO.orddetailsMealsQuantity}</td>
+		<td>${orddetailsVO.orddetailsMealsAmount}</td>
 		<td>${orddetailsVO.orddetailsMealsStatus == 0 ?"已製作":"未製作"}</td>
 		<td>${orddetailsVO.orddetailsDeliverStatus == 0 ?"已送餐":"未送餐"}</td>
+		<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/orddetails/orddetails.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="修改">
+			     <input type="hidden" name="orddetailsID"  value="${orddetailsVO.orddetailsID}">
+			     <input type="hidden" name="action"	value="xxx"></FORM>
+			</td>
 	</tr>
+	</c:forEach>
 </table>
-
 
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>

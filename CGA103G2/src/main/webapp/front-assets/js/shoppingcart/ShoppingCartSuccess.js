@@ -19,7 +19,7 @@ var shoppingCart = (function() {
 	// 從session中讀取購物車
 	function loadCart() {
 		cart = JSON.parse(sessionStorage.getItem('shoppingCart'));
-		console.log(cart);
+//		console.log(cart);
 	}
 	//如果購物車不是空的時候取得購物車東西
 	if (sessionStorage.getItem("shoppingCart") != null) {
@@ -202,6 +202,25 @@ $('.show-cart').on("change", ".item-count", function(event) {
 	displayCart();
 });
 
+//新增訂單後顯示訂單類型
+//0:外帶, 1:外送, 2: 內用 單選 
+function viewType(){
+	if(JSON.parse(sessionStorage.getItem('Type')) === "0"){
+    	$("#orderType").text("外帶訂單");
+    }
+    if(JSON.parse(sessionStorage.getItem('Type')) === "1"){
+    	$("#orderType").text("外送訂單");
+    }
+    if(JSON.parse(sessionStorage.getItem('Type')) === "2"){
+    	$("#orderType").text("內用訂單");
+    }
+    
+    //成立訂單重置
+    sessionStorage.removeItem('shoppingCart');
+    sessionStorage.removeItem('Type');
+//    console.log(JSON.parse(sessionStorage.getItem('Type')));
+}
+
 var MyPoint = "/front-end/shopcart/ShopCartAddSuccess.jsp";
 var host = window.location.host;
 var path = window.location.pathname;
@@ -228,3 +247,4 @@ $('#submit2').on("click",  function(event) {
 });
 // 執行顯示購物車
 displayCart();
+viewType();

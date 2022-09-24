@@ -128,11 +128,12 @@ public class RsvtDAOImpl implements RsvtDAO_interface {
 	}
 
 	@Override
-	public RsvtVO findByCustomerName(String Name) {
+	public List<RsvtVO> findByCustomerName(String Name) {
 		String GET_NAME_STMT = "SELECT RSVTID,MEMID,TABLETYPEID,CUSTOMERNAME,CUSTOMERPHONE,RSVTNUM,RSVTPERIOD,RSVTTOSEAT,RSVTDATE,RSVTMEALDATE FROM RESERVATION WHERE CUSTOMERNAME LIKE '%" + Name + "%'";
 		try (Connection conn = ds.getConnection();
 				PreparedStatement ps = conn.prepareStatement(GET_NAME_STMT)) {
 			ResultSet rs = ps.executeQuery();
+			List<RsvtVO> list = new ArrayList<>();
 			while (rs.next()) {
 				RsvtVO rsvt = new RsvtVO();
 				rsvt.setRsvtId(rs.getInt(1));
@@ -145,9 +146,11 @@ public class RsvtDAOImpl implements RsvtDAO_interface {
 				rsvt.setRsvtToSeat(rs.getInt(8));
 				rsvt.setRsvtDate(rs.getDate(9));
 				rsvt.setRsvtMealDate(rs.getTimestamp(10));
-				return rsvt;
+				list.add(rsvt);
 			}
 			rs.close();
+			return list;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
