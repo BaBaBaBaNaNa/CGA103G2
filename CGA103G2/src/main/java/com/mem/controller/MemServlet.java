@@ -14,6 +14,9 @@ import com.emp.model.*;
 import com.mem.model.MemDAO;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
+
+import mail.MailService;
+
 import com.emp.controller.*;
 
 public class MemServlet extends HttpServlet {
@@ -521,9 +524,155 @@ public class MemServlet extends HttpServlet {
 					successView.forward(req, res);
 				}
 				// ----- ----- ----- getMemPersonalData end ----- ----- -----
-			}
+			
+				// ----- ----- ----- forgetPassword start ----- ----- -----
+	 if("forgetPassword".equals(action)) {
+     	
+     	List<String> errorMsgs = new LinkedList<String>();
+     	req.setAttribute("errorMsgs", errorMsgs);
+     	try {
+     		//請求
+     		String memEmail = req.getParameter("memEmail");
+				MemService memSvc = new MemService();
+				
+				List<MemVO> listall = memSvc.getAll();
+				MemVO memVO = null;
+				for (MemVO memVOList : listall) {
+					if (memVOList.getMemEmail().equals(memEmail)) {
+						memVO = memSvc.getOwnMem(memVOList.getMemAccount());
+						break;
+					}else if(!memVOList.getMemEmail().equals(memEmail)){
+						errorMsgs.add("信箱無註冊資料，請重新輸入");
+					}
+				}
+				System.out.println(memVO.getMemAccount());
+				MailService mail = new MailService();
+				String authCode = mail.getRandom();
+				
+				memSvc.updatePassword(authCode, memVO.getMemID());
+				
+				String subject = "臨時密碼";
+				String message = "臨時密碼:" + authCode + "請登入後修改密碼";
+			
 
+				try {
+					mail.sendMail(memEmail, subject, message);
+		            res.sendRedirect(req.getContextPath() + "/front-end/member/member.jsp");
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+     	}catch(Exception e) {
+     		errorMsgs.add(e.getMessage());
+     		RequestDispatcher failureView = req.getRequestDispatcher("/front-end/member/forgetPassword.jsp");
+     		failureView.forward(req, res);
+     	}
+     	
+     	
+     }
+	
 
+	// ----- ----- ----- forgetPassword stop ----- ----- -----
+	
+	// ----- ----- ----- insert for member start ----- ----- -----
+	
+	if ("insertForMem".equals(action)) { // 來自memberAdd.jsp的請求
+		List<String> errorMsgs = new LinkedList<String>();
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
+		/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+		// memName
+		String memName = req.getParameter("memName");
+		String memNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+		if (memName == null || memName.trim().length() == 0) {
+			errorMsgs.add("member姓名: 請勿空白");
+		} else if (!memName.trim().matches(memNameReg)) { // 以下練習正則(規)表示式(regular-expression)
+			errorMsgs.add("member姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+		}
 
+		String memAccount = req.getParameter("memAccount").trim();
+		if (memAccount == null || memAccount.trim().length() == 0) {
+			errorMsgs.add("帳號請勿空白");
+		}
+		String memPassword = req.getParameter("memPassword").trim();
+		if (memPassword == null || memPassword.trim().length() == 0) {
+			errorMsgs.add("密碼請勿空白");
+		}
+
+		String memGender = req.getParameter("memGender").trim();
+		if (memGender == null || memGender.trim().length() == 0) {
+			errorMsgs.add("性別請勿空白");
+		}
+
+		String memPermission = req.getParameter("memPermission").trim();
+		if (memPermission == null || memPermission.trim().length() == 0) {
+			errorMsgs.add("權限請勿空白");
+		}
+
+		String memPhone = req.getParameter("memPhone").trim();
+		if (memPhone == null || memPhone.trim().length() == 0) {
+			errorMsgs.add("電話請勿空白");
+		}
+
+		String memEmail = req.getParameter("memEmail").trim();
+		if (memEmail == null || memEmail.trim().length() == 0) {
+			errorMsgs.add("信箱請勿空白");
+		}
+
+		String memAddress = req.getParameter("memAddress").trim();
+		if (memAddress == null || memAddress.trim().length() == 0) {
+			errorMsgs.add("地址請勿空白");
+		}
+		
+		String county = req.getParameter("county");
+		String district = req.getParameter("district");
+		System.out.println(county);
+		System.out.println(district);
+
+		java.sql.Date memBirthday = null;
+		try {
+			memBirthday = java.sql.Date.valueOf(req.getParameter("memBirthday").trim());
+		} catch (IllegalArgumentException e) {
+			memBirthday = new java.sql.Date(System.currentTimeMillis());
+			errorMsgs.add("請輸入日期!");
+		}
+
+		MemVO memVO = new MemVO();
+
+		memVO.setMemName(memName);
+		memVO.setMemAccount(memAccount);
+		memVO.setMemPassword(memPassword);
+		memVO.setMemGender(Integer.parseInt(memGender));
+		memVO.setMemPhone(memPhone);
+		memVO.setMemEmail(memEmail);
+		memVO.setMemAddress(memAddress);
+		memVO.setMemBirthday(memBirthday);
+		memVO.setMemPermission(Integer.parseInt(memPermission));
+//				memVO.setMemBirthday(LocalDateTime.parse(memBirthdat));	
+
+		// Send the use back to the form, if there were errors
+		if (!errorMsgs.isEmpty()) {
+			req.setAttribute("memVO", memVO); // 含有輸入格式錯誤的empVO物件,也存入req
+			RequestDispatcher failureView = req.getRequestDispatcher("/front-end/member/addMem.jsp");
+			failureView.forward(req, res);
+			
+			return;
+		}
+		/*************************** 2.開始新增資料 ***************************************/
+		MemService memSvc = new MemService();
+		memVO = memSvc.addMem(memName, memAccount, memPassword, Integer.parseInt(memPermission),
+				Integer.parseInt(memGender), memPhone, memAddress, memEmail, memBirthday);
+
+		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+		String url = "/FrontIndex.jsp";
+		RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+		successView.forward(req, res);
 	}
+	
+	// ----- ----- ----- insert for member stop ----- ----- ------
+	
+	
+	}
+	
+}
 

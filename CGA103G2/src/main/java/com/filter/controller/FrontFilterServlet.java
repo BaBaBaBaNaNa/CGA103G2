@@ -47,11 +47,11 @@ public class FrontFilterServlet extends HttpFilter implements Filter {
 		System.out.println("SessionID : " + getSessionID);
 		System.out.println("登入狀態Session : " + LoginSessionName);
 		
-		//以下判斷,當結尾不是"BackLogin.jsp" 或是 "EmpLoginServlet.do" 時 ,而且沒有取得Session登入狀態
-		if( !(uri.endsWith("/front-end/member/members.jsp") || uri.endsWith("MemLoginServlet.do")) && (LoginSessionName == null || (LoginSessionName.trim()).length() == 0)){
+		//以下判斷,當結尾不是"members.jsp" 或是 "MemLoginServlet.do" 時 ,而且沒有取得Session登入狀態
+		if( !(uri.endsWith("members.jsp") || uri.endsWith("MemLoginServlet.do")) && (LoginSessionName == null || (LoginSessionName.trim()).length() == 0)){
 //			req.getRequestDispatcher("../../BackLogin.jsp").forward(request, response);
-			//跳轉頁面至後台登入頁面
-			res.sendRedirect("/front-end/member/members.jsp");
+			//跳轉頁面至首頁
+			res.sendRedirect("../../FrontIndex.jsp");
 			return;
 		}else{
 			//回傳正常頁面
@@ -64,5 +64,23 @@ public class FrontFilterServlet extends HttpFilter implements Filter {
 	public void init(FilterConfig fConfig) throws ServletException {
 		
 	}
+	
+	
+	
+//	====test====
+	
+	public static String getString(String LoginSessionName, String defaultValue) {
+		defaultValue="";
+		if(LoginSessionName == null || LoginSessionName.trim().equals("")) {
+			return defaultValue;
+		}
+		else {
+			return LoginSessionName;
+		}
+			
+		}
+	}
 
-}
+
+
+

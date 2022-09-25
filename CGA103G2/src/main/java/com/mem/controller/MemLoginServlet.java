@@ -56,7 +56,7 @@ public class MemLoginServlet extends HttpServlet {
 		MemDAO dao = new MemDAO();
 		boolean res = dao.loginAdmin(admin);
 		MemVO test = dao.findByMemAccount(memAccount);
-		// 登入驗證，如果驗證成功，則設定一個屬性名為“LoginSessionName”值為使用者名稱的session，用於BackFilterServlet驗證是否登入過
+		// 登入驗證，如果驗證成功，則設定一個屬性名為“LoginSessionName”值為使用者名稱的session，用於FrontBackFilterServlet驗證是否登入過
 		// 驗證的話還是會用SessionId去做驗證
 		if (res) {
 			request.getSession().setAttribute("LoginSessionName", memAccount);
@@ -73,7 +73,7 @@ public class MemLoginServlet extends HttpServlet {
 			request.setAttribute("errorMessage", "帳號或者密碼錯誤");
 			request.getRequestDispatcher("/front-end/member/members.jsp").forward(request, response);
 			return;
-//			response.sendRedirect("BackLogin.jsp");
+//			response.sendRedirect("FrontIndex.jsp");
 		}
 	}
 }

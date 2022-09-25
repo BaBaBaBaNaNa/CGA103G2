@@ -50,47 +50,9 @@
 		<!-- ----- ----- ----- 中間上面 end ----- ----- ----- -->
 
 		<!-- ----- ----- ----- 中間內容 start ----- ----- ----- -->
-		<!-- 		<form name="myform" action="MemLoginServlet.do" method="POST"> -->
 
-		<!-- 			<div id="wrapper"> -->
-		<!-- 				<div id="wrappertop"></div> -->
 
-		<!-- 				<div id="wrappermiddle"> -->
-		<!-- 					<h2>義鄉人 會員登入系統</h2> -->
-
-		<!-- 					<div id="username_input"> -->
-
-		<!-- 						<div id="username_inputleft"></div> -->
-
-		<!-- 						<div id="username_inputmiddle"> -->
-		<!-- 							<input type="text" name="memAccount" id="url" value="會員帳號"> -->
-		<!-- 						</div> -->
-
-		<!-- 						<div id="username_inputright"></div> -->
-
-		<!-- 					</div> -->
-
-		<!-- 					<div id="password_input"> -->
-
-		<!-- 						<div id="password_inputleft"></div> -->
-
-		<!-- 						<div id="password_inputmiddle"> -->
-		<!-- 							<input type="password" name="memPassword" id="url" -->
-		<!-- 								value="Password"> -->
-		<!-- 						</div> -->
-
-		<!-- 						<div id="password_inputright"></div> -->
-
-		<!-- 					</div> -->
-		<!-- 					<div id="submit"> -->
-		<!-- 						<input type="submit" id="submit1" value="Sign In"> -->
-
-		<!-- 					</div> -->
-		<!-- 				</div> -->
-
-		<!-- 				<div id="wrapperbottom"></div> -->
-		<!-- 			</div> -->
-		<!-- 		</form> -->
+<!-- ----- ----- ----- orignal v1 start ----- ----- ----- -->
 		<form name="myform" action="MemLoginServlet.do" method="POST">
 			<section class="about section-padding bg-white">
 				<div class="container">
@@ -104,7 +66,7 @@
 								<div id="username_inputleft"></div>
 
 								<div id="username_inputmiddle">
-									<input type="text" name="memAccount" id="url" value="會員帳號">
+									<input type="text" name="memAccount" id="url" value="cga03">
 								</div>
 
 								<div id="username_inputright"></div>
@@ -117,7 +79,7 @@
 
 								<div id="password_inputmiddle">
 									<input type="password" name="memPassword" id="url"
-										value="Password">
+										value="cga03">
 								</div>
 
 								<div id="password_inputright"></div>
@@ -134,7 +96,7 @@
 							<!-- 									id="submit2" value="Sign In"> -->
 						</div>
 						<div id="submit">
-							<input type="submit" id="submit1" value="Sign Up"
+							<input type="submit" id="submit1" value="忘記密碼"
 								onclick="return checkForm()">
 							<!-- 									<input type="submit" -->
 							<!-- 									id="submit2" value="Sign In"> -->
@@ -145,6 +107,8 @@
 				</div>
 			</section>
 		</form>
+		
+		<!-- ----- ----- ----- orignal v1 stop ----- ----- ----- -->
 		-->
 		<!-- ----- ----- ----- 中間內容 end ----- ----- ----- -->
 	</main>

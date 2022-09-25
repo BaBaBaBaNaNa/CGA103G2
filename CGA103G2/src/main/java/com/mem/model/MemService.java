@@ -92,13 +92,20 @@ public class MemService {
 		return dao.findByMemAccount(memAccount);
 	}
 	
-	public MemVO updatePassword(String mem_password,Integer mem_no) {
+//public MemVO getOneBymail(String memEmail) {
+//		
+//		return dao.getOneBymail(memEmail);
+//	}
+//	
+	public MemVO updatePassword(String memPassword,Integer memID) {
 		
 		MemVO memVO = new MemVO();
-		memVO.setMem_pwd(mem_password);
-		memVO.setMem_no(mem_no);
+		memVO.setMemPassword(memPassword);
+		memVO.setMemID(memID);
 		
 		dao.upatePassword(memVO);
 		return memVO;
 	}
+//	
+	
 }

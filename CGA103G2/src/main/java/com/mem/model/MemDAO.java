@@ -35,7 +35,7 @@ private static final String GETONESTMT = "SELECT memID, memname, memaccount, mem
 private static final String DELETE = "DELETE FROM members where memID = ?";
 private static final String UPDATE = "UPDATE members set memname=?, memaccount=?, mempassword=?, memgender=?, memphone=?, mememail=?, memaddress=?, membirthday=?, mempermission=? where memID = ?";
 private static final String GetOwnSTMT= "SELECT * FROM members where memAccount = ?";
-
+private static final String UPDATEPASSWORD = "UPDATE members SET mempassword =? WHERE memID=?";
 
 @Override
 public boolean loginAdmin(MemVO admin) {
@@ -329,8 +329,39 @@ public List<MemVO> getAll() {
 	return list;
 
 }	
-
-public static void main(String[] args) {
+@Override
+public void upatePassword(MemVO memVO) {
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	try {
+		con = ds.getConnection();
+		pstmt = con.prepareStatement(UPDATEPASSWORD);
+			 
+		pstmt.setString(1,memVO.getMemPassword());
+		pstmt.setInt(2, memVO.getMemID());
+		
+		pstmt.executeUpdate();
+		
+	}catch(SQLException se){
+		se.printStackTrace();
+	}
+	if (pstmt != null) {
+		try {
+		pstmt.close();
+		}catch (SQLException SQ) {
+			SQ.printStackTrace();
+		}
+	 }
+	if (con != null) {
+		try {
+		con.close();
+		}catch (SQLException SQ) {
+			SQ.printStackTrace();
+		}
+	 }
+	
+}
+//public static void main(String[] args) {
 
 //	MemJDBCDAO dao = new MemJDBCDAO();
 	// 新增  done
@@ -400,7 +431,7 @@ public static void main(String[] args) {
 //		System.out.println(aMem.getMemPermission()+ ",");
 //		System.out.println("---------------------");
 //	}
-}
+
 
 
 
@@ -414,7 +445,7 @@ public boolean loginAdmin(MemLoginVO admin) {
 
 
 
-//----- ----- ----- 查找 db Employee 個人資料 start ----- ----- -----
+//----- ----- ----- 查找 db member 個人資料 start ----- ----- -----
 @Override
 public MemVO findByMemAccount(String memAccount) {
 
@@ -472,7 +503,7 @@ public MemVO findByMemAccount(String memAccount) {
 	}
 	return memVO;
 }
-//----- ----- ----- 查找 db Employee 個人資料 end ----- ----- -----
+//----- ----- ----- 查找 db member 個人資料 end ----- ----- -----
 }
 
 

@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*,com.mem.model.*"%>
-
-<%
-MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroller) 存入req的memVo物件 (包括幫忙取出的memVO, 也包括輸入資料錯誤時的memVO物件)
-%>
 
 <!doctype html>
 <html lang="zh-tw">
@@ -21,6 +15,16 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
 
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="/style.css">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,25 +33,26 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
 	rel="stylesheet">
 
-<link href="../../front-assets/bootstrap_css/bootstrap.min.css"
+<link
+	href="<%=request.getContextPath()%>/front-assets/bootstrap_css/bootstrap.min.css"
 	rel="stylesheet">
 
-<link href="../../front-assets/bootstrap_css/bootstrap-icons.css"
+<link
+	href="<%=request.getContextPath()%>/front-assets/bootstrap_css/bootstrap-icons.css"
 	rel="stylesheet">
 
-<link href="../../front-assets/css/tooplate-crispy-kitchen.css"
+<link
+	href="<%=request.getContextPath()%>/front-assets/css/tooplate-crispy-kitchen.css"
 	rel="stylesheet">
 
-<link href="../../front-assets/css/navbar.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>front-assets/css/navbar.css"
+	rel="stylesheet">
 
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
 
 <body>
-
-	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
-	
 	<!-- ----- ----- ----- 最上面 選擇列 start ----- ----- ----- -->
 	<%@ include file="../../front-end/tool/UpSideBar.file"%>
 	<!-- ----- ----- ----- 最上面 選擇列 end ----- ----- ----- -->
@@ -58,112 +63,99 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 		<header> </header>
 		<!-- ----- ----- ----- 中間上面 end ----- ----- ----- -->
 
-	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
-	<main class="body-content"padding-right: 0 px;>
-		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
+		<!-- ----- ----- ----- 中間內容 start ----- ----- ----- -->
+
+
+		<!-- ----- ----- ----- orignal v1 start ----- ----- ----- -->
 		
-		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
-
-		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
+		<!-- ----- ----- ----- 會員登入區塊 start ----- ----- ----- -->
 		
-		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
+		<form name="myform" action="MemLoginServlet.do" method="POST">
+			<section class="about section-padding bg-white">
+				<div id="logreg-forms">
+					<form class="form-signin">
+						<h1 class="h3 mb-3 font-weight-normal" style="text-align: center">
+							異鄉人</h1>
 
-		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2>會員資料修改!</h2>
+						<p style="text-align: center">會員登入</p>
+						<input type="account" name="memAccount" id="inputEmail" class="form-control"
+							placeholder="帳號" required="" autofocus=""> <input
+							type="password" name="memPassword"id="inputPassword" class="form-control"
+							placeholder="密碼" required="">
 
-		<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-			<font style="color: red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
-		</c:if>
-
-		<form
-			action="${pageContext.request.contextPath}/back-end/member/mem.do"
-			name="form1" method="post">
-			<!-- 		<FORM METHOD="post" ACTION="mem.do" name="form1"> -->
-			<table>
-
-				<tr>
-				
-					<td><input type="hidden" name="memID"
-						value="<%=memVO.getMemID()%>" required /></td>
-				</tr>
-				<tr>
-					<td>會員姓名</td>
-					<td><input type="text" name="memName"
-						value="<%=memVO.getMemName()%>" required /></td>
-				</tr>
-				<tr>
-					<td>會員帳號</td>
-					<td><input type="text" name="memAccount"
-						value="<%=memVO.getMemAccount()%>" required /></td>
-				</tr>
-				<tr>
-					<td>密碼</td>
-					<td><input type="text" name="memPassword"
-						value="<%=memVO.getMemPassword()%>" required /></td>
-				</tr>
-									<td>會員性別</td>
-					<td>
-					<select name="memGender">
-					<option value="0" <%=memVO.getMemGender() == 0 ? "selected": ""%>>男生</option>
-					<option value="1" <%=memVO.getMemGender() == 1 ? "selected": ""%>>女生</option>
-					</select>
-					</td>
-				<tr>
+						<button class="btn btn-success btn-block" type="submit" valut="Sign In">
+							<i class="fas fa-sign-in-alt"></i> Sign in
+						</button>
+						<a href="#" id="forgot_pswd">Forgot password?</a>
+						<hr>
+						<!-- ----- ----- ----- 會員登入區塊 stop ----- ----- ----- -->
+						
+						
+						<!-- <p>Don't have an account!</p>  -->
+						<button class="btn btn-primary btn-block" type="button"
+							id="btn-signup">
+							<i class="fas fa-user-plus"></i> Sign up New Account
+						</button>
+					</form>
 					
-					<td><input type="hidden" name="memPermission"
-						value="<%=memVO.getMemPermission()%>" required /></td>
-				</tr>
-				<tr>
-					<td>電話</td>
-					<td><input type="text" name="memPhone"
-						value="<%=memVO.getMemPhone()%>" required /></td>
-				</tr>
-				<tr>
-					<td>地址</td>
-					<td><input type="text" name="memAddress"
-						value="<%=memVO.getMemAddress()%>" required /></td>
-				</tr>
-				<tr>
-					<td>信箱</td>
-					<td><input type="text" name="memEmail"
-						value="<%=memVO.getMemEmail()%>" required /></td>
-				</tr>
-				<tr>
-					<td>生日</td>
-					<td><input type="text" id="f_date1" name="memBirthday"
-						value="<%=memVO.getMemBirthday()%>" required /></td>
-				</tr>
 
-			</table>
-			<br>
-			<div>
-				<input type="hidden" name="action" value="updateForMem"> <input
-					type="hidden" name="memID" value="<%=memVO.getMemID()%>"> <input
-					type="submit" value="送出修改">
-			</div>
+					<form action="/reset/password/" class="form-reset">
+						<input type="email" id="resetEmail" class="form-control"
+							placeholder="Email address" required="" autofocus="">
+						<button class="btn btn-primary btn-block" type="submit">Reset
+							Password</button>
+						<a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i>
+							Back</a>
+					</form>
+
+					<form action="/signup/" class="form-signup">
+
+
+						<p style="text-align: center">OR</p>
+
+						<input type="text" id="user-name" class="form-control"
+							placeholder="Full name" required="" autofocus=""> <input
+							type="email" id="user-email" class="form-control"
+							placeholder="Email address" required autofocus=""> <input
+							type="password" id="user-pass" class="form-control"
+							placeholder="Password" required autofocus=""> <input
+							type="password" id="user-repeatpass" class="form-control"
+							placeholder="Repeat Password" required autofocus="">
+
+						<button class="btn btn-primary btn-block" type="submit">
+							<i class="fas fa-user-plus"></i> Sign Up
+						</button>
+						<a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i>
+							Back</a>
+					</form>
+					<br>
+
+				</div>
+				<!-- 						<div class="col-lg-6 col-12"> -->
+
+				<div id="submit">
+					<input type="submit" id="submit1" value="Sign In"
+						onclick="return checkForm()">
+					<!-- 									<input type="submit" -->
+					<!-- 									id="submit2" value="Sign In"> -->
+				</div>
+				<div id="submit">
+					<input type="submit" id="submit1" value="忘記密碼"
+						onclick="return checkForm()">
+					<!-- 									<input type="submit" -->
+					<!-- 									id="submit2" value="Sign In"> -->
+				</div>
+
+			</section>
 		</form>
+
+		<!-- ----- ----- ----- orignal v1 stop ----- ----- ----- -->
+		-->
+		<!-- ----- ----- ----- 中間內容 end ----- ----- ----- -->
 	</main>
-
-
-	<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
-
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 
-	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
-	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
-
-	<!-- Page Specific Scripts Finish -->
-
-	<!-- ----- ----- ----- Script End ----- ----- ----- -->
-	
-
-<!-- ----- ----- ----- 底部 start ----- ----- ----- -->
+	<!-- ----- ----- ----- 底部 start ----- ----- ----- -->
 	<footer class="site-footer section-padding">
 
 		<div class="container">
@@ -314,47 +306,7 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 	<script src="../../front-assets/js/jquery.min.js"></script>
 	<script src="../../front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
 	<script src="../../front-assets/js/custom.js"></script>
-	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
-
+	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 </body>
-<%
-	
-	java.sql.Date memBirthday = null;
-	try {
-		memBirthday = memVO.getMemBirthday();
-	} catch (Exception e) {
-		memBirthday = new java.sql.Date(System.currentTimeMillis());
-	}
-	%>
-
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.css" />
-	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.js"></script>
-	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
-	
-	
-	<style>
-  .xdsoft_datetimepicker .xdsoft_datepicker {
-	width: 300px; /* width:  300px; */
-}
-
-  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-	height: 151px; /* height:  151px; */
-}
-</style>
-
-<script>
-        $.datetimepicker.setLocale('zh'); // kr ko ja en
-        $('#f_date1').datetimepicker({
-           theme: '',          //theme: 'dark',
-           timepicker:false ,  //timepicker: false,
-           step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format: 'Y-m-d',
-	       value: '<%=memBirthday%>', // value:   new Date(),
-           //disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
-           //startDate:	        '2022/07/10',  // 起始日
-           //minDate:           '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:           '+1970-01-01'  // 去除今日(不含)之後
-        });
-</script>
 
 </html>
