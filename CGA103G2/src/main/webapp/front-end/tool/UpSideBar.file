@@ -40,9 +40,9 @@
                         <a class="nav-link" href="${pageContext.request.contextPath}/front-end/queuer/queuer.jsp">餐廳候位</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/front-end/contact/contact.jsp">客服</a>
-                    </li>
+                    <!-- <li class="nav-item"> -->
+                    <!--     <a class="nav-link" href="${pageContext.request.contextPath}/front-end/contact/contact.jsp">客服</a> -->
+                    <!-- </li> -->
 
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/front-end/member/members2.jsp">會員中心</a>

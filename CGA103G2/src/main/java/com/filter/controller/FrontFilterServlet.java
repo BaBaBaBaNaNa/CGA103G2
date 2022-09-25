@@ -65,7 +65,7 @@ public class FrontFilterServlet extends HttpFilter implements Filter {
 			res.setContentType("text/html;UTF-8");
 			res.getWriter().println("<script>");
 			res.getWriter().println("alert('請登入會員');");
-			res.getWriter().println("window.location.href='../../front-end/member/members.jsp'");
+			res.getWriter().println("window.location.href='../../front-end/member/members2.jsp'");
 			res.getWriter().println("</script>");
 //			write("<script>alert('添加成功！');location.href='Jump.aspx';</script>");
 //			res.sendRedirect("../../front-end/member/members.jsp");

@@ -31,24 +31,9 @@
 </head>
 
 <body class="ms-body ms-primary-theme ms-logged-out">
-	<!-- 讀取網頁圈圈 -->
-	<div id="preloader-wrap">
-		<div class="spinner spinner-8">
-			<div class="ms-circle1 ms-child"></div>
-			<div class="ms-circle2 ms-child"></div>
-			<div class="ms-circle3 ms-child"></div>
-			<div class="ms-circle4 ms-child"></div>
-			<div class="ms-circle5 ms-child"></div>
-			<div class="ms-circle6 ms-child"></div>
-			<div class="ms-circle7 ms-child"></div>
-			<div class="ms-circle8 ms-child"></div>
-			<div class="ms-circle9 ms-child"></div>
-			<div class="ms-circle10 ms-child"></div>
-			<div class="ms-circle11 ms-child"></div>
-			<div class="ms-circle12 ms-child"></div>
-		</div>
-	</div>
-	<!-- Main Content -->
+	<!-- ----- ----- ----- 進入網站的讀取圈圈 start ----- ----- ----- -->
+	<%@ include file="./back-end/tool/ReadingCircle.file"%>
+	<!-- ----- ----- ----- 進入網站的讀取圈圈 end ----- ----- ----- -->
 	<main class="body-content">
 		<!-- Body Content Wrapper -->
 		<div class="ms-content-wrapper ms-auth">
@@ -60,17 +45,17 @@
 					<div class="ms-auth-form">
 						<form class="needs-validation" form name="myform" action="EmpLoginServlet.do" method="POST">
 							<h3>義鄉人 餐廳管理系統</h3>
-							<p>請輸入你的員工帳號、員工密碼</p>
+							<p style="color:red;">請輸入你的員工帳號、員工密碼</p>
 							<div class="mb-3">
 								<label for="validationCustom08">員工帳號</label>
 								<div class="input-group">
-									<input type="text" class="form-control" name="empAccount" id="url" value="test01@gmail.com">
+									<input type="text" class="form-control" name="empAccount" id="url">
 								</div>
 							</div>
 							<div class="mb-2">
 								<label for="validationCustom09">員工密碼</label>
 								<div class="input-group">
-									<input type="password" class="form-control" name="empPassword" id="url" value="123456">
+									<input type="password" class="form-control" name="empPassword" id="url">
 								</div>
 							</div>
 							<button class="btn btn-primary mt-4 d-block w-100" type="submit">登入</button>

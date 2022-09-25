@@ -82,19 +82,19 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 
 				<div class="form-row">
 					<div class="col-md-12 ">
-						<label>員工姓名</label><p>${errorMsgs.empName}</p>
+						<label>員工姓名</label><p style="color:red;">${errorMsgs.empName}</p>
 						<div class="input-group">
 							<input type="text" name="empName" value="${param.empName}" class="form-control" placeholder="請輸入員工姓名">
 						</div>
 					</div>
 					<div class="col-md-12 ">
-						<label>帳號:[請輸入Email信箱]</label><p>${errorMsgs.empAccount}</p>
+						<label>帳號:[請輸入Email信箱][新增後不可更改]</label><p style="color:red;">${errorMsgs.empAccount}</p>
 						<div class="input-group">
 							<input type="text" name="empAccount" value="${param.empAccount}" class="form-control" placeholder="example@gmail.com">
 						</div>
 					</div>
 					<div class="col-md-12 ">
-						<label>密碼</label><p>${errorMsgs.empPassword}</p>
+						<label>密碼</label><p style="color:red;">${errorMsgs.empPassword}</p>
 						<div class="input-group">
 						<input type="password" name="empPassword" value="${param.empPassword}" class="form-control" placeholder="請輸入密碼">
 						</div>
@@ -109,13 +109,13 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 						</div>
 					</div>
 					<div class="col-md-12 ">
-						<label>電話</label><p>${errorMsgs.empPhone}</p>
+						<label>電話</label><p style="color:red;">${errorMsgs.empPhone}</p>
 						<div class="input-group">
 						<input type="text" name="empPhone" value="${param.empPhone}" class="form-control" placeholder="請輸入員工電話">
 						</div>
 					</div>
 					<div class="col-md-12 ">
-						<label>地址</label><p>${errorMsgs.empAddress}</p>
+						<label>地址</label><p style="color:red;">${errorMsgs.empAddress}</p>
 						<div class="input-group">
 							<input type="text" name="empAddress" value="${param.empAddress}" class="form-control" placeholder="請輸入地址">
 						</div>
@@ -132,7 +132,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 						</div>
 					</div>
 					<div class="col-md-12 ">
-						<label>雇用日期</label><p>${errorMsgs.empHiredate}</p>
+						<label>雇用日期</label><p style="color:red;">${errorMsgs.empHiredate}</p>
 						<div class="input-group">
 						<input type="text" name="empHiredate" id="f_date1" value="${param.empHiredate}" class="form-control">
 						</div>
