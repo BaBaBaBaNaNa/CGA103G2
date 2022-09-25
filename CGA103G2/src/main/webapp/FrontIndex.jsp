@@ -145,7 +145,7 @@
 									<div class="col-lg-4 col-12 ms-auto">
 										<input type="hidden" name="action" value="insert">
 
-										<button type="submit" class="form-control" id="sub_btn">送出</button>
+										<button type="button" class="form-control" id="sub_btn">送出</button>
 									</div>
 								</form>
 							</div>
@@ -156,6 +156,7 @@
 					</div>
 
 				</div>
+				<span id="s" style="display:none;"></span>
 			</div>
 			<!-- ----- ----- ----- 跳出預先訂位頁面 end ----- ----- ----- -->
 
@@ -169,6 +170,9 @@
 			<script src="<%=request.getContextPath()%>/front-assets/js/bootstrap-datepicker.zh-TW.min.js"></script>
 
 			<script>
+				
+				var rsvtForm = document.getElementById('rsvt_form');
+				var sub_btn = document.getElementById('sub_btn');
 				var dp1 = document.getElementById('dp1');
 				var period = document.getElementById('period');
 				const dateUrl = '/CGA103G2/back-end/reservation_ctrl/Date';
@@ -185,22 +189,25 @@
 						for(let key of list){
 							arr.push(key);
 						}
-					})
+						$('.datepicker').datepicker({
+							autoclose: true, // 選擇後自動關閉日期選擇器
+							language: 'zh-TW', // 語言切換 中文
+							format: 'yyyy-mm-dd', // 日期格式
+							todayHighlight: true, // 高亮"當天日期"
+							toggleActive: true, // 	點擊選擇，再次點擊取消
+							startDate: new Date(), //開放初始日期 ex=> 
+							// endDate:new Date(),
+							// clearBtn: true, //顯示清除按鈕
+							daysOfWeekDisabled: [3], //每周隱藏的第幾天  0為周日6為星期六
+							datesDisabled: arr
+						});
+						})
 							console.log(arr);
-			
-				var disabledDates = arr;
-				$('.datepicker').datepicker({
-					autoclose: true, // 選擇後自動關閉日期選擇器
-					language: 'zh-TW', // 語言切換 中文
-					format: 'yyyy-mm-dd', // 日期格式
-					todayHighlight: true, // 高亮"當天日期"
-					toggleActive: true, // 	點擊選擇，再次點擊取消
-					startDate: new Date(), //開放初始日期 ex=> 
-					// endDate:new Date(),
-					// clearBtn: true, //顯示清除按鈕
-					daysOfWeekDisabled: [3], //每周隱藏的第幾天  0為周日6為星期六
-					datesDisabled: arr
-				});
+				sub_btn.addEventListener('click',() => {
+					if(confirm('確認送出？')){
+						rsvtForm.submit();
+					}
+				})
 				function checkPeriod(){
 					fetch(periodUrl,{
 						method: 'post',
@@ -251,6 +258,7 @@
 						}
 					})
 				}
+				
 			</script>
 			<!-- ----- ----- ----- js end ----- ----- ----- -->
 

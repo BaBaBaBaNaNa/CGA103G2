@@ -196,9 +196,9 @@ margin: 0 auto;
 									<div class="input-group-append bg-custom b-0" style="width: 100%;">
 										<select name="rsvtToSeat" class="form-control">
 											<option value="0"
-												<%=rsvtVO.getRsvtToSeat() == 0 ? "selected" : ""%>>未入座</option>
+												<%=rsvtVO.getRsvtToSeat() == 0 ? "selected" : ""%>>已入座</option>
 											<option value="1"
-												<%=rsvtVO.getRsvtToSeat() == 1 ? "selected" : ""%>>已入座</option>
+												<%=rsvtVO.getRsvtToSeat() == 1 ? "selected" : ""%>>未入座</option>
 										</select> <span class="input-group-text"></span>
 									</div>
 								</div>
