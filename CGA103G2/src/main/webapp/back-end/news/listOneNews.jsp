@@ -59,7 +59,7 @@ NewsVO newsVO = (NewsVO) request.getAttribute("newsVO"); //OrdersServlet.java(Co
 <style>
   table {
 	width: 100%;
-	background-color: white;
+	background-color: #f0f0fa;
 	margin-top: 5px;
 	margin-bottom: 5px;
   }
@@ -106,8 +106,8 @@ NewsVO newsVO = (NewsVO) request.getAttribute("newsVO"); //OrdersServlet.java(Co
 
 <table id="table-1">
 	<tr><td>
-		 <h3>單筆消息 - listOneNews.jsp</h3>
-		 <h4><a href="listAllNews.jsp"><img src="images/back.png" width="100" height="100" border="0">回首頁</a></h4>
+		 <h3>單筆消息</h3>
+		 <h4><a href="listAllNews.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 

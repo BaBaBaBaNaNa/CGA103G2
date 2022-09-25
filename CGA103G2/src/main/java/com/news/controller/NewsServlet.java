@@ -148,6 +148,8 @@ public class NewsServlet extends HttpServlet {
 			} else {
 				NewsService newsSvc = new NewsService();
 				newsPictures = newsSvc.getOneNews(newsID).getNewsPictures();
+			}if (newsPictures == null) {
+				errorMsgs.add("請新增圖片");
 			}
 			
 			

@@ -1,3 +1,4 @@
+<%@page import="com.mysql.cj.Session"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
@@ -8,6 +9,8 @@
     OrdersService ordersSvc = new OrdersService();
     List<OrdersVO> list = ordersSvc.getAll();
     pageContext.setAttribute("list",list);
+    Integer memID=Integer.parseInt(request.getSession().getAttribute("memID").toString());
+    System.out.println(memID);
 %>
 
 <!doctype html>
@@ -89,7 +92,8 @@
 		<th>成立訂單日</th>
 		<th>預計製作日</th>
 	</tr>
-	<c:forEach var="ordersVO" items="${list}" >
+	<c:forEach var="ordersVO" items="${list}">
+	<c:if test="${ordersVO.memID == memID}">
 	<c:if test="${ordersVO.ordersType == 1}">
 	<tr>
 			<td>${ordersVO.ordersID}</td>
@@ -107,9 +111,10 @@
 				 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/orddetails/orddetails.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="明細">
 			     <input type="hidden" value="${ordersVO.ordersID}" name="orderDetailId">
-			     <input type="hidden" name="action"	value="getOne_For_Display2"></FORM>
+			     <input type="hidden" name="action"	value="getOne_For_Display3"></FORM>
 			</td>
 	</tr>
+	</c:if>
 	</c:if>
 	</c:forEach>
 </table>
