@@ -66,17 +66,18 @@ MealsCategoryVO mealsCategoryVO =(MealsCategoryVO)request.getAttribute("mealsCat
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 		<div class="ms-auth-form">
 			<form METHOD="post" ACTION="MealsCategory.do" name="form1">
-				<h3>修改職位名稱</h3>
+				<h3>修改菜系名稱</h3>
 				<div class="form-row">
 					<div class="col-md-12 ">
-						<label>職位編號</label>
+						<label>菜系編號</label>
 						<div class="input-group">
 							<input type="text" name="MealsCategoryId" value="${param.mealsCategoryId}" class="form-control" readonly="readonly">
 							
 						</div>
 					</div>
 					<div class="col-md-12 ">
-						<label>職位名稱</label>
+					
+						<label>菜系名稱</label>
 						<p>${errorMsgs.MealsCategory}</p>
 						<div class="input-group">
 							<input type="text" name="MealsCategory" value="${param.MealsCategory}" class="form-control" placeholder="請輸入職稱">

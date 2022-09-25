@@ -123,19 +123,21 @@ public class MealsCategoryServlet extends HttpServlet{
 			Integer MealsCategoryId = Integer.valueOf(req.getParameter("MealsCategoryId").trim());
 			String MealsCategory = req.getParameter("MealsCategory");
 			
-			System.out.println(MealsCategory.getClass().getSimpleName());
+			System.out.println(MealsCategory);
 			
 			String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{0,10}$";
 			if (MealsCategory == null || MealsCategory.trim().length() == 0) {
-				errorMsgs.put("MealsCategory: ","請勿空白");
+				errorMsgs.put("MealsCategory","菜系名稱:請勿空白");
+				System.out.println("132");
 			} else if (!MealsCategory.trim().matches(enameReg)) { //以下練習正則(規)表示式(regular-expression)
-				errorMsgs.put("MealsCategory"," 只能是中、英文字母、數字和_ , 且長度必需在0到10之間");
+				errorMsgs.put("MealsCategory"," 菜系名稱:只能是中、英文字母、數字和_ , 且長度必需在0到10之間");
 			}
 			MealsCategoryVO mealsCategoryVO = new MealsCategoryVO();
 			mealsCategoryVO.setMealsCategoryId(MealsCategoryId);
 			mealsCategoryVO.setMealsCategory(MealsCategory);
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
+				System.out.println("132");
 				req.setAttribute("mealsCategoryVO", mealsCategoryVO);
 				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/mealscategory/update_mealsCategory_input.jsp");
 				failureView.forward(req, res);
@@ -150,6 +152,7 @@ public class MealsCategoryServlet extends HttpServlet{
 			String url = "/back-end/mealscategory/mealsCatefgoryEditSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
+			return;
 		}
 		
 		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
