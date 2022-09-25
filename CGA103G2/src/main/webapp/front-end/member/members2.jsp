@@ -409,48 +409,7 @@ if ((request.getAttribute("errorMessage") != null)) {
 	<script src="../../front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
 	<script src="../../front-assets/js/custom.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
-<%
-java.sql.Date memBirthday = null;
-try {
-	memBirthday = memVO.getMemBirthday();
-} catch (Exception e) {
-	memBirthday = new java.sql.Date(System.currentTimeMillis());
-}
-%>
 
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.css" />
-<script
-	src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.js"></script>
-<script
-	src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-
-<style>
-.xdsoft_datetimepicker .xdsoft_datepicker {
-	width: 300px; /* width:  300px; */
-}
-
-.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-	height: 151px; /* height:  151px; */
-}
-</style>
-
-<script>
-        $.datetimepicker.setLocale('zh'); // kr ko ja en
-        $('#f_date1').datetimepicker({
-           theme: '',          //theme: 'dark',
-           timepicker:false ,  //timepicker: false,
-           step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format: 'Y-m-d',
-	       value: '<%=memBirthday%>
-	', // value:   new Date(),
-	//disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
-	//startDate:	        '2022/07/10',  // 起始日
-	//minDate:           '-1970-01-01', // 去除今日(不含)之前
-	//maxDate:           '+1970-01-01'  // 去除今日(不含)之後
-	});
-</script>
 
 
 	<!-- 下拉式地址註冊表格script  start -->
@@ -492,5 +451,43 @@ try {
 
 </body>
 
+<%
+	
+	java.sql.Date memBirthday = null;
+	try {
+		memBirthday = memVO.getMemBirthday();
+	} catch (Exception e) {
+		memBirthday = new java.sql.Date(System.currentTimeMillis());
+	}
+	%>
 
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.css" />
+	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
+	
+	
+	<style>
+  .xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
+</style>
+
+<script>
+        $.datetimepicker.setLocale('zh'); // kr ko ja en
+        $('#f_date1').datetimepicker({
+           theme: '',          //theme: 'dark',
+           timepicker:false ,  //timepicker: false,
+           step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
+	       format: 'Y-m-d',
+	       value: '<%=memBirthday%>', // value:   new Date(),
+           //disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
+           //startDate:	        '2022/07/10',  // 起始日
+           //minDate:           '-1970-01-01', // 去除今日(不含)之前
+           //maxDate:           '+1970-01-01'  // 去除今日(不含)之後
+        });
+</script>
 </html>

@@ -142,7 +142,7 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 			</table>
 			<br>
 			<div>
-				<input type="hidden" name="action" value="update"> <input
+				<input type="hidden" name="action" value="updateForMem"> <input
 					type="hidden" name="memID" value="<%=memVO.getMemID()%>"> <input
 					type="submit" value="送出修改">
 			</div>
