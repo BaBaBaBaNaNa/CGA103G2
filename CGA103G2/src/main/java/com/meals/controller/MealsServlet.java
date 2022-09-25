@@ -154,7 +154,7 @@ public class MealsServlet extends HttpServlet{
 			try {
 				mealsPrice = Integer.valueOf(req.getParameter("mealsPrice").trim());
 			} catch (NumberFormatException e) {
-				errorMsgs.put("mealsPrice",": 價錢:請輸入數字");
+				errorMsgs.put("mealsPrice","價錢:請輸入數字");
 			}
 			
 			String mealsInfo = req.getParameter("mealsInfo").trim();

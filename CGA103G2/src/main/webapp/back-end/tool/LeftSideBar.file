@@ -42,7 +42,6 @@
 					<!-- <li><a href="${pageContext.request.contextPath}/back-end/product/product_detail.jsp">產品細節</a></li> -->
 					<li><a href="${pageContext.request.contextPath}/back-end/meals/MealsServlet.do?action=getAll">查詢目前菜色</a></li>
 					<li><a href="${pageContext.request.contextPath}/back-end/meals/mealsAdd.jsp">新增菜色</a></li>
-					<li><a href="${pageContext.request.contextPath}/back-end/mealscategory/nothing1.jsp">查詢目前菜系1</a></li>
 					<li><a href="${pageContext.request.contextPath}/back-end/mealscategory/MealsCategoryServlet.do?action=getAll">查看目前菜系</a></li>
 					<li><a href="${pageContext.request.contextPath}/back-end/mealscategory/mealsCategoryAdd.jsp">新增菜系</a></li>
 				</ul></li>

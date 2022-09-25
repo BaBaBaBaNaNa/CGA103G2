@@ -84,12 +84,22 @@ h2{
 		<h2	> 修改成功!</h2>
 		<table>
 			<tr>
-				<th>菜色編號</th>
-				<th>菜名</th>
+					<th>菜色編號</th>
+					<th>菜系</th>
+					<th>菜色名稱</th>
+					<th>價錢</th>
+					<th>說明</th>
+					<th>照片</th>
+					<th>控制</th>
 			</tr>
 			<tr>
 				<td>${mealsVO.mealsID}</td>
+				<td>${mealsVO.mealsCategoryID}-[${mealsVO.mealsCategoryVO.mealsCategory}]</td>
 				<td>${mealsVO.mealsName}</td>
+				<td>${mealsVO.mealsPrice}</td>
+				<td>${mealsVO.mealsInfo}</td>
+				<td><img src="<%=request.getContextPath()%>/meals/DBGifReader?mealsID=${mealsVO.mealsID}" width="100px"></td> 
+				<td>${mealsVO.mealsControl==0?'下架':'上架'}</td>
 			</tr>
 		</table>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->

@@ -91,7 +91,7 @@
 		<table style="width: 35% ;">
 			<tr>
 				<th style="width: 5% ;">編號</th>
-				<th style="width: 20% ;">菜系名稱<br>名稱</th>
+				<th style="width: 20% ;">菜系<br>名稱</th>
 				<th style="width: 5% ;">修改</th>
 				<th style="width: 5% ;">刪除</th>
 			</tr>

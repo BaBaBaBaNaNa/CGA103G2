@@ -92,7 +92,7 @@
      		<table style="width: 90% ;">
 			<tr>
 				<th style="width: 5% ;">編號</th>
-				<th style="width: 20% ;">mealsCategoryID</th>
+				<th style="width: 20% ;">菜系</th>
 				<th style="width: 10% ;">菜色名稱</th>
 				<th style="width: 5% ;">價錢</th>
 				<th style="width: 20% ;">說明</th>

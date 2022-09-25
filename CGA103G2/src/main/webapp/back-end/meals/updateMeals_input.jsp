@@ -102,13 +102,12 @@ MealsVO mealsVO = (MealsVO) request.getAttribute("mealsVO"); //EmpServlet.java (
 								placeholder="請輸入菜名" onclick="hideContent('mealsName.errors');" />
 						</div>
 					</div>
-						<p>${errorMsgs.mealsPrice}</p>
 					<div class="col-md-12">
+						<p>${errorMsgs.mealsPrice}</p>
 						<label for="mealsPrice">價錢:</label> <input id="mealsPrice"
 							name="mealsPrice" type="text" value="${param.mealsPrice}"
 							class="form-control" placeholder="請輸入價錢"
-							onclick="hideContent('mealsPrice.errors');" /> <span
-							id="mealsPrice.errors" class="error">${errorMsgs.mealsPrice}</span>
+							onclick="hideContent('mealsPrice.errors');" />
 					</div>
 
 					<div class="col-md-12">

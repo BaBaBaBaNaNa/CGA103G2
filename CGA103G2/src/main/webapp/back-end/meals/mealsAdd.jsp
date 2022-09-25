@@ -33,6 +33,12 @@
 
 <link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
+<style>
+	.mealsID{
+/* 		margin-left:3rem;		 */
+		}
+</style>
+
 </head>
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
@@ -69,7 +75,7 @@
 					<div class="col-md-12">
 						<label>菜色編號:</label>
 						<div class="input-group">
-							<input id="mealsID" name="mealsID" type="text"
+							<input  name="mealsID" type="text"
 								value="${param.mealsID}" class="form-control"
 								readonly="readonly" />
 						</div>
@@ -77,10 +83,10 @@
 					
 					
 					<jsp:useBean id="MealscategorySvc" scope="page" class="com.mealscateory.model.MealsCategoryService" />
-					<div class="col-md-12">
-						<label for="mealsCategoryID">菜系編號:</label>
-						<div class="input-group">
-							<select size="1" name="mealsCategoryID">
+					<div class="col-md-12 ">
+						<label   for="mealsCategoryID">菜系編號:</label>
+						<div   class="mealsID" class="input-group">
+							<select class="mealsID" size="1" name="mealsCategoryID">
 							<c:forEach var="MealsCategoryVO" items="${MealscategorySvc.all}">
 							<option value="${MealsCategoryVO.mealsCategoryId}" ${(mealsVO.mealsCategoryID==MealsCategoryVO.mealsCategoryId)? 'selected':'' } >${MealsCategoryVO.mealsCategory}
 						</c:forEach>
