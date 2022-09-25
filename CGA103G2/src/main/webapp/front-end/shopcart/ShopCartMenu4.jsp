@@ -106,6 +106,11 @@
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
 	<main>
+		<div id="dg" style="z-index: 9999; position: fixed ! important; right: 0px; top: 100px;">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.href='${pageContext.request.contextPath}/back-end/meals/MealsServlet.do?action=getAll1'">回到菜單</button>
+			<br>
+			<button type="button" class="btn btn-primary" onclick="window.location.href='../../front-end/shopcart/ShopCart.jsp'">確認購物車</button>
+		</div>
 		<%@ include file="../../back-end/tool/page3.file"%>
 		<!-- ----- ----- ----- 中間上面 start ----- ----- ----- -->
 		<header> </header>
@@ -284,71 +289,14 @@
 			<hr>
 		</section>
 		<!-- ----- ----- ----- 中間內容 end ----- ----- ----- -->
+		<!-- ----- ----- -----   按鈕-回到網頁最上面 start ----- ----- ----- -->
+		<button type="button" id="GoTop" class="GoTop-arrow" style="z-index:9999;"></button>
+		<!-- ----- ----- -----   按鈕-回到網頁最上面 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 底部 start ----- ----- ----- -->
-	<footer class="site-footer section-padding">
-
-		<div class="container">
-
-			<div class="row">
-
-				<div class="col-12">
-					<h4 class="text-white mb-4 me-5">義式餐酒館</h4>
-				</div>
-
-				<div class="col-lg-4 col-md-7 col-xs-12 tooplate-mt30">
-					<h6 class="text-white mb-lg-4 mb-3">Location</h6>
-
-					<p>緯育 中壢Java班 CGA_103 第二組</p>
-
-					<a href="https://goo.gl/maps/wcmDpTGaAHn3eWPd7"
-						class="custom-btn btn btn-dark mt-2">Directions</a>
-				</div>
-
-				<div class="col-lg-4 col-md-5 col-xs-12 tooplate-mt30">
-					<h6 class="text-white mb-lg-4 mb-3">Opening Hours</h6>
-
-					<p class="mb-2">Monday - Friday</p>
-
-					<p>17:00 PM - 03:00 AM</p>
-
-					<p>
-						Tel: <a href="tel: 03-425-1108" class="tel-link">03-425-1108</a>
-					</p>
-				</div>
-
-				<div class="col-lg-4 col-md-6 col-xs-12 tooplate-mt30">
-					<h6 class="text-white mb-lg-4 mb-3">社群</h6>
-
-					<ul class="social-icon">
-						<li><a href="#" class="social-icon-link bi-facebook"></a></li>
-
-						<li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-						<li><a
-							href="https://twitter.com/search?q=tooplate.com&src=typed_query&f=live"
-							target="_blank" class="social-icon-link bi-twitter"></a></li>
-
-						<li><a href="#" class="social-icon-link bi-youtube"></a></li>
-					</ul>
-
-					<p class="copyright-text tooplate-mt60">
-						Copyright © 2022 中壢Java班 CGA_103 緯育 第二組 Co., Ltd. <br>Design:
-						<a rel="nofollow" href="" target="_blank">2022 中壢Java班 CGA_103
-							緯育 第二組</a>
-					</p>
-
-				</div>
-
-			</div>
-			<!-- row ending -->
-
-		</div>
-		<!-- container ending -->
-
-	</footer>
+	<%@ include file="../../front-end/tool/PageFooter.file"%>
 	<!-- ----- ----- ----- 底部 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 跳出預先訂位頁面 start ----- ----- ----- -->
