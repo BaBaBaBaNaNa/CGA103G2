@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
 <html lang="zh-tw">
@@ -25,30 +26,9 @@
 
     <link href="<%=request.getContextPath()%>/front-assets/css/tooplate-crispy-kitchen.css" rel="stylesheet">
 
-
-    <link href="front-assets/css/navbar.css" rel="stylesheet">
-    
-    <link href="front-assets/css/datepicker.css" rel="stylesheet">
-
     <link href="<%=request.getContextPath()%>/front-assets/css/navbar.css" rel="stylesheet">
-<body class="ms-body ms-primary-theme ms-logged-out">
-	<!-- 讀取網頁圈圈 -->
-	<div id="preloader-wrap">
-		<div class="spinner spinner-8">
-			<div class="ms-circle1 ms-child"></div>
-			<div class="ms-circle2 ms-child"></div>
-			<div class="ms-circle3 ms-child"></div>
-			<div class="ms-circle4 ms-child"></div>
-			<div class="ms-circle5 ms-child"></div>
-			<div class="ms-circle6 ms-child"></div>
-			<div class="ms-circle7 ms-child"></div>
-			<div class="ms-circle8 ms-child"></div>
-			<div class="ms-circle9 ms-child"></div>
-			<div class="ms-circle10 ms-child"></div>
-			<div class="ms-circle11 ms-child"></div>
-			<div class="ms-circle12 ms-child"></div>
-		</div>
-	</div>
+    
+    <link href="<%=request.getContextPath()%>/front-assets/css/datepicker.css" rel="stylesheet">
     <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -59,9 +39,6 @@
 	<!-- ----- ----- ----- 最上面 選擇列 end ----- ----- ----- -->
 
     <!-- ----- ----- ----- 頁面 中間內容 start ----- ----- ----- -->
-
-    
-
     <main>
 
         <section class="hero">
@@ -87,7 +64,7 @@
 			<br><br><br><br><br><br><br><br><br><br>
             <div class="video-wrap">
                 <video autoplay="" loop="" muted="" class="custom-video" poster="">
-                    <source src="front-assets/video/production_ID_3769033.mp4" type="video/mp4">
+                    <source src="<%=request.getContextPath()%>/front-assets/video/production_ID_3769033.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
@@ -98,11 +75,6 @@
         
 
     </main>
-
-
-
-
-
     <!-- ----- ----- ----- 頁面 中間內容 end ----- ----- ----- -->
 
     <!-- ----- ----- ----- 頁面 底部 start ----- ----- ----- -->
@@ -189,16 +161,12 @@
 
     <!-- ----- ----- ----- js start ----- ----- ----- -->
     
-			<script src="front-assets/js/jquery.min.js"></script>
-			<script src="front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
-			<script src="front-assets/js/custom.js"></script>
-			<script
-				src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
-			<script src="front-assets/js/bootstrap-datepicker.zh-TW.min.js"></script>
     		<script src="<%=request.getContextPath()%>/front-assets/js/jquery.min.js"></script>
     		<script src="<%=request.getContextPath()%>/front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
     		<script src="<%=request.getContextPath()%>/front-assets/js/custom.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+			<script src="<%=request.getContextPath()%>/front-assets/js/bootstrap-datepicker.zh-TW.min.js"></script>
 
 			<script>
 				var dp1 = document.getElementById('dp1');

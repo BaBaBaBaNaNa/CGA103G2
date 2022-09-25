@@ -51,7 +51,12 @@
 <!-- 				<li class="ms-nav-item ms-nav-user dropdown"><a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="ms-user-img ms-img-round float-right" src="${pageContext.request.contextPath}/back-assets/img/costic/customer-6.jpg" alt="people"></a> -->
 <!-- =========================================== -->
 				
-				<li class="ms-nav-item ms-nav-user dropdown"><a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="text-disabled" style="text-decoration:underline; color:red; background-color: white;">員工 : <%= request.getSession().getAttribute("LoginSessionName") %></span></a>
+				<li class="ms-nav-item ms-nav-user dropdown">
+				    <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    	<span class="text-disabled" style="text-decoration:underline; color:red; background-color: white;">員工 : <c:if test="${LoginSessionName != null }"><%= request.getSession().getAttribute("LoginSessionName") %></c:if>
+				    																											  <c:if test="${LoginSessionName == null }">未登入</c:if>
+				    	</span>
+				    </a>
 					<ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
 
 						<li class="dropdown-divider"></li>

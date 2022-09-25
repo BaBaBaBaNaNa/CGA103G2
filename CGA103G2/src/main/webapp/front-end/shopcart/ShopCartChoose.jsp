@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*,com.shopcart.controller.ShopCartServlet"%>
+<%@ page import="com.shopcart.model.*"%>
+
 <!doctype html>
 <html lang="zh-tw">
 
@@ -11,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>義鄉人 - 義式餐酒館 - 會員中心 - 緯育 中壢Java班 CGA_103 第二組</title>
+<title>義鄉人 - 義式餐酒館 - 訂單 - 緯育 中壢Java班 CGA_103 第二組</title>
 
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
 
@@ -19,24 +21,36 @@
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<link href="<%=request.getContextPath()%>/front-assets/bootstrap_css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="../../front-assets/css/navbar.css" rel="stylesheet">
 
-<link href="<%=request.getContextPath()%>/front-assets/bootstrap_css/bootstrap-icons.css"
-	rel="stylesheet">
+<link href="../../front-assets/bootstrap_css/bootstrap.min.css" rel="stylesheet">
 
-<link href="<%=request.getContextPath()%>/front-assets/css/tooplate-crispy-kitchen.css"
-	rel="stylesheet">
+<link href="../../front-assets/bootstrap_css/bootstrap-icons.css" rel="stylesheet">
 
-<link href="<%=request.getContextPath()%>front-assets/css/navbar.css" rel="stylesheet">
+<link href="../../front-assets/css/tooplate-crispy-kitchen.css" rel="stylesheet">
 
+<!-- <link href="../../front-assets/css/navbar.css" rel="stylesheet"> -->
+
+<!-- <link href="../../front-assets/css/shoppingcart/ShoppingCart.css" rel="stylesheet"> -->
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
-</head>
+<style>
+.show-cart li {
+	display: flex;
+}
 
+.card {
+	margin-bottom: 20px;
+}
+
+.card-img-top {
+	width: 200px;
+	height: 200px;
+	align-self: center;
+}
+</style>
+</head>
 
 <body>
 	<!-- ----- ----- ----- 最上面 選擇列 start ----- ----- ----- -->
@@ -51,65 +65,39 @@
 
 		<!-- ----- ----- ----- 中間內容 start ----- ----- ----- -->
 
-
-<!-- ----- ----- ----- orignal v1 start ----- ----- ----- -->
-		<form name="myform" action="MemLoginServlet.do" method="POST">
-			<section class="about section-padding bg-white">
-				<div class="container">
-					<div class="row">
-
-						<div class="col-lg-6 col-12 mb-2">
-							<h4 class="mb-3">會員登入</h4>
-
-							<div id="username_input">
-
-								<div id="username_inputleft"></div>
-
-								<div id="username_inputmiddle">
-									<input type="text" name="memAccount" id="url" value="cga03">
-								</div>
-
-								<div id="username_inputright"></div>
-
+		<section class="about section-padding bg-white">
+			<hr>
+<!-- 			<form METHOD="post" ACTION="ShopCartServlet.do" name="form1"> -->
+				<div class="modal-fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<!-- 						<div class="modal-dialog modal-dialog-centered modal-xl"> -->
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">購物車</h5>
+								<!-- 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+								<!-- 								<span aria-hidden="true">&times;</span> -->
+								<!-- 							</button> -->
 							</div>
+							<div class="modal-body">
+								<table class="show-cart table">
 
-							<div id="password_input">
-
-								<div id="password_inputleft"></div>
-
-								<div id="password_inputmiddle">
-									<input type="password" name="memPassword" id="url"
-										value="cga03">
+								</table>
+								<div>
+									總金額: $<span class="total-cart"></span>
 								</div>
-
-								<div id="password_inputright"></div>
-
 							</div>
-						</div>
-
-						<!-- 						<div class="col-lg-6 col-12"> -->
-
-						<div id="submit">
-							<input type="submit" id="submit1" value="Sign In"
-								onclick="return checkForm()">
-							<!-- 									<input type="submit" -->
-							<!-- 									id="submit2" value="Sign In"> -->
-						</div>
-						<div id="submit">
-							<input type="submit" id="submit1" value="忘記密碼"
-								onclick="return checkForm()">
-							<!-- 									<input type="submit" -->
-							<!-- 									id="submit2" value="Sign In"> -->
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.href='${pageContext.request.contextPath}/back-end/meals/MealsServlet.do?action=getAll1'">回到菜單</button>
+								<input type="hidden" name="action" value="insert">
+								<input id="submit2" class="btn btn-primary" type="submit" value="送出訂單">
+<!-- 								<button type="button" class="btn btn-primary" onclick="window.location.href='../../front-end/shopcart/ShopCart.jsp'">送出訂單</button> -->
+							</div>
 						</div>
 					</div>
-
 				</div>
-				</div>
-			</section>
-		</form>
-		
-		<!-- ----- ----- ----- orignal v1 stop ----- ----- ----- -->
-		-->
+<!-- 			</form> -->
+			<hr>
+		</section>
 		<!-- ----- ----- ----- 中間內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
@@ -130,8 +118,7 @@
 
 					<p>緯育 中壢Java班 CGA_103 第二組</p>
 
-					<a href="https://goo.gl/maps/wcmDpTGaAHn3eWPd7"
-						class="custom-btn btn btn-dark mt-2">Directions</a>
+					<a href="https://goo.gl/maps/wcmDpTGaAHn3eWPd7" class="custom-btn btn btn-dark mt-2">Directions</a>
 				</div>
 
 				<div class="col-lg-4 col-md-5 col-xs-12 tooplate-mt30">
@@ -154,17 +141,13 @@
 
 						<li><a href="#" class="social-icon-link bi-instagram"></a></li>
 
-						<li><a
-							href="https://twitter.com/search?q=tooplate.com&src=typed_query&f=live"
-							target="_blank" class="social-icon-link bi-twitter"></a></li>
+						<li><a href="https://twitter.com/search?q=tooplate.com&src=typed_query&f=live" target="_blank" class="social-icon-link bi-twitter"></a></li>
 
 						<li><a href="#" class="social-icon-link bi-youtube"></a></li>
 					</ul>
 
 					<p class="copyright-text tooplate-mt60">
-						Copyright © 2022 中壢Java班 CGA_103 緯育 第二組 Co., Ltd. <br>Design:
-						<a rel="nofollow" href="" target="_blank">2022 中壢Java班 CGA_103
-							緯育 第二組</a>
+						Copyright © 2022 中壢Java班 CGA_103 緯育 第二組 Co., Ltd. <br>Design: <a rel="nofollow" href="" target="_blank">2022 中壢Java班 CGA_103 緯育 第二組</a>
 					</p>
 
 				</div>
@@ -179,55 +162,41 @@
 	<!-- ----- ----- ----- 底部 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 跳出預先訂位頁面 start ----- ----- ----- -->
-	<div class="modal fade" id="BookingModal" tabindex="-1"
-		aria-labelledby="BookingModal" aria-hidden="true">
+	<div class="modal fade" id="BookingModal" tabindex="-1" aria-labelledby="BookingModal" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-xl">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h3 class="mb-0">預先訂位</h3>
 
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 
 				<div class="modal-body d-flex flex-column justify-content-center">
 					<div class="booking">
 
-						<form class="booking-form row" role="form" action="#"
-							method="post">
+						<form class="booking-form row" role="form" action="#" method="post">
 							<div class="col-lg-6 col-12">
-								<label for="name" class="form-label">您的名字</label> <input
-									type="text" name="name" id="name" class="form-control"
-									placeholder="Your Name" required>
+								<label for="name" class="form-label">您的名字</label> <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" required>
 							</div>
 
 							<div class="col-lg-6 col-12">
-								<label for="email" class="form-label">Email</label> <input
-									type="email" name="email" id="email" pattern="[^ @]*@[^ @]*"
-									class="form-control" placeholder="your@email.com" required>
+								<label for="email" class="form-label">Email</label> <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="your@email.com" required>
 							</div>
 
 							<div class="col-lg-6 col-12">
-								<label for="phone" class="form-label">電話號碼</label> <input
-									type="telephone" name="phone" id="phone"
-									pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control"
-									placeholder="123-456-7890">
+								<label for="phone" class="form-label">電話號碼</label> <input type="telephone" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" placeholder="123-456-7890">
 							</div>
 
 							<div class="col-lg-6 col-12">
-								<label for="people" class="form-label">訂位人數</label> <input
-									type="text" name="people" id="people" class="form-control"
-									placeholder="12 persons">
+								<label for="people" class="form-label">訂位人數</label> <input type="text" name="people" id="people" class="form-control" placeholder="12 persons">
 							</div>
 
 							<div class="col-lg-6 col-12">
-								<label for="date" class="form-label">日期</label> <input
-									type="date" name="date" id="date" value="" class="form-control">
+								<label for="date" class="form-label">日期</label> <input type="date" name="date" id="date" value="" class="form-control">
 							</div>
 
 							<div class="col-lg-6 col-12">
-								<label for="time" class="form-label">時間</label> <select
-									class="form-select form-control" name="time" id="time">
+								<label for="time" class="form-label">時間</label> <select class="form-select form-control" name="time" id="time">
 									<option value="5" selected>5:00 PM</option>
 									<option value="6">18:00 PM</option>
 									<option value="7">19:00 PM</option>
@@ -242,8 +211,7 @@
 							<div class="col-12">
 								<label for="message" class="form-label">其他需求:</label>
 
-								<textarea class="form-control" rows="4" id="message"
-									name="message" placeholder=""></textarea>
+								<textarea class="form-control" rows="4" id="message" name="message" placeholder=""></textarea>
 							</div>
 
 							<div class="col-lg-4 col-12 ms-auto">
@@ -265,7 +233,10 @@
 	<script src="../../front-assets/js/jquery.min.js"></script>
 	<script src="../../front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
 	<script src="../../front-assets/js/custom.js"></script>
+
+	<script src="../../front-assets/js/shoppingcart/ShoppingCart.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
+
 </body>
 
 </html>
