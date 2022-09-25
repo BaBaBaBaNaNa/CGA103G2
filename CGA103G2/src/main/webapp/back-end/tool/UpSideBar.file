@@ -53,8 +53,11 @@
 				
 				<li class="ms-nav-item ms-nav-user dropdown">
 				    <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    	<span class="text-disabled" style="text-decoration:underline; color:red; background-color: white;">員工 : <c:if test="${LoginSessionName != null }"><%= request.getSession().getAttribute("LoginSessionName") %></c:if>
-				    																											  <c:if test="${LoginSessionName == null }">未登入</c:if>
+				    	<span style="color:blue; background-color: none;">員工</span>
+				    	<span>&emsp;|&emsp;</span>
+				    	<span class="text-disabled" style="text-decoration:underline; color:red; background-color: none;">
+				    		<c:if test="${LoginSessionName != null }"><%= request.getSession().getAttribute("LoginSessionName") %></c:if>
+				    		<c:if test="${LoginSessionName == null }">未登入</c:if>
 				    	</span>
 				    </a>
 					<ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">

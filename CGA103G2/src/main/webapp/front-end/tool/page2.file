@@ -16,7 +16,7 @@
 
   <%if (pageNumber>1) {%>
     <FORM METHOD="post" ACTION="<%=request.getRequestURI()%>">   
-       <select size="1" name="whichPage">
+       <select class="form-control" size="1" name="whichPage">
          <%for (int i=1; i<=pageNumber; i++){%>
             <option value="<%=i%>">跳至第<%=i%>頁
          <%}%> 

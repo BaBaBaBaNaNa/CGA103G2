@@ -31,6 +31,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 <link href="../../back-assets/css/jquery-ui.min.css" rel="stylesheet">
 <!-- Page Specific CSS (Slick Slider.css) -->
 <link href="../../back-assets/css/slick.css" rel="stylesheet">
+
 <link href="../../back-assets/css/datatables.min.css" rel="stylesheet">
 <!-- Costic styles -->
 <link href="../../back-assets/css/style.css" rel="stylesheet">
@@ -57,7 +58,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
-	<main class="body-content"padding-right: 0 px;>
+	<main style="width:100%" class="body-content">
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
 		<%@ include file="../../back-end/tool/UpSideBar.file"%>
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
@@ -77,42 +78,46 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 		<h2>查看員工訊息</h2>
 		<jsp:useBean id="jobSvc" scope="page" class="com.job.model.JobService" />
 		<hr>
-		<div style="text-align: center;">
-    		<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" >
+		<div style="display:flex; justify-content:center; align-items:center; text-align: center;" >
+    		<FORM class="form-inline" role="form" METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" >
         		<b>輸入員工編號 (如1):</b>
-        		<input type="text" name="empID" value="${param.empID}"><font color=red>${errorMsgs.empID}</font>
+        		<input class="form-control" type="text" name="empID" value="${param.empID}" style="width:200px; text-align: center;" >
+        		<font color=red>${errorMsgs.empID}</font>
         		<input type="hidden" name="action" value="getOne_For_Display">
-        		<input type="submit" value="送出">
+        		&emsp;&emsp;
+        		<button type="submit" class="btn btn-info btn-sm" value="送出">查詢</button>
+<!--         	<input type="submit" value="送出"> -->
     		</FORM>
     	</div>
   		<hr>
-  		<div style="text-align: center;">
+  		<div style="display:flex; justify-content:center; align-items:center; text-align: center;">
   			<div style= "margin:0 auto;">
-  			<div>
-  		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/employee/EmpServlet.do" name="form1">
-        	<b><font color=blue>多項選擇查詢:</font></b> <br>
-        	<b>輸入員工編號:</b>
-        	<input type="text" name="empID">
-           
-       		<b>輸入員工姓名:</b>
-      		<input type="text" name="empName">	
-       
-       		<b>輸入員工職位:</b>
-       		<select size="1" name="jobID" >
-          		<option value="">
-         		<c:forEach var="jobVO" items="${jobSvc.all}" > 
-          			<option value="${jobVO.jobID}">${jobVO.jobName}
-         		</c:forEach>   
-       		</select>
-           
-       		<b>雇用日期:</b>
-	   		<input name="empHiredate" id="f_date1" type="text">
-		        
-        	<input type="submit" value="送出">
-        	<input type="hidden" name="action" value="getEmpListCompositeQuery">
-        	</div>
-     	</FORM>
-     	</div> 
+  				<div>
+  					<FORM class="form-inline" METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/employee/EmpServlet.do" name="form1">
+        				<b><font color=blue>多項選擇查詢:</font></b> <br>
+        				<b>輸入員工編號:</b>
+        				<input class="form-control" type="text" name="empID" style="display:inline;">
+           				&emsp;
+       					<b>輸入員工姓名:</b>
+      					<input class="form-control" type="text" name="empName" style="display:inline;">	
+       					&emsp;
+       					<b>輸入員工職位:</b>
+       					<select size="1" name="jobID" class="form-control">
+          					<option value="">
+         					<c:forEach var="jobVO" items="${jobSvc.all}" > 
+          						<option value="${jobVO.jobID}">${jobVO.jobName}
+         					</c:forEach>   
+       					</select>
+          				&emsp;
+       					<b>雇用日期:</b>
+	   					<input class="form-control" name="empHiredate" id="f_date1" type="text">
+<!--         			<input type="submit" value="送出"> -->
+						&emsp;&emsp;
+        				<button type="submit" class="btn btn-info btn-sm" id="submit456" value="送出">多項選擇查詢</button>
+        				<input type="hidden" name="action" value="getEmpListCompositeQuery">
+        			</FORM>
+        		</div>
+     		</div> 
      	</div>
   		<hr>
 		<table class = "dataTable table-striped thead-primary" style="width: 95%">
@@ -120,14 +125,14 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 				<th style="width: 5% ; ">員工<br>編號</th>
 				<th style="width: 7% ;">員工<br>姓名</th>
 				<th style="width: 10% ;">帳號</th>
-				<th style="width: 10% ;">密碼</th>
+				<th style="width: 5% ;">密碼</th>
 				<th style="width: 5% ;">權限</th>
 				<th style="width: 10% ;">員工<br>電話</th>
 				<th>員工<br>地址</th>
 				<th style="width: 10% ;">員工<br>職位</th>
 				<th style="width: 10% ;">員工<br>入職日期</th>
 				<th style="width: 5% ;">修改</th>
-				<th style="width: 5% ; display: none">刪除</th>
+<!-- 				<th style="width: 5% ; display: none">刪除</th> -->
 			</tr>
 			<div style="text-align: center">
 			<%@ include file="../../back-end/tool/page1.file"%>
@@ -137,7 +142,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 					<td style="width: 5% ;">${empVO.empID}</td>
 					<td style="width: 7%">${empVO.empName}</td>
 					<td style="width: 10%">${empVO.empAccount}</td>
-					<td style="width: 10%"><input style="border:none; background:none;text-align:center;" type="password" value="${empVO.empPassword}"></td>
+					<td style="width: 5%"><input style="width: 40%; border:none; background:none;text-align:center;" type="password" value="${empVO.empPassword}"></td>
 					<td style="width: 5%">${(empVO.empPermission == "0") ? "正常" : "停權"}</td>
 					<td style="width: 10%">${empVO.empPhone}</td>
 					<td>${empVO.empAddress}</td>
@@ -145,18 +150,22 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 <%-- 					<td>${empVO.emp_job}-[${empVO.jobVO.job_name}]</td> --%>
 					<td style="width: 10% ; ">${empVO.empHiredate}</td>
 					<td style="width: 5% ; ">
+						<div>
 						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;">
-							<input type="submit" value="修改"> <input type="hidden" name="empID" value="${empVO.empID}"> <input type="hidden" name="action" value="getOne_For_Update">
+<!-- 							<input class="btn btn-info btn-sm" type="submit" value="修改"> -->
+							<button  type="submit" class="btn-info " value="修改">修改</button>
+							<input type="hidden" name="empID" value="${empVO.empID}">
+							<input type="hidden" name="action" value="getOne_For_Update">
 						</FORM>
+						</div>
 					</td>
-					<td style="width: 5% ; height:100px ; display: none">
-						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;">
-<!-- 							        "submit" -->
-							<input type="hidden" value="刪除" disabled="disabled">
-							<input type="hidden" name="empID" value="${empVO.empID}" >
-							<input type="hidden" name="action" value="delete">
-						</FORM>
-					</td>
+<!-- 					<td style="width: 5% ; height:100px ; display: none"> -->
+<%-- 						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;"> --%>
+<!-- 							<input type="submit" value="刪除" disabled="disabled"> -->
+<%-- 							<input type="hidden" name="empID" value="${empVO.empID}" > --%>
+<!-- 							<input type="hidden" name="action" value="delete"> -->
+<!-- 						</FORM> -->
+<!-- 					</td> -->
 				</tr>
 			</c:forEach>
 		</table>

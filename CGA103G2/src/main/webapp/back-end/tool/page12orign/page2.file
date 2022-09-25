@@ -15,17 +15,12 @@
 <br><br> 	
 
   <%if (pageNumber>1) {%>
-  <div style="display:flex; justify-content:center; align-items:center; text-align: center;" >
-    <FORM class="form-inline" METHOD="post" ACTION="<%=request.getRequestURI()%>">   
-       <select class="form-control" size="1" name="whichPage">
+    <FORM METHOD="post" ACTION="<%=request.getRequestURI()%>">   
+       <select size="1" name="whichPage">
          <%for (int i=1; i<=pageNumber; i++){%>
             <option value="<%=i%>">跳至第<%=i%>頁
          <%}%> 
        </select>
-       &emsp;&emsp;
-       <input class="btn-info btn-sm" style="width: 70px ; height:30px ;" type="submit" value="確定" >  
+       <input type="submit" value="確定" >  
     </FORM>
-  </div>
   <%}%>
-  
-<br>

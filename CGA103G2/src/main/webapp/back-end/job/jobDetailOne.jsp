@@ -78,7 +78,7 @@ pageContext.setAttribute("list", list);
 				<td>${jobVO.jobName}</td>
 				<td>
 					<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/job/JobServlet.do" style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden" name="jobID" value="${jobVO.jobID}"> <input type="hidden" name="action" value="getOne_For_Update">
+						<input class="btn btn-info btn-sm" type="submit" value="修改"> <input type="hidden" name="jobID" value="${jobVO.jobID}"> <input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>
 <!-- 				<td> -->

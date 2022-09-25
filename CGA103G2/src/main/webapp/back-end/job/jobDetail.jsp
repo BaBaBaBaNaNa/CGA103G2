@@ -26,6 +26,7 @@
 <link href="${pageContext.request.contextPath}/back-assets/css/jquery-ui.min.css" rel="stylesheet">
 <!-- Page Specific CSS (Slick Slider.css) -->
 <link href="${pageContext.request.contextPath}/back-assets/css/slick.css" rel="stylesheet">
+
 <link href="${pageContext.request.contextPath}/back-assets/css/datatables.min.css" rel="stylesheet">
 <!-- Costic styles -->
 <link href="${pageContext.request.contextPath}/back-assets/css/style.css" rel="stylesheet">
@@ -50,7 +51,7 @@
 	<!-- ----- ----- ----- 最左邊的 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
-	<main class="body-content"padding-right: 0 px;>
+	<main class="body-content">
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
 		<%@ include file="../../back-end/tool/UpSideBar.file"%>
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
@@ -69,16 +70,19 @@
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 		<h2>查看職位</h2>
 		<hr>
-		<div style="text-align: center;">
-			<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/job/JobServlet.do">
+		<div style="display:flex; justify-content:center; align-items:center; text-align: center;">
+			<FORM class="form-inline" METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/job/JobServlet.do">
 				<b>輸入職稱編號 (如1):</b> 
-				<input type="text" name="jobID" value="${param.jobID}"><font color=red>${errorMsgs.jobID}</font> 
+				<input class="form-control" type="text" name="jobID" value="${param.jobID}" style="width:200px; text-align: center;">
+				<font color=red>${errorMsgs.jobID}</font> 
 				<input type="hidden" name="action" value="getOne_For_Display"> 
-				<input type="submit" value="送出">
+				&emsp;&emsp;
+				<button type="submit" class="btn btn-info btn-sm" value="送出">查詢</button>
+<!-- 				<input type="submit" value="送出"> -->
 			</FORM>
     	</div>
   		<hr>
-		<table style="width: 35% ;">
+		<table class = "dataTable table-striped thead-primary" style="width: 35% ;">
 			<tr>
 				<th style="width: 5% ;">編號</th>
 				<th style="width: 20% ;">職務<br>名稱</th>
@@ -94,17 +98,19 @@
 					<td>${jobVO.jobName}</td>
 					<td>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/job/JobServlet.do" style="margin-bottom: 0px;">
-							<input type="submit" value="修改"> <input type="hidden" name="jobID" value="${jobVO.jobID}"> <input type="hidden" name="action" value="getOne_For_Update">
+							<button type="submit" class="btn-info " value="修改">修改</button>
+<!-- 							<input type="submit" value="修改">  -->
+							<input type="hidden" name="jobID" value="${jobVO.jobID}"> 
+							<input type="hidden" name="action" value="getOne_For_Update">
 						</FORM>
 					</td>
-					<td style="display: none ;">
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/job/JobServlet.do" style="margin-bottom: 0px;">
-<!-- 							        "submit" -->
-							<input type="hidden" value="刪除" disabled="disabled">
-							<input type="hidden" name="jobID" value="${jobVO.jobID}">
-							<input type="hidden" name="action" value="delete">
-						</FORM>
-					</td>
+<!-- 					<td> -->
+<%-- 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/job/JobServlet.do" style="margin-bottom: 0px;"> --%>
+<!-- 							<input type="submit" value="刪除" disabled="disabled"> -->
+<%-- 							<input type="hidden" name="jobID" value="${jobVO.jobID}"> --%>
+<!-- 							<input type="hidden" name="action" value="delete"> -->
+<!-- 						</FORM> -->
+<!-- 					</td> -->
 				</tr>
 			</c:forEach>
 		</table>
