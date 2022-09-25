@@ -55,10 +55,11 @@ public class MemLoginServlet extends HttpServlet {
 		admin.setMemPassword(memPassword);
 		MemDAO dao = new MemDAO();
 		boolean res = dao.loginAdmin(admin);
+		boolean resPer = dao.loginAdminPermission(admin);
 		MemVO test = dao.findByMemAccount(memAccount);
-		// 登入驗證，如果驗證成功，則設定一個屬性名為“LoginSessionName”值為使用者名稱的session，用於BackFilterServlet驗證是否登入過
+		// 登入驗證，如果驗證成功，則設定一個屬性名為“LoginSessionName”值為使用者名稱的session，用於FrontBackFilterServlet驗證是否登入過
 		// 驗證的話還是會用SessionId去做驗證
-		if (res) {
+		if ((res) && (resPer)) {
 			request.getSession().setAttribute("LoginSessionName", memAccount);
 			request.getSession().setAttribute("LoginSessionName1", memId);
 			request.getRequestDispatcher("../../FrontIndex.jsp").forward(request, response);
@@ -69,11 +70,18 @@ public class MemLoginServlet extends HttpServlet {
 			System.out.println(request.getSession().getAttribute("memID"));
 
 			return;
-		} else {
+		}
+		else if(!(res)){
 			request.setAttribute("errorMessage", "帳號或者密碼錯誤");
-			request.getRequestDispatcher("/front-end/member/members.jsp").forward(request, response);
+			request.getRequestDispatcher("/front-end/member/members2.jsp").forward(request, response);
+			
 			return;
-//			response.sendRedirect("BackLogin.jsp");
+
+		}
+		else if(!(resPer)) {
+			request.setAttribute("errorMessage", "帳號已停權,詳情請洽管理員");
+			request.getRequestDispatcher("/front-end/member/members2.jsp").forward(request, response);
+			return;
 		}
 	}
 }

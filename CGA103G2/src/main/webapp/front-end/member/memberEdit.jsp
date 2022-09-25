@@ -45,6 +45,7 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 
 
 <body>
+
 	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 	
 	<!-- ----- ----- ----- 最上面 選擇列 start ----- ----- ----- -->
@@ -60,11 +61,11 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
 	<main class="body-content"padding-right: 0 px;>
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
-		<%@ include file="../../back-end/tool/UpSideBar.file"%>
+		
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
-		<%@ include file="../../back-end/tool/Upicon.file"%>
+		
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
@@ -148,6 +149,16 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 			</div>
 		</form>
 	</main>
+
+
+<!-- 測試修改密碼用 -->
+<!-- 			<div> -->
+<!-- 				<input type="hidden" name="action" value=updateMemPW> <input -->
+<%-- 					type="hidden" name="memID" value="<%=memVO.getMemID()%>"> <input --%>
+<!-- 					type="submit" value="送出修改"> -->
+<!-- 			</div> -->
+<!-- 		</form> -->
+<!-- 	</main> -->
 
 
 	<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->

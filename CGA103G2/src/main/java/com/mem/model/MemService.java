@@ -3,6 +3,8 @@ package com.mem.model;
 import java.util.List;
 
 
+
+
 public class MemService {
 
 	private MemDAO_interface dao;
@@ -91,4 +93,23 @@ public class MemService {
 	public MemVO getOwnMem(String memAccount) {
 		return dao.findByMemAccount(memAccount);
 	}
+	
+	public void updateMemPW(String memAccount, String memPassword) {
+		MemVO memVO = new MemVO();
+		
+		memVO.setMemPassword(memPassword);
+		dao.updateMemPW(memAccount, memPassword);
+	}
+//	
+//	public MemVO updatePassword(String memPassword,Integer memID) {
+//		
+//		MemVO memVO = new MemVO();
+//		memVO.setMemPassword(memPassword);
+//		memVO.setMemID(memID);
+//		
+//		dao.upatePassword(memVO);
+//		return memVO;
+//	}
+////	
+	
 }

@@ -45,7 +45,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/front-end/member/members.jsp">會員中心</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/front-end/member/members2.jsp">會員中心</a>
                     </li>
                     <c:if test="${LoginSessionName != null }">
                     <li class="nav-link"><a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

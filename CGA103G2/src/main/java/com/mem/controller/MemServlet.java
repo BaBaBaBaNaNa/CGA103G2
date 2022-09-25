@@ -14,6 +14,9 @@ import com.emp.model.*;
 import com.mem.model.MemDAO;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
+
+import mail.MailService;
+
 import com.emp.controller.*;
 
 public class MemServlet extends HttpServlet {
@@ -215,6 +218,18 @@ public class MemServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 		// ----- ----- ----- getOne_For_Update end ----- ----- -----
+		
+		// ----- ----- ----- updateMemPWe start ----- ----- -----
+		if("updateMemPW".equals(action)) {
+			String memPassword = req.getParameter("memPassword");
+			System.out.println(memPassword);
+			MemVO memVO = (MemVO)req.getSession().getAttribute("memVO");
+			String memAccount = memVO.getMemAccount();
+			new MemService().updateMemPW(memAccount, memPassword);
+			res.getWriter().println("成功更新密碼！");
+			return;
+		}
+		// ----- ----- ----- updateMemPW end ----- ----- -----
 		
 		// ----- ----- ----- getOne_For_Update_mem start ----- ----- -----
 				if ("getOne_For_Update_mem".equals(action)) { // 來自listAllMem.jsp的請求
@@ -521,9 +536,190 @@ public class MemServlet extends HttpServlet {
 					successView.forward(req, res);
 				}
 				// ----- ----- ----- getMemPersonalData end ----- ----- -----
-			}
+			
+				// ----- ----- ----- forgetPassword start ----- ----- -----
+//	 if("forgetPassword".equals(action)) {
+//     	
+//     	List<String> errorMsgs = new LinkedList<String>();
+//     	req.setAttribute("errorMsgs", errorMsgs);
+//     	try {
+//     		//請求
+//     		String memEmail = req.getParameter("memEmail");
+//				MemService memSvc = new MemService();
+//				
+//				List<MemVO> listall = memSvc.getAll();
+//				MemVO memVO = null;
+//				for (MemVO memVOList : listall) {
+//					if (memVOList.getMemEmail().equals(memEmail)) {
+//						memVO = memSvc.getOwnMem(memVOList.getMemAccount());
+//						break;
+//					}else if(!memVOList.getMemEmail().equals(memEmail)){
+//						errorMsgs.add("信箱無註冊資料，請重新輸入");
+//					}
+//				}
+//				System.out.println(memVO.getMemAccount());
+//				MailService mail = new MailService();
+//				String authCode = mail.getRandom();
+//				
+//				memSvc.updateMemPW(authCode, memVO.getMemID());
+//				
+//				String subject = "臨時密碼";
+//				String message = "臨時密碼:" + authCode + "請登入後修改密碼";
+//			
+//
+//				try {
+//					mail.sendMail(memEmail, subject, message);
+//		            res.sendRedirect(req.getContextPath() + "/front-end/member/member.jsp");
+//				}catch(Exception e) {
+//					e.printStackTrace();
+//				}
+//     	}catch(Exception e) {
+//     		errorMsgs.add(e.getMessage());
+//     		RequestDispatcher failureView = req.getRequestDispatcher("/front-end/member/forgetPassword.jsp");
+//     		failureView.forward(req, res);
+//     	}
+//     	
+//     	
+//     }
+//	
 
+	// ----- ----- ----- forgetPassword stop ----- ----- -----
+	
+	// ----- ----- ----- insert for member start ----- ----- -----
+	
+	if ("insertForMem".equals(action)) { // 來自memberAdd.jsp的請求
+		List<String> errorMsgs = new LinkedList<String>();
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
+		/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+		// memName
+		String memName = req.getParameter("memName");
+		String memNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+		if (memName == null || memName.trim().length() == 0) {
+			errorMsgs.add("member姓名: 請勿空白");
+		} else if (!memName.trim().matches(memNameReg)) { // 以下練習正則(規)表示式(regular-expression)
+			errorMsgs.add("member姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+		}
 
+		String memAccount = req.getParameter("memAccount").trim();
+		if (memAccount == null || memAccount.trim().length() == 0) {
+			errorMsgs.add("帳號請勿空白");
+		}
+		String memPassword = req.getParameter("memPassword").trim();
+		if (memPassword == null || memPassword.trim().length() == 0) {
+			errorMsgs.add("密碼請勿空白");
+		}
 
+		String memGender = req.getParameter("memGender").trim();
+		if (memGender == null || memGender.trim().length() == 0) {
+			errorMsgs.add("性別請勿空白");
+		}
+
+		String memPermission = req.getParameter("memPermission").trim();
+		if (memPermission == null || memPermission.trim().length() == 0) {
+			errorMsgs.add("權限請勿空白");
+		}
+
+		String memPhone = req.getParameter("memPhone").trim();
+		if (memPhone == null || memPhone.trim().length() == 0) {
+			errorMsgs.add("電話請勿空白");
+		}
+
+		String memEmail = req.getParameter("memEmail").trim();
+		if (memEmail == null || memEmail.trim().length() == 0) {
+			errorMsgs.add("信箱請勿空白");
+		}
+
+		String memAddress = req.getParameter("memAddress").trim();
+		if (memAddress == null || memAddress.trim().length() == 0) {
+			errorMsgs.add("地址請勿空白");
+		}
+		
+		String county = req.getParameter("county");
+		String district = req.getParameter("district");
+		System.out.println(county);
+		System.out.println(district);
+
+		java.sql.Date memBirthday = null;
+		try {
+			memBirthday = java.sql.Date.valueOf(req.getParameter("memBirthday").trim());
+		} catch (IllegalArgumentException e) {
+			memBirthday = new java.sql.Date(System.currentTimeMillis());
+			errorMsgs.add("請輸入日期!");
+		}
+
+		MemVO memVO = new MemVO();
+
+		memVO.setMemName(memName);
+		memVO.setMemAccount(memAccount);
+		memVO.setMemPassword(memPassword);
+		memVO.setMemGender(Integer.parseInt(memGender));
+		memVO.setMemPhone(memPhone);
+		memVO.setMemEmail(memEmail);
+		memVO.setMemAddress(memAddress);
+		memVO.setMemBirthday(memBirthday);
+		memVO.setMemPermission(Integer.parseInt(memPermission));
+//				memVO.setMemBirthday(LocalDateTime.parse(memBirthdat));	
+		
+		
+		
+		
+		  //mail 重複驗證
+		   MemService memberSvc = new MemService();
+		   List<MemVO> listall = memberSvc.getAll();
+		   for (MemVO memVOList : listall) {
+		    if (memVOList.getMemEmail().equals(memEmail)) {
+//		     errorMsgs.add("信箱已被註冊，請重新輸入");
+		    	req.setAttribute("errorMessage", "mail重複");
+		    }
+		   }
+
+		// Send the use back to the form, if there were errors
+		if (!errorMsgs.isEmpty()) {
+			req.setAttribute("memVO", memVO); // 含有輸入格式錯誤的empVO物件,也存入req
+			RequestDispatcher failureView = req
+					.getRequestDispatcher("/front-end/member/addMem.jsp");
+			failureView.forward(req, res);
+			
+			return;
+		}
+		/*************************** 2.開始新增資料 ***************************************/
+		MemService memSvc = new MemService();
+		memVO = memSvc.addMem(memName, memAccount, memPassword, Integer.parseInt(memPermission),
+				Integer.parseInt(memGender), memPhone, memAddress, memEmail, memBirthday);
+
+		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+		String url = "/FrontIndex.jsp";
+		RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+		successView.forward(req, res);
 	}
+	
+	// ----- ----- ----- insert for member stop ----- ----- ------
+	
+	
+	
+	
+	
+	
+	
+	if("sendEmailForNewPW".equals(action)) {
+		String to = req.getParameter("memEmail");
+		System.out.println(to);	
+		HttpSession session = req.getSession();
+		MemVO memvo = (MemVO)session.getAttribute("memvo");
+		String memAccount = memvo.getMemAccount();
+		String subject = "重設您密碼";
+		String messageText="<h3>"+memAccount+"您好，我們已經收到您重設密碼的申請。請點擊<a href=\"http://35.194.147.13/CFA101G4/front-end/setNewPW.html\">連結</a>，將會為您的帳戶重新設置新密碼。或是複製以下連結至您的瀏覽器開啟：<br>http://35.194.147.13/CFA101G4/front-end/setNewPW.html<br>如果您沒有申請此重設密碼的需求，請立刻聯絡我們的天堂鳥客服團隊</h3>";
+		sendMail sm = new sendMail(to, subject, messageText);
+		Thread t1 = new Thread(sm);
+		t1.start();
+		res.getWriter().write("更改密碼信已寄出！");
+		return;
+	}
+	
+	
+	}
+	
+}
 

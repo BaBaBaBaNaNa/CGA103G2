@@ -115,7 +115,11 @@ button {
 .form-label {
   color: var(--p-color);
   font-weight: var(--font-weight-semibold);
+  
 }
+
+
+
 
 a {
   color: var(--secondary-color);
@@ -139,6 +143,7 @@ a:hover {
 .section-padding {
   padding-top: 8rem;
   padding-bottom: 8rem;
+  text-align: center;
 }
 
 b,
@@ -263,6 +268,10 @@ strong {
 
 .navbar-toggler .navbar-toggler-icon:after {
   top: 8px;
+}
+
+#username_input{
+    text-align: center;
 }
 
 
@@ -830,6 +839,7 @@ strong {
   .section-padding {
     padding-top: 5rem;
     padding-bottom: 5rem;
+    text-align:center;
   }
 
   .navbar {
