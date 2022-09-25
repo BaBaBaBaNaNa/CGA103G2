@@ -304,7 +304,7 @@
 									<div class="col-lg-4 col-12 ms-auto">
 										<input type="hidden" name="action" value="insert">
 
-										<button type="submit" class="form-control" id="sub_btn">送出</button>
+										<button type="button" class="form-control" id="sub_btn">送出</button>
 									</div>
 								</form>
 							</div>
@@ -330,6 +330,9 @@
 			<script src="front-assets/js/bootstrap-datepicker.zh-TW.min.js"></script>
 
 			<script>
+				
+				var rsvtForm = document.getElementById('rsvt_form');
+				var sub_btn = document.getElementById('sub_btn');
 				var dp1 = document.getElementById('dp1');
 				var period = document.getElementById('period');
 				const dateUrl = '/CGA103G2/back-end/reservation_ctrl/Date';
@@ -360,7 +363,11 @@
 						});
 						})
 							console.log(arr);
-				
+				sub_btn.addEventListener('click',() => {
+					if(confirm('確認送出？')){
+						rsvtForm.submit();
+					}
+				})
 				function checkPeriod(){
 					fetch(periodUrl,{
 						method: 'post',
