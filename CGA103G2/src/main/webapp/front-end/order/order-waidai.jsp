@@ -68,7 +68,7 @@ th, td {
 
 <body>
 	<!-- ----- ----- ----- 最上面 選擇列 start ----- ----- ----- -->
-	<%@ include file="../../front-end/tool/UpSideBar.file"%>
+	<%@ include file="../../front-end/tool/UpSideBarNoRSVT.file"%>
 	<!-- ----- ----- ----- 最上面 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
@@ -196,10 +196,13 @@ th, td {
 
 		</div>
 		<!-- container ending -->
+        <!-- ----- ----- ----- 頁面 底部 start ----- ----- ----- -->
+	<%@ include file="../../front-end/tool/PageFooter.file"%>
+    <!-- ----- ----- ----- 頁面 底部 end ----- ----- ----- -->
 
 	</footer>
 	<!-- ----- ----- ----- 底部 end ----- ----- ----- -->
-
+    <!-- ----- ----- ----- 跳出預先訂位頁面 start ----- ----- ----- -->
 	<!-- ----- ----- ----- 跳出預先訂位頁面 start ----- ----- ----- -->
 	<div class="modal fade" id="BookingModal" tabindex="-1"
 		aria-labelledby="BookingModal" aria-hidden="true">
@@ -282,6 +285,7 @@ th, td {
 		</div>
 	</div>
 	<!-- ----- ----- ----- 跳出預先訂位頁面 end ----- ----- ----- -->
+    <!-- ----- ----- ----- 跳出預先訂位頁面 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- Script Start ----- ----- ----- -->
 	<script src="../../front-assets/js/jquery.min.js"></script>

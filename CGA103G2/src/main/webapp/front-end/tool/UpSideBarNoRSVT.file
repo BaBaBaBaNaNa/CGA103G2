@@ -47,7 +47,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/front-end/member/members.jsp">會員中心</a>
                     </li>
-                    <c:if test="${LoginSessionName != null }">
+                     <c:if test="${LoginSessionName != null }">
                     <li class="nav-link"><a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     	<span class="text-disabled" style="text-decoration:underline; color:red; background-color: white;"><c:if test="${LoginSessionName != null }">會員 : <%= request.getSession().getAttribute("LoginSessionName") %></c:if>
 				    																											   <c:if test="${LoginSessionName == null }">會員 : 未登入</c:if>
@@ -69,9 +69,8 @@
                 </ul>
             </div>
             <div class="d-none d-lg-block">
-                <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#BookingModal">訂位</button>
+                <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#BookingModal" onclick="window.location.href='${pageContext.request.contextPath}/FrontIndex.jsp'">訂位</button>
             </div>
-
         </div>
     </nav>
 	<!-- ----- ----- ----- 最上面 選擇列 end ----- ----- ----- -->

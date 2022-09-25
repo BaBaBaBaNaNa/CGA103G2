@@ -3,6 +3,7 @@ var shoppingCart = (function() {
 	// Private 相關方法設置
 	// =============================
 	cart = [];
+	var Type ;
 
 	// 建構子 品項名 價格 數量
 	function Item(name, price, count , id) {
@@ -26,7 +27,6 @@ var shoppingCart = (function() {
 	if (sessionStorage.getItem("shoppingCart") != null) {
 		loadCart();
 	}
-
 
 	// =============================
 	// Public 相關方法設置
@@ -137,7 +137,6 @@ var shoppingCart = (function() {
 	return obj;
 })();
 
-
 // *****************************************
 // 監聽事件
 // ***************************************** 
@@ -208,6 +207,35 @@ $('.show-cart').on("change", ".item-count", function(event) {
 	displayCart();
 });
 
+//監控checkbox 使0:外帶, 1:外送, 2: 內用 單選 
+$('#checkboxGroup li input').click(function(){
+	if($(this).prop('checked')){
+		
+		$('#checkboxGroup li input:checkbox').prop('checked',false);
+		$(this).prop('checked',true);
+		//console.log($(this).val());
+		if(!(JSON.parse(sessionStorage.getItem('Type')) === "0") || (JSON.parse(sessionStorage.getItem('Type')) === "1") || (JSON.parse(sessionStorage.getItem('Type')) === "2")){
+			sessionStorage.setItem('Type', JSON.stringify($(this).val()));
+		}
+		if($(this).val() === "1"){
+			$("#ordtext1").prop('disabled',false);
+//			document.getElementById("ordtext1").disabled=false; 
+		}
+		else{
+			$("#ordtext1").prop('disabled',true);
+		}
+	}
+	else{
+		sessionStorage.setItem('Type', JSON.stringify("999")); 
+		$("#ordtext1").prop('disabled',true);
+	}
+});
+
+//監聽ordtext1打字
+$('#ordtext1').on('input', function () {
+	sessionStorage.setItem('ordaddress', JSON.stringify($('#ordtext1').val()));
+});
+
 var MyPoint = "/front-end/shopcart/ShopCartAddSuccess.jsp";
 var host = window.location.host;
 var path = window.location.pathname;
@@ -216,25 +244,32 @@ var endPointURL = "http://" + host + webCtx + MyPoint;
 
 // 當要把購物車送出產生訂單時
 $('#submit2').on("click",  function(event) {
-	console.log(cart);
+	var orderType = JSON.parse(sessionStorage.getItem('Type'));
+	var ordaddress = JSON.parse(sessionStorage.getItem('ordaddress'));
+//	console.log(JSON.parse(sessionStorage.getItem('Type')));
+//	console.log(cart);
 	if(JSON.stringify(cart) === '{}' || JSON.stringify(cart) === '' || JSON.stringify(cart) === '[]'){
 //		console.log("請至少點一份餐點");
 		alert("請至少點一份餐點");
+	}
+	else if(!(JSON.parse(sessionStorage.getItem('Type')) === "0") && !(JSON.parse(sessionStorage.getItem('Type')) === "1") && !(JSON.parse(sessionStorage.getItem('Type')) === "2")){
+		alert("請選擇需要 外帶 外送 內用");
 	}
 	else{
 	  fetch('ShopCartServlet.do', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-		cart
+		cart,
+		orderType,
+		ordaddress
       }),
     })
     .then(resp => window.location.href='ShopCartAddSuccess.jsp');
 	}
 });
+
+
+// ===== ===== ===== ===== ===== 執行方法 ===== ===== ===== ===== =====
 // 執行顯示購物車
 displayCart();
-
-
-
-

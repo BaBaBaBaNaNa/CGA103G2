@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.taglibs.standard.tag.common.fmt.ParseDateSupport;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,17 +39,16 @@ public class ShopCartServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		action = "insertInside";
 
-		// ----- ----- ----- insertInside start ----- ----- -----
-		if ("insertInside".equals(action)) {
+		HttpSession session = req.getSession();
+
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			// ----- 產生內用訂單 -----
 
-			// 訂單種類 0:外帶, 1:外送, 2: 內用
+			// 訂單種類 0:外帶, 1:外送, 2: 內用 測試用
 			Integer ordersType = 2;
 
 			// 訂單狀態 0:完成 , 1:未完成 , 2: 退回
@@ -80,11 +80,25 @@ public class ShopCartServlet extends HttpServlet {
 			
 			JSONArray jArray = null;
 			
+			Integer memID = 1;
+			if(!(session.getAttribute("memID") == null)) {
+				memID = (Integer)session.getAttribute("memID");
+			}
+			System.out.println("memID" + memID);
 			ArrayList PriceArrayList = new ArrayList();
 			ArrayList NameArrayList = new ArrayList();
 			ArrayList CountArrayList = new ArrayList();
 			ArrayList idArrayList = new ArrayList();
+			String getorderType = new String();
+			String ordersDestination = new String();
 			try {
+				//取得訂餐類型 外送 外帶 內用
+				getorderType = Jsonobject.get("orderType").toString().replace("\"", "");
+//				System.out.println("getorderType ="+getorderType);
+				
+				//取得外送地址
+				ordersDestination = Jsonobject.get("ordaddress").toString().replace("\"", "");
+				
 				// cart丟到 jArray 處理
 				jArray = new JSONArray(Jsonobject.get("cart").toString());
 				// 輸出看看是否成功
@@ -114,8 +128,6 @@ public class ShopCartServlet extends HttpServlet {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-
-			System.out.println("有執行10");
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/shopcart/ShopCart.jsp");
 				failureView.forward(req, res);
@@ -124,13 +136,11 @@ public class ShopCartServlet extends HttpServlet {
 			/*************************** 2.開始新增資料 ***************************************/
 			// 新增訂單
 			ShopCartService shopcartSvc = new ShopCartService();
-			shopcartSvc.addInsideOrder(ordersType, ordersStatus, ordersBuildDate,PriceArrayList,NameArrayList,CountArrayList,idArrayList);
+			shopcartSvc.addInsideOrder(memID,Integer.parseInt(getorderType),ordersStatus,ordersDestination, ordersBuildDate,PriceArrayList,NameArrayList,CountArrayList,idArrayList);
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			req.setAttribute("shopcartVO", shopcartVO); // 資料庫update成功後,正確的的empVO物件,存入req
 			String url = "/front-end/shopcart/ShopCartAddSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 		}
-		// ----- ----- ----- insertInside end ----- ----- -----
-	}
 }
