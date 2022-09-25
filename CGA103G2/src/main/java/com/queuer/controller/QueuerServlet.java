@@ -112,10 +112,27 @@ public class QueuerServlet extends HttpServlet {
 		
 
 		// 關閉系統按鈕觸發清除redis資料
-		if ("openOrClose".equals(action)) {
+		if ("close".equals(action)) {
 			queuer.closeShop();
 			try {
 				output.put("closeShop", "success");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// 開啟系統按鈕 設定開啟狀態
+		if ("open".equals(action)) {
+			queuer.openShop();
+			try {
+				output.put("openShop", "success");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// 開啟系統按鈕 設定開啟狀態
+		if ("getSystemOpen".equals(action)) {
+			try {
+				output.put("system", queuer.getSystemOpen());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

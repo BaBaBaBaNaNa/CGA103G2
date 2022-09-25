@@ -28,13 +28,6 @@
 <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath}/favicon.ico">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 
-<style type="text/css">
-
-#manageArea {
-	border : 1px solid
-	color : red;
-}
-</style>
 </head>
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
@@ -69,12 +62,20 @@
 		
 
 		<div class="ms-content-wrapper">
-		<button type="button" class="btn btn-danger" id="openOrCloseBtn" onclick="openOrCloseBtn">清空候位</button>
+		<button type="button" class="btn btn-danger" id="openBtn" onclick="openBtn">
+    開啟候位系統
+  </button>
+		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+    關閉候位系統
+  </button>
+ 
 			<div class="row">
+			
 				<div class="col-md-12">
 					<div class="alert alert-success" role="hidden" style="display:none">
 					</div>
 				</div>
+				
 				<div class="col-xl-6 col-md-12">
 					<div class="ms-panel ms-panel-fh">
 						<div class="ms-panel-header">
@@ -108,7 +109,7 @@
 									<div id="imagesSlider" class="ms-image-slider carousel slide" data-ride="carousel" >
 
 										<div>
-										<button type="button" class="btn btn-danger" id="getNextNOBtn" onclick="getNextNOBtn">下一號</button>
+										<button type="button" class="btn btn-danger" id="getNextNOBtn" onclick="getNextNOBtn" disabled="disabled">下一號</button>
 										<button type="button" class="btn btn-danger" id="doSeatedListBtn" onclick="doSeatedListBtn" disabled="disabled">入座</button>
 										<button type="button" class="btn btn-danger" id="doOverListBtn" onclick="doOverListBtn" disabled="disabled">過號</button>
 										</div>
@@ -149,6 +150,26 @@
 				</div>
 			</div>
 		</div>
+		  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">關閉候位系統</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          這將關閉候位系統，並將全部候位資料清空，您是否要繼續呢？
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary"  data-dismiss="modal" id="closeBtn" onclick="closeBtn" >確定</button>
+        </div>
+      </div>
+    </div>
+  </div>
 		
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
@@ -179,10 +200,7 @@
 			
 	        $("#getNextNOBtn").click(function(){
 	        	
-	    		$("#doSeatedListBtn").attr("disabled", false);
-	    		$("#doOverListBtn").attr("disabled", false);
-	    		$("#getNextNOBtn").attr("disabled", true);
-	        	
+
 
 	            $.ajax({
 
@@ -195,6 +213,11 @@
 
 	                 success : function(res){
 	                	 
+	                		$("#getNextNOBtn").attr("disabled", true);
+	        	    		$("#doSeatedListBtn").attr("disabled", false);
+	        	    		$("#doOverListBtn").attr("disabled", false);
+
+	                	 
 	                	 showCurrentNO(res)
 	                	 showNextNO(res)
 	                	 
@@ -203,7 +226,7 @@
 
 	                 error:function(xhr, ajaxOptions, thrownError){
 
-	                     alert(xhr.status+"\n"+thrownError);
+	                     alert('尚未有人候位，先等等！');
 	                 }
 
 	             });
@@ -266,16 +289,17 @@
 
 	        });
 	        
-	        $("#openOrCloseBtn").click(function(){
+	        $("#closeBtn").click(function(){
 					localStorage.clear()	
 	        		window.location.reload()
+	        	
 	            $.ajax({
 
 
 	                 url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
 
 	                 data: {
-	                	 action:  "openOrClose", 
+	                	 action:  "close", 
 	                 },
 
 	                 success : function(res){
@@ -290,6 +314,31 @@
 	             });
 
 	        });
+	        
+	        $("#openBtn").click(function(){
+        	
+	        	$("#getNextNOBtn").attr("disabled", false);
+            $.ajax({
+
+
+                 url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
+
+                 data: {
+                	 action:  "open", 
+                 },
+
+                 success : function(res){
+                	 console.log(JSON.parse(res));
+                 },
+
+                 error:function(xhr, ajaxOptions, thrownError){
+
+                     alert(xhr.status+"\n"+thrownError);
+                 }
+
+             });
+
+        });
 
 	     });  
 	</script>
