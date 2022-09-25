@@ -190,7 +190,7 @@ public class MealsCategoryServlet extends HttpServlet{
 			mealsCategoryVO = MealsCategorySvc.addMealsCategory(MealsCategory);
 			/*************************** 2.開始新增資料***************************************/
 			req.setAttribute("mealsCategoryVO", mealsCategoryVO);
-			MealsCategorySvc.addMealsCategory(MealsCategory);
+//			MealsCategorySvc.addMealsCategory(MealsCategory);
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = "/back-end/mealscategory/mealsCategoryAddSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
