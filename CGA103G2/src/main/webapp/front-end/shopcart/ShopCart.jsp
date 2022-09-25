@@ -34,21 +34,7 @@
 <!-- <link href="../../front-assets/css/shoppingcart/ShoppingCart.css" rel="stylesheet"> -->
 
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
-<style>
-.show-cart li {
-	display: flex;
-}
 
-.card {
-	margin-bottom: 20px;
-}
-
-.card-img-top {
-	width: 200px;
-	height: 200px;
-	align-self: center;
-}
-</style>
 
 </head>
 
