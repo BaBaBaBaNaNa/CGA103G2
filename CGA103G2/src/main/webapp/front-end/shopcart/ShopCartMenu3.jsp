@@ -126,6 +126,11 @@
 								<h4  class="card-title">${MealsVO.mealsName}</h4>
 								<p class="card-text">${MealsVO.mealsPrice}</p>
 								<a href="#" data-name="${MealsVO.mealsName}" data-price="${MealsVO.mealsPrice}" class="add-to-cart btn btn-primary">加入購物車</a>
+							<script>
+							${MealsVO.mealsName}
+							</script>
+							
+							
 							</div>
 						</div>
 					</c:if>

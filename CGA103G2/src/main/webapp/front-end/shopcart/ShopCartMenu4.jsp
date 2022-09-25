@@ -126,7 +126,7 @@
 						role="tablist">
 						<li role="presentation" class="fs-12"><a href="#btc"
 							aria-controls="btc" class="active show" role="tab"
-							data-toggle="tab">沙拉 </a></li>
+							data-toggle="tab">前菜 </a></li>
 					<c:forEach var="MealsCategoryVO" items="${list1}"
 											begin="<%=pageIndex +1%>" end="<%=pageIndex+rowsPerPage-1%>">
 <%-- 										<h4 class="card-title">${MealsCategoryVO.mealsCategoryId}</h4>	 --%>
@@ -220,12 +220,7 @@
 						</c:forEach>
 						
 						
-											
-						<!--         --------------主餐------------------- -->
-						
-						<!--                             --------------甜點------------------- -->
-						
-						<!--                             --------------飲料------------------- -->
+
 
 						
 					

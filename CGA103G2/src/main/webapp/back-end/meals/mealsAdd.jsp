@@ -35,8 +35,8 @@
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 <style>
 	.mealsID{
-		margin-left:3rem;
-	}
+/* 		margin-left:3rem;		 */
+		}
 </style>
 
 </head>
@@ -84,8 +84,8 @@
 					
 					<jsp:useBean id="MealscategorySvc" scope="page" class="com.mealscateory.model.MealsCategoryService" />
 					<div class="col-md-12 ">
-						<label   class="mealsID" for="mealsCategoryID">菜系編號:</label>
-						<div  class="input-group">
+						<label   for="mealsCategoryID">菜系編號:</label>
+						<div   class="mealsID" class="input-group">
 							<select class="mealsID" size="1" name="mealsCategoryID">
 							<c:forEach var="MealsCategoryVO" items="${MealscategorySvc.all}">
 							<option value="${MealsCategoryVO.mealsCategoryId}" ${(mealsVO.mealsCategoryID==MealsCategoryVO.mealsCategoryId)? 'selected':'' } >${MealsCategoryVO.mealsCategory}
