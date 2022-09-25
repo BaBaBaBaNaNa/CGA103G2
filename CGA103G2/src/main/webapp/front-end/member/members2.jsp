@@ -20,6 +20,7 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
 
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
 
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -53,6 +54,31 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
 <link href="<%=request.getContextPath()%>front-assets/css/navbar.css"
 	rel="stylesheet">
 
+
+<!-- 	註冊欄位的錯誤列表 -->
+
+<c:if test="${not empty errorMsgs}">
+	<font style="color: red">請修正以下錯誤:</font>
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color: red">${message}</li>
+		</c:forEach>
+	</ul>
+</c:if>
+
+<!-- ==========登入的錯誤列表======	 -->
+<%
+if ((request.getAttribute("errorMessage") != null)) {
+%>
+<script type="text/javascript">
+ 	alert("<%=request.getAttribute("errorMessage")%>");
+</script>
+<%
+} else {
+%>
+<%
+}
+%>
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
 
@@ -92,7 +118,9 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
 							valut="Sign In">
 							<i class="fas fa-sign-in-alt"></i> Sign in
 						</button>
-						<a href="#" id="forgot_pswd">Forgot password?</a>
+
+						<!-- 						忘記密碼按鈕 -->
+						<!-- 						<a href="#" id="forgot_pswd">Forgot password?</a> -->
 						<hr>
 						<!-- ----- ----- ----- 會員登入區塊 stop ----- ----- ----- -->
 
@@ -105,79 +133,95 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
 						<!-- 						</button> -->
 					</form>
 
-
-					<form action="/reset/password/" class="form-reset">
-						<input type="email" id="resetEmail" class="form-control"
-							placeholder="忘記密碼? 輸入你的email吧" required="" autofocus="">
-						<button class="btn btn-primary btn-block" type="submit">Reset
-							Password</button>
-						<a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i>
-							Back</a>
-					</form>
-
-
-<!-- ================原始註冊用的signup action================ -->
-<!-- 					<form action="/signup/" class="form-signup"> -->
+					<!-- 重設密碼按鈕 -->
+					<!-- 					<form action="/reset/password/" class="form-reset"> -->
+					<!-- 						<input type="email" id="resetEmail" class="form-control" -->
+					<!-- 							placeholder="忘記密碼? 輸入你的email吧" required="" autofocus=""> -->
+					<!-- 						<button class="btn btn-primary btn-block" type="submit">Reset -->
+					<!-- 							Password</button> -->
+					<!-- 						<a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> -->
+					<!-- 							Back</a> -->
+					<!-- 					</form> -->
 
 
-						<p style="text-align: center">OR</p>
+					<!-- ================原始註冊用的signup action================ -->
+					<!-- 					<form action="/signup/" class="form-signup"> -->
 
 
-<FORM METHOD="post" ACTION="mem.do" name="form1">
-
-<!--                     ==========放註冊表單用的================ -->
-<!-- 						<input type="text" id="user-name" name="memName" class="form-control" -->
-<%-- 							placeholder="姓名" required="" autofocus="" value="<%=(memVO == null) ? "Leo" : memVO.getMemName()%>"> <input --%>
-<!-- 							type="text" id="user-account" name="memAccount" class="form-control" -->
-<%-- 							placeholder="帳號" required autofocus="" value="<%=(memVO == null) ? "wowowoo" : memVO.getMemAccount()%>"  > <input --%>
-<%-- 							type="password" id="user-pass" class="form-control" name="memPassword" value="<%=(memVO == null) ? "a123123" : memVO.getMemPassword()%>" --%>
-<!-- 							placeholder="密碼" required autofocus=""> <select name="memGender" class="form-control" > -->
-<!-- 							<option value="0">男生 </option> -->
-<!-- 							<option value="1">女生</option></select>  -->
-<%-- 							<input type="hidden" id="user-permission" name="memPermission" class="form-control" value="<%=(memVO == null) ? "0" : memVO.getMemPermission()%>"> --%>
-<%-- 							<input type="TEXT" id="user-Phone" name="memPhone" class="form-control" value="<%=(memVO == null) ? "987654321" : memVO.getMemPhone()%>"> --%>
-<%-- 							<input type="email" id="user-Phone" name="memEmail" class="form-control" value="<%=(memVO == null) ? "aa@aaa.com" : memVO.getMemEmail()%>"> --%>
-<!-- 							<div id="twzipcode"></div> -->
-<%-- 							<input type="TEXT" id="user-address" name="memAddress" class="form-control" value="<%=(memVO == null) ? "" : memVO.getMemAddress()%>"> --%>
-<!-- 							<input type="TEXT" id="f_date1" name=memBirthday class="form-control"> -->
+					<p style="text-align: center">OR</p>
+					<p style="text-align: center">會員註冊</p>
 
 
+					<FORM METHOD="post" ACTION="mem.do" name="form1">
+
+						<!--                     ==========放註冊表單用的================ -->
+						<!-- 						<input type="text" id="user-name" name="memName" class="form-control" -->
+						<%-- 							placeholder="姓名" required="" autofocus="" value="<%=(memVO == null) ? "Leo" : memVO.getMemName()%>"> <input --%>
+						<!-- 							type="text" id="user-account" name="memAccount" class="form-control" -->
+						<%-- 							placeholder="帳號" required autofocus="" value="<%=(memVO == null) ? "wowowoo" : memVO.getMemAccount()%>"  > <input --%>
+						<%-- 							type="password" id="user-pass" class="form-control" name="memPassword" value="<%=(memVO == null) ? "a123123" : memVO.getMemPassword()%>" --%>
+						<!-- 							placeholder="密碼" required autofocus=""> <select name="memGender" class="form-control" > -->
+						<!-- 							<option value="0">男生 </option> -->
+						<!-- 							<option value="1">女生</option></select>  -->
+						<%-- 							<input type="hidden" id="user-permission" name="memPermission" class="form-control" value="<%=(memVO == null) ? "0" : memVO.getMemPermission()%>"> --%>
+						<%-- 							<input type="TEXT" id="user-Phone" name="memPhone" class="form-control" value="<%=(memVO == null) ? "987654321" : memVO.getMemPhone()%>"> --%>
+						<%-- 							<input type="email" id="user-Phone" name="memEmail" class="form-control" value="<%=(memVO == null) ? "aa@aaa.com" : memVO.getMemEmail()%>"> --%>
+						<!-- 							<div id="twzipcode"></div> -->
+						<%-- 							<input type="TEXT" id="user-address" name="memAddress" class="form-control" value="<%=(memVO == null) ? "" : memVO.getMemAddress()%>"> --%>
+						<!-- 							<input type="TEXT" id="f_date1" name=memBirthday class="form-control"> -->
 
 
 
-<!-- 							放註冊表單用-上線備份 -->
 
 
-						<input type="text" id="user-name" name="memName" class="form-control"
-							placeholder="姓名" required="" autofocus="" value="<%=(memVO == null) ? "Leo" : memVO.getMemName()%>"> <input
-							type="text" id="user-account" name="memAccount" class="form-control"
-							placeholder="帳號" required autofocus="" value="<%=(memVO == null) ? "wowowoo" : memVO.getMemAccount()%>"  > <input
-							type="password" id="user-pass" class="form-control" name="memPassword" value="<%=(memVO == null) ? "a123123" : memVO.getMemPassword()%>"
-							placeholder="密碼" required autofocus=""> <select name="memGender" class="form-control" >
-							<option value="0">男生 </option>
-							<option value="1">女生</option></select> 
-							<input type="hidden" id="user-permission" name="memPermission" class="form-control" value="<%=(memVO == null) ? "0" : memVO.getMemPermission()%>">
-							<input type="TEXT" id="user-Phone" name="memPhone" class="form-control" value="<%=(memVO == null) ? "987654321" : memVO.getMemPhone()%>">
-							<input type="email" id="user-Phone" name="memEmail" class="form-control" value="<%=(memVO == null) ? "aa@aaa.com" : memVO.getMemEmail()%>">
-							<div id="twzipcode"></div>
-							<input type="TEXT" id="user-address" name="memAddress" class="form-control" value="<%=(memVO == null) ? "" : memVO.getMemAddress()%>">
-							<input type="TEXT" id="f_date1" name=memBirthday class="form-control">
-							
+						<!-- 							放註冊表單用-上線備份 -->
 
 
-<!--                     ==========放註冊表單用的-原始備份用================ -->
-<!-- 						<input type="text" id="user-name" name="memName" class="form-control" -->
-<!-- 							placeholder="姓名" required="" autofocus=""> <input -->
-<!-- 							type="email" id="user-email" class="form-control" -->
-<!-- 							placeholder="Email address" required autofocus=""> <input -->
-<!-- 							type="password" id="user-pass" class="form-control" -->
-<!-- 							placeholder="Password" required autofocus=""> <input -->
-<!-- 							type="password" id="user-repeatpass" class="form-control" -->
-<!-- 							placeholder="Repeat Password" required autofocus=""> -->
+						<input type="text" id="user-name" name="memName"
+							class="form-control" placeholder="姓名" required="" autofocus=""
+							value="<%=(memVO == null) ? "" : memVO.getMemName()%>"> <input
+							type="text" id="user-account" name="memAccount"
+							class="form-control" placeholder="帳號" required autofocus=""
+							value="<%=(memVO == null) ? "" : memVO.getMemAccount()%>">
+						<input type="password" id="user-pass" class="form-control"
+							name="memPassword"
+							value="<%=(memVO == null) ? "" : memVO.getMemPassword()%>"
+							placeholder="密碼" required autofocus=""> <select
+							name="memGender" class="form-control">
+							<option value="0">男生</option>
+							<option value="1">女生</option>
+						</select> <input type="hidden" id="user-permission" name="memPermission"
+							class="form-control"
+							value="<%=(memVO == null) ? "1" : memVO.getMemPermission()%>">
+						<input type="TEXT" id="user-Phone" name="memPhone"
+							placeholder="電話" class="form-control"
+							value="<%=(memVO == null) ? "" : memVO.getMemPhone()%>">
+						<input type="email" id="user-Phone" name="memEmail"
+							class="form-control" placeholder="信箱"
+							value="<%=(memVO == null) ? "" : memVO.getMemEmail()%>">
+						<div id="twzipcode"></div>
+						<input type="TEXT" id="user-address" name="memAddress"
+							class="form-control" placeholder="地址"
+							value="<%=(memVO == null) ? "" : memVO.getMemAddress()%>">
+						<input type="TEXT" id="f_date1" placeholder="生日" name=memBirthday
+							class="form-control">
 
 
-<input type="hidden" name="action" value="insertForMem">
-						<button class="btn btn-primary btn-block" type="submit" value="送出新增">
+
+						<!--                     ==========放註冊表單用的-原始備份用================ -->
+						<!-- 						<input type="text" id="user-name" name="memName" class="form-control" -->
+						<!-- 							placeholder="姓名" required="" autofocus=""> <input -->
+						<!-- 							type="email" id="user-email" class="form-control" -->
+						<!-- 							placeholder="Email address" required autofocus=""> <input -->
+						<!-- 							type="password" id="user-pass" class="form-control" -->
+						<!-- 							placeholder="Password" required autofocus=""> <input -->
+						<!-- 							type="password" id="user-repeatpass" class="form-control" -->
+						<!-- 							placeholder="Repeat Password" required autofocus=""> -->
+
+
+						<input type="hidden" name="action" value="insertForMem">
+						<button class="btn btn-primary btn-block" type="submit"
+							value="送出新增">
 							<i class="fas fa-user-plus"></i> Sign1 Up
 						</button>
 						<a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i>
@@ -365,24 +409,24 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
 	<script src="../../front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
 	<script src="../../front-assets/js/custom.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
-	<%
-	java.sql.Date memBirthday = null;
-	try {
-		memBirthday = memVO.getMemBirthday();
-	} catch (Exception e) {
-		memBirthday = new java.sql.Date(System.currentTimeMillis());
-	}
-	%>
+<%
+java.sql.Date memBirthday = null;
+try {
+	memBirthday = memVO.getMemBirthday();
+} catch (Exception e) {
+	memBirthday = new java.sql.Date(System.currentTimeMillis());
+}
+%>
 
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.css" />
-	<script
-		src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.css" />
+<script
+	src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.js"></script>
+<script
+	src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 
-	<style>
+<style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
 	width: 300px; /* width:  300px; */
 }
@@ -391,6 +435,23 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
 	height: 151px; /* height:  151px; */
 }
 </style>
+
+<script>
+        $.datetimepicker.setLocale('zh'); // kr ko ja en
+        $('#f_date1').datetimepicker({
+           theme: '',          //theme: 'dark',
+           timepicker:false ,  //timepicker: false,
+           step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
+	       format: 'Y-m-d',
+	       value: '<%=memBirthday%>
+	', // value:   new Date(),
+	//disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
+	//startDate:	        '2022/07/10',  // 起始日
+	//minDate:           '-1970-01-01', // 去除今日(不含)之前
+	//maxDate:           '+1970-01-01'  // 去除今日(不含)之後
+	});
+</script>
+
 
 	<!-- 下拉式地址註冊表格script  start -->
 	<script
@@ -427,24 +488,9 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
 	
 </script>
 	<!-- 下拉式地址註冊表格script  stop -->
-	<script>
-	
 
-        $.datetimepicker.setLocale('zh'); // kr ko ja en
-        $('#f_date1').datetimepicker({
-           theme: '',          //theme: 'dark',
-           timepicker:false ,  //timepicker: false,
-           step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format: 'Y-m-d',
-	       value: '<%=memBirthday%>
-		', // value:   new Date(),
-		//disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
-		//startDate:	        '2022/07/10',  // 起始日
-		//minDate:           '-1970-01-01', // 去除今日(不含)之前
-		//maxDate:           '+1970-01-01'  // 去除今日(不含)之後
-		});
-	</script>
-	
+
 </body>
+
 
 </html>

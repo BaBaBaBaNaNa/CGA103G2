@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/mem/controller/MailService.java=MS950
 encoding//src/main/java/com/rsvt/controller/RsvtServlet.java=UTF-8
 encoding//src/main/java/mail=MS950
 encoding//src/main/java/mail/MailService.java=MS950

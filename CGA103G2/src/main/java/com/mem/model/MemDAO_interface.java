@@ -4,6 +4,7 @@ import java.util.*;
 import com.emp.model.EmpVO;
 import com.mem.model.MemLoginVO;
 
+
 public interface MemDAO_interface {
 	public boolean loginAdmin (MemLoginVO admin);
           public void insert(MemVO memVO);
@@ -15,8 +16,9 @@ public interface MemDAO_interface {
 //          //萬用複合查詢(傳入參數型態Map)(回傳 List)
 //        public List<MemVO> getAll(Map<String, String[]> map); 
 		boolean loginAdmin(MemVO admin);
+		boolean loginAdminPermission(MemVO admin);
 	    public MemVO findByMemAccount(String memAccount);
-	    
-	    public void upatePassword(MemVO memVO);
+	    public void updateMemPW(String memAccount, String memPassword);
+//	    public void upatePassword(MemVO memVO);
 	    
 }

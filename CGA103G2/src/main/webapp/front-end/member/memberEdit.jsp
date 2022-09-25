@@ -151,6 +151,16 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 	</main>
 
 
+<!-- 測試修改密碼用 -->
+<!-- 			<div> -->
+<!-- 				<input type="hidden" name="action" value=updateMemPW> <input -->
+<%-- 					type="hidden" name="memID" value="<%=memVO.getMemID()%>"> <input --%>
+<!-- 					type="submit" value="送出修改"> -->
+<!-- 			</div> -->
+<!-- 		</form> -->
+<!-- 	</main> -->
+
+
 	<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->

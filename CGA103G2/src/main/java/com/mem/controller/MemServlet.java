@@ -219,6 +219,18 @@ public class MemServlet extends HttpServlet {
 		}
 		// ----- ----- ----- getOne_For_Update end ----- ----- -----
 		
+		// ----- ----- ----- updateMemPWe start ----- ----- -----
+		if("updateMemPW".equals(action)) {
+			String memPassword = req.getParameter("memPassword");
+			System.out.println(memPassword);
+			MemVO memVO = (MemVO)req.getSession().getAttribute("memVO");
+			String memAccount = memVO.getMemAccount();
+			new MemService().updateMemPW(memAccount, memPassword);
+			res.getWriter().println("成功更新密碼！");
+			return;
+		}
+		// ----- ----- ----- updateMemPW end ----- ----- -----
+		
 		// ----- ----- ----- getOne_For_Update_mem start ----- ----- -----
 				if ("getOne_For_Update_mem".equals(action)) { // 來自listAllMem.jsp的請求
 					List<String> errorMsgs = new LinkedList<String>();
@@ -526,50 +538,50 @@ public class MemServlet extends HttpServlet {
 				// ----- ----- ----- getMemPersonalData end ----- ----- -----
 			
 				// ----- ----- ----- forgetPassword start ----- ----- -----
-	 if("forgetPassword".equals(action)) {
-     	
-     	List<String> errorMsgs = new LinkedList<String>();
-     	req.setAttribute("errorMsgs", errorMsgs);
-     	try {
-     		//請求
-     		String memEmail = req.getParameter("memEmail");
-				MemService memSvc = new MemService();
-				
-				List<MemVO> listall = memSvc.getAll();
-				MemVO memVO = null;
-				for (MemVO memVOList : listall) {
-					if (memVOList.getMemEmail().equals(memEmail)) {
-						memVO = memSvc.getOwnMem(memVOList.getMemAccount());
-						break;
-					}else if(!memVOList.getMemEmail().equals(memEmail)){
-						errorMsgs.add("信箱無註冊資料，請重新輸入");
-					}
-				}
-				System.out.println(memVO.getMemAccount());
-				MailService mail = new MailService();
-				String authCode = mail.getRandom();
-				
-				memSvc.updatePassword(authCode, memVO.getMemID());
-				
-				String subject = "臨時密碼";
-				String message = "臨時密碼:" + authCode + "請登入後修改密碼";
-			
-
-				try {
-					mail.sendMail(memEmail, subject, message);
-		            res.sendRedirect(req.getContextPath() + "/front-end/member/member.jsp");
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-     	}catch(Exception e) {
-     		errorMsgs.add(e.getMessage());
-     		RequestDispatcher failureView = req.getRequestDispatcher("/front-end/member/forgetPassword.jsp");
-     		failureView.forward(req, res);
-     	}
-     	
-     	
-     }
-	
+//	 if("forgetPassword".equals(action)) {
+//     	
+//     	List<String> errorMsgs = new LinkedList<String>();
+//     	req.setAttribute("errorMsgs", errorMsgs);
+//     	try {
+//     		//請求
+//     		String memEmail = req.getParameter("memEmail");
+//				MemService memSvc = new MemService();
+//				
+//				List<MemVO> listall = memSvc.getAll();
+//				MemVO memVO = null;
+//				for (MemVO memVOList : listall) {
+//					if (memVOList.getMemEmail().equals(memEmail)) {
+//						memVO = memSvc.getOwnMem(memVOList.getMemAccount());
+//						break;
+//					}else if(!memVOList.getMemEmail().equals(memEmail)){
+//						errorMsgs.add("信箱無註冊資料，請重新輸入");
+//					}
+//				}
+//				System.out.println(memVO.getMemAccount());
+//				MailService mail = new MailService();
+//				String authCode = mail.getRandom();
+//				
+//				memSvc.updateMemPW(authCode, memVO.getMemID());
+//				
+//				String subject = "臨時密碼";
+//				String message = "臨時密碼:" + authCode + "請登入後修改密碼";
+//			
+//
+//				try {
+//					mail.sendMail(memEmail, subject, message);
+//		            res.sendRedirect(req.getContextPath() + "/front-end/member/member.jsp");
+//				}catch(Exception e) {
+//					e.printStackTrace();
+//				}
+//     	}catch(Exception e) {
+//     		errorMsgs.add(e.getMessage());
+//     		RequestDispatcher failureView = req.getRequestDispatcher("/front-end/member/forgetPassword.jsp");
+//     		failureView.forward(req, res);
+//     	}
+//     	
+//     	
+//     }
+//	
 
 	// ----- ----- ----- forgetPassword stop ----- ----- -----
 	
@@ -654,14 +666,14 @@ public class MemServlet extends HttpServlet {
 		
 		
 		  //mail 重複驗證
-//		   MemService memberSvc = new MemService();
-//		   List<MemVO> listall = memberSvc.getAll();
-//		   for (MemVO memVOList : listall) {
-//		    if (memVOList.getMemEmail().equals(memEmail)) {
+		   MemService memberSvc = new MemService();
+		   List<MemVO> listall = memberSvc.getAll();
+		   for (MemVO memVOList : listall) {
+		    if (memVOList.getMemEmail().equals(memEmail)) {
 //		     errorMsgs.add("信箱已被註冊，請重新輸入");
-//		     System.out.println(district);
-//		    }
-//		   }
+		    	req.setAttribute("errorMessage", "mail重複");
+		    }
+		   }
 
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
@@ -684,6 +696,27 @@ public class MemServlet extends HttpServlet {
 	}
 	
 	// ----- ----- ----- insert for member stop ----- ----- ------
+	
+	
+	
+	
+	
+	
+	
+	if("sendEmailForNewPW".equals(action)) {
+		String to = req.getParameter("memEmail");
+		System.out.println(to);	
+		HttpSession session = req.getSession();
+		MemVO memvo = (MemVO)session.getAttribute("memvo");
+		String memAccount = memvo.getMemAccount();
+		String subject = "重設您密碼";
+		String messageText="<h3>"+memAccount+"您好，我們已經收到您重設密碼的申請。請點擊<a href=\"http://35.194.147.13/CFA101G4/front-end/setNewPW.html\">連結</a>，將會為您的帳戶重新設置新密碼。或是複製以下連結至您的瀏覽器開啟：<br>http://35.194.147.13/CFA101G4/front-end/setNewPW.html<br>如果您沒有申請此重設密碼的需求，請立刻聯絡我們的天堂鳥客服團隊</h3>";
+		sendMail sm = new sendMail(to, subject, messageText);
+		Thread t1 = new Thread(sm);
+		t1.start();
+		res.getWriter().write("更改密碼信已寄出！");
+		return;
+	}
 	
 	
 	}
