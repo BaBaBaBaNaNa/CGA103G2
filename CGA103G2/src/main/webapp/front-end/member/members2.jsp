@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.mem.model.*"%>
+<%@ page import="java.util.*,com.mem.controller.MemServlet"%>
+<%
+MemVO memVO = (MemVO) request.getAttribute("memVO");
+%>
 <!doctype html>
 <html lang="zh-tw">
 
@@ -67,9 +72,9 @@
 
 
 		<!-- ----- ----- ----- orignal v1 start ----- ----- ----- -->
-		
+
 		<!-- ----- ----- ----- 會員登入區塊 start ----- ----- ----- -->
-		
+
 		<form name="myform" action="MemLoginServlet.do" method="POST">
 			<section class="about section-padding bg-white">
 				<div id="logreg-forms">
@@ -78,52 +83,102 @@
 							異鄉人</h1>
 
 						<p style="text-align: center">會員登入</p>
-						<input type="account" name="memAccount" id="inputEmail" class="form-control"
-							placeholder="帳號" required="" autofocus=""> <input
-							type="password" name="memPassword"id="inputPassword" class="form-control"
-							placeholder="密碼" required="">
+						<input type="account" name="memAccount" id="inputEmail"
+							class="form-control" placeholder="帳號" required="" autofocus="">
+						<input type="password" name="memPassword" id="inputPassword"
+							class="form-control" placeholder="密碼" required="">
 
-						<button class="btn btn-success btn-block" type="submit" valut="Sign In">
+						<button class="btn btn-success btn-block" type="submit"
+							valut="Sign In">
 							<i class="fas fa-sign-in-alt"></i> Sign in
 						</button>
 						<a href="#" id="forgot_pswd">Forgot password?</a>
 						<hr>
 						<!-- ----- ----- ----- 會員登入區塊 stop ----- ----- ----- -->
-						
-						
+
+
 						<!-- <p>Don't have an account!</p>  -->
-						<button class="btn btn-primary btn-block" type="button"
-							id="btn-signup">
-							<i class="fas fa-user-plus"></i> Sign up New Account
-						</button>
+						<!-- 						----- ----- ----- 註冊帳號按鈕 沒用到  ----- ----- ----- -->
+						<!-- 						<button class="btn btn-primary btn-block" type="button" -->
+						<!-- 							id="btn-signup"> -->
+						<!-- 							<i class="fas fa-user-plus"></i> Sign up New Account -->
+						<!-- 						</button> -->
 					</form>
-					
+
 
 					<form action="/reset/password/" class="form-reset">
 						<input type="email" id="resetEmail" class="form-control"
-							placeholder="Email address" required="" autofocus="">
+							placeholder="忘記密碼? 輸入你的email吧" required="" autofocus="">
 						<button class="btn btn-primary btn-block" type="submit">Reset
 							Password</button>
 						<a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i>
 							Back</a>
 					</form>
 
-					<form action="/signup/" class="form-signup">
+
+<!-- ================原始註冊用的signup action================ -->
+<!-- 					<form action="/signup/" class="form-signup"> -->
 
 
 						<p style="text-align: center">OR</p>
 
-						<input type="text" id="user-name" class="form-control"
-							placeholder="Full name" required="" autofocus=""> <input
-							type="email" id="user-email" class="form-control"
-							placeholder="Email address" required autofocus=""> <input
-							type="password" id="user-pass" class="form-control"
-							placeholder="Password" required autofocus=""> <input
-							type="password" id="user-repeatpass" class="form-control"
-							placeholder="Repeat Password" required autofocus="">
 
-						<button class="btn btn-primary btn-block" type="submit">
-							<i class="fas fa-user-plus"></i> Sign Up
+<FORM METHOD="post" ACTION="mem.do" name="form1">
+
+<!--                     ==========放註冊表單用的================ -->
+<!-- 						<input type="text" id="user-name" name="memName" class="form-control" -->
+<%-- 							placeholder="姓名" required="" autofocus="" value="<%=(memVO == null) ? "Leo" : memVO.getMemName()%>"> <input --%>
+<!-- 							type="text" id="user-account" name="memAccount" class="form-control" -->
+<%-- 							placeholder="帳號" required autofocus="" value="<%=(memVO == null) ? "wowowoo" : memVO.getMemAccount()%>"  > <input --%>
+<%-- 							type="password" id="user-pass" class="form-control" name="memPassword" value="<%=(memVO == null) ? "a123123" : memVO.getMemPassword()%>" --%>
+<!-- 							placeholder="密碼" required autofocus=""> <select name="memGender" class="form-control" > -->
+<!-- 							<option value="0">男生 </option> -->
+<!-- 							<option value="1">女生</option></select>  -->
+<%-- 							<input type="hidden" id="user-permission" name="memPermission" class="form-control" value="<%=(memVO == null) ? "0" : memVO.getMemPermission()%>"> --%>
+<%-- 							<input type="TEXT" id="user-Phone" name="memPhone" class="form-control" value="<%=(memVO == null) ? "987654321" : memVO.getMemPhone()%>"> --%>
+<%-- 							<input type="email" id="user-Phone" name="memEmail" class="form-control" value="<%=(memVO == null) ? "aa@aaa.com" : memVO.getMemEmail()%>"> --%>
+<!-- 							<div id="twzipcode"></div> -->
+<%-- 							<input type="TEXT" id="user-address" name="memAddress" class="form-control" value="<%=(memVO == null) ? "" : memVO.getMemAddress()%>"> --%>
+<!-- 							<input type="TEXT" id="f_date1" name=memBirthday class="form-control"> -->
+
+
+
+
+
+<!-- 							放註冊表單用-上線備份 -->
+
+
+						<input type="text" id="user-name" name="memName" class="form-control"
+							placeholder="姓名" required="" autofocus="" value="<%=(memVO == null) ? "Leo" : memVO.getMemName()%>"> <input
+							type="text" id="user-account" name="memAccount" class="form-control"
+							placeholder="帳號" required autofocus="" value="<%=(memVO == null) ? "wowowoo" : memVO.getMemAccount()%>"  > <input
+							type="password" id="user-pass" class="form-control" name="memPassword" value="<%=(memVO == null) ? "a123123" : memVO.getMemPassword()%>"
+							placeholder="密碼" required autofocus=""> <select name="memGender" class="form-control" >
+							<option value="0">男生 </option>
+							<option value="1">女生</option></select> 
+							<input type="hidden" id="user-permission" name="memPermission" class="form-control" value="<%=(memVO == null) ? "0" : memVO.getMemPermission()%>">
+							<input type="TEXT" id="user-Phone" name="memPhone" class="form-control" value="<%=(memVO == null) ? "987654321" : memVO.getMemPhone()%>">
+							<input type="email" id="user-Phone" name="memEmail" class="form-control" value="<%=(memVO == null) ? "aa@aaa.com" : memVO.getMemEmail()%>">
+							<div id="twzipcode"></div>
+							<input type="TEXT" id="user-address" name="memAddress" class="form-control" value="<%=(memVO == null) ? "" : memVO.getMemAddress()%>">
+							<input type="TEXT" id="f_date1" name=memBirthday class="form-control">
+							
+
+
+<!--                     ==========放註冊表單用的-原始備份用================ -->
+<!-- 						<input type="text" id="user-name" name="memName" class="form-control" -->
+<!-- 							placeholder="姓名" required="" autofocus=""> <input -->
+<!-- 							type="email" id="user-email" class="form-control" -->
+<!-- 							placeholder="Email address" required autofocus=""> <input -->
+<!-- 							type="password" id="user-pass" class="form-control" -->
+<!-- 							placeholder="Password" required autofocus=""> <input -->
+<!-- 							type="password" id="user-repeatpass" class="form-control" -->
+<!-- 							placeholder="Repeat Password" required autofocus=""> -->
+
+
+<input type="hidden" name="action" value="insertForMem">
+						<button class="btn btn-primary btn-block" type="submit" value="送出新增">
+							<i class="fas fa-user-plus"></i> Sign1 Up
 						</button>
 						<a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i>
 							Back</a>
@@ -133,18 +188,21 @@
 				</div>
 				<!-- 						<div class="col-lg-6 col-12"> -->
 
-				<div id="submit">
-					<input type="submit" id="submit1" value="Sign In"
-						onclick="return checkForm()">
-					<!-- 									<input type="submit" -->
-					<!-- 									id="submit2" value="Sign In"> -->
-				</div>
-				<div id="submit">
-					<input type="submit" id="submit1" value="忘記密碼"
-						onclick="return checkForm()">
-					<!-- 									<input type="submit" -->
-					<!-- 									id="submit2" value="Sign In"> -->
-				</div>
+
+				<!-- 						----- ----- ----- 舊版member.jsp的按鈕 沒用到  ----- ----- ----- -->
+
+				<!-- 				<div id="submit"> -->
+				<!-- 					<input type="submit" id="submit1" value="Sign In" -->
+				<!-- 						onclick="return checkForm()"> -->
+				<!-- 														<input type="submit" -->
+				<!-- 														id="submit2" value="Sign In"> -->
+				<!-- 				</div> -->
+				<!-- 				<div id="submit"> -->
+				<!-- 					<input type="submit" id="submit1" value="忘記密碼" -->
+				<!-- 						onclick="return checkForm()"> -->
+				<!-- 														<input type="submit" -->
+				<!-- 														id="submit2" value="Sign In"> -->
+				<!-- 				</div> -->
 
 			</section>
 		</form>
@@ -307,6 +365,86 @@
 	<script src="../../front-assets/bootstrap_js/bootstrap.bundle.min.js"></script>
 	<script src="../../front-assets/js/custom.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
+	<%
+	java.sql.Date memBirthday = null;
+	try {
+		memBirthday = memVO.getMemBirthday();
+	} catch (Exception e) {
+		memBirthday = new java.sql.Date(System.currentTimeMillis());
+	}
+	%>
+
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.css" />
+	<script
+		src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/back-assets/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+
+	<style>
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
+</style>
+
+	<!-- 下拉式地址註冊表格script  start -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery-twzipcode@1.7.14/jquery.twzipcode.min.js"></script>
+
+	<script>
+	$("#twzipcode").twzipcode();
+
+	$("#twzipcode_ADV").twzipcode({
+	zipcodeIntoDistrict: true, // 郵遞區號自動顯示在地區
+	css: ["city form-control", "town form-control"], // 自訂 "城市"、"地區" class 名稱 
+	countyName: "zip", // 自訂城市 select 標籤的 name 值
+	districtName: "zip" // 自訂地區 select 標籤的 name 值
+
+		/*! Callback */
+// 		twzipcode.get(function (data) {
+// 			consol.log(8);
+		
+// 		 data (Array)
+// 		    [
+// 		        {
+// 		            "county": "縣市",
+// 		            "district": "鄉鎮市區",
+// 		            "zipcode": "郵遞區號",
+// 		        }
+// 		        …
+// 		    ]
+
+
+	
+ 	});
+	
+</script>
+	<!-- 下拉式地址註冊表格script  stop -->
+	<script>
+	
+
+        $.datetimepicker.setLocale('zh'); // kr ko ja en
+        $('#f_date1').datetimepicker({
+           theme: '',          //theme: 'dark',
+           timepicker:false ,  //timepicker: false,
+           step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
+	       format: 'Y-m-d',
+	       value: '<%=memBirthday%>
+		', // value:   new Date(),
+		//disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
+		//startDate:	        '2022/07/10',  // 起始日
+		//minDate:           '-1970-01-01', // 去除今日(不含)之前
+		//maxDate:           '+1970-01-01'  // 去除今日(不含)之後
+		});
+	</script>
+	
 </body>
 
 </html>
