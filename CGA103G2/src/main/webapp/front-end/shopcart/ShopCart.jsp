@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>義鄉人 - 義式餐酒館 - 訂單 - 緯育 中壢Java班 CGA_103 第二組</title>
+<title>義鄉人 - 義式餐酒館 - 購物車 - 緯育 中壢Java班 CGA_103 第二組</title>
 
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
 

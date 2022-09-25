@@ -59,7 +59,7 @@ public class EmpServlet extends HttpServlet {
 			
 			//--- 當有錯誤資訊時 ---
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/employee/empDetail.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/employee/EmpServlet.do?action=getAll");
 				failureView.forward(req, res);
 				return;
 			}
@@ -72,7 +72,7 @@ public class EmpServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/employee/empDetail.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/employee/EmpServlet.do?action=getAll");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -85,7 +85,7 @@ public class EmpServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/employee/empDetail.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/employee/EmpServlet.do?action=getAll");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}

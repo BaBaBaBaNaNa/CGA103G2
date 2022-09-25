@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>義鄉人 - 義式餐酒館 - 訂單 - 緯育 中壢Java班 CGA_103 第二組</title>
+<title>義鄉人 - 義式餐酒館 - 新增訂單成功 - 緯育 中壢Java班 CGA_103 第二組</title>
 
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
 
@@ -68,7 +68,8 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">訂單詳情</h5>
-								<span id="orderType" class=name></span>
+								<span id="orderType"></span><br>
+								<span id="ordaddress"></span>
 							</div>
 							<div class="modal-body">
 								<table class="show-cart table">

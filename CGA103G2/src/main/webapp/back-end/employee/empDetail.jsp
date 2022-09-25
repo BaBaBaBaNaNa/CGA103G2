@@ -137,7 +137,7 @@ EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 					<td style="width: 5% ;">${empVO.empID}</td>
 					<td style="width: 7%">${empVO.empName}</td>
 					<td style="width: 10%">${empVO.empAccount}</td>
-					<td style="width: 10%">${empVO.empPassword}</td>
+					<td style="width: 10%"><input style="border:none; background:none;text-align:center;" type="password" value="${empVO.empPassword}"></td>
 					<td style="width: 5%">${(empVO.empPermission == "0") ? "正常" : "停權"}</td>
 					<td style="width: 10%">${empVO.empPhone}</td>
 					<td>${empVO.empAddress}</td>

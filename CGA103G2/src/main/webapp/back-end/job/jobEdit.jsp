@@ -89,7 +89,7 @@ JobVO jobVO = (JobVO) request.getAttribute("jobVO"); //EmpServlet.java (Concroll
 				</div>
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="jobID" value="${param.jobID}">
-				<input class="btn btn-primary mt-4 d-block w-100" type="submit" value="送出修改">
+				<input type="submit" class="btn btn-primary mt-4 d-block w-100" value="送出修改">
 			</form>
 		</div>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
