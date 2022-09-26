@@ -72,14 +72,7 @@
 				<h3>新增職位名稱</h3>
 				
 				<div class="form-row">
-					<div class="col-md-12">
-						<label>菜色編號:</label>
-						<div class="input-group">
-							<input  name="mealsID" type="text"
-								value="${param.mealsID}" class="form-control"
-								readonly="readonly" />
-						</div>
-					</div>
+					
 					
 					
 					<jsp:useBean id="MealscategorySvc" scope="page" class="com.mealscateory.model.MealsCategoryService" />
