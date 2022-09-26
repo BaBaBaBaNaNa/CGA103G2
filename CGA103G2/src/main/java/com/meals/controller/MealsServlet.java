@@ -231,8 +231,6 @@ public class MealsServlet extends HttpServlet{
 			System.out.println("insert");
 			Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
-
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			
 			
@@ -240,7 +238,7 @@ public class MealsServlet extends HttpServlet{
 			
 			
 			String mealsName = req.getParameter("mealsName");
-			String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+			String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,15}$";
 			if (mealsName == null || mealsName.trim().length() == 0) {
 				errorMsgs.put("mealsName","名稱:請勿空白");
 			} else if (!mealsName.trim().matches(enameReg)) { // 以下練習正則(規)表示式(regular-expression)
@@ -255,11 +253,11 @@ public class MealsServlet extends HttpServlet{
 			}
 			
 			
-			
+			String enameReg1 = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,100}$";
 			String mealsInfo = req.getParameter("mealsInfo");
 			if (mealsInfo == null || mealsInfo.trim().length() == 0) {
 				errorMsgs.put("mealsInfo","菜色說明:請勿空白");
-			} else if (!mealsInfo.trim().matches(enameReg)) { // 以下練習正則(規)表示式(regular-expression)
+			} else if (!mealsInfo.trim().matches(enameReg1)) { // 以下練習正則(規)表示式(regular-expression)
 				errorMsgs.put("mealsInfo:","菜色說明:只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
 			}
 
@@ -269,28 +267,38 @@ public class MealsServlet extends HttpServlet{
 				mealsPicture = new byte[in.available()];
 				in.read(mealsPicture);
 				in.close();
-			}  else errorMsgs.put("upFiles","員工照片: 請上傳照片");
+			}  else {errorMsgs.put("upFiles","員工照片: 請上傳照片");
+				System.out.println("沒有照片");
+			};
 			Integer mealsControl =0;
 			String[] mealsControl1 = null;
 			try {
 				mealsControl1 = req.getParameterValues("mealsControl");
 				if (mealsControl1[0].equals("0")) {
 					 mealsControl = 0;
-					 System.out.println(0);
+					 System.out.println('0');
 				}else if (mealsControl1[0].equals("1")) {
 					mealsControl = 1;
-					System.out.println(1);	
+					System.out.println('1');	
 				}
 			} catch (Exception e) {
-				errorMsgs.put("mealsControl",": 請選擇上下架");
+//				errorMsgs.put("mealsControl",": 請選擇上下架");
+				System.out.println("1234");
 			}
+			System.out.println(mealsCategoryID);
+			System.out.println(mealsName);
+			System.out.println(mealsPrice);
+			System.out.println(mealsInfo);
+//			System.out.println(mealsPicture);
+			System.out.println(mealsControl);
 			
 			MealsVO mealsVO = new MealsVO();
 			mealsVO.setMealsCategoryID(mealsCategoryID);
 			mealsVO.setMealsName(mealsName);
 			mealsVO.setMealsPrice(mealsPrice);
-			mealsVO.setMealsControl(mealsControl);
+			mealsVO.setMealsInfo(mealsInfo);
 			mealsVO.setMealsPicture(mealsPicture);
+			mealsVO.setMealsControl(mealsControl);
 
 			
 			
