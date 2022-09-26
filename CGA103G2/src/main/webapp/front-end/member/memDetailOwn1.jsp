@@ -92,7 +92,9 @@
 		<!-- 			</div> -->
 		<!-- 		</form> -->
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
+		<div style="text-align:center;width:50%;margin:0 auto;">
 		<h2>&emsp;${memVO.memName}&emsp;個人訊息</h2>
+		
 		<table class="dataTable table-striped thead-primary"
 			style="width: 80%">
 			<table>
@@ -145,6 +147,7 @@
 				</td>
 			</tr>
 		</table>
+		</div>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->

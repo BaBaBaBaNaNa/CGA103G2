@@ -68,7 +68,7 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
-		<h2>修改員工訊息</h2>
+		<h2>修改會員訊息</h2>
 
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
