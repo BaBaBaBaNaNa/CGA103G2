@@ -69,7 +69,7 @@
 		<div class="ms-auth-form">
 			<FORM METHOD="post" ACTION="Meals.do" name="form1" enctype="multipart/form-data">
 		
-				<h3>新增職位名稱</h3>
+				<h3>新增菜色</h3>
 				
 				<div class="form-row">
 					

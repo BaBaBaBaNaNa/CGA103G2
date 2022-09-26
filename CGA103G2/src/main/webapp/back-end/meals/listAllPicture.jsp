@@ -72,7 +72,7 @@
 		<hr>
 			<div style="text-align: center;">
 				<FORM METHOD="post" ACTION="Meals.do">
-					<b>輸入菜系編號 (如1):</b> <input type="text" name="mealsID">
+					<b>輸入菜色編號 (如1):</b> <input type="text" name="mealsID">
 					<input type="hidden" name="action" value="getOne_For_Display">
 					<input type="submit" value="送出">
 				</FORM>
