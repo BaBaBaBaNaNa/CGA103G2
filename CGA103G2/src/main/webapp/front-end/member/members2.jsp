@@ -200,14 +200,13 @@ if ((request.getAttribute("errorMessage") != null)) {
 						<
 						<input type="text" id="user-name" name="memName"
 							class="form-control" placeholder="姓名" required="" autofocus=""
-							value="<%=(memVO == null) ? "" : memVO.getMemName()%>"><p style="color:red">${errorMsgs.memName} </p>  <input
-							type="text" id="user-account" name="memAccount"
+							value="<%=(memVO == null) ? "" : memVO.getMemName()%>"><p style="color:red">${errorMsgs.memName} </p>  
+							<input type="text" id="user-account" name="memAccount"
 							class="form-control" placeholder="帳號" required autofocus=""
 							value="<%=(memVO == null) ? "" : memVO.getMemAccount()%>"><p style="color:red">${errorMsgs.memAccount} </p>
 						<input type="password" id="user-pass" class="form-control"
-							name="memPassword"
-							value="<%=(memVO == null) ? "" : memVO.getMemPassword()%>"><p style="color:red">${errorMsgs.memPassword} </p>
-							placeholder="密碼" required autofocus=""> <select
+							name="memPassword" value="<%=(memVO == null) ? "" : memVO.getMemPassword()%>" placeholder="密碼" required autofocus=""> 
+							<select
 							name="memGender" class="form-control">
 							<option value="0">男生</option>
 							<option value="1">女生</option>
