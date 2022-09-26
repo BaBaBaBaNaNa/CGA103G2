@@ -7,6 +7,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.emp.model.EmpVO;
 import com.login.model.EmpLoginVO;
 import com.mem.model.MemVO;
 
@@ -36,7 +37,7 @@ public class MemDAO implements MemDAO_interface {
 	private static final String UPDATE = "UPDATE members set memname=?, memaccount=?, mempassword=?, memgender=?, memphone=?, mememail=?, memaddress=?, membirthday=?, mempermission=? where memID = ?";
 	private static final String GetOwnSTMT = "SELECT * FROM members where memAccount = ?";
 	private static final String UPDATEPASSWORD = "UPDATE members SET mempassword =? WHERE memID=?";
-
+	private static final String CheckRepeatEmpAccount= "SELECT memAccount FROM members where memAccount = ?";
 	@Override
 	public boolean loginAdmin(MemVO admin) {
 		Connection con = null;
@@ -538,9 +539,67 @@ public class MemDAO implements MemDAO_interface {
 
 	}
 	// ----- ----- ----- 修改密碼 stop ----- ----- -----
+	
+	
+	
+	// ----- ----- ----- checkRepeatMemAccount start ----- ----- -----
+	@Override
+	public MemVO checkRepeatMemAccount(String memAccount) {
 
+		MemVO memVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(CheckRepeatEmpAccount);
+			
+			pstmt.setString(1, memAccount);
+			
+			rs = pstmt.executeQuery();
+//			System.out.println(rs);
+			while (rs.next()) {
+				// empVo 也稱為 Domain objects
+				memVO = new MemVO();
+
+				memVO.setMemName(rs.getString("memAccount"));
+
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memVO;
+	}
 }
-
+	// ----- ----- ----- checkRepeatMemAccount stop ----- ----- -----
+	
+	
+	
+	
 //----- ----- ----- 修改密碼 start ----- ----- -----
 //@Override
 //public void updateMemPW(Integer memID, String memPassword) {
