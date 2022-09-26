@@ -41,7 +41,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/front-end/contact/contact.jsp">客服</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/front-end/botqa/botqaIndex5.jsp">客服</a>
                     </li>
 
                     <li class="nav-item">

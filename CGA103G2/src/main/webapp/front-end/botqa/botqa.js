@@ -39,6 +39,7 @@ $(document).ready(() => {
 	$("#form-start").on("submit", (event) => {
 		event.preventDefault();
 		$userName = $("#username").val();
+		postBotReply("你好!! " + $userName + "有需要神麼幫助的嗎");
 		$("#landing").slideUp(300);
 		setTimeout(() => {
 			$("#start-chat").html("Continue chat")
@@ -108,7 +109,7 @@ $(document).ready(() => {
 			var a = a1[index];
 			var b = a1[index+1];
 		
-			if (/a/.test(message)) reply = [b];
+//			if (/a/.test(message)) reply = [b];
 		    if(message ===a	){
 			console.log(b);
 			reply=[b];
