@@ -197,7 +197,7 @@ if ((request.getAttribute("errorMessage") != null)) {
 
 
 						<!--                     ==========放註冊表單用的-原始備份用================ -->
-						<
+						
 						<input type="text" id="user-name" name="memName"
 							class="form-control" placeholder="姓名" required="" autofocus=""
 							value="<%=(memVO == null) ? "" : memVO.getMemName()%>"><p style="color:red">${errorMsgs.memName} </p>  
