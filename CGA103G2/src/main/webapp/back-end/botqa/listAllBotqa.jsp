@@ -41,7 +41,8 @@
 		text-align: left;
 		font-weight: bold;
 	}
-</style>
+
+<!-- </style> -->
 </head>
 <body>
 
@@ -82,6 +83,5 @@
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
-
 </body>
 </html>

@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>所有員工資料 - listAllEmp.jsp</title>
-
+<script src="box.js"></script>
 <%@ include file="included-fragment.file" %>
 <style type="text/css">
     
@@ -65,7 +65,10 @@
 	</tr>
     <%@ include file="page1.file" %>
 	<c:forEach var="mealsVO" items="${MealsListData}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="s">
+		<script>
+		adda1("${mealsVO.mealsID}");
 		
+		</script>
 		<tr>
             <%-- <td>${s.count}</td> --%>
 			<td>${mealsVO.mealsID}</td>

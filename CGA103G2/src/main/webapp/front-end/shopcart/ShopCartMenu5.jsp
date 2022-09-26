@@ -5,12 +5,15 @@
 <%@ page import="com.meals.model.*"%>
 <%@ page import="com.meals.controller.MealsServlet"%>
 <%@ page import="com.mealscateory.model.*"%>
-
-<%-- <jsp:useBean id="MealsSvc" scope="page" --%>
-<%-- 	class="com.meals.model.MealsService" /> --%>
-<%-- <jsp:useBean id="list" scope="session" type="java.util.List<MealsVO>" /> --%>
+<%@ page import="com.botqa.model.*"%>
+<%@ page import="com.botqa.controller.BotqaServlet"%>
 
 <%
+	BotqaService botqaSvc = new BotqaService();
+	List<BotqaVO> list4 = botqaSvc.getAll();
+	pageContext.setAttribute("list4",list4);
+
+
 	MealsCategoryService mealsCategorySvc = new MealsCategoryService();
 	List<MealsCategoryVO> list1 = mealsCategorySvc.getAll();
 	pageContext.setAttribute("list1",list1);
@@ -35,6 +38,13 @@
 <title>義鄉人 - 義式餐酒館 - 訂單 - 緯育 中壢Java班 CGA_103 第二組</title>
 
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
+
+
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.0/css/all.min.css'>
+<link  href="../botqa/style.css" rel="stylesheet">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src="../botqa/botqa.js"></script>
+
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -95,6 +105,9 @@
     justify-content: flex-start;
 /*      align-items: center;  */
 }
+.shop{
+/*    position: absolute;   */
+}
 
 </style>
 </head>
@@ -115,12 +128,13 @@
 		<!-- Food Widget -->
 		<!-- 		col-xl-6 col-md-12 -->
 		
-		<div class="">
+		<div class="shop">
 			<div class="ms-panel ms-widget ms-crypto-widget">
 				<div class="ms-panel-header">
 					<h6>美味餐點</h6>
 					<p>選擇你想吃的食物</p>
 				</div>
+		<jsp:include page="../botqa/botqaIndex3.jsp"></jsp:include><!-- 第二種 -->
 				
 				<div class="ms-panel-body p-0">
 					<ul class="nav nav-tabs nav-justified has-gap px-4 pt-4"

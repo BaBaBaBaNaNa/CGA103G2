@@ -76,7 +76,7 @@ MealsVO mealsVO = (MealsVO) request.getAttribute("mealsVO"); //EmpServlet.java (
 				enctype="multipart/form-data">
 				<h3>修改職位名稱</h3>
 				<div class="form-row">
-					<div class="col-md-12">
+					<div class="col-md-12"> 
 						<label>菜色編號:</label>
 						<div class="input-group">
 							<input id="mealsID" name="mealsID" type="text"

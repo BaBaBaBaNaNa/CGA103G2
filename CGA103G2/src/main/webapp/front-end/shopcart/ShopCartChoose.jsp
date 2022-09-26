@@ -31,6 +31,8 @@
 
 <link href="../../front-assets/css/tooplate-crispy-kitchen.css" rel="stylesheet">
 
+		<link rel="stylesheet" href="../botqa/style.css">
+	<script src="../botqa/botqa.js"></script>
 <!-- <link href="../../front-assets/css/navbar.css" rel="stylesheet"> -->
 
 <!-- <link href="../../front-assets/css/shoppingcart/ShoppingCart.css" rel="stylesheet"> -->
@@ -61,6 +63,7 @@
 	<main>
 		<!-- ----- ----- ----- 中間上面 start ----- ----- ----- -->
 		<header> </header>
+<jsp:include page="../botqa/botqaIndex2.jsp"></jsp:include>
 		<!-- ----- ----- ----- 中間上面 end ----- ----- ----- -->
 
 		<!-- ----- ----- ----- 中間內容 start ----- ----- ----- -->

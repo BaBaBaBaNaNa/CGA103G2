@@ -5,20 +5,14 @@
 <%@ page import="com.meals.model.*"%>
 <%@ page import="com.meals.controller.MealsServlet"%>
 <%@ page import="com.mealscateory.model.*"%>
-
-<%-- <jsp:useBean id="MealsSvc" scope="page" --%>
-<%-- 	class="com.meals.model.MealsService" /> --%>
-<%-- <jsp:useBean id="list" scope="session" type="java.util.List<MealsVO>" /> --%>
+<%@ page import="com.botqa.model.*"%>
+<%@ page import="com.botqa.controller.BotqaServlet"%>
 
 <%
-	MealsCategoryService mealsCategorySvc = new MealsCategoryService();
-	List<MealsCategoryVO> list1 = mealsCategorySvc.getAll();
-	pageContext.setAttribute("list1",list1);
 	
-	MealsService mealsSvc = new MealsService();
-	List<MealsVO> list = mealsSvc.getAll();
-	pageContext.setAttribute("list",list);
-	
+	BotqaService botqaSvc = new BotqaService();
+	List<BotqaVO> list4 = botqaSvc.getAll();
+	pageContext.setAttribute("list4",list4);
 %>
 
 
@@ -32,8 +26,10 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>義鄉人 - 義式餐酒館 - 訂單 - 緯育 中壢Java班 CGA_103 第二組</title>
-
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.0/css/all.min.css'>
+	<link rel="stylesheet" href="./style.css">
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+	<script src="botqa.js"></script>
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,7 +56,6 @@
 
 <!-- <link href="../../front-assets/css/shoppingcart/ShoppingCart.css" rel="stylesheet"> -->
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
-
 <style>
 .show-cart li {
 	display: flex;
@@ -95,7 +90,23 @@
     justify-content: flex-start;
 /*      align-items: center;  */
 }
-
+	h2 { 
+    font-size: 1rem; 
+    font-weight: 400; 
+    color:	white	;
+ }
+.size{
+	width: 30%;
+    hight: 100%;
+    margin-left: auto;
+/*     display:none; */
+}
+#listBtn{
+background-color: #dc3545;
+    font-size: 18px;;
+    padding: 10px 35px;
+        border-radius: 0.25rem;
+}
 </style>
 </head>
 
@@ -107,129 +118,99 @@
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
 	<main>
-		<%@ include file="../../back-end/tool/page3.file"%>
 		<!-- ----- ----- ----- 中間上面 start ----- ----- ----- -->
 		<header> </header>
 
 		<!-- 		<button id="demo8">Demo 8</button> -->
 		<!-- Food Widget -->
 		<!-- 		col-xl-6 col-md-12 -->
+		<c:forEach var="BotqaVO" items="${list4}">
+		<script>
+			adda1("${BotqaVO.keywordName}","${BotqaVO.keywordContext}");
+			adda2("${BotqaVO.keywordContext}");
 		
-		<div class="">
-			<div class="ms-panel ms-widget ms-crypto-widget">
-				<div class="ms-panel-header">
-					<h6>美味餐點</h6>
-					<p>選擇你想吃的食物</p>
-				</div>
-				
-				<div class="ms-panel-body p-0">
-					<ul class="nav nav-tabs nav-justified has-gap px-4 pt-4"
-						role="tablist">
-						<li role="presentation" class="fs-12"><a href="#btc"
-							aria-controls="btc" class="active show" role="tab"
-							data-toggle="tab">前菜 </a></li>
-					<c:forEach var="MealsCategoryVO" items="${list1}"
-											begin="<%=pageIndex +1%>" end="<%=pageIndex+rowsPerPage-1%>">
-<%-- 										<h4 class="card-title">${MealsCategoryVO.mealsCategoryId}</h4>	 --%>
-<%-- 										<h4 class="card-title">${MealsCategoryVO.mealsCategory}</h4> --%>
-										<li role="presentation" class="fs-12"><a href="#${MealsCategoryVO.mealsCategory}"
-							aria-controls="${MealsCategoryVO.mealsCategory}" role="tab" data-toggle="tab">${MealsCategoryVO.mealsCategory}</a></li>
-					</c:forEach>
-					</ul>
-					<div class="tab-content">
-						<!--                             --------------沙拉------------------- -->
-						<div role="tabpanel" class="tab-pane active show fade in" id="btc">
+		</script>
+		</c:forEach>
+<html>
 
-							<div class="table-responsive">
-								<div class="container">
-									<div class="row">
-										<c:forEach var="MealsVO" items="${list}"
-											begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-											<c:if test="${MealsVO.mealsCategoryID ==1}">
-												<div class="col">
-													<div class="card" style="width: 20rem;">
-														<img class="card-img-top" alt="Card image cap"
-															src="<%=request.getContextPath()%>/meals/DBGifReader?mealsID=${MealsVO.mealsID}"
-															width="100px">
-														<div class="card-block">
-															<h4 class="card-title">${MealsVO.mealsName}</h4>
-															<p class="card-text">價錢:${MealsVO.mealsPrice}</p>
-															
-															<a 
-																data-id="${MealsVO.mealsID}" 
-																data-name="${MealsVO.mealsName}"
-																data-price="${MealsVO.mealsPrice}"
-																data-info="${MealsVO.mealsInfo}" class="Info">查看詳情</a>
-															<a href="#"
-																data-id="${MealsVO.mealsID}" 
-																data-name="${MealsVO.mealsName}"
-																data-price="${MealsVO.mealsPrice}"
-																class="add-to-cart btn btn-primary">加入購物車</a>
-														</div>
-													</div>
-												</div>
-											</c:if>
-										</c:forEach>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--                             --------------前菜------------------- -->
-						
-						
-<!-- 						-----------測試------>
-						<c:forEach var="MealsCategoryVO" items="${list1}"
-											begin="<%=pageIndex +1%>" end="<%=pageIndex+rowsPerPage-1%>">
-										<div role="tabpanel" class="tab-pane fade" id="${MealsCategoryVO.mealsCategory}">
+	<head>
+		<title>jQuery ChatBot</title>
+	</head>
 
-							<div class="table-responsive">
-								<div class="container">
-									<div class="row">
-										<c:forEach var="MealsVO" items="${list}"
-											begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-											<c:if test="${MealsVO.mealsCategoryID  ==  MealsCategoryVO.mealsCategoryId}">
-												<c:if test="${MealsVO.mealsControl==1}">
-													<div class="col">
-														<div class="card" style="width: 20rem;">
-															<img class="card-img-top" alt="Card image cap"
-																src="<%=request.getContextPath()%>/meals/DBGifReader?mealsID=${MealsVO.mealsID}"
-																width="100px">
-																<div class="card-block">
-															<h4 class="card-title">${MealsVO.mealsName}</h4>
-															<p class="card-text">${MealsVO.mealsPrice}</p>
-															<a  data-id="${MealsVO.mealsID}" 
-																data-name="${MealsVO.mealsName}"
-																data-price="${MealsVO.mealsPrice}"
-																data-info="${MealsVO.mealsInfo}" class="Info">查看詳情</a>
-															<a href="#" 
-															data-id="${MealsVO.mealsID}" 
-															data-name="${MealsVO.mealsName}"
-																data-price="${MealsVO.mealsPrice}"
-																class="add-to-cart btn btn-primary">加入購物車</a>
-														</div>
-													</div>
-												</div>
-											</c:if>
-											</c:if>
-										</c:forEach>
-									</div>
-								</div>
-
-							</div>
-						</div>
-					
-											
-						</c:forEach>
-						
-						
-
-
-						
-					
+	<body>
+	<button id="listBtn" onclick="listBtn()"> 開啟客服</button>
+	<div class= "size fas" id="size" style="display:none;">
+		<div id="phone-wrapper">
+			<div id="app">
+				<div id="landing" class="bg-dark text-light" style="">
+					<span class="fas fa-robot fa-4x"></span>
+					<div>
+						<h1 class="mt-3">ChatBot</h1>
 					</div>
+					<form id="form-start">
+						<input type="text" name="username" id="username" value="" placeholder="Your name" required>
+						<button type="submit" id="start-chat">Start chat</button>
+					</form>
+				</div>
+				<div id="header" class="bg-dark">
+					<!-- <div>
+						<button id="back-button" class="text-light btn-transparent btn-icon fas fa-arrow-left"></button>
+					</div> -->
+					<div class="text-light align-center">
+						<h2>ChatBot</h2>
+					</div>
+					<div>
+						<!-- <button id="nav-icon" class="text-light btn-transparent btn-icon fas fa-bars"></button>
+						<nav id="nav-container" style="display: none;">
+							<ul class="nav">
+								<li id="search" class="nav-link"><span class="fas fa-search"></span>Search</li>
+								<li id="clear-history" class="nav-link"><span class="fas fa-trash-alt"></span>Clear
+									history</li>
+								<li id="theme" class="nav-link"><span class="fas fa-cogs"></span>Settings</li>
+								<hr>
+								<li id="sign-out" class="nav-link"><span class="fas fa-sign-out-alt"></span>Sign out
+								</li>
+							</ul>
+						</nav> -->
+					</div>
+				</div>
+				<div id="message-board">
+
+
+				</div>
+				<div id="form" class="bg-light">
+					<div id="emoijis" style="display: none;">
+						<button class="smiley btn-transparent btn-icon"><span class="far fa-grin-beam"></span></button>
+						<button class="smiley btn-transparent btn-icon"><span class="far fa-grin"></span></button>
+						<button class="smiley btn-transparent btn-icon"><span class="far fa-grin-wink"></span></button>
+						<button class="smiley btn-transparent btn-icon"><span
+								class="far fa-grin-tongue"></span></button>
+						<button class="smiley btn-transparent btn-icon"><span
+								class="far fa-grin-tongue-wink"></span></button>
+						<button class="smiley btn-transparent btn-icon"><span
+								class="far fa-kiss-wink-heart"></span></button>
+						<button class="smiley btn-transparent btn-icon"><span
+								class="far fa-grin-hearts"></span></button>
+						<button class="smiley btn-transparent btn-icon"><span class="far fa-surprise"></span></button>
+						<button class="smiley btn-transparent btn-icon"><span class="far fa-angry"></span></button>
+						<button class="smiley btn-transparent btn-icon"><span class="far fa-tired"></span></button>
+						<button class="smiley btn-transparent btn-icon"><span class="far fa-sad-tear"></span></button>
+						<button class="smiley btn-transparent btn-icon"><span
+								class="far fa-grin-squint-tears"></span></button>
+						<button class="smiley btn-transparent btn-icon"><span class="far fa-sad-cry"></span></button>
+						<button class="smiley btn-transparent btn-icon"><span class="far fa-dizzy"></span></button>
+					</div>
+					<div><button id="emoi" class="btn-transparent btn-icon far fa-grin"></button></div>
+					<div id="message" placeholder="Type your message here" rows="1" contenteditable></div>
+					<div><button id="send" type="" class="btn-transparent btn-icon fas fa-paper-plane"></button></div>
 				</div>
 			</div>
 		</div>
+	</div>
+
+	</body>
+
+	</html>
 
 
 		<!-- ----- ----- ----- 中間上面 end ----- ----- ----- -->
@@ -366,45 +347,7 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
-	<script>
-				$('.Info').click(function(event) {
-					event.preventDefault();
-					var name = $(this).data('name');
-					var price = Number($(this).data('price'));
-			        var info = ($(this).data('info'));
-			        var id = ($(this).data('id'));
-					console.log(name);
-					console.log(info);
-					swal.fire({
-					 title: name,
-		                html: "價錢:" + price + "<p></p>" + info ,
-		                text: 'Modal with a custom image.',
-		                imageUrl: '/CGA103G2//meals/DBGifReader?mealsID='+id,
-		                imageWidth: 400,
-		                imageHeight: 200,
-		                imageAlt: 'Custom image',
-		                showCancelButton: true,
-		                confirmButtonColor: '#3085d6',
-		                cancelButtonColor: '#d33',
-		                cancelButtonText: '取消',
-		                confirmButtonText: '加入購物車!'
-		            }).then((result) => {
-		                if (result.isConfirmed) {
-		                    Swal.fire(
-		                    	'success',
-		                        '成功加入購物車',
-		                        'success'
-		                    )
-		                    shoppingCart.addItemToCart(name, price, 1,id);
-		                	displayCart();
-		                }
-		            })
-					
-				});
-		
-
-      
-            </script>
+	
 </body>
 
 </html>

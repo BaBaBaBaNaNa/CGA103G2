@@ -34,7 +34,7 @@
 <link href="../../back-assets/css/empDetailStyle.css" rel="stylesheet">
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
 </head>
-
+	<script src="box.js"></script>
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
 
 	<!-- ----- ----- ----- 進入網站的讀取圈圈 start ----- ----- ----- -->
