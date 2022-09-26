@@ -133,7 +133,7 @@
 						<li role="presentation" class="fs-12"><a href="#btc"
 							aria-controls="btc" class="active show" role="tab"
 							data-toggle="tab">前菜 </a></li>
-					<c:forEach var="MealsCategoryVO" items="${list1}"
+						<c:forEach var="MealsCategoryVO" items="${list1}"
 											begin="<%=pageIndex +1%>" end="<%=pageIndex+rowsPerPage-1%>">
 <%-- 										<h4 class="card-title">${MealsCategoryVO.mealsCategoryId}</h4>	 --%>
 <%-- 										<h4 class="card-title">${MealsCategoryVO.mealsCategory}</h4> --%>
@@ -151,6 +151,7 @@
 										<c:forEach var="MealsVO" items="${list}"
 											begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 											<c:if test="${MealsVO.mealsCategoryID ==1}">
+											<c:if test="${MealsVO.mealsControl ==1}">
 												<div class="col">
 													<div class="card" style="width: 20rem;">
 														<img class="card-img-top" alt="Card image cap"
@@ -174,6 +175,7 @@
 													</div>
 												</div>
 											</c:if>
+											</c:if>
 										</c:forEach>
 									</div>
 								</div>
@@ -194,6 +196,7 @@
 											begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 											<c:if test="${MealsVO.mealsCategoryID  ==  MealsCategoryVO.mealsCategoryId}">
 												<c:if test="${MealsVO.mealsControl==1}">
+												
 													<div class="col">
 														<div class="card" style="width: 20rem;">
 															<img class="card-img-top" alt="Card image cap"
