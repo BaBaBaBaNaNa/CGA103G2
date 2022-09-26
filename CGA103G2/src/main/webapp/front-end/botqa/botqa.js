@@ -39,7 +39,7 @@ $(document).ready(() => {
 	$("#form-start").on("submit", (event) => {
 		event.preventDefault();
 		$userName = $("#username").val();
-		postBotReply("你好!! " + $userName + "有需要神麼幫助的嗎");
+		postBotReply("你好!! " + $userName + "有需要什麼幫助的嗎");
 		$("#landing").slideUp(300);
 		setTimeout(() => {
 			$("#start-chat").html("Continue chat")

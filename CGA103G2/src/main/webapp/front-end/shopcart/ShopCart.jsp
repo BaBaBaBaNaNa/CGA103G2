@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>義鄉人 - 義式餐酒館 - 訂單 - 緯育 中壢Java班 CGA_103 第二組</title>
+<title>義鄉人 - 義式餐酒館 - 購物車 - 緯育 中壢Java班 CGA_103 第二組</title>
 
 <!-- ----- ----- ----- CSS&Front設定 start ----- ----- ----- -->
 
@@ -32,23 +32,11 @@
 <link href="../../front-assets/css/tooplate-crispy-kitchen.css" rel="stylesheet">
 
 <!-- <link href="../../front-assets/css/shoppingcart/ShoppingCart.css" rel="stylesheet"> -->
+<!-- GoTop -->
+<link href="${pageContext.request.contextPath}/back-assets/css//gotop/GoTop.css" rel="stylesheet">
 
 <!-- ----- ----- ----- CSS&Front設定 end ----- ----- ----- -->
-<style>
-.show-cart li {
-	display: flex;
-}
 
-.card {
-	margin-bottom: 20px;
-}
-
-.card-img-top {
-	width: 200px;
-	height: 200px;
-	align-self: center;
-}
-</style>
 
 </head>
 
@@ -67,6 +55,11 @@
 
 		<section class="about section-padding bg-white">
 			<hr>
+				<div id="dg" style="z-index: 9999; position: fixed ! important; right: 0px; top: 100px;">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.href='${pageContext.request.contextPath}/back-end/meals/MealsServlet.do?action=getAll1'">回到菜單</button>
+					<br>
+					<button type="button" class="btn btn-primary" onclick="window.location.href='../../front-end/shopcart/ShopCart.jsp'">確認購物車</button>
+				</div>
 <!-- 			<form METHOD="post" ACTION="ShopCartServlet.do" name="form1"> -->
 				<div class="modal-fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<!-- 						<div class="modal-dialog modal-dialog-centered modal-xl"> -->
@@ -106,6 +99,9 @@
 			<hr>
 		</section>
 		<!-- ----- ----- ----- 中間內容 end ----- ----- ----- -->
+		<!-- ----- ----- -----   按鈕-回到網頁最上面 start ----- ----- ----- -->
+		<button type="button" id="GoTop" class="GoTop-arrow" style="z-index:9999;"></button>
+		<!-- ----- ----- -----   按鈕-回到網頁最上面 end ----- ----- ----- -->
 	</main>
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
 
@@ -123,6 +119,8 @@
 	<script src="../../front-assets/js/custom.js"></script>
 
 	<script src="../../front-assets/js/shoppingcart/ShoppingCart.js"></script>
+	<!-- GoTop -->
+	<script src="${pageContext.request.contextPath}/front-assets/js/gotop/GoTop.js"></script>
 	<!-- ----- ----- ----- Script End ----- ----- ----- -->
 
 </body>

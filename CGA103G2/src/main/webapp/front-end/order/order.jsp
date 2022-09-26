@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="zh-tw">
 
@@ -75,7 +75,7 @@
     <!-- ----- ----- ----- 頁面 底部 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 跳出預先訂位頁面 start ----- ----- ----- -->
-		<%@ include file="../../front-end/tool/RsvtButton.file"%>
+	
 	<!-- ----- ----- ----- 跳出預先訂位頁面 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- Script Start ----- ----- ----- -->

@@ -34,7 +34,7 @@ public class MemLogoutServlet extends HttpServlet {
 		System.out.println("SessionId : "+request.getRequestedSessionId() + " 已失效");
 		System.out.println("登出成功!");
 		
-		request.getRequestDispatcher("/front-end/member/members.jsp").forward(request, response);
+		request.getRequestDispatcher("/FrontIndex.jsp").forward(request, response);
 //		response.sendRedirect("BackLogin.jsp");
 		return;
 	}

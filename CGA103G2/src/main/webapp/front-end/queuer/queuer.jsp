@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="zh-tw">
 
@@ -111,7 +111,7 @@
 				</div>
 
 				<div class="col-12" style="text-align:center;margin-top:100px;">
-					<button type="button" class="btn btn-danger" id="queueInListBtn" onclick="queueInListBtn">我要候位</button>
+					<button type="button" class="btn btn-danger" id="queueInListBtn" onclick="queueInListBtn" disabled="disabled">我要候位</button>
 						<div class="news-text-info"></div>
 				</div>
 
@@ -200,7 +200,7 @@
 	</footer>
 	<!-- ----- ----- ----- 底部 end ----- ----- ----- -->
 
-	<!-- ----- ----- ----- 跳出預先訂位頁面 start ----- ----- ----- -->
+<!-- ----- ----- ----- 跳出預先訂位頁面 start ----- ----- ----- -->
 	<!-- Modal -->
 	<div class="modal fade" id="BookingModal" tabindex="-1"
 		aria-labelledby="BookingModal" aria-hidden="true">
@@ -380,19 +380,12 @@
 
 		}
 
-		window.onload = function() {
-			
-			showFirstQueuerNO()
-			setInterval(showRemainNO, 1000);
-			setInterval(showCurrentNO, 1000);
 
-		}
-	</script>
-		<script type="text/javascript">
     
     $(document).ready(function(){
     	 
         $("#queueInListBtn").click(function(){
+
 
             $.ajax({
 
@@ -419,7 +412,60 @@
 
      });  
 
- </script>
+    
+    function checkSystem(){
+    	
+        $.ajax({
+
+            url: "<%=request.getContextPath()%>/queuer/QueuerServlet.do",     
+
+            data: {
+           	 action: "getSystemOpen", 
+            },
+
+            success : function(res){
+				
+            	if(JSON.parse(res).system == "open"){
+            	$("#queueInListBtn").attr("disabled", false);
+            	}else{
+            		alert('尚未開放候位，請您稍候。')
+            	}
+           	 	
+            },
+            
+
+            error:function(xhr, ajaxOptions, thrownError){
+
+                alert(xhr.status+"\n"+thrownError);
+            }
+
+        });
+    	
+    }
+    
+	let a = 0;
+    function myTurn(){
+      if( a == 0 && localStorage.getItem('queuerNO') != null && localStorage.getItem('currentNO') != null && localStorage.getItem('queuerNO') == localStorage.getItem('currentNO') ){
+        alert('已經輪到您囉！')
+      }
+        a++;
+    }
+    function loseChance(){
+    	if( a == 1 && localStorage.getItem('currentNO') > localStorage.getItem('queuerNO')){
+    		alert('抱歉，您已過號！')
+    	}
+    	a++;
+    }
+    window.onload = function() {
+		checkSystem();
+		showFirstQueuerNO();
+		setInterval(showRemainNO, 1000);
+		setInterval(showCurrentNO, 1000);
+// 		setInterval(myTurn,1000);
+// 		setInterval(loseChance,1000);
+	}
+    </script>
+
 	
 </body>
 

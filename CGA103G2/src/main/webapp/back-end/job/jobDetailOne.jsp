@@ -68,24 +68,26 @@ pageContext.setAttribute("list", list);
 		<h2>查看員工訊息</h2>
 		<table>
 			<tr>
-				<th>員工編號</th>
-				<th>員工姓名</th>
+				<th>編號</th>
+				<th>職務名稱</th>
 				<th>修改</th>
-				<th>刪除</th>
+<!-- 				<th>刪除</th> -->
 			</tr>
 			<tr>
 				<td>${jobVO.jobID}</td>
 				<td>${jobVO.jobName}</td>
 				<td>
 					<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/job/JobServlet.do" style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden" name="jobID" value="${jobVO.jobID}"> <input type="hidden" name="action" value="getOne_For_Update">
+						<input class="btn btn-info btn-sm" type="submit" value="修改"> <input type="hidden" name="jobID" value="${jobVO.jobID}"> <input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>
-				<td>
-					<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/job/JobServlet.do" style="margin-bottom: 0px;">
-							<input type="submit" value="刪除"> <input type="hidden" name="jobID" value="${jobVO.jobID}"> <input type="hidden" name="action" value="delete">
-					</FORM>
-				</td>
+<!-- 				<td> -->
+<%-- 					<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/job/JobServlet.do" style="margin-bottom: 0px;"> --%>
+<!-- 							<input type="submit" value="刪除">  -->
+<%-- 							<input type="hidden" name="jobID" value="${jobVO.jobID}">  --%>
+<!-- 							<input type="hidden" name="action" value="delete"> -->
+<!-- 					</FORM> -->
+<!-- 				</td> -->
 			</tr>
 		</table>
 		<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->

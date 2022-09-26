@@ -72,7 +72,7 @@
 				<h3>新增職位</h3>
 				<div class="form-row">
 					<div class="col-md-12 ">
-						<p>${errorMsgs.jobName}</p>
+						<p style="color:red;">${errorMsgs.jobName}</p>
 						<div class="input-group">
 							<input type="text" name="jobName" value="${param.jobName}" class="form-control" placeholder="請輸入職稱">
 						</div>

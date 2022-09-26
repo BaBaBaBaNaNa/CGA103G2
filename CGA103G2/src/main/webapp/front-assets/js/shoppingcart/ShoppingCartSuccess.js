@@ -205,46 +205,24 @@ $('.show-cart').on("change", ".item-count", function(event) {
 //新增訂單後顯示訂單類型
 //0:外帶, 1:外送, 2: 內用 單選 
 function viewType(){
+	var ordaddress = JSON.parse(sessionStorage.getItem('ordaddress'));
 	if(JSON.parse(sessionStorage.getItem('Type')) === "0"){
     	$("#orderType").text("外帶訂單");
     }
     if(JSON.parse(sessionStorage.getItem('Type')) === "1"){
     	$("#orderType").text("外送訂單");
+    	$("#ordaddress").text('外送地址:'+JSON.parse(sessionStorage.getItem('ordaddress')));
     }
     if(JSON.parse(sessionStorage.getItem('Type')) === "2"){
     	$("#orderType").text("內用訂單");
     }
-    
     //成立訂單重置
     sessionStorage.removeItem('shoppingCart');
     sessionStorage.removeItem('Type');
+    sessionStorage.removeItem('ordaddress');
 //    console.log(JSON.parse(sessionStorage.getItem('Type')));
 }
 
-var MyPoint = "/front-end/shopcart/ShopCartAddSuccess.jsp";
-var host = window.location.host;
-var path = window.location.pathname;
-var webCtx = path.substring(0, path.indexOf('/', 1));
-var endPointURL = "http://" + host + webCtx + MyPoint;
-
-// 當要把購物車送出產生訂單時
-$('#submit2').on("click",  function(event) {
-//	console.log(cart);
-	if(JSON.stringify(cart) === '{}' || JSON.stringify(cart) === '' || JSON.stringify(cart) === '[]'){
-//		console.log("請至少點一份餐點");
-		alert("請至少點一份餐點");
-	}
-	else{
-	  fetch('ShopCartServlet.do', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-		cart
-      }),
-    })
-    .then(resp => window.location.href='ShopCartAddSuccess.jsp');
-	}
-});
 // 執行顯示購物車
 displayCart();
 viewType();

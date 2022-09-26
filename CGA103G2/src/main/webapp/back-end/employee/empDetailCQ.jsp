@@ -86,7 +86,7 @@
 				<th style="width: 10% ;">員工<br>職位</th>
 				<th style="width: 10% ;">員工<br>入職日期</th>
 				<th style="width: 5% ;">修改</th>
-				<th style="width: 5% ; display: none">刪除</th>
+<!-- 				<th style="width: 5% ; ">刪除</th> -->
 			</tr>
 			<div style="text-align: center">
 			<%@ include file="../../back-end/employee/EmpCQpage1.file"%>
@@ -105,16 +105,17 @@
 					<td style="width: 10% ; ">${empVO.empHiredate}</td>
 					<td style="width: 5% ; ">
 						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;">
-							<input type="submit" value="修改"> <input type="hidden" name="empID" value="${empVO.empID}"> 
+							<input class="btn-info btn-sm" type="submit" value="修改"> 
+							<input type="hidden" name="empID" value="${empVO.empID}"> 
 							<input type="hidden" name="action" value="getOne_For_Update">
 						</FORM>
 					</td>
-					<td style="width: 5% ; height:100px ; display: none ; ">
-						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;">
-							<input type="submit" value="刪除"> <input type="hidden" name="empID" value="${empVO.empID}"> 
-							<input type="hidden" name="action" value="delete">
-						</FORM>
-					</td>
+<!-- 					<td style="width: 5% ; height:100px ; "> -->
+<%-- 						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/back-end/employee/EmpServlet.do" style="margin-bottom: 0px;"> --%>
+<%-- 							<input type="submit" value="刪除"> <input type="hidden" name="empID" value="${empVO.empID}">  --%>
+<!-- 							<input type="hidden" name="action" value="delete"> -->
+<!-- 						</FORM> -->
+<!-- 					</td> -->
 				</tr>
 			</c:forEach>
 		</table>

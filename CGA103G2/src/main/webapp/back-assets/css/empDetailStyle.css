@@ -6,6 +6,7 @@ table {
 th{
 	width: 150px;
 	height:100px;
+/* 	background : red; */
 	color : black;
 	border: 2px solid DarkGray;
 	text-align: center;

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="zh-tw">
 
@@ -98,37 +98,37 @@
 			<table>
 			<tr>
 
-				<th style="width: 10%;"><br>會員編號</th>
-				<td style="width: 30%; text-align: left;">&emsp;&emsp;&emsp;${memVO.memID}</td>
+				<th style="width: 10%;text-align:center"><br>會員編號</th>
+				<td style="width: 30%; text-align: center;">&emsp;&emsp;&emsp;${memVO.memID}</td>
 				<!-- 照片未完成 -->
 				<!-- 						<th style="width: 40% ;">員工照片</th> -->
 			</tr>
 			<tr>
-				<th style="width: 10%;"><br>會員姓名</th>
-				<td style="width: 10%; text-align: left;">&emsp;&emsp;&emsp;${memVO.memName}</td>
+				<th style="width: 10%;text-align:center"><br>會員姓名</th>
+				<td style="width: 10%; text-align: center;">&emsp;&emsp;&emsp;${memVO.memName}</td>
 								
 			</tr>
 			<tr>
-				<th style="width: 10%;"><br>帳號</th>
-				<td style="width: 30%; text-align: left;">&emsp;&emsp;&emsp;${memVO.memAccount}</td>
+				<th style="width: 10%;text-align:center"><br>帳號</th>
+				<td style="width: 30%; text-align: center;">&emsp;&emsp;&emsp;${memVO.memAccount}</td>
 			</tr>
 
 
 			<tr>
-				<th style="width: 10%;"><br>電話</th>
-				<td style="text-align: ;" colspan="2">&emsp;&emsp;&emsp;${memVO.memPhone}</td>
+				<th style="width: 10%;text-align:center"><br>電話</th>
+				<td style="text-align:center ;" colspan="2">&emsp;&emsp;&emsp;${memVO.memPhone}</td>
 			</tr>
 			<tr>
-				<th style="width: 10%;"><br>地址</th>
-				<td style="text-align: left;" colspan="2">&emsp;&emsp;&emsp;${memVO.memAddress}</td>
+				<th style="width: 10%;text-align:center"><br>地址</th>
+				<td style="text-align: center;" colspan="2">&emsp;&emsp;&emsp;${memVO.memAddress}</td>
 			</tr>
 			<tr>
-				<th style="width: 10%;"><br>信箱</th>
-				<td style="text-align: left;" colspan="2">&emsp;&emsp;&emsp;${memVO.memEmail}</td>
+				<th style="width: 10%;text-align:center"><br>信箱</th>
+				<td style="text-align: center;" colspan="2">&emsp;&emsp;&emsp;${memVO.memEmail}</td>
 			</tr>
 			<tr>
-				<th style="width: 10%;"><br>生日</th>
-				<td style="text-align: left;" colspan="2">&emsp;&emsp;&emsp;${memVO.memBirthday}</td>
+				<th style="width: 10%;text-align:center"><br>生日</th>
+				<td style="text-align: center;" colspan="2">&emsp;&emsp;&emsp;${memVO.memBirthday}</td>
 			</tr>
 			</table>
 			<tr>
@@ -138,7 +138,7 @@
 						style="margin-bottom: 0px;">
 						&emsp;&emsp;&emsp; <input type="submit" value="修改"
 							class="btn btn-primary mt-4 d-block"
-							style="width: 50%; margin: 0 auto;"> <input type="hidden"
+							style="width: 30%; margin: 0 auto;"> <input type="hidden"
 							name="memID" value="${memVO.memID}"> <input type="hidden"
 							name="action" value="getOne_For_Update_mem">
 					</FORM>

@@ -4,7 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.orders.model.*"%>
 <%@ page import="java.sql.*"%>
-<%@page import="java.util.ArrayList"%>
+<%@ page import="java.util.ArrayList"%>
 
 <%
 ArrayList list = (ArrayList) request.getAttribute("orddetailsVO");

@@ -3,6 +3,35 @@ package com.queuer.model;
 import redis.clients.jedis.Jedis;
 
 public class QueuerRedisService {
+	public static void main(String[] args) {
+	
+		QueuerRedisService svc = new QueuerRedisService();
+		svc.getSystemOpen();
+		
+	}
+	
+	public void openShop() {
+		Jedis jedis =getJedisConnection();
+		
+		jedis.select(15);
+		
+		jedis.set("System", "open");
+	}
+	
+	public String getSystemOpen() {
+		Jedis jedis = getJedisConnection();
+		String getSystemOpen = "";
+		
+		if(!jedis.exists("System")) {
+			getSystemOpen = "";
+		}else {
+			getSystemOpen = jedis.get("System");
+		}
+		
+		System.out.println(getSystemOpen);
+		
+		return getSystemOpen;
+	}
 
 	public String showOverList() {
 		Jedis jedis = getJedisConnection();
@@ -131,7 +160,7 @@ public class QueuerRedisService {
 			overIndex = Integer.toString(Integer.parseInt(jedis.get("overIndex")) + 1);
 
 			jedis.set("overIndex", overIndex);
-			jedis.lpush("overList", jedis.get("currentNO"));
+			jedis.rpush("overList", jedis.get("currentNO"));
 		}
 
 		jedis.close();
@@ -247,6 +276,7 @@ public class QueuerRedisService {
 
 		return jedis;
 	}
+	
 
 	public void closeShop() {
 		Jedis jedis = getJedisConnection();

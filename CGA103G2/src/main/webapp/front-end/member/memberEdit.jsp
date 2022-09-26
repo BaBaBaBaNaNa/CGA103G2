@@ -45,10 +45,11 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 
 
 <body>
+
 	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 	
 	<!-- ----- ----- ----- 最上面 選擇列 start ----- ----- ----- -->
-	<%@ include file="../../front-end/tool/UpSideBar.file"%>
+	<%@ include file="../../front-end/tool/UpSideBarNoRSVT.file"%>
 	<!-- ----- ----- ----- 最上面 選擇列 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
@@ -60,11 +61,11 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 	<!-- ----- ----- ----- 中間 start ----- ----- ----- -->
 	<main class="body-content"padding-right: 0 px;>
 		<!-- ----- ----- -----   中間上面Bar start ----- ----- ----- -->
-		<%@ include file="../../back-end/tool/UpSideBar.file"%>
+		
 		<!-- ----- ----- -----   中間上面Bar end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間目錄條 start ----- ----- ----- -->
-		<%@ include file="../../back-end/tool/Upicon.file"%>
+		
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
@@ -150,6 +151,16 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 	</main>
 
 
+<!-- 測試修改密碼用 -->
+<!-- 			<div> -->
+<!-- 				<input type="hidden" name="action" value=updateMemPW> <input -->
+<%-- 					type="hidden" name="memID" value="<%=memVO.getMemID()%>"> <input --%>
+<!-- 					type="submit" value="送出修改"> -->
+<!-- 			</div> -->
+<!-- 		</form> -->
+<!-- 	</main> -->
+
+
 	<!-- ----- ----- -----   中間下面內容 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 中間 end ----- ----- ----- -->
@@ -227,86 +238,7 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 	<!-- ----- ----- ----- 底部 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- 跳出預先訂位頁面 start ----- ----- ----- -->
-	<div class="modal fade" id="BookingModal" tabindex="-1"
-		aria-labelledby="BookingModal" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-xl">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="mb-0">預先訂位</h3>
 
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-
-				<div class="modal-body d-flex flex-column justify-content-center">
-					<div class="booking">
-
-						<form class="booking-form row" role="form" action="#"
-							method="post">
-							<div class="col-lg-6 col-12">
-								<label for="name" class="form-label">您的名字</label> <input
-									type="text" name="name" id="name" class="form-control"
-									placeholder="Your Name" required>
-							</div>
-
-							<div class="col-lg-6 col-12">
-								<label for="email" class="form-label">Email</label> <input
-									type="email" name="email" id="email" pattern="[^ @]*@[^ @]*"
-									class="form-control" placeholder="your@email.com" required>
-							</div>
-
-							<div class="col-lg-6 col-12">
-								<label for="phone" class="form-label">電話號碼</label> <input
-									type="telephone" name="phone" id="phone"
-									pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control"
-									placeholder="123-456-7890">
-							</div>
-
-							<div class="col-lg-6 col-12">
-								<label for="people" class="form-label">訂位人數</label> <input
-									type="text" name="people" id="people" class="form-control"
-									placeholder="12 persons">
-							</div>
-
-							<div class="col-lg-6 col-12">
-								<label for="date" class="form-label">日期</label> <input
-									type="date" name="date" id="date" value="" class="form-control">
-							</div>
-
-							<div class="col-lg-6 col-12">
-								<label for="time" class="form-label">時間</label> <select
-									class="form-select form-control" name="time" id="time">
-									<option value="5" selected>5:00 PM</option>
-									<option value="6">18:00 PM</option>
-									<option value="7">19:00 PM</option>
-									<option value="8">20:00 PM</option>
-									<option value="10">21:00 PM</option>
-									<option value="11">22:00 PM</option>
-									<option value="12">23:00 PM</option>
-									<option value="13">00:00 AM</option>
-								</select>
-							</div>
-
-							<div class="col-12">
-								<label for="message" class="form-label">其他需求:</label>
-
-								<textarea class="form-control" rows="4" id="message"
-									name="message" placeholder=""></textarea>
-							</div>
-
-							<div class="col-lg-4 col-12 ms-auto">
-								<button type="submit" class="form-control">送出</button>
-							</div>
-						</form>
-					</div>
-				</div>
-
-				<div class="modal-footer"></div>
-
-			</div>
-
-		</div>
-	</div>
 	<!-- ----- ----- ----- 跳出預先訂位頁面 end ----- ----- ----- -->
 
 	<!-- ----- ----- ----- Script Start ----- ----- ----- -->

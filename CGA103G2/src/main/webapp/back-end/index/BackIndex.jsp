@@ -85,7 +85,7 @@
 									</div>
 									<div class="ms-card-heading-title">
 										<p>
-											數量 : <span class="red-text">15</span>
+											數量 : <span class="red-text">1</span>
 										</p>
 									</div>
 								</div>
@@ -100,7 +100,7 @@
 									</div>
 									<div class="ms-card-heading-title">
 										<p>
-											數量 : <span class="red-text">15</span>
+											數量 : <span class="red-text">1</span>
 										</p>
 									</div>
 								</div>
@@ -115,7 +115,7 @@
 									</div>
 									<div class="ms-card-heading-title">
 										<p>
-											數量 : <span class="red-text">15</span>
+											數量 : <span class="red-text">3</span>
 										</p>
 									</div>
 								</div>
@@ -142,7 +142,7 @@
 									</div>
 									<div class="ms-card-heading-title">
 										<p>
-											數量 : <span class="red-text">15</span>人
+											數量 : <span class="red-text">5</span>人
 										</p>
 									</div>
 								</div>
@@ -157,7 +157,7 @@
 									</div>
 									<div class="ms-card-heading-title">
 										<p>
-											數量 : <span class="red-text">15</span>人
+											數量 : <span class="red-text">1</span>人
 										</p>
 									</div>
 								</div>

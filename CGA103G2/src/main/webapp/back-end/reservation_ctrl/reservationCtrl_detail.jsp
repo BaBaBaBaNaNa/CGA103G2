@@ -130,9 +130,9 @@ line-height:37px;
 </c:if>
 <table class="table">
 	<tr>
-		<th>訂位控制編號</th>
-		<th>訂位控制開放</th>
+<!-- 		<th>訂位控制編號</th> -->
 		<th>訂位控制日期</th>
+		<th>訂位控制開放</th>
 		<th>訂位控制時段</th>
 		<th>桌子上限</th>
 		<th>已預訂桌數</th>
@@ -144,9 +144,9 @@ line-height:37px;
 		end="<%=pageIndex+rowsPerPage-1%>">
 
 		<tr>
-			<td>${rsvtCtrlVO.rsvtCtrlId}</td>
-			<td>${rsvtCtrlVO.rsvtCtrlOpen == 0 ? "開放" : "不開放"}</td>
+<%-- 			<td>${rsvtCtrlVO.rsvtCtrlId}</td> --%>
 			<td>${rsvtCtrlVO.rsvtCtrlDate}</td>
+			<td>${rsvtCtrlVO.rsvtCtrlOpen == 0 ? "開放" : "不開放"}</td>
 			<td>${rsvtCtrlVO.rsvtCtrlOpen == 0 ? "中午" : "晚上"}</td>
 			<td>${rsvtCtrlVO.rsvtCtrlMax}</td>
 			<td>${rsvtCtrlVO.rsvtCtrlNumber}</td>

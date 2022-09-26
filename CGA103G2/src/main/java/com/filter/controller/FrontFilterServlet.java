@@ -16,12 +16,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /****************************************
- * 限制 "/front-end/*" 底下的頁面
+ * 限制 
+ * "/front-end/shopcart/*",
+ * "/front-end/order/*"
+ * 底下的頁面
  ****************************************/
-//@WebFilter(	filterName = "BackFilterServlet",
-//			servletNames = {"/BackFilterServlet"},
-//			urlPatterns = {"/back-end/*"}
-//)
+@WebFilter(filterName = "FrontFilterServlet",
+			servletNames = {"/FrontFilterServlet"},
+			urlPatterns = {	"/front-end/shopcart/*",
+							"/front-end/order/*"
+						  }
+)
 public class FrontFilterServlet extends HttpFilter implements Filter {
 
 	public FrontFilterServlet() {
@@ -35,6 +40,9 @@ public class FrontFilterServlet extends HttpFilter implements Filter {
 		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
+		
+		//設定編碼
+		req.setCharacterEncoding("UTF-8");
 		//讀取的網頁路徑
 		String uri = req.getRequestURI();
 //		System.out.println(uri);
@@ -47,11 +55,20 @@ public class FrontFilterServlet extends HttpFilter implements Filter {
 		System.out.println("SessionID : " + getSessionID);
 		System.out.println("登入狀態Session : " + LoginSessionName);
 		
-		//以下判斷,當結尾不是"BackLogin.jsp" 或是 "EmpLoginServlet.do" 時 ,而且沒有取得Session登入狀態
-		if( !(uri.endsWith("/front-end/member/members.jsp") || uri.endsWith("MemLoginServlet.do")) && (LoginSessionName == null || (LoginSessionName.trim()).length() == 0)){
+		//以下判斷,當結尾不是"members.jsp" 或是 "MemLoginServlet.do" 時 ,而且沒有取得Session登入狀態
+		if( !(uri.endsWith("members.jsp") || uri.endsWith("MemLoginServlet.do")) && (LoginSessionName == null || (LoginSessionName.trim()).length() == 0)){
 //			req.getRequestDispatcher("../../BackLogin.jsp").forward(request, response);
-			//跳轉頁面至後台登入頁面
-			res.sendRedirect("/front-end/member/members.jsp");
+			//跳轉頁面至首頁
+			
+			//編碼設置
+			res.setCharacterEncoding("UTF-8");
+			res.setContentType("text/html;UTF-8");
+			res.getWriter().println("<script>");
+			res.getWriter().println("alert('請登入會員');");
+			res.getWriter().println("window.location.href='../../front-end/member/members2.jsp'");
+			res.getWriter().println("</script>");
+//			write("<script>alert('添加成功！');location.href='Jump.aspx';</script>");
+//			res.sendRedirect("../../front-end/member/members.jsp");
 			return;
 		}else{
 			//回傳正常頁面
@@ -64,5 +81,23 @@ public class FrontFilterServlet extends HttpFilter implements Filter {
 	public void init(FilterConfig fConfig) throws ServletException {
 		
 	}
+	
+	
+	
+//	====test====
+	
+	public static String getString(String LoginSessionName, String defaultValue) {
+		defaultValue="";
+		if(LoginSessionName == null || LoginSessionName.trim().equals("")) {
+			return defaultValue;
+		}
+		else {
+			return LoginSessionName;
+		}
+			
+		}
+	}
 
-}
+
+
+

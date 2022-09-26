@@ -157,6 +157,7 @@
     margin-right: 0;
 }
 
+
 .body-content {
     position: relative;
     background: #f0f0fa;
@@ -208,3 +209,14 @@ body {
     background: #e4e3e8;
     color: #34334a;
 }
+
+.row
+username_inputmiddle{
+	text-align:center;
+}
+
+.container{
+    text-align: center;
+}
+
+
