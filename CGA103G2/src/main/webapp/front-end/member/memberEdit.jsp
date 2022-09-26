@@ -104,7 +104,7 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //MemServlet.java (Concroll
 				</tr>
 				<tr>
 					<td>密碼</td>
-					<td><input type="text" name="memPassword"
+					<td><input type="password" name="memPassword"
 						value="<%=memVO.getMemPassword()%>" required /></td>
 				</tr>
 									<td>會員性別</td>

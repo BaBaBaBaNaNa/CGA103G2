@@ -3,9 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="java.util.*,com.mem.controller.MemServlet"%>
+
 <%
 MemVO memVO = (MemVO) request.getAttribute("memVO");
 %>
+
 <!doctype html>
 <html lang="zh-tw">
 
@@ -57,14 +59,7 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
 
 <!-- 	註冊欄位的錯誤列表 -->
 
-<c:if test="${not empty errorMsgs}">
-	<font style="color: red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color: red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
+
 
 <!-- ==========登入的錯誤列表======	 -->
 <%
@@ -177,15 +172,41 @@ if ((request.getAttribute("errorMessage") != null)) {
 						<!-- 							放註冊表單用-上線備份 -->
 
 
+<%-- 						<input type="text" id="user-name" name="memName"class="form-control" placeholder="姓名" required="" autofocus=""value="<%=(memVO == null) ? "" : memVO.getMemName()%>"> <p style="color:red;">${errorMsgs.memName}</p> --%>
+						
+<%-- 						<input type="text" id="user-account" name="memAccount"class="form-control" placeholder="帳號" required autofocus=""value="<%=(memVO == null) ? "" : memVO.getMemAccount()%>"><p style="color:red;">${errorMsgs.memAccount}</p> --%>
+<%-- 						<input type="password" id="user-pass" class="form-control"name="memPassword"value="<%=(memVO == null) ? "" : memVO.getMemPassword()%>"placeholder="密碼" required autofocus=""> <p style="color:red;">${errorMsgs.memPassword}</p> --%>
+						
+<!-- 						<select name="memGender" class="form-control"> -->
+<!-- 							<option value="0">男生</option> -->
+<!-- 							<option value="1">女生</option> -->
+<!-- 						</select>  -->
+						
+<%-- 						<input type="hidden" id="user-permission" name="memPermission"class="form-control"value="<%=(memVO == null) ? "1" : memVO.getMemPermission()%>"> --%>
+						
+<%-- 						<input type="TEXT" id="user-Phone" name="memPhone"placeholder="電話" class="form-control"value="<%=(memVO == null) ? "" : memVO.getMemPhone()%>"> <p style="color:red;">${errorMsgs.memPhone}</p> --%>
+						
+<%-- 						<input type="email" id="user-Phone" name="memEmail"class="form-control" placeholder="信箱"value="<%=(memVO == null) ? "" : memVO.getMemEmail()%>"> <p style="color:red;">${errorMsgs.memEmail}</p> --%>
+						
+<!-- 						<div id="twzipcode"></div> -->
+						
+<%-- 						<input type="TEXT" id="user-address" name="memAddress"class="form-control" placeholder="地址"value="<%=(memVO == null) ? "" : memVO.getMemAddress()%>"> --%>
+						
+<!-- 						<input type="TEXT" id="f_date1" placeholder="生日" name=memBirthday class="form-control"> -->
+
+
+
+						<!--                     ==========放註冊表單用的-原始備份用================ -->
+						<
 						<input type="text" id="user-name" name="memName"
 							class="form-control" placeholder="姓名" required="" autofocus=""
-							value="<%=(memVO == null) ? "" : memVO.getMemName()%>"> <input
+							value="<%=(memVO == null) ? "" : memVO.getMemName()%>"><p style="color:red">${errorMsgs.memName} </p>  <input
 							type="text" id="user-account" name="memAccount"
 							class="form-control" placeholder="帳號" required autofocus=""
-							value="<%=(memVO == null) ? "" : memVO.getMemAccount()%>">
+							value="<%=(memVO == null) ? "" : memVO.getMemAccount()%>"><p style="color:red">${errorMsgs.memAccount} </p>
 						<input type="password" id="user-pass" class="form-control"
 							name="memPassword"
-							value="<%=(memVO == null) ? "" : memVO.getMemPassword()%>"
+							value="<%=(memVO == null) ? "" : memVO.getMemPassword()%>"><p style="color:red">${errorMsgs.memPassword} </p>
 							placeholder="密碼" required autofocus=""> <select
 							name="memGender" class="form-control">
 							<option value="0">男生</option>
@@ -195,28 +216,17 @@ if ((request.getAttribute("errorMessage") != null)) {
 							value="<%=(memVO == null) ? "1" : memVO.getMemPermission()%>">
 						<input type="TEXT" id="user-Phone" name="memPhone"
 							placeholder="電話" class="form-control"
-							value="<%=(memVO == null) ? "" : memVO.getMemPhone()%>">
+							value="<%=(memVO == null) ? "" : memVO.getMemPhone()%>"><p style="color:red">${errorMsgs.memPhone} </p>
 						<input type="email" id="user-Phone" name="memEmail"
 							class="form-control" placeholder="信箱"
-							value="<%=(memVO == null) ? "" : memVO.getMemEmail()%>">
+							value="<%=(memVO == null) ? "" : memVO.getMemEmail()%>"><p style="color:red">${errorMsgs.memEmail} </p>
 						<div id="twzipcode"></div>
 						<input type="TEXT" id="user-address" name="memAddress"
 							class="form-control" placeholder="地址"
-							value="<%=(memVO == null) ? "" : memVO.getMemAddress()%>">
+							value="<%=(memVO == null) ? "" : memVO.getMemAddress()%>"><p style="color:red">${errorMsgs.memAddress} </p>
 						<input type="TEXT" id="f_date1" placeholder="生日" name=memBirthday
 							class="form-control">
 
-
-
-						<!--                     ==========放註冊表單用的-原始備份用================ -->
-						<!-- 						<input type="text" id="user-name" name="memName" class="form-control" -->
-						<!-- 							placeholder="姓名" required="" autofocus=""> <input -->
-						<!-- 							type="email" id="user-email" class="form-control" -->
-						<!-- 							placeholder="Email address" required autofocus=""> <input -->
-						<!-- 							type="password" id="user-pass" class="form-control" -->
-						<!-- 							placeholder="Password" required autofocus=""> <input -->
-						<!-- 							type="password" id="user-repeatpass" class="form-control" -->
-						<!-- 							placeholder="Repeat Password" required autofocus=""> -->
 
 
 						<input type="hidden" name="action" value="insertForMem">
