@@ -2,6 +2,8 @@ package com.mem.model;
 
 import java.util.List;
 
+import com.emp.model.EmpVO;
+
 
 
 
@@ -93,6 +95,12 @@ public class MemService {
 	public MemVO getOwnMem(String memAccount) {
 		return dao.findByMemAccount(memAccount);
 	}
+	
+	//使用empAccount找是否有職位
+	public MemVO getMemAccountCheck(String memAccount) {
+		return dao.checkRepeatMemAccount(memAccount);
+	}
+	
 	
 	public void updateMemPW(String memAccount, String memPassword) {
 		MemVO memVO = new MemVO();

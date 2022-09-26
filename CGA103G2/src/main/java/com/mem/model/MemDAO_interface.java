@@ -20,5 +20,7 @@ public interface MemDAO_interface {
 	    public MemVO findByMemAccount(String memAccount);
 	    public void updateMemPW(String memAccount, String memPassword);
 //	    public void upatePassword(MemVO memVO);
+		public MemVO checkRepeatMemAccount(String memAccount);
+		
 	    
 }
