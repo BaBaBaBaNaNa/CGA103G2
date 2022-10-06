@@ -1,6 +1,9 @@
 # Tibame_中壢班_CGA103G2_義鄉人
-第二組 組員:  
-  Stan , Joe , Liang , Hui , Gu , Allen
+第二組 
+組長:
+24_Allen
+組員:  
+1_Stan ,5_Joe ,13_Liang ,16_Hui ,23_Gu
 
 專案 master 更新:  
 09/27 "專題驗收"
