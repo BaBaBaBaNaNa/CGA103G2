@@ -55,7 +55,7 @@
                     <div class="col-lg-6 col-12 mb-2">
                         <h4 class="mb-3 " ><li class="breadcrumb-item active" aria-current="page">訂單查詢</li></h4>
 
-                        <a href="../../front-end/order/order-wai-song.jsp" class="custom-btn btn btn-dark mt-3 ms-3">外送</a>
+                        <a href="../../front-end/order/order-wai-song.jsp" class="custom-btn btn btn-danger mt-3 ms-3">外送</a>
 
                         <a href="../../front-end/order/order-waidai.jsp" class="custom-btn btn btn-danger mt-3 ms-3">外帶</a>
 

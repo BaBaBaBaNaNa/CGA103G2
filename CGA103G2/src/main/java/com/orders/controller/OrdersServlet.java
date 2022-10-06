@@ -118,7 +118,7 @@ public class OrdersServlet extends HttpServlet {
 			try {
 				empCounterID = Integer.valueOf(req.getParameter("empCounterID").trim());
 			} catch (NumberFormatException e) {
-				empCounterID = 0;
+				empCounterID = empCounterID;
 				errorMsgs.add("櫃台員工編號:請勿留白");
 			}
 
@@ -126,7 +126,7 @@ public class OrdersServlet extends HttpServlet {
 			try {
 				empDeliveryID = Integer.valueOf(req.getParameter("empDeliveryID").trim());
 			} catch (NumberFormatException e) {
-				empDeliveryID = 0;
+				empDeliveryID = empDeliveryID;
 				errorMsgs.add("外送員工編號");
 			}
 
@@ -138,13 +138,7 @@ public class OrdersServlet extends HttpServlet {
 				errorMsgs.add("座位號碼");
 			}
 
-			Integer ordersType = null;
-			try {
-				ordersType = Integer.valueOf(req.getParameter("ordersType").trim());
-			} catch (NumberFormatException e) {
-				ordersType = 0;
-				errorMsgs.add("請確認訂單種類");
-			}
+			Integer ordersType = Integer.valueOf(req.getParameter("ordersType").trim());
 
 			Integer ordersAmount = null;
 			try {
@@ -153,22 +147,12 @@ public class OrdersServlet extends HttpServlet {
 				errorMsgs.add("訂單金額請填數字.");
 			}
 
-			Integer ordersStatus = null;
-			try {
-				ordersStatus = Integer.valueOf(req.getParameter("ordersStatus").trim());
-			} catch (NumberFormatException e) {
-				ordersStatus = 0;
-				errorMsgs.add("請確認訂單狀態");
-			}
+			Integer ordersStatus = Integer.valueOf(req.getParameter("ordersStatus").trim());
 
 			String ordersDestination = req.getParameter("ordersDestination");
-//			String ordersDestination = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]$";
-			if (ordersDestination == null || ordersDestination.trim().length() == 0) {
+			if ( ordersDestination.trim().length() == 0) {
 				errorMsgs.add("地址: 請勿空白");
 			}
-//			else if (!ordersDestination.trim().matches(ordersDestination)) { // 以下練習正則(規)表示式(regular-expression)
-//				errorMsgs.add("地址: 只能是中、英文字母、數字和_ ");
-//			}f
 
 			Timestamp ordersBuildDate = null;
 			try {
@@ -209,7 +193,7 @@ public class OrdersServlet extends HttpServlet {
 
 //			---------------------2.修改資料-------------------------------
 			OrdersService orderSvc = new OrdersService();
-			ordersVO = orderSvc.updateOrders(ordersID, memID, empCounterID, empDeliveryID, seatID, ordersType,
+			ordersVO = orderSvc.updateOrders(ordersID, memID, 1, 1, seatID, ordersType,
 					ordersAmount, ordersStatus, ordersDestination, ordersBuildDate, ordersMakeDate);
 			/**************** 3.修改完成準備移交數據 *********************/
 			req.setAttribute("ordersVO", ordersVO);

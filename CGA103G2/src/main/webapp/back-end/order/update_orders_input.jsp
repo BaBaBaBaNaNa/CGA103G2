@@ -383,8 +383,6 @@ th, td {
 			</tr>
 		</table>
 
-		<h3>資料修改:</h3>
-
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
 			<font style="color: red">請修正以下錯誤:</font>

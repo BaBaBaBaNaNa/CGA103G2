@@ -29,53 +29,53 @@ public class NewsServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
-//		if ("getOne_For_Display".equals(action)) {
-//			List<String> errorMsgs = new LinkedList<String>();
-//			req.setAttribute("errorMsgs", errorMsgs);
-//
-//		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-//		
-//			String str = req.getParameter("newsID");
-//			if (str == null || (str.trim()).length() == 0||str == "0") {
-//				errorMsgs.add("請輸入消息編號");
-//			}
-//
-//			if (!errorMsgs.isEmpty()) {
-//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/news/select_page.jsp");
-//				failureView.forward(req, res);
-//				return; // 程式中斷	
-//			}
-//
-//			Integer newsID = null;
-//			try {
-//				newsID = Integer.valueOf(str);
-//			} catch (Exception e) {
-//				errorMsgs.add("消息編號格式不正確");
-//			}
-//			if (!errorMsgs.isEmpty()) {
-//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/news/select_page.jsp");
-//				failureView.forward(req, res);
-//				return;
-//			}
-//			/******** 2.開始查詢資料 *************/
-//
-//			NewsService newsSvc = new NewsService();
-//			NewsVO newsVO = newsSvc.getOneNews(newsID);
-//			if (newsVO == null) {
-//				errorMsgs.add("查無資料");
-//			}
-//			
-//			if (!errorMsgs.isEmpty()) {
-//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/news/select_page.jsp");
-//				failureView.forward(req, res);
-//				return;
-//			}
-//			/******** 3.查詢完成,準備轉交 **********/
-//			req.setAttribute("newsVO", newsVO);
-//			String url = "/back-end/news/listOneNews.jsp";
-//			RequestDispatcher successView = req.getRequestDispatcher(url);
-//			successView.forward(req, res);
-//		}
+		if ("getOne_For_Display".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+		
+			String str = req.getParameter("newsID");
+			if (str == null || (str.trim()).length() == 0||str == "0") {
+				errorMsgs.add("請輸入消息編號");
+			}
+
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/news/select_page.jsp");
+				failureView.forward(req, res);
+				return; // 程式中斷	
+			}
+
+			Integer newsID = null;
+			try {
+				newsID = Integer.valueOf(str);
+			} catch (Exception e) {
+				errorMsgs.add("消息編號格式不正確");
+			}
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/news/select_page.jsp");
+				failureView.forward(req, res);
+				return;
+			}
+			/******** 2.開始查詢資料 *************/
+
+			NewsService newsSvc = new NewsService();
+			NewsVO newsVO = newsSvc.getOneNews(newsID);
+			if (newsVO == null) {
+				errorMsgs.add("查無資料");
+			}
+			
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/news/select_page.jsp");
+				failureView.forward(req, res);
+				return;
+			}
+			/******** 3.查詢完成,準備轉交 **********/
+			req.setAttribute("newsVO", newsVO);
+			String url = "/back-end/news/listOneNews.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
 
 		if ("getOne_For_Update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
@@ -188,7 +188,7 @@ public class NewsServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			/*********** 1.接收請求參數 --輸入格式的錯誤處理 **************/
+			/*********** 1.接收請求參數輸入格式的錯誤處理 **************/
 			
 			Integer empID = null;
 			try {

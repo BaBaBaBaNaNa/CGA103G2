@@ -52,9 +52,10 @@ table#table-1 h4 {
 	margin-left: 10px;
 }
 
-h4 {
-	color: blue;
+h3 {
+	color: red;
 	display: inline;
+	margin-left: 10px;
 }
 </style>
 
@@ -92,7 +93,7 @@ h4 {
 		<!-- ----- ----- -----   中間目錄條 end ----- ----- ----- -->
 		<!-- ----- ----- -----   中間下面內容 start ----- ----- ----- -->
 
-		<h3>資料查詢:</h3>
+		<h3>訂單查詢:</h3>
 
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
@@ -104,7 +105,7 @@ h4 {
 			</ul>
 		</c:if>
 
-		<ul>
+		<ul style="margin-left: 10px;">
 			<li style="margin-left: 10px"><a href='listAllOrders.jsp'>查看訂單</a><br>
 			<br></li>
 
